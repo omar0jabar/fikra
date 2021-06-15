@@ -1,0 +1,31 @@
+
+.project-update {
+  padding: 90px 0;
+  min-height: calc(100vh - 400px);
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  @media #{$tab-min-2} {
+    padding: 50px 0;
+    min-height: auto;
+  }
+
+  .bg-secondary {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    @media #{$tab-max} {
+      font-size: rem(48px);
+    }
+    @media #{$mobile} {
+      font-size: rem(36px);
+    }
+  }
+
+  p {
+    @media #{$tab-min} {
+      font-size: rem(16px);
+    }
+  }
+}

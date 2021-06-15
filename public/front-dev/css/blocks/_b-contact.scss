@@ -1,0 +1,131 @@
+.b-contact {
+  background-color: $cloudBurst-1;
+  padding-top: 56px;
+  padding-bottom: 69px;
+  @media #{$mobile} {
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+
+  h2, h3, h4, h5, p, label {
+    color: $white;
+  }
+
+  h3 {
+    font-weight: 500;
+    @media #{$tab-max} {
+      font-size: rem(36px);
+    }
+  }
+  h4 {
+    font-weight: 400;
+    @media #{$tab-max} {
+      font-size: rem(20px);
+    }
+  }
+
+  // Contact Form
+  .card-contact {
+    padding: 0 50px 0 130px;
+
+    @media #{$desk-max} {
+      padding: 0 15px;
+    }
+  }
+  .form-contact {
+    @include linear-gradient(to right, $orange, $yellow);
+    padding: 20px 64px 26px;
+    border-radius: 8px;
+    
+    @media #{$mobile} {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    form {
+      padding-top: 25px;
+    }
+
+    .contact-btns {
+      margin: 0 -15px 16px;
+      padding-top: 11px;
+      
+      .btn {
+        @media #{$mobile} {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .forget-password {
+      font-size: rem(16px);
+      font-weight: 300;
+      color: $white;
+      padding-left: 22px;
+    }
+  }
+
+  // Newsletter Form
+  .form-newsletter {
+    padding: 18px 172px 20px 102px;
+
+    @media #{$desk-max} {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+    @media #{$tab-max} {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media #{$tab-min} {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+    @media #{$mobile} {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media #{$mobile-xs} {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    h4 {
+      max-width: 85%;
+      margin: 0 auto;
+      
+      @media #{$mobile} {
+        max-width: 100%;
+      }
+    }
+
+    form {
+      padding-top: 7px;
+
+      .field {
+        margin: 0 0 28px;
+      }
+    }
+
+    .choice {
+      position: relative;
+      margin-bottom: 10px;
+
+      label {
+        font-size: rem(16px);
+        font-weight: 300;
+        margin-bottom: 0;
+      }
+    }
+
+    .newsletter-btn {
+      padding-top: 28px;
+      padding-left: 8px;
+    }
+  }
+  label.error
+  {
+    color: $btnRedHover;
+    font-size: rem(14px);
+  }
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'resetting' %}
+
+{% block title %}{% trans %}resetting.reset.title{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="reset-password">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>{% trans %}resetting.reset.title{% endtrans %}</h4>
+                        </div>
+                        <div class="card-body">
+                            {% include 'partials/_notice.html.twig' %}
+                            {{ form_start(form, { 'action': path('resetting_reset', {'token': token}) }) }}
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-bg-red btn-h40 btn-w35 mt-2">
+                                {% trans %}resetting.reset.btn{% endtrans %}
+                            </button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

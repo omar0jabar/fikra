@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Dashboard
+    {% if project %}
+        - {{ project.name }}
+    {% endif %}
+    {% if company %}
+        - {{ company.name }}
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .active {
+            background-color: #bfd9ff;
+            color: white !important;
+        }
+    </style>
+{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    <div class="dashboard-project">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 sidebar-project-menu">
+                {% include 'startuper/dashboard/_menu.html.twig' %}
+            </div>
+            <div class="col-lg-9 sidebar-project-content">
+                {% include 'partials/_notice.html.twig' %}
+                {% if project %}
+                    {% include 'startuper/dashboard/_head-project.html.twig' %}
+                    {% include 'startuper/dashboard/content-project.html.twig' %}
+                {% elseif company %}
+                    {% include 'startuper/dashboard/_head-company.html.twig' %}
+                    {% include 'startuper/dashboard/content-company.html.twig' %}
+                {% else %}
+                    <div class="text-center my-5">
+                        <a href="{{ path('startuper_project_create') }}" class="btn btn-orange-yellow btn-h40 btn-w20">
+                            {% trans %}Submit your project{% endtrans %}
+                        </a>
+                        <a href="{{ path('startuper_company_create') }}" class="btn btn-orange-yellow btn-h40 btn-w20">
+                            {% trans %}Submit your company{% endtrans %}
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if project %}
+                    {% include 'startuper/dashboard/_actus.html.twig' %}
+                {% endif %}
+
+            </div><!-- /.col-md-9 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/cms/js/axios.min.js') }}"></script>
+    <script src="{{ asset('bundles/cms/js/article-like.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% trans_default_domain 'company' %}
+{% if object.comments|length > 0 %}
+      <a href="{{ admin.generateObjectUrl('comments', object) }}" class="btn btn-sm btn-primary">
+            <i class="fa fa-comment"></i> {{ object.comments|length  }} {% trans %}Comments{% endtrans %}
+      </a>
+{% endif %}

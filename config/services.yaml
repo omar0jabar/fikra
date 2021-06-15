@@ -1,0 +1,396 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'fr'
+    locales: fr|en
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    app.locale_listener:
+        class: App\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    maintenance_listener:
+        class: App\EventListener\MaintenanceListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    project_listener:
+        class: App\EventListener\ProjectListener
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+
+    App\EventListener\UploadListener:
+        tags:
+            - { name: kernel.event_listener, event: vich_uploader.post_upload }
+
+    sonata.admin.company.comment:
+        class: App\Admin\CompanyCommentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Companies", label: "Comments"}
+        arguments:
+            - ~
+            - App\Entity\CompanyComment
+            - App\Controller\Admin\OverrideCompanyCommentAdminController
+
+    sonata.admin.company.faq:
+        class: App\Admin\CompanyFAQAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Companies", label: "FAQ"}
+        arguments:
+            - ~
+            - App\Entity\CompanyFAQ
+            - ~
+
+    sonata.admin.contributor:
+        class: App\Admin\ContributorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Companies", label: "Contributors"}
+        arguments:
+            - ~
+            - App\Entity\Contributor
+            - ~
+
+    sonata.admin.domain:
+        class: App\Admin\DomainAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Companies", label: "Domains"}
+        arguments:
+            - ~
+            - App\Entity\Domain
+            - ~
+
+    sonata.admin.city:
+        class: App\Admin\CityAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: "Cities"}
+        arguments:
+            - ~
+            - App\Entity\City
+            - App\Controller\Admin\CityAdminController
+
+    sonata.admin.company:
+        class: App\Admin\CompanyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: "Companies"}
+        arguments:
+            - ~
+            - App\Entity\Company
+            - App\Controller\Admin\CompanyAdminController
+
+    sonata.admin.startuper:
+        class: App\Admin\StartuperAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Utilisateurs", label: Startupers }
+        arguments:
+            - ~
+            - App\Entity\User
+            - App\Controller\Admin\StartuperAdminController
+
+    sonata.admin.admin:
+        class: App\Admin\AdminAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Utilisateurs", label: Admins }
+        arguments:
+            - ~
+            - App\Entity\User
+            - App\Controller\Admin\AdminAdminController
+
+    sonata.admin.project:
+        class: App\Admin\ProjectAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Project }
+        arguments:
+            - ~
+            - App\Entity\Project
+            - App\Controller\Admin\ProjectAdminController
+
+    sonata.admin.request_documentation:
+        class: App\Admin\RequestDocumentationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Demande documentation }
+        arguments:
+            - ~
+            - App\Entity\RequestDocumentation
+            - App\Controller\Admin\RequestDocumentationAdminController
+
+    sonata.admin.step:
+        class: App\Admin\StepAdmin
+        arguments: [~, App\Entity\Step, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Step }
+
+    sonata.admin.business_model:
+        class: App\Admin\BusinessModelAdmin
+        arguments: [~, App\Entity\BusinessModel, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Business model }
+
+    sonata.admin.sector:
+        class: App\Admin\SectorAdmin
+        arguments: [~, App\Entity\Sector, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Sector }
+
+    sonata.admin.sales_channels:
+        class: App\Admin\SalesChannelsAdmin
+        arguments: [~, App\Entity\SalesChannels, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Sales channels }
+
+    sonata.admin.earned:
+        class: App\Admin\EarnedAdmin
+        arguments: [~, App\Entity\Earned, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Earned }
+
+    sonata.admin.document_type:
+        class: App\Admin\DocumentTypeAdmin
+        arguments: [~, App\Entity\DocumentType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Document type }
+
+    sonata.admin.funding_objective:
+        class: App\Admin\FundingObjectiveAdmin
+        arguments: [~, App\Entity\FundingObjective, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Labels", label: Funding Objective }
+
+    sonata.admin.partner:
+        class: App\Admin\PartnerAdmin
+        arguments: [~, App\Entity\Partner, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Partners", label: Partner }
+        public: true
+
+    sonata.admin.testimonial:
+        class: App\Admin\TestimonialAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Testimonial }
+        arguments:
+            - ~
+            - App\Entity\Testimonial
+            - ~
+    sonata.admin.fond:
+        class: App\Admin\FondAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Programmes }
+        arguments:
+            - ~
+            - App\Entity\Fond
+            - App\Controller\Admin\FondAdminController
+    sonata.admin.gestionnaire:
+        class: App\Admin\GestionnaireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Gestionnaire }
+        arguments:
+            - ~
+            - App\Entity\Gestionnaire
+            - ~
+
+    sonata.admin.fondType:
+        class: App\Admin\FondTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Type de programme }
+        arguments:
+            - ~
+            - App\Entity\FondType
+            - ~
+    sonata.admin.secteur:
+        class: App\Admin\SecteurAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Secteur }
+        arguments:
+            - ~
+            - App\Entity\Secteur
+            - ~
+    sonata.admin.phase:
+        class: App\Admin\PhaseAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Phase }
+        arguments:
+            - ~
+            - App\Entity\Phase
+            - ~
+    sonata.admin.financementType:
+        class: App\Admin\FinancementTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Type de financement }
+        arguments:
+            - ~
+            - App\Entity\FinancementType
+            - ~
+    sonata.admin.eligibiliteCritere:
+        class: App\Admin\EligibiliteCritereAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Critère éligibilité}
+        arguments:
+            - ~
+            - App\Entity\EligibiliteCritere
+            - ~
+    sonata.admin.depensesType:
+        class: App\Admin\DepensesTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Types de dépenses }
+        arguments:
+            - ~
+            - App\Entity\DepensesType
+            - ~
+    sonata.admin.montant:
+        class: App\Admin\montantAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Chiffre d’affaires }
+        arguments:
+            - ~
+            - App\Entity\Montant
+            - ~
+
+    sonata.admin.global_document:
+        class: App\Admin\GlobalDocumentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Documents", label: Global Documents }
+        arguments:
+            - ~
+            - App\Entity\GlobalDocument
+            - ~
+
+    sonata.admin.tools:
+        class: App\Admin\ToolsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Documents", label: Tools }
+        arguments:
+            - ~
+            - App\Entity\Tools
+            - App\Controller\Admin\AdminToolsController
+
+    sonata.admin.seo:
+        class: App\Admin\SeoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Home", label: SEO}
+        arguments:
+            - ~
+            - App\Entity\SEO
+            - ~
+
+    sonata.admin.background.slider:
+        class: App\Admin\BackgroundSliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Home", label: Background Slider}
+        arguments:
+            - ~
+            - App\Entity\BackgroundSlider
+            - ~
+
+    sonata.admin.slider:
+        class: App\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Home", label: Slider}
+        arguments:
+            - ~
+            - App\Entity\Slider
+            - ~
+
+#    sonata.admin.video:
+#        class: App\Admin\VideoAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Home", label: Video}
+#        arguments:
+#            - ~
+#            - App\Entity\Video
+#            - ~
+
+    sonata.admin.comment_ca_marche:
+        class: App\Admin\CommentCaMarcheBlockAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Home", label: Comment ça marche}
+        arguments:
+            - ~
+            - App\Entity\CommentCaMarcheBlock
+            - ~
+
+    sonata.admin.garanties_block:
+        class: App\Admin\GarantiesBlockAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Home", label: Garanties block}
+        arguments:
+            - ~
+            - App\Entity\GarantiesBlock
+            - ~
+
+#    sonata.admin.reassurance_block:
+#        class: App\Admin\ReassuranceAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Home", label: Reassurance block}
+#        arguments:
+#            - ~
+#            - App\Entity\Reassurance
+#            - ~
+
+    sonata.admin.header:
+        class: App\Admin\HeaderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Headers}
+        arguments:
+            - ~
+            - App\Entity\Header
+            - ~
+
+    sonata.admin.contact:
+        class: App\Admin\ContactAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Contact}
+        arguments:
+            - ~
+            - App\Entity\Contact
+            - ~
+
+    sonata.admin.contact_info:
+        class: App\Admin\ContactInfoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Contact info}
+        arguments:
+            - ~
+            - App\Entity\ContactInfo
+            - ~
+
+    sonata.admin.email_template:
+        class: App\Admin\EmailTemplateAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Email template}
+        arguments:
+            - ~
+            - App\Entity\EmailTemplate
+            - ~
+
+    app.form.create_project:
+        class: App\Form\ProjectFormFlow
+        parent: craue.form.flow
+        public: true
+        autowire: true
+        autoconfigure: false
+

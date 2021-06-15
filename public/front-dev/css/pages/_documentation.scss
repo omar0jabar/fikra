@@ -1,0 +1,593 @@
+/* Documents PAGE */
+#documents
+{
+	background: $white;
+	.container {
+		position: relative;
+		z-index: 2;
+	}
+	/* Begin Nav button Style */ 
+	.nav
+	{
+		background-color: $bg-white-default;
+		padding: 15px 0 0 0;
+		overflow: hidden;
+		border-radius: 5px 5px 0 0;
+		margin-top: -95px;
+
+		@media #{$mobile} 
+		{
+			margin-top: -20px;
+			border-radius: 5px;
+			display: block;
+		}
+
+	}
+
+	.tab-content {
+		padding-bottom: 40px;
+	}
+
+	.nav-tabs {
+		opacity: 1;
+	}
+
+	.nav-item
+	{
+		color: $eastBay-1;
+		background: transparent;
+		border-radius: 0;
+		padding: 0;
+
+		a
+		{
+			font-family: $font-base;
+			background: transparent;
+			border-radius: 0;
+			border: 0;
+			padding: 0;
+			width: 100%;
+			font-size: rem(28px);
+			height: 81px;
+			word-break: break-all;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			opacity: .7;
+
+			@media #{$desk-min} 
+			{
+				font-size: rem(22px);
+			}
+
+			@media #{$tab-min} 
+			{
+				font-size: rem(17px);
+			}
+
+			i
+			{
+				margin-right: 8px;
+				&:before
+				{
+					color: $eastBay-1;
+					font-size: rem(34px);
+					//vertical-align: sub;
+
+					@media #{$desk-min} 
+					{
+						font-size: rem(26px);
+					}
+
+					@media #{$tab-min} 
+					{
+						font-size: rem(21px);
+					}
+				}
+
+				&.icon-Docutheque--la-une {
+					&:before {
+						font-size: rem(48px);
+					}
+				}
+			}
+		}
+
+		a.active
+		{
+			background: $white;
+			color: $eastBay-1;
+			border: 0;
+			opacity: 1;
+
+			i
+			{
+				&:before
+				{
+					color: $eastBay-1;
+				}
+			}
+		}
+	}
+	/* End Nav button Style */ 
+
+	/* Begin Tab content "A la une" Style */ 
+	#a_la_une
+	{
+		> h4 
+		{
+			color: $cloudBurst;
+			font-size: rem(30px);
+			font-weight: normal;
+			word-spacing: 2.4px;
+			letter-spacing: .3px;
+			margin: 104px 0 44px 0 ;
+			padding: 0px;
+			padding-left: 15px;
+
+			@media #{$mobile} 
+			{
+				font-size: rem(19px);
+				text-align: center;
+			}
+		}
+		.jumbotron
+		{
+			background-color: $AliceBlue-2;
+			font-family: $font-base;
+			padding: 4rem 1rem 2rem 1rem;
+			
+			/* Begin Slider Style */
+			.carousel
+			{
+				background: transparent;
+			}
+			.carousel-item
+			{
+				> .row {
+					padding: 25px 0 25px;
+
+					&:first-child
+					{
+						padding: 0 0 25px 0;
+					}
+				}
+
+				hr
+				{
+					&:last-child
+					{
+						display: none;
+					}
+				}
+			}
+
+			h2
+			{
+				font-size: rem(30px);
+				color: $cloudBurst;
+				font-weight: 500;
+				margin-bottom: 15px;
+
+				@media #{$desk-min-1} 
+				{
+					font-size: rem(20px);
+				}
+			}
+
+			p
+			{
+				color: $eastBay;
+				font-size: rem(20px);
+				margin-bottom: 34px;
+				line-height: 26px;
+				//word-spacing: 1.6px;
+
+				@media #{$desk-min-1} 
+				{
+					font-size: rem(15px);
+				}				
+			}
+
+			img
+			{
+				display: block;
+    			margin: 0 auto;
+
+    			@media #{$mobile} 
+				{
+					margin-bottom: 17px;
+				}
+			}
+
+			a.btn
+			{
+				background-color:  $cloudBurst;
+				color: $white;
+				padding: 0 15px;
+				height: 40px;
+				line-height: 40px;
+				font-family: $font-base;
+				//letter-spacing: 1.1px;
+				border-radius: 5px;
+				transition: all .3s ease-in-out;
+				&:focus {
+					box-shadow: none;
+				}
+				&:hover {
+					background-color: $btnBlueHover;
+				}
+
+				@media #{$mobile} 
+				{
+					font-size: rem(15px);
+				}
+			}
+
+			.CarouselDots {
+			    list-style: none;
+			    display: table;
+			    margin: 54px auto 0;
+			    padding: 0;
+
+			    li
+			    {
+			    	display: inline-block;
+			    	width: 15px;
+			    	height: 15px;
+			    	margin: 0 0 0 17px;
+			    	background-color: $LinkWater-2;
+			    	border-radius: 50%;
+
+			    	&:first-child
+			    	{
+			    		margin: 0;
+			    	}
+			    }
+
+			    li.active
+			    {
+			    	background-color: $papaGreen;
+			    }
+			}
+			/* End Slider Style */
+		}
+		.jumbotronRight
+		{
+			background-color: $whisper;
+			padding: 1.5rem 0 1.5rem;
+
+			hr
+			{
+				&:last-child
+				{
+					display: none;
+				}
+			}
+			h2
+			{
+				font-size: rem(24px);
+				color: $eastBay-3;
+				font-weight: 500;
+				margin-bottom: 1.5rem;
+				word-spacing: 0px;
+
+				@media #{$mobile} 
+				{
+					font-size: rem(18px);
+				}
+			}
+			.docTitle
+			{
+				font-size: rem(16px);
+				color: $comet;
+				font-weight: 400;
+
+				@media #{$desk-min-1} 
+				{
+					font-size: rem(15px);
+				}
+
+				@media #{$mobile} 
+				{
+					font-size: rem(14px);
+				}
+			}
+			.docDate
+			{
+				font-size: rem(16px);
+				color: #a3adbf;
+				// color: $WaikawaGrey-2;	
+				letter-spacing: 0px;
+
+				@media #{$desk-min-1} 
+				{
+					font-size: rem(15px);
+				}
+
+				@media #{$mobile} 
+				{
+					font-size: rem(14px);
+				}
+			}
+			.icon-download
+			{
+				display: block;
+				
+				&:before
+				{
+					color : $comet;
+					font-size: rem(24px);
+				}
+			}
+			p
+			{
+				margin: 0;
+			}
+			.my-hr
+			{
+				margin: 22px 0 22px;
+			}
+		}
+	}
+	/* End Tab content "A la une" Style */
+	
+	/* Begin Tab content "document public ,auto-production" Style */
+	#document_public,
+	#auto_production
+	{
+		nav
+		{
+			padding: 146px 93px 0px 93px;
+
+			@media #{$tab-min} 
+			{
+				padding: 110px 50px 0 50px;
+			}
+			@media screen and (max-width: 400px) {
+				padding: 110px 20px 0 20px;
+			}
+
+		}
+		form
+		{
+
+			input
+			{
+
+				&[type="text"]
+				{
+					background: transparent;
+					border: 3px solid $ShipCove;
+					border-right: 0;
+					padding: 0 rem(74px);
+					height: 72px;
+					font-size: rem(20px);
+					color: $comet;
+					border-radius: 5px 0 0 5px;
+					line-height: 72px;
+					width: 100%;
+					font-weight: normal;
+					font-family: $font-base;
+					//letter-spacing: 1.5px;
+
+					@include placeholder 
+					{
+				        color: $comet !important;
+				    }
+
+					@media #{$desk-min-1} 
+					{
+						padding: 0 rem(30px);
+					}
+
+					@media screen and (max-width: 575px) {
+						border-right: 3px solid $ShipCove;
+						border-radius: 5px;
+					}
+				}
+
+			}
+			button
+			{
+				background: transparent;
+				border: 0;
+				position: absolute;
+				right: 0px;
+				color: $comet;
+				top: 0;
+				width: 60px;
+				height: 72px;
+				font-size: rem(20px);
+				border-radius: 0;
+			}
+			.select2-container
+			{
+				border: 3px solid $ShipCove;
+				border-radius: 0 5px 5px 0;
+				height: 72px !important;
+
+				@media screen and (max-width: 575px) {
+					border-radius: 5px;
+				}
+
+				.select2-choice
+				{
+					height: 100%;
+					line-height: 66px;
+					background: transparent;
+					padding: 0 0 0 rem(74px);
+    				font-size: rem(20px);
+    				color: $comet  !important;
+    				//letter-spacing: 1.5px;
+
+					@media #{$desk-min-1} 
+					{
+						padding: 0 0 0 rem(30px);
+					}
+
+					.select2-arrow
+					{
+						width: 72px;
+						background: $Solitude;
+						border: 0;
+
+						@media #{$tab-min} 
+						{
+							width: 35px;	
+						}
+
+						b
+						{
+							background-image: url(#{$img}arrow-down-select.png);
+							background-position: center;
+						}
+					}
+
+				}
+
+			}
+
+		}
+
+		.jumbotron
+		{
+			background: transparent;
+
+			> .row p
+			{
+				//text-transform: capitalize;
+				color: $PortGore;
+				margin: 0;
+				font-size: rem(18px);
+				white-space: nowrap;
+				&[data-title] {
+					@media #{$mobile} {
+						font-size: 0 !important;
+						&:before {
+							padding-right: 10px;
+							content: attr(data-title);
+							display: block;
+							font-size: 16px;
+						}
+					}
+				}
+			}
+			.downloadDocument
+			{
+				background: $AliceBlue-3;
+			    margin: 0 0 24px 0;
+			    padding: 30px 0 26px 10px;
+			    border-radius: 5px;
+				box-shadow: 0px 1px 7px rgba(0,0,0,0.15);
+
+				p
+				{
+					margin: 0;
+					color: $cloudBurst;
+				}
+				.docTitle
+				{
+					font-size: rem(24px);
+					font-weight: 400;
+
+					@media #{$desk-min-1} 
+					{
+						font-size: rem(15px);
+					}
+
+					@media #{$mobile} 
+					{
+						font-size: rem(14px);
+					}
+				}
+				.docDate
+				{
+					font-size: rem(24px);
+					font-weight: 300;
+
+					@media #{$desk-min-1} 
+					{
+						font-size: rem(15px);
+					}
+
+					@media #{$mobile} 
+					{
+						font-size: rem(14px);
+					}
+				}
+				.icon-download
+				{
+					display: block;
+					text-align: center;
+
+					&:before
+					{
+						color : $comet;
+						font-size: rem(32px);
+
+						@media #{$mobile} 
+						{
+							font-size: rem(24px);
+						}
+					}
+				}
+
+				&:hover
+				{
+					background-color: #e7ecf5;
+					box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+				}
+			}
+			.btn
+			{
+				background: transparent;
+				border-radius: 5px;
+				border: 3px solid $ShipCove;
+				color: $cloudBurst;
+				height: 43px;
+				line-height: 37px;
+				padding: 0 30px;
+
+
+				&:hover
+				{
+
+					background: $ShipCove;
+					color: $white;
+				}
+			}
+		}
+
+	}
+	/* End Tab content "document public,auto-production" Style */
+}
+
+.more {
+	font-size: rem(18px);
+	font-weight: 500;
+	color: $cloudBurst;
+	margin: 0 auto;
+	transition: all .3s ease-in-out;
+	position: relative;
+
+	&:after {
+		content: "\e918";
+		font-family: icomoon;
+		font-weight: 600;
+		position: absolute;
+		right: -25px;
+		top: 0;
+		width: 20px;
+		height: 28px;
+		z-index: 2;
+		transition: all .3s ease-in-out;
+	}
+
+	&:hover {
+		&:after {
+			transform: translateX(50%);
+		}
+	}
+}

@@ -1,0 +1,30 @@
+Request to receive an offer: Receive an offer
+
+Your offer request has been successfully sent: Your offer request has been successfully sent
+
+modal:
+    description: Fill in the information below, a consultant will contact you
+
+form:
+    firstName:
+        label: First name
+        placeholder: First name
+    lastName:
+        label: Last name
+        placeholder: Last name
+    email:
+        label: Email
+        placeholder: Your email
+    youAre:
+        label: You are ?
+    message:
+        label: Message
+        placeholder: Your message ...
+
+Startuper: Entrepreneur
+Investor: Investor
+
+Required Field: Required Field
+
+Send: Receive an offer
+Cancel: Cancel

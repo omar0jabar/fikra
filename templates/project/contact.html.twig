@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }} - contact{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+    <div class="contact-porteur">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 contact-porteur-card">
+                    <h3>{% trans %}Contact the project leader{% endtrans %} : {{ project.name }}</h3>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <div class="champ-requis">
+                        <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                    </div>
+
+                    {#<div class="g-recaptcha"
+                         data-sitekey="{{ recaptcha_site_key }}"
+                         data-callback="onSubmitMessage"
+                         data-size="invisible">
+                    </div>#}
+                    <button type="submit" class="btn btn-bg-red btn-h50 btn-w25">
+                        {% trans %}Send{% endtrans %}
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div><!-- /.container -->
+    </div>
+{% endblock %}
+

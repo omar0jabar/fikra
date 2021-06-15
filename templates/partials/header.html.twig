@@ -1,0 +1,171 @@
+
+{% trans_default_domain 'header' %}
+<header class="header main-header">
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    {% set locale = app.request.locale %}
+    {% set pathHome = path("home_default") %}
+    {% if locale == "en" %}
+        {% set pathHome = path("home") %}
+    {% endif %}
+    {% set current_path = app.request.get('_route') %}
+    {% if current_path == 'home' or current_path == "home_default" %}
+        <h1 class="header-logo">
+            <a class="navbar-brand" href="{{ pathHome }}">
+                <img src="/assets/img/logo.png" alt="PFE Startup" title="PFE Startup">
+            </a>
+        </h1>
+    {% else %}
+        <a class="navbar-brand" href="{{ pathHome }}">
+            <img src="/assets/img/logo.png" alt="PFE Startup" title="PFE Startup">
+        </a>
+    {% endif %}
+    <div class="upperbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 tags">
+                    <a href="{{ path('set_locale_language', {language: 'fr'}) }}" class="{% if app.request.locale == 'fr' %}active{% endif %} btn">
+                        {% trans %}FR{% endtrans %}
+                    </a>
+                    <a href="{{ path('set_locale_language', {language: 'en'}) }}" class="{% if app.request.locale == 'en' %}active{% endif %} btn">
+                        {% trans %}EN{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <div class="upperbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 tags">
+                        <a href="{{ path('set_locale_language', {language: 'fr'}) }}" class="{% if app.request.locale == 'fr' %}active{% endif %} btn">
+                            {% trans %}FR{% endtrans %}
+                        </a>
+                        <a href="{{ path('set_locale_language', {language: 'en'}) }}" class="{% if app.request.locale == 'en' %}active{% endif %} btn">
+                            {% trans %}EN{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="navbar-nav ml-auto">
+            {% set current_path = app.request.get('_route') %}
+            {% set array = ["startuper_project_create", "startuper_project_complete",
+                            "startuper_project_request_validation", "startuper_project_success_create",
+                            "startuper_project_edit","startuper_project_check_update",
+                            "startuper_project_success_update", "startuper_registration"] %}
+            {% if current_path not in array %}
+                <li class="nav-item {% if current_menu is defined and current_menu == 'projects' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path("project_list") }}">{% trans %}Projects{% endtrans %}</a>
+                </li>
+{#                <li class="nav-item company {% if current_menu is defined and current_menu == 'companies_home' %}active{% endif %}">#}
+{#                    <a class="nav-link" href="{{ path("company_home") }}">{% trans %}Companies{% endtrans %}</a>#}
+{#                </li>#}
+                <li class="nav-item {% if current_menu is defined and current_menu == 'about_us' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path("about_us") }}">{% trans %}About us{% endtrans %}</a>
+                </li>
+                <li class="nav-item parent {% if current_menu is defined and current_menu == 'comment_ca_marche' %}active{% endif %}">
+                    <a class="nav-link" href="#">{% trans %}How it works{% endtrans %} <i class="icon-right-chevron"></i></a>
+                    <ul class="sous-title">
+                        <li><a href="{{ path('comment_ca_marche', { actor: 'startupers'}) }}">
+                                {% trans %}Startupers{% endtrans %}
+                            </a>
+                        </li>
+                        <li><a href="{{ path('comment_ca_marche', { actor: 'investisseurs'}) }}">
+                                {% trans %}Investors{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item {% if current_menu is defined and current_menu == 'articles' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path("cmsbundle_article_list") }}">{% trans %}Articles{% endtrans %}</a>
+                </li>
+{#                <li class="nav-item parent {% if current_menu is defined and current_menu == 'articles' %}active{% endif %}">#}
+{#                    <a class="nav-link" href="#">{% trans %}News{% endtrans %} <i class="icon-right-chevron"></i></a>#}
+{#                    <ul class="sous-title">#}
+{#                        <li><a href="{{ path('cmsbundle_article_list') }}">#}
+{#                                {% trans %}Articles{% endtrans %}#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        <li><a href="{{ path('cmsbundle_event_list') }}">#}
+{#                                {% trans %}Events{% endtrans %}#}
+{#                            </a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </li>#}
+                <li class="nav-item {% if current_menu is defined and current_menu == 'contact' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path("contact") }}">{% trans %}Contact{% endtrans %}</a>
+                </li>
+
+                <li class="nav-item submit-project {% if current_menu is defined and current_menu == 'create-project' %}active{% endif %}">
+                    <a class="btn btn-orange-yellow btn-h40 btn-w20" href="{{ path("startuper_project_create") }}">
+                        {% trans %}Submit your project{% endtrans %}
+                    </a>
+                </li>
+
+                {% if app.user %}
+                    <li class="nav-item parent startuper">
+                        <a href="#" class="nav-link">
+                            <div class="avatar">
+                            {% set exist = app.user.file_existes(vich_uploader_asset(app.user, "imageFile")) %}
+                            {% if exist %}
+                                {% set avatar = vich_uploader_asset(app.user, "imageFile") %}
+                            {% else %}
+                                {% set avatar = '/upload/users/empty.jpg' %}
+                            {% endif %}
+                                <img src="{{avatar}}" alt="{{ app.user.fullName }}">
+                            </div>
+                            {{ app.user.fullName }}
+                            <i class="icon-right-chevron"></i>
+                        </a>
+                        <ul class="sous-title">
+                            <li>
+                                <a href="{{ path('startuper_project_dashboard') }}">
+                                    <i class="icon-chart-pie"></i>
+                                    {% trans %}Dashboard{% endtrans %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('investor_messages') }}">
+                                    <i class="icon-message"></i>
+                                    {% trans %}Messages{% endtrans %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('startuper_project_create') }}">
+                                    <i class="icon-file-signature"></i>
+                                    {% trans %}Submit your project{% endtrans %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('startuper_profile') }}">
+                                    <i class="icon-user-circle"></i>
+                                    {% trans %}My account{% endtrans %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('startuper_logout') }}">
+                                    <i class="icon-logout"></i>
+                                    {% trans %}Logout{% endtrans %}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item c-buttons {% if current_menu is defined and current_menu == 'login' %}active{% endif %}">
+                        <a class="btn btn-transparent-black btn-h40 btn-w20" href="{{ path('startuper_login') }}">{% trans %}Login{% endtrans %}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+</header>

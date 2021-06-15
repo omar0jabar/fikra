@@ -1,0 +1,75 @@
+{% trans_default_domain 'company' %}
+
+<div class="col-lg-4 col-md-6 styleCard" >
+    {% if company.coverName is not empty %}
+    {% set cover = company.coverPath %}
+    {% else%}
+    {% set cover = asset('assets/img/project_cover.png') %}
+    {% endif %}
+    {% set link = path('company_show', { id: company.company.id, slug: company.slug}) %}
+    <a href="{{ link }}">
+        <div class="card card-project card-company w-100 {% if company.isClosed %}closed{% endif %}">
+            {% if company.isClosed %}
+                <div class="passed-flag">
+                    {{ 'Closed'|trans }}
+                </div>
+            {% endif %}
+            <div class="card-img-top" >
+                <img src="{{ cover }}" alt="{{ company.name }}">
+                {% if company.isVerified == true %}
+                    <div class="project-card-verified">
+                        <div class="icon-content">
+                            <i class="icon-Verifi"></i>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="project-card-likes js-card-like">
+                    <span class="js-like-project">
+                        <span class="js-likes">{{ company.company.likes|length }}</span>
+                        {% if app.user and company.company.isLikedByUser(app.user) %}
+                            <i class="icon-favorite-heart-button red"></i>
+                        {% else %}
+                            <i class="icon-favorite-heart-button"></i>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">
+                    {% if company.name|length > 30 %}
+                        {{ company.name|slice(0, 30) ~ "..." }}
+                    {% else %}
+                        {{ company.name }}
+                    {% endif %}
+                </h2>
+                <span class="card-title-second">{{ company.associationName }}</span>
+                <div class="card-progress has-progress clearfix">
+                    <div class="progress-price-wrapper">
+                        <div class="progress-price company">
+                            <strong>{{ company.amountCollected('CONFIRMED')|number_format(0, ",", " ") }}</strong>
+                            <span>Mad</span>
+                        </div>
+                        /
+                        <div class="progress-price company">
+                            <strong>{{ company.fundingObjective|number_format(0, ",", " ") }}</strong>
+                            <span>Mad</span>
+                        </div>
+                    </div>
+                    <div class="progress-content">
+                        <div class="progress">
+                            <div class="progress-bar" style="width:{{ company.percentageOfContribution }};" role="progressbar" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"></div>
+                        </div>
+                        <div class="percentage">{{ company.percentageOfContribution }}</div>
+                    </div>
+                </div>
+                {% set days = company.numberOfDays %}
+                {% set word = days > 1 ? 'days left'|trans : 'day left'|trans %}
+                {% if days > 0 %}
+                    <div class="secteur">
+                        <h5>{{ days }} {{ ' ' ~ word }}</h5>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+</div>

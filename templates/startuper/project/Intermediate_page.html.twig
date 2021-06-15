@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block title %}{% trans %}The incomplete project{% endtrans %}{% endblock %}
+
+{% block body %}
+   <div class="project-incompleted">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-5 mb-5">
+               <div class="bg-secondary" style="height: 300px"></div>
+            </div>
+            <div class="col-md-7">
+               <p class="intro">
+                  {% trans %}project_incomplete.message{% endtrans %}
+               </p>
+               {#<ul class="p-0">
+                  {% for check in app.session.get('checks') %}
+                     <li>- {{ check }}</li>
+                  {% endfor %}
+               </ul>#}
+               <div class="c-block-btn">
+                  <a href="{{ path('startuper_project_edit', {id: project.id, slug: project.slug}) }}" class="btn btn-bg-blue btn-h50 btn-w25">
+                     {% trans %}Complete the project{% endtrans %}
+                  </a>
+                  {% if updated %}
+                     {% set link = path('startuper_project_success_update', {id: project.id, slug: project.slug}) %}
+                  {% else %}
+                     {% set link = path('startuper_project_success_create', {id: project.id, slug: project.slug}) %}
+                  {% endif %}
+                  <a href="{{ link }}" class="btn btn-bg-red btn-h50 btn-w25">
+                     {% trans %}Continue without completing{% endtrans %}
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+

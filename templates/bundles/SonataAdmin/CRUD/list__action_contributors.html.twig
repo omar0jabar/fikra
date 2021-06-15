@@ -1,0 +1,6 @@
+{% trans_default_domain 'company' %}
+{% if object.contributors|length > 0 %}
+      <a href="{{ admin.generateObjectUrl('contributors', object) }}" class="btn btn-sm btn-success">
+            <i class="fa fa-euro"></i> {{ object.contributors|length  }} {% trans %}Contributors{% endtrans %}
+      </a>
+{% endif %}

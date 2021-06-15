@@ -1,0 +1,97 @@
+{% trans_default_domain 'project' %}
+
+<div class="col-lg-4 col-md-6 styleCard" >
+    {% if project.imageCoverName is not empty %}
+    {% set cover = '/upload/approved-projects/approved-gallery-photo/' ~ project.imageCoverName %}
+    {% else%}
+    {% set cover = asset('assets/img/project_cover.png') %}
+    {% endif %}
+    {% set link = path('project_show', { id: project.project.id, slug: project.slug}) %}
+    <a href="{{ link }}">
+        <div class="card card-project w-100">
+            <div class="card-img-top" >
+                    <img src="{{ cover }}" alt="">
+                    {% if project.isVerified == true %}
+                        <div class="project-card-verified">
+                            <div class="icon-content">
+                                <i class="icon-Verifi"></i>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="project-card-langue">
+                        <span>{{ project.language }}</span>
+                    </div>
+                    {% set countPhoto = project.galleryPhotos|length %}
+                    <div class="project-card-icons">
+                        {% if countPhoto > 0 %}
+                            <i class="icon-picture-1"></i>
+                        {% endif %}
+                        {% if project.video is not empty %}
+                            <i class="icon-play-button-1"></i>
+                        {% endif %}
+                    </div>
+                    <div class="project-card-likes js-card-like">
+                        {#<a href="{{ path('project_like', {id: project.id}) }}" class="js-like-project" >#}
+                        <span class="js-like-project">
+                            <span class="js-likes">{{ project.project.likes|length }}</span>
+                            {% if app.user and project.Project.isLikedByUser(app.user) %}
+                                <i class="icon-favorite-heart-button red"></i>
+                            {% else %}
+                                <i class="icon-favorite-heart-button"></i>
+                            {% endif %}
+                        </span>
+                    </div>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">
+                    {% if project.name|length > 30 %}
+                        {{ project.name|slice(0, 30) ~ "..." }}
+                    {% else %}
+                        {{ project.name }}
+                    {% endif %}
+                </h2>
+                {% if project.description|length > 100 %}
+                    {% set description = project.description|slice(0, 100) ~ "..." %}
+                {% else %}
+                    {% set description = project.description %}
+                {% endif %}
+                <div class="card-progress clearfix">
+                    <h3>{% trans %}Funding objective{% endtrans %}</h3>
+                    <div class="progress-price">
+                        {% if project.hasNotAmount or project.amount == 0 %}
+                            <strong>{% trans %}Has not amount{% endtrans %}</strong>
+                        {% else %}
+                            <strong>{{ project.amount|number_format(0, ",", " ") }}</strong>
+                            <span>Mad</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="card-text">{{ description }}</p>
+                <div class="card-additions">
+                    <ul>
+                        {% for avantage in project.avantages|slice(0, 3) %}
+                            <li><i class="icon-add-circle"></i><span>{{ avantage.name }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="secteur">
+                    <h5>{% trans %}Sectors{% endtrans %} : </h5>
+                    <div class="tags">
+                        {% for sector in project.sectors|slice(0, 3) %}
+                            {% set label = sector.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = sector.labelEn %}
+                            {% endif %}
+                            <span class="badge badge-pill badge-primary btn btn-bg-blue btn-h30 btn-w18">{{ label }}</span>
+                        {% endfor %}
+                        {% if project.sectors|length > 3 %}
+                            <span class="badge badge-pill badge-primary btn btn-bg-blue btn-h30 btn-w18 show-more">
+                                <i class="icon-add"></i>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

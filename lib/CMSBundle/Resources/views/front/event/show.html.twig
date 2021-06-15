@@ -1,0 +1,210 @@
+{% extends 'base-no-header.html.twig' %}
+
+{% trans_default_domain 'event' %}
+
+{% block meta %}
+    <meta name="title" content="{{ metatitle }}">
+    <meta name="description" content="{{ metadescription }}">
+    <meta name="keywords" content="{{ event.metaTags }}">
+
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ metatitle }}"/>
+    <meta property="og:description" content="{{ metadescription }}"/>
+    <meta property="og:image:width" content="{{width}}"/>
+    <meta property="og:image:height" content="{{height}}"/>
+    <meta property="og:image"
+          content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/cms/events-public/" ~ event.bannerDesktop }}"/>
+
+    <meta name="twitter:title" content="{{ event.metaTitle }}"/>
+    <meta name="twitter:description" content="{{ event.metaDescription }}"/>
+    <meta name="twitter:image"
+          content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/cms/events-public/" ~ event.bannerDesktop }}"/>
+{% endblock %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/cms/css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <body id="{{ event.htmlIdAttr }}" class="{{ event.htmlClassAttr }}">
+
+    {% include 'partials/header.html.twig' %}
+
+    <div class="article-detail">
+        {% if event.bannerDesktop is not empty %}
+            {% set cover = "/upload/cms/events-public/" ~ event.bannerDesktop %}
+        {% else %}
+            {% set cover = asset('assets/img/Banner.png') %}
+        {% endif %}
+        <div class="row banner-actus hide-for-mobile">
+            <img src="{{ cover }}" alt="" class="img-responsive">
+        </div>
+        {% if event.bannerMobile is not empty %}
+            {% set cover = asset("upload/cms/events-public/" ~ event.bannerMobile) %}
+        {% else %}
+            {% set cover = asset('assets/img/banner-mobile.png') %}
+        {% endif %}
+        <div class="row banner-actus show-for-mobile">
+            <img src="{{ cover | imagine_filter('cms_cover') }}" alt="" class="img-responsive">
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12">
+                    <div class="back-to-actus">
+                        <a href="{{ path('cmsbundle_event_list') }}">
+                            <i class="icon-right-arrow"></i> {% trans %}events{% endtrans %}
+                        </a>
+                    </div>
+                    <h2 class="c-heading">
+                        {{ event.title }}
+                        {% if event.event.isExpired == 1 %}
+                            <br><span class="badge badge-warning">{% trans %}Event expired{% endtrans %}</span>
+                        {% endif %}
+                    </h2>
+                    {#<h5>{% trans %}Category{% endtrans %}: {{ event.category }}</h5>#}
+                    {#<h5>{% trans %}Start date{% endtrans %}: {{ event.dateDebut|date('d/m/Y') }} {% trans %}at{% endtrans %} {{ event.heureDebut|date("H:i") }}</h5>
+                    <h5>{% trans %}End date{% endtrans %}: {{ event.dateFin|date('d/m/Y') }} at {{ event.heureFin|date("H:i") }}</h5>#}
+                    <div class="block-addis">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>
+                                    <h5>
+                                        <i class="icon-calendar"></i>
+                                        {% trans %}From{% endtrans %}
+                                        {{ event.dateDebut|date('d/m/Y') }}
+                                        {% if event.heureDebut is not empty %}
+                                            {% trans %}at{% endtrans %}
+                                            {{ event.heureDebut|date("H:i") }}
+                                        {% endif %}
+                                        {% if event.dateFin is not empty or event.heureFin is not empty %}
+                                            {% trans %}to{% endtrans %}
+                                        {% endif %}
+                                        {% if event.dateFin is not empty %}
+                                            {{ event.dateFin|date('d/m/Y') }}
+                                        {% endif %}
+                                        {% if event.heureFin is not empty %}
+                                            {% trans %}at{% endtrans %}
+                                            {{ event.heureFin|date("H:i") }}
+                                        {% endif %}
+                                    </h5>
+                                </span>
+                                {% if event.lieu is not empty %}
+                                    <h5>
+                                        <i class="icon-placeholder"></i>
+                                        {% trans %}Location{% endtrans %}: {{ event.lieu }}
+                                    </h5>
+                                {% endif %}
+                                <div class="category">
+                                    <h5>{% trans %}Category{% endtrans %} : <br></h5>
+                                    <span class="badge badge-pill badge-primary btn btn-bg-blue btn-h30 btn-w18">
+                                        {{ event.category.title }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 addis-icons">
+                                <div class="addthis_inline_share_toolbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ event.content|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% for key,row in blocks %}
+                <div class="row justify-content-center {{ rows[key].class }}" id="{{ rows[key].idHTml }}">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="row">
+                            {% for block in row %}
+                                <div class="col-md-{{ block.colLarge }} col-sm-12">
+                                    {#{% if block.title is not empty %}
+                                        <h3>{{ block.title }}</h3>
+                                    {% endif %}#}
+                                    {% if block.type == 'image' %}
+                                        {% if block.imageName is not empty %}
+                                            {% set img = "/upload/cms/events-public/blocks/" ~ block.imageName %}
+                                        {% else %}
+                                            {% set img = asset('assets/img/block-875x500.png') %}
+                                        {% endif %}
+                                        {% if block.linkImage is not empty %}
+                                            <a href="{{ block.linkImage }}">
+                                                <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                                            </a>
+                                        {% else %}
+                                            <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                                        {% endif %}
+                                        {% if block.legend is not empty %}
+                                            <em>{{ block.legend }}</em>
+                                        {% endif %}
+                                        {% if block.textImage is not empty %}
+                                            {{ block.textImage|raw }}
+                                        {% endif %}
+
+                                    {% elseif block.type == 'text' %}
+                                        {{ block.content|raw }}
+                                    {% elseif block.type == 'video' %}
+                                        <div class="video-content">
+                                            <iframe width="{{ block.width }}" height="{{ block.height }}"
+                                                    src="//www.youtube.com/embed/{{ block.idVideo }}?controls=0&showinfo=0"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if block.clearfix %}
+                                    <div class="w-100"></div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if event.url is not empty %}
+                <div class="row  justify-content-center">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="text-center">
+                            <a href="{{ event.url }}" target="_blank" class="btn btn-bg-red btn-h40 btn-w40"
+                               title="{% trans %}Show event{% endtrans %}">{% trans %}Show event{% endtrans %}
+                                {# <i class="icon-visibility"></i> #}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if count_events > 0 %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3>{% trans %}Related events{% endtrans %}</h3>
+                            </div>
+                            {% for event in events %}
+                                {% include '@CMS/front/event/_card_event.html.twig' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+    {% include 'partials/footer.html.twig' %}
+
+    </body>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c93906a67926205"></script>
+    <script src="{{ asset('bundles/cms/js/axios.min.js') }}"></script>
+    <script src="{{ asset('bundles/cms/js/event-like.js') }}"></script>
+{% endblock %}

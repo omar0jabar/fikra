@@ -1,0 +1,505 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% include 'administration/project/_head.html.twig' %}
+
+   {% set locale = app.request.locale %}
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Idea{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <label for="">Language du projet</label>
+               <div class="view-project">
+                  {{ project.language }}
+               </div>
+
+               <label for="">Nom projet</label>
+               <div class="view-project">
+                  {{ project.name }}
+               </div>
+
+               <label for="">Description</label>
+               <div class="view-project">
+                  {{ project.description }}
+               </div>
+
+               <label for="">Executive summary</label>
+               <div class="view-project">
+                  {% if project.summary is not empty %}
+                     {{ project.summary|raw }}
+                  {% else %}
+                     #
+                  {% endif %}
+               </div>
+
+               <label for="">Phase projet</label>
+               <div class="view-project">
+                  {{ project.step }}
+               </div>
+
+               <label for="">Revenus generes jusqu'à maintenant</label>
+               <div class="view-project">
+                  {% set label = project.earned.labelFr %}
+                  {% if locale == "en" %}
+                     {% set label = project.earned.labelEn %}
+                  {% endif %}
+                  {{ label }}
+               </div>
+
+               <label for="">Produits / Services</label>
+               <div class="view-project">
+                  <ul>
+                     {% for service in project.services %}
+                        <li>{{ service.name }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">Startup</label>
+               <div class="view-project">
+                  {{ project.startup|default('#') }}
+               </div>
+
+               <label for="">Dénomination</label>
+               <div class="view-project">
+                  {{ project.denomination|default('#') }}
+               </div>
+
+               <label for="">Date de création</label>
+               <div class="view-project">
+                  {{ project.creatingDate|date('d/m/Y') }}
+               </div>
+
+               <label for="">Numéro de RC</label>
+               <div class="view-project">
+                  {{ project.rc|default('#') }}
+               </div>
+
+               <label for="">Ville</label>
+               <div class="view-project">
+                  {{ project.city|default('vide') }}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Project{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <label for="">Canaux de vente</label>
+               <div class="view-project">
+                  <ul>
+                     {% for sale in project.salesChannels %}
+                        {% set label = sale.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = sale.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+                  {% if project.otherSalesChannels == true %}
+                     Autre: <strong>Oui</strong><br>
+                     {% else %}
+                        Autre: <strong>Non</strong><br>
+                  {% endif %}
+                  Canal: {{ project.moreSalesChannels|default('#') }}
+               </div>
+
+               <label for="">Secteurs</label>
+               <div class="view-project">
+                  <ul>
+                     {% for sector in project.sectors %}
+                        {% set label = sector.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = sector.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+                  Autre: {{ project.moreSectors|default('#') }}
+               </div>
+
+               <label for="">Business models</label>
+               <div class="view-project">
+                  <ul>
+                     {% for business in project.businessModels %}
+                        {% set label = business.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = business.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+                  {% if project.otherBusinessModel == true %}
+                     Autre: <strong>Oui</strong><br>
+                  {% else %}
+                     Autre: <strong>Non</strong><br>
+                  {% endif %}
+                  Secteur: {{ project.moreBusinessModel|default('#') }}
+               </div>
+
+               {#<label for="">Marché</label>
+               <div class="view-project">
+                  {% if project.morocco == true %}
+                     {% set val = "Oui" %}
+                  {% else %}
+                     {% set val = "Non" %}
+                  {% endif %}
+                  Morocco: {{ val }}<br>
+                  {% if project.otherCountry == true %}
+                     {% set val = "Oui" %}
+                  {% else %}
+                     {% set val = "Non" %}
+                  {% endif %}
+                  Etranger: {{ val }}<br>
+                  pays: {{ project.foreignCountry|default('#') }}
+               </div>
+
+               <label for="">Étude de marché disponible ?</label>
+               <div class="view-project">
+                  {% if project.marketResearch == true %}
+                     {% set val = "Oui" %}
+                  {% else %}
+                     {% set val = "Non" %}
+                  {% endif %}
+                  {{ val }}
+               </div>#}
+
+               <label for="">Avantages</label>
+               <div class="view-project">
+                  <ul>
+                     {% for avantage in project.avantages %}
+                        <li>{{ avantage.name }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               {#<label for="">Budget global du projet</label>
+               <div class="view-project">
+                  {{ project.budget|number_format(0, "", " ") }}
+               </div>#}
+
+               <label for="">Montant déjà levé</label>
+               <div class="view-project">
+                  {{ project.raised|number_format(0, "", " ") }}
+               </div>
+
+               <label for="">Montant recherché</label>
+               <div class="view-project">
+                  {{ project.amount|number_format(0, "", " ") }}
+               </div>
+
+               <label for="">Project finances</label>
+               <div class="view-project">
+                  <ul>
+                     {% for finance in project.projectFinances %}
+                        <li>{{ finance.detail }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">Expression</label>
+               <div class="view-project">
+                  {{ project.express|raw }}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+
+      <div class="col-md-6">
+         <div class="box box-default">
+            <div class="box-header">
+               <h3>{% trans %}Team Members{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h1 class="panel-title">L'équipe</h1>
+                  </div>
+                  <div class="panel-body">
+
+                     {% for member in project.teamMembers %}
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h1 class="panel-title">Membre {{ loop.index }}</h1>
+                           </div>
+                           <div class="panel-body">
+                              <div class="row">
+                                 <div class="col-md-5">
+                                    {% if member.photo %}
+                                       {% set photo = vich_uploader_asset(member, 'imageFile') %}
+                                    {% else %}
+                                       {% set photo = 'upload/users/empty.jpg' %}
+                                    {% endif %}
+                                    <div class="center">
+                                       <img src="{{ asset(photo) }}" alt="" class ="avatar">
+                                    </div>
+                                    <hr>
+                                    <label for="">LinkedIn</label>
+                                    <div class="view-project">
+                                       {{ member.linkedin|default('#') }}
+                                    </div>
+                                    <label for="">Twitter</label>
+                                    <div class="view-project">
+                                       {{ member.twitter|default('#') }}
+                                    </div>
+                                    <label for="">Facebook</label>
+                                    <div class="view-project">
+                                       {{ member.facebook|default('#') }}
+                                    </div>
+                                 </div>
+                                 <div class="col-md-7">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <label for="">Prénom</label>
+                                          <div class="view-project">
+                                             {{ member.firstName }}
+                                          </div>
+                                       </div>
+                                       <div class="col-md-6">
+                                          <label for="">Nom</label>
+                                          <div class="view-project">
+                                             {{ member.lastName }}
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <label for="">Position</label>
+                                          <div class="view-project">
+                                             {{ member.position }}
+                                          </div>
+                                          <label for="">Biographie</label>
+                                          <div class="view-project">
+                                             {{ member.biography|default('#') }}
+                                          </div>
+                                          <label for="">CV</label>
+                                          <div class="view-project">
+                                             {% if member.cv %}
+                                                <a href="{{ vich_uploader_asset(member, 'cvFile') }}" target="_blank">
+                                                   {{ member.cv|default('#') }}
+                                                </a>
+                                                {% else %}
+                                                #
+                                             {% endif %}
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div><!-- /.panel -->
+                     {% endfor %}
+                  </div>
+               </div><!-- /.panel -->
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <div class="row">
+
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Documents{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h1 class="panel-title">Documents</h1>
+                  </div>
+                  <div class="panel-body">
+
+                     {% for document in project.documents %}
+
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h1 class="panel-title">Document {{ loop.index }}</h1>
+                           </div>
+                           <div class="panel-body">
+                              <div class="row">
+                                 <div class="col-md-4">
+                                    <label for="">document</label>
+                                    <div class="view-project">
+                                       <a href="{{ vich_uploader_asset(document, 'file') }}" target="_blank">
+                                          {{ document.name }}
+                                       </a>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                    <label for="">Type de document</label>
+                                    <div class="view-project">
+                                       {% set label = document.documentType.labelFr %}
+                                       {% if locale == "en" %}
+                                          {% set label = document.documentType.labelEn %}
+                                       {% endif %}
+                                       {{ label }}
+                                    </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                    <label for="">Document confidentiel</label>
+                                    <div class="view-project">
+                                       {% if document.isPrivate == 1 %}
+                                          Oui
+                                       {% else %}
+                                          {{ document.isPrivate|default('Non') }}
+                                       {% endif %}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div><!-- /.panel -->
+                     {% endfor %}
+                  </div>
+               </div><!-- /.panel -->
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Gallery photo{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h1 class="panel-title">Gallery photos</h1>
+                  </div>
+                  <div class="panel-body">
+                     <div class="row">
+                        {% for photo in project.galleryPhotos %}
+                           <div class="col-md-6">
+                              <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="" class="w-100">
+                              <label for="">Title</label>
+                              <div class="view-project">
+                                 {{ photo.alt|default('empty')|trans }}
+                              </div>
+                           </div>
+                        {% endfor %}
+                     </div>
+                  </div>
+               </div><!-- /.panel -->
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <div class="row">
+
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Video{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h1 class="panel-title">{% trans %}Video{% endtrans %}</h1>
+                  </div>
+                  <div class="panel-body">
+                     {% if project.video is not empty %}
+                        <iframe width="100%" height="400" src="//www.youtube.com/embed/{{ project.idVideo }}" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"allowfullscreen
+                                class="my-2">
+                        </iframe>
+                        {% else %}
+                        {% trans %}No video{% endtrans %}
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="sonata-ba-form-actions well well-small form-actions">
+      <div class="text-center">
+         <a href="{{ admin.generateObjectUrl('lock', project) }}" class="btn btn-default btn-lg">
+            {% if project.isLocked %}
+               {% set label = 'Unlock' %}
+               {% set icon = 'unlock' %}
+            {% else %}
+               {% set label = 'Lock' %}
+               {% set icon = 'lock' %}
+            {% endif %}
+            <i class="fa fa-{{ icon }}"></i> {{ label }}
+         </a>
+         <a href="{{ admin.generateObjectUrl('edit', project) }}" class="btn btn-default btn-lg">
+            <i class="fa fa-pencil"></i> Edit
+         </a>
+         <a href="{{ admin.generateObjectUrl('delete', project) }}" class="btn btn-danger btn-lg">
+            <i class="fa fa-trash"></i> Delete
+         </a>
+         {% if not project.isRejected %}
+            {% if project.isApproved %}
+               {% if project.isUpdated %}
+                  <a href="{{ admin.generateObjectUrl('compare', project) }}" class="btn btn-lg btn-warning">
+                     <i class="fa fa-binoculars"></i> Comparer
+                  </a>
+               {% else %}
+                  <a href="{{ admin.generateObjectUrl('approve', project) }}" class="btn btn-lg btn-default">
+                     <i class="fa fa-ban"></i> Disqualifier
+                  </a>
+               {% endif %}
+            {% else %}
+               <a href="{{ admin.generateObjectUrl('approve', project) }}" class="btn btn-lg btn-success">
+                  <i class="fa fa-check"></i> Qualifier
+               </a>
+            {% endif %}
+         {% endif %}
+
+         {% if not project.isApproved and not project.isUpdated %}
+            {% if project.isRejected %}
+               {% set label = 'Unreject' %}
+               {% set color = 'danger' %}
+            {% else %}
+               {% set label = 'Reject' %}
+               {% set color = 'danger' %}
+            {% endif %}
+            <a href="{{ admin.generateObjectUrl('reject', project) }}" class="btn btn-lg btn-{{ color }}">
+               <i class="fa fa-remove"></i> {{ label }}
+            </a>
+         {% endif %}
+
+         {% if project.isApproved %}
+            {% if project.isVerified %}
+               {% set label = 'Unverify' %}
+               {% set icon = 'minus-circle' %}
+               {% set color = 'info' %}
+            {% else %}
+               {% set label = 'Verify' %}
+               {% set icon = 'check' %}
+               {% set color = 'info' %}
+            {% endif %}
+            <a href="{{ admin.generateObjectUrl('verify', project) }}" class="btn btn-{{ color }} btn-lg">
+               <i class="fa fa-{{ icon }}"></i> {{ label }}
+            </a>
+         {% endif %}
+      </div>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+   {# {{ dump() }} you can dump all variables here #}
+   {% if object.isVerified == true %}
+      <i class="fa fa-check"></i>
+   {% endif %}
+{% endblock field %}

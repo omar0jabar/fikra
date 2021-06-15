@@ -1,0 +1,84 @@
+{% extends '@VichUploader/Form/fields.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block vich_image_widget %}
+   {% spaceless %}
+      <div class="c-section-upload-file">
+         {% set display = "block" %}
+         {% if image_uri %}
+            <img class="vich-img w-100" src="{{ image_uri }}" alt="" />
+            {% set display = "none" %}
+         {% endif %}
+
+         {{ form_widget(form.file, {'attr' :{'style' : 'display:'~ display}}) }}
+         
+         {% if form.delete is defined %}
+            {{ form_row(form.delete) }}
+         {% endif %}
+
+         {% if download_uri %}
+            <a class="btn btn-secondary" href="{{ download_uri }}">
+               <i class="fas fa-download"></i>
+               {{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
+            </a>
+         {% endif %}
+      </div>
+   {% endspaceless %}
+{% endblock %}
+
+{# ADD Photo  project_form_galleryPhotos #}
+
+{% block _project_form_galleryPhotos_widget %}
+   <div class="gallery-intro">
+      <p class="text-muted">{% trans %}form.galleryPhotos.help{% endtrans %}</p>
+   </div>
+   <div class="form-gallery-widget">
+      {{ form_widget(form) }}
+   </div>
+   <div class="b-add-photo">
+      <input type="hidden" id="photo-counter" value="0">
+      <button id="add-photo" type="button" class="btn btn-bg-blue btn-h50 btn-w35">
+         <i class="icon-add"></i> {% trans %}form.galleryPhotos.btnAdd{% endtrans %}
+      </button>
+   </div>
+{% endblock %}
+
+{% block _project_form_galleryPhotos_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_galleryPhotos_entry_widget  %}
+   <div id="block_{{ id }}" class="c-form-gallery">
+      <div class="row justify-content-center">
+         <div class="col-lg-10 col-md-12 p-0">
+            <div class="row">
+               <div class="col-md-4 field-upload">
+                  <div class="b-form-upload" id="col_{{ id }}">
+                     <div class="c-section-gallery" style="display: none">
+                        <img src="" alt="" id="img_{{ id }}">
+                     </div>
+                     {{ form_errors(form.imageFile) }}
+                     {{ form_widget(form.imageFile) }}
+                  </div>
+               </div>
+               <div class="col-md-8 field-select">
+                  <div class="b-select-form">
+                     {{ form_widget(form.alt) }}
+                     {{ form_errors(form.alt) }}
+                  </div>
+                  {#<div class="b-description-form">
+                     {{ form_widget(form.description) }}
+                     {{ form_errors(form.description) }}
+                  </div>#}
+                  <div class="b-btn-delete">
+                     <button type="button" data-action="delete-photo" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w35">
+                        <i class="icon-garbage"></i> {% trans %}form.galleryPhotos.btnDelete{% endtrans %}
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

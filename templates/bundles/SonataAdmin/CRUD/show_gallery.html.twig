@@ -1,0 +1,25 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+   {% if object.galleryPhotos|length > 0 %}
+      <div class="row">
+         {% for photo in object.galleryPhotos %}
+            <div class="col-md-3">
+               <div style="border: 1px solid grey">
+                  {% set src = vich_uploader_asset(photo, 'imageFile') %}
+                  <a href="{{ src }}" target="_blank">
+                     <img src="{{ src }}" alt="{{ photo.alt }}" style="width: 100%">
+                  </a>
+                  <hr>
+               </div>
+               <div style="border: 1px solid grey;  padding: 10px;">
+                  <p>{{ photo.alt|default('Aucun alt') }}</p>
+               </div>
+
+            </div>
+         {% endfor %}
+      </div>
+   {% else %}
+      <p>Aucun Photo</p>
+   {% endif %}
+{% endblock field %}

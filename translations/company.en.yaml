@@ -1,0 +1,401 @@
+Action: Action
+Home solidarity campaigns: Home solidarity campaigns
+User: User
+Contributors: Contributors
+contributors: contributeurs
+contributor: contributor
+Contributor: Contributor
+Contributor List: List of contributors
+Create your solidarity company: Create a solidarity campaign
+Update your solidarity company: Update your solidarity campaign
+FAQ: FAQ
+F A Q List: List of FAQ
+See all FAQs: See all FAQs
+Id: Id
+form:
+    message:
+        send: |
+            <p>You can save your information at any time and complete the form later<br>
+               The information submitted will be examined by our team before  publication.</p>
+        update: |
+            <p>We inform you that after any modification<br>
+            your project will be in draft until validation by one of our experts!</p>
+    id:
+        label: Id
+    name:
+        label: Campaign name
+        placeholder: Campaign name
+    shortDescription:
+        label: Short description
+        placeholder: Short description
+    domain:
+        label: Domain
+        placeholder: Domain
+    domains:
+        label: Domains
+        placeholder: Domains
+    useOfFundsCollecteds:
+        label: Uses of funds collected
+        placeholder: Uses of funds collected
+    useFund:
+        label: Uses of funds collected
+        placeholder: Uses of funds collected
+    city:
+        label: City
+        placeholder: City
+    duration:
+        label: Duration
+        placeholder: Duration
+    fundingObjective:
+        label: Funding objective
+        placeholder: Funding objective
+    RIB:
+        label: Bank account identity
+        placeholder: Bank account identity
+    webSite:
+        label: Association website
+        placeholder:  Association website
+    documentType:
+        label: Document type
+        placeholder: Document type
+    documentFile:
+        label: Document
+        placeholder: Document
+    documents:
+        label: Documents
+        help: Authorized PDF, DOCX and EXCEL files | Maximum size 3Mb
+        btnAdd: Add a document
+    logoFile:
+        label: Association logo
+        placeholder: Browse...
+    coverFile:
+        label: Cover picture
+        placeholder: Browse
+    isLegalRepresentativeOfTheAssociation:
+        label: "I declare that I am the legal representative of the association calling for donations, and that I have all the powers necessary to initiate the operation of appeal for public generosity on behalf of the said association. I thus give a mandate to the pfestartup.com platform to proceed on behalf of the association, to the publication and the implementation of the online donation collection."
+    isAcceptedTheConditionOfSecurity:
+        label: "I accept the conditions of security, transparency and protection of personal data"
+    user:
+        label: Author
+        placeholder: Author
+    isDraft:
+        label: Draft
+    isVerified:
+        label: Verified
+        placeholder: Choose an option
+    isApproved:
+        label: Approved
+    isUpdated:
+        label: Updated
+    isRejected:
+        label: Rejected
+    metaTitle:
+        label: Meta title
+    metaDescription:
+        label: Meta description
+    search:
+        label: Search
+    order:
+        label: Order
+        placeholder: Choose an option
+    createdAt:
+        label: Created at
+    updatedAt:
+        label: Updated at
+    orderBy:
+        label: Order
+    isClosed:
+        label: Closed
+    startDate:
+        label: Start date
+    endDate:
+        label: End date
+    totalAmount:
+        label: Total amount
+    comment:
+        label: Comment
+        placeholder: Comment
+    responses:
+        label: Responses
+    author:
+        label: Author
+    isPublished:
+        label: Is published
+    action:
+        label: Action
+    firstName:
+        label: First name
+        placeholder: First name
+    lastName:
+        label: Last name
+        placeholder: Last name
+    isAnonymous:
+        label: I wish to remain anonymous
+        labelBo: Anonymous
+    email:
+        label: Email
+        placeholder: Email
+    contributionAmount:
+        label: Amount of your contribution
+        labelBo: Contributed amount
+        placeholder: Amount of your contribution
+    chosenPayment:
+        label: Choose your payment method
+        placeholder: Choose your payment method
+    amountDebited:
+        label: Amount to be debited
+        placeholder: Amount to be debited
+    contributedAt:
+        label: Contributed at
+    contributionDate:
+        label: Contribution date
+    associationName:
+        label: Association name
+        placeholder: Association name
+    description:
+        label: Description
+        placeholder: "Describe in detail your project: Your mission, the beneficiaries ... everything that would encourage the community to contribute to your cause"
+    phone:
+        label: Phone
+    question:
+        label: Question
+    response:
+        label: Response
+    language:
+        label: Language
+    status:
+        label: Status
+
+1 month: 1 month
+2 month: 2 month
+3 month: 3 month
+4 month: 4 month
+5 month: 5 month
+6 month: 6 month
+
+Attestation RIB: RIB certificate
+Autorisation SGG: SGG authorization
+Présentation association: Presentation association
+Autres: Others
+
+Send company: Send
+Save changes: Save changes
+Required fields: Required fields
+A manager will contact you to validate the information before the company is published.: A manager will contact you to validate the information before the campaign is published.
+The collection of donations is reserved for Moroccan associations which have the authorization of the General Secretariat of the Government (SGG) for the call to public generosity *: The collection of donations is reserved for Moroccan associations which have the authorization of the General Secretariat of the Government (SGG) for the call to public generosity *
+
+congrats:
+    title: Campaign validation
+    message: |
+        Congratulations
+    details: |
+        Your campaign is being examined, you will be notified by email once valid.
+
+#  DASHBOARD
+
+Companies: Companies
+Your company: Your campaign
+Company: Campaign
+Funding objective: Funding objective
+Domain: Domain
+Status: Status
+Use of funds collected: Use of funds collected
+
+Draft: Draft
+Declined: Declined
+Declined modification: Declined modification
+Under study: Under study
+Modification under study: Modification under study
+Approved: Approved
+
+View company: View campaign
+Update company: Update campaign
+Delete company: Delete campaign
+
+Publish: Publish
+Published: Published
+Disable publishing: Disable publishing
+Comment is no longer published: Comment is no longer published
+The comment was successfully published: The comment was successfully published
+Parent comment is not published yet: Parent comment is not published yet
+
+Is your new funding goal in draft mode while the administrator validates it: Is your new funding objective in draft mode while the administrator validates it
+Statistics: Statistics
+Visits: Visits
+Likes: Likes
+
+#create
+Your company created successfully: Your campaign created successfully
+Your company updated successfully: Your campaign updated successfully
+Your company is temporarily locked: Your campaign is temporarily locked
+Your company cover photo  has been changed successfully: Your campaign cover photo  has been changed successfully
+Your company logo has been changed successfully: Your campaign logo has been changed successfully
+
+# Show
+
+Show: Show
+Share: Share
+Description: Description
+Edit cover photo: Edit cover photo
+Edit logo: Edit logo
+The company: The campaign
+Domains: Domains
+Use of funds collecteds: Use of funds collecteds
+Web site: Web site
+Similar companies: Similar companies
+Required Field: Required Field
+Information: Information
+Verified: Verified
+Contribution: Contribution
+No contributor: Aucun contributeur
+
+To make a project a favorite, you must authenticate: To make a project a favorite, you must authenticate
+Login: Login
+Register: Register
+
+Comments: Comments
+Your comment has been sent successfully: Your comment has been sent successfully
+Your response has been sent successfully: Your response has been sent successfully
+We cannot save an empty response: We cannot save an empty response
+Send: Send
+Reply: Reply
+
+To contribute: To contribute
+Contribute: Contribute
+Contribute for: Contribute for
+Required field: Required field
+Validate my contribution: Validate my contribution
+Your contribution has been sent successfully: Your contribution has been sent successfully
+
+messageLogin:  Please authenticate or register to access the project files
+
+# add cover
+Change the cover of your company: Change the cover of your campaign
+Choose a cover photo for your company: Choose a cover photo for your campaign
+Change the logo: Change logo of your campaign
+Change logo of your company: Change logo of your campaign
+Cancel: Cancel
+Change: Change
+
+# Delete action
+Deletion confirmation: Deletion confirmation
+Are you sure you want to delete this company: Are you sure you want to delete this campaign
+Yes, delete: Yes, delete
+Your company has been deleted successfully: Your campaign has been deleted successfully
+
+# messages
+The company was locked successfully: The campaign was locked successfully
+The company was unlocked successfully: The campaign was unlocked successfully
+The modification of the company was rejected successfully: The modification of the campaign was rejected successfully
+The company is not approved and updated for the rejected: The campaign is not approved and updated for the rejected
+The modification of the company is already rejected: The modification of the campaign is already rejected
+
+# Action BO
+Delete: Delete
+Approve: Approve
+Disapprove: Disapprove
+Lock: Lock
+Unlock: Unlock
+Edit: Edit
+Reject: Reject
+Verify: Verify
+Unverify: Unverify
+
+Approved company: Approved campaign
+Draft company: Draft campaign
+
+Month: Month
+
+The funding objective was changed: The funding objective was changed
+
+#####################################################
+# listing project || added "results" & "All"
+###################################################
+results: results found
+All: All
+Between: Between
+Reset: Reset
+Yes: Yes
+No: No
+
+Recent: Recent
+Older: Older
+Higher budget: Higher budget
+Lower budget: Lower budget
+
+Closed: Closed
+days left: days left
+day left: day left
+Amount collected: Amount collected
+
+No more results: No more results
+Load more: Load more
+
+Error registering company, please try again later: Error registering campaign, please try again later
+Company not found: campaign not found
+Company List: List of campaigns
+
+Cities: Cities
+City: City
+City List: Liste of cities
+Name: Name
+City Create: Create new city
+Cannot remove this city because it is already used in another table: Cannot remove this city because it is already used in another table
+
+Company updated successfully: campaign updated successfully
+Your changes are in draft mode: Your changes are in draft mode
+Go to the dashboard: Go to the dashboard
+This campaign is not yours.: This campaign is not yours.
+
+Recent campaigns: Recent campaigns
+Discover the campaigns: Discover the campaigns
+Do you have a campaign ?: Do you have a campaign ?
+
+Carte bancaire nationale (2.60 % de frais bancaires): National bank card (2.60% bank charges)
+Carte bancaire internationale (3.60 % de frais bancaires): International bank card (3.60% bank charges)
+
+About your campaign: About your campaign
+About your association: About your association
+
+No contributor found: No contributor found
+You cannot send comment without login: You cannot send comment without login
+You cannot respond without login: You cannot respond without login
+
+This campaign is closed: This campaign is closed
+
+Anonymous contributor: Anonymous contributor
+
+January: January
+February: February
+March: March
+April: April
+May: May
+June: June
+July: July
+August: August
+September: September
+October: October
+November: November
+December: December
+
+Thank you for advancing the project: Thank you for advancing the project
+on: on
+
+Find answers to the most frequently asked questions.: Find answers to the most frequently asked questions.
+Count of contributors: Count of contributors
+Amount: Amount
+PENDING: PENDING
+CONFIRMED: CONFIRMED
+CANCELLED: CANCELLED
+Association: 'Association'
+Areas of intervention: 'Areas of intervention'
+Invite those around you to contribute: 'Invite those around you to contribute'
+Number of days left: 'Number of days left'
+Back to the list of campaigns: 'Back to the list of campaigns'
+Comment: 'Comment'
+Show more contributors: 'Show more contributors'
+
+Amount debited not found: 'Amount debited not found'
+I accept: 'I accept'
+the general sales conditions: 'the general sales conditions'
+Please accept the general sales conditions: 'Please accept the general sales conditions'

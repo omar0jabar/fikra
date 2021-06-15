@@ -1,0 +1,23 @@
+
+{% block _event_blocks_widget %}
+   {{ form_widget(form) }}
+   <div class="form-group">
+      <div class="row">
+         <div class="col-md-10">
+            <input type="hidden" id="widgets-block-counter" value="0">
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block _event_blocks_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _event_blocks_entry_widget  %}
+    {% include '@CMS/admin/partials/_block.html.twig' %}
+{% endblock %}
+
+{% block vich_image_widget %}
+    {% include '@CMS/admin/partials/_theme_vich.html.twig' %}
+{% endblock %}

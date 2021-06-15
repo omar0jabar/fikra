@@ -1,0 +1,30 @@
+Contact us: Contactez nous
+form:
+  firstName:
+    label: Prénom
+    placeholder: Votre prénom ...
+  lastName:
+    label: Nom
+    placeholder: Votre nom ...
+  email:
+    label: Email
+    placeholder: Votre addresse email ...
+  prefix:
+    phone: Code pays
+  phone:
+    label: Téléphone
+    placeholder: Votre numéros de téléphone ...
+  object:
+    label: Objet
+    placeholder: Votre Objet ...
+  message:
+    label: Message
+    placeholder: Votre message ...
+
+Required Field: Champ obligatoire
+
+Send: Envoyer
+
+phone: Téléphone
+email: E-mail
+address: Adresse

@@ -1,0 +1,124 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        user_image:
+            uri_prefix: /upload/users
+            upload_destination: '%kernel.project_dir%/public/upload/users'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        gallery_photo:
+            uri_prefix: /upload/projects/gallery-photo
+            upload_destination: '%kernel.project_dir%/public/upload/projects/gallery-photo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        project_logo:
+            uri_prefix: /upload/projects/project-logo
+            upload_destination: '%kernel.project_dir%/public/upload/projects/project-logo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        company_logo:
+            uri_prefix: /upload/company/logo
+            upload_destination: '%kernel.project_dir%/public/upload/company/logo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        company_cover:
+            uri_prefix: /upload/company/cover
+            upload_destination: '%kernel.project_dir%/public/upload/company/cover'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        company_document:
+            uri_prefix: /upload/company/document
+            upload_destination: '%kernel.project_dir%/public/upload/company/document'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        member_photo:
+            uri_prefix: /upload/projects/member-photo
+            upload_destination: '%kernel.project_dir%/public/upload/projects/member-photo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        member_cv:
+            uri_prefix: /upload/projects/member-cv
+            upload_destination: '%kernel.project_dir%/public/upload/projects/member-cv'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        project_documents:
+            uri_prefix: /upload/projects/documents
+            upload_destination: '%kernel.project_dir%/public/upload/projects/documents'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        documents:
+            uri_prefix: /upload/documents
+            upload_destination: '%kernel.project_dir%/public/upload/documents'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'slugName'} # supposing that the object contains a "slugName" attribute or a "getSlugName" method
+
+        tools_documents:
+            uri_prefix: /upload/tools
+            upload_destination: '%kernel.project_dir%/public/upload/tools'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'slugName'} # supposing that the object contains a "slugName" attribute or a "getSlugName" method
+
+        pages:
+            uri_prefix: /upload/cms/pages
+            upload_destination: '%kernel.project_dir%/public/upload/cms/pages'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        articles:
+            uri_prefix: /upload/cms/articles
+            upload_destination: '%kernel.project_dir%/public/upload/cms/articles'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        events:
+            uri_prefix: /upload/event
+            upload_destination: '%kernel.project_dir%/public/upload/cms/events'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        blocks:
+            uri_prefix: /upload/cms/blocks
+            upload_destination: '%kernel.project_dir%/public/upload/cms/blocks'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        partner_logo:
+            uri_prefix: /upload/partner-logo
+            upload_destination: '%kernel.project_dir%/public/upload/partner-logo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        testimonial_avatar:
+            uri_prefix: /upload/testimonial-logo
+            upload_destination: '%kernel.project_dir%/public/upload/testimonial-logo'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        comment_ca_marche_img:
+            uri_prefix: /upload/configuration/comment-ca-marche
+            upload_destination: '%kernel.project_dir%/public/upload/configuration/comment-ca-marche'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        garanties_block:
+            uri_prefix: /upload/configuration/garanties-block
+            upload_destination: '%kernel.project_dir%/public/upload/configuration/garanties-block'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        reassurance:
+            uri_prefix: /upload/configuration/reassurance-block
+            upload_destination: '%kernel.project_dir%/public/upload/configuration/reassurance-block'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        headers:
+            uri_prefix: /upload/header
+            upload_destination: '%kernel.project_dir%/public/upload/header'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+        slider:
+            uri_prefix: /upload/slider
+            upload_destination: '%kernel.project_dir%/public/upload/slider'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        fonds:
+            uri_prefix: /upload/fond
+            upload_destination: '%kernel.project_dir%/public/upload/fond'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'

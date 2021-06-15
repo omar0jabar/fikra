@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}{% trans %}Companies{% endtrans %}{% endblock %}
+
+{% block body %}
+
+   {% set locale = app.request.locale %}
+
+   <div class="header-banner">
+      {% if header and header.bannerName is not empty %}
+         {% set banner = vich_uploader_asset(header, 'bannerFile') %}
+         {% set description = header.description %}
+      {% else %}
+         {% set banner = asset('assets/img/Banner.png') %}
+         {% set description = null %}
+      {% endif %}
+      <img src="{{ banner }}" class="img-responsive w-100" alt>
+      <div class="container">
+         <div class="banner-content">
+            {{ description|raw }}
+         </div>
+      </div>
+   </div><!-- /.jumbotron -->
+
+   <div class="block-tabs">
+      <div class="row select-filter">
+         <div class="col-md-4 filter-choose">
+            <div class="custom-select-field">
+               <select id="domains-select-picker" class="form-control w-100" title="{{ 'form.domains.label'|trans }}" multiple>
+                  {% for domain in domains %}
+                     {% set selected = "" %}
+                     {% for choiceDomain in choicesDomains %}
+                        {% if choiceDomain == domain.id %}
+                           {% set selected = "selected" %}
+                        {% endif %}
+                     {% endfor %}
+                     <option {{ selected }} value="{{ domain.id }}">
+                        {% set label = domain.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = domain.labelEn %}
+                        {% endif %}
+                        {{ label }}
+                     </option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+         <div class="col-md-4 filter-choose">
+            <div class="custom-select-field">
+               <select id="select-city" class="form-control w-100" title="{{ 'form.city.label'|trans }}">
+                  <option value="">{{ 'form.city.placeholder'|trans }}</option>
+                  {% for city in cities %}
+                     {% set selected = "" %}
+                     {% if choiceCity == city %}
+                        {% set selected = "selected" %}
+                     {% endif %}
+                     <option {{ selected }} value="{{ city }}">
+                        {{ city }}
+                     </option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+         <div class="col-md-4 b-search">
+            <div class="search">
+               <input type="text" name="search" id="search" class="form-control" value="{{ search }}">
+               <label for="search">{% trans %}form.search.label{% endtrans %}...</label>
+               <button type="button" onclick="filterProject()"></button>
+            </div>
+         </div>
+      </div>
+      <input type="hidden" id="domains" name="domains" value="{{ current_domains }}">
+      <input type="hidden" id="offset" name="offset" value="6">
+      <input type="hidden" id="loadMore" name="load" value="{{ showMore }}">
+
+      <div class="row filter justify-content-center">
+         {#<div class="col-lg-2 col-md-4 b-trier">
+            <label for="verified">{% trans %}form.isVerified.label{% endtrans %}</label>
+            <div class="custom-select-field">
+               <select id="verified" name="verified" class="form-control">
+                  <option value="">{% trans %}form.isVerified.placeholder{% endtrans %}</option>
+                  <option value="1" {% if verified == "1" %}selected{% endif %}>{% trans %}Yes{% endtrans %}</option>
+                  <option value="0" {% if verified == "0" %}selected{% endif %}>{% trans %}No{% endtrans %}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-4 b-trier">
+            <label for="order">{% trans %}form.order.label{% endtrans %}</label>
+            <div class="custom-select-field">
+            <select id="order" name="order" class="form-control">
+               <option value="" {% if order is null %}selected{% endif %}>{% trans %}form.order.label{% endtrans %}</option>
+               <option value="1" {% if order == '1' %}selected{% endif %}>{% trans %}Recent{% endtrans %}</option>
+               <option value="2" {% if order == '2' %}selected{% endif %}>{% trans %}Older{% endtrans %}</option>
+               <option value="4" {% if order == '4' %}selected{% endif %}>{% trans %}Higher budget{% endtrans %}</option>
+               <option value="3" {% if order == '3' %}selected{% endif %}>{% trans %}Lower budget{% endtrans %}</option>
+            </select>
+            </div>
+         </div>#}
+         <div class="col-md-2 reset text-center">
+            <a href="{{ path('companies_list') }}" class="btn btn-transparent-red btn-h50 btn-w25">
+               {% trans %}Reset{% endtrans %}
+            </a>
+         </div>         
+      </div>
+   </div>
+
+   <div class="container">
+      <div class="text-center mb-4">
+            <p id="countResults">
+               <strong>
+                  {% if countResults == 0 %}
+                     {% trans %}No result found{% endtrans %}
+                  {% else %}
+                     {{ countResults }} {% trans %}results{% endtrans %}
+                  {% endif %}
+               </strong>
+            </p>
+      </div>
+
+      <div class="row" id="results">
+         {% include 'company/_results.html.twig' %}
+      </div>
+
+      <div class="col-md-12 load-more-project">
+         <div class="text-center">
+            {% if showMore == true %}
+               <button id="btn-load-more" type="button" class="btn btn-bg-red btn-h40 btn-w40" style="display: none;">
+                  {% trans %}Load more{% endtrans %}
+               </button>
+               <img id="gif" src="{{ asset('assets/img/loader-1.gif') }}" alt="" class="gif">
+            {% endif %}
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+   <script type="text/javascript">
+      const locale = '{{ app.request.locale }}';
+      const linkMore = '{{ path('company_more_companies') }}';
+      const domainSelectPicker = $('#domains-select-picker');
+      domainSelectPicker.select2({
+         placeholder: "{{ 'form.domains.placeholder'|trans }}"
+      });
+   </script>
+
+   <script src="{{ asset('js/company_list.js') }}"></script>
+{% endblock %}

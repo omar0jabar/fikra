@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
+
+    <meta name="theme-color" content="#263055">
+    <meta name="url" content="{{ app.request.getSchemeAndHttpHost() ~ app.request.requestUri }}" />
+    <meta property="og:url" content="{{ app.request.getSchemeAndHttpHost() ~ app.request.requestUri }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@PFEStartup" />
+    {% block meta %}
+        <meta name="title" content="{{ SEOTitle }}"/>
+        <meta name="description" content="{{ SEODescription }}"/>
+        <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}"/>
+        <meta property="og:description" content="{{ SEODescription }}"/>
+        {% block ogimage %}
+        {% endblock %}
+        <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}"/>
+        <meta name="twitter:title" content="{{ SEOTitle }}" />
+        <meta name="twitter:description" content="{{ SEODescription }}" />
+        <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}" />
+    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/select2/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/select2/select2-bootstrap.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <title>{% block title %}{% endblock %}</title>
+    
+    {% block stylesheets %}{% endblock %}
+</head>
+
+{% block body %}{% endblock %}
+
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/bundle.js') }}"></script>
+<script src="{{ asset('bundles/sonatacore/vendor/select2/select2.js') }}"></script>
+<script src="{{ asset('js/backtotop.js') }}"></script>
+
+{% block javascripts %}{% endblock %}
+</html>

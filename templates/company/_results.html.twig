@@ -1,0 +1,30 @@
+{% trans_default_domain 'company' %}
+{% if countResults == 0 %}
+   {% set res = 'No result found'|trans %}
+{% else %}
+   {% set count = countResults %}
+   {% set text = 'results'|trans %}
+   {% set res = count ~ ' ' ~ text %}
+{% endif %}
+
+<script>
+   $('#countResults').html('<strong>{{ res }}</strong>');
+   $('#offset').val({{ offset }});
+   $('#loadMore').val({{ showMore }});
+</script>
+
+{% if more %}
+   <script>
+      $('#btn-load-more').show();
+   </script>
+{% else %}
+   <script>
+      $('#btn-load-more').hide();
+   </script>
+{% endif %}
+
+{% set locale = app.request.locale %}
+
+{% for company in companies %}
+   {% include 'company/_card_company.html.twig' %}
+{% endfor %}

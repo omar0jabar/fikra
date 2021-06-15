@@ -1,0 +1,22 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% trans_default_domain 'company' %}
+
+{% block field %}
+   {% set approvedCompany = object.approvedCompany %}
+   {% if approvedCompany %}
+      <span class="text-success">
+         <strong>
+            {{ 'Approved'|trans }} : {{ approvedCompany.fundingObjective|number_format(2, ',', ' ') }} MAD
+         </strong>
+      </span>
+      {% if object.fundingObjective != approvedCompany.fundingObjective %}
+         <br>
+         <span class="text-danger">
+            {{ 'Draft'|trans }}: {{ object.fundingObjective|number_format(2, ',', ' ') }} MAD
+         </span>
+      {% endif %}
+   {% else %}
+      <span>{{ object.fundingObjective|number_format(2, ',', ' ') }} MAD</span>
+   {% endif %}
+{% endblock %}

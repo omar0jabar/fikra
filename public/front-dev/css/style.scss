@@ -1,0 +1,430 @@
+// @import "~bootstrap/scss/bootstrap";
+@import "helper/font";
+@import "helper/mixin";
+@import "helper/variables";
+@import "helper/type";
+@import "helper/commun";
+
+
+p { 
+  font-size: rem(16px); 
+  font-weight: 300;
+  color: $eastBay-2;
+  margin-bottom: 13px;
+} 
+
+// CUSTOM BUTTONS
+.btn {
+  font-family: $font-base;
+  border: 0;
+  font-size: rem(18px);
+  outline: none;
+  box-shadow: 0 0 0;
+  border-radius: 4px;
+  font-weight: 400;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+
+  &:focus, &:active {
+    box-shadow: none;
+    outline: none;
+  }
+
+  &.btn-bg-red {
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+    background-color: $coralRed;
+    color: $white;
+    border: 2px solid $coralRed;
+
+    &:hover {
+      background-color: $btnRedHover;
+    }
+  }
+
+  &.btn-bg-blue {
+    background-color: $cloudBurst;
+    color: $white;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+    border: 2px solid $cloudBurst;
+
+    &:hover {
+      background-color: $btnBlueHover;
+    }
+  }
+
+  &.btn-bg-white {
+    background-color: $white;
+    color: $pickledBluewood-1;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+    border: 2px solid $white;
+
+    &:hover {
+      background-color: $zicron-4;
+    }
+  }
+
+  &.btn-bg-transparent {
+    background-color: transparent;
+    color: $cloudBurst;
+    border: 2px solid $nepal;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+
+    &:hover {
+      color: $btnBgTransparentHover;
+      border-color: $btnBgTransparentBorderHover;
+    }
+  }
+
+  &.btn-bg-transparent-white {
+    background-color: transparent;
+    color: $white;
+    border: 2px solid $nepal;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+
+    &:hover {
+      background-color: white;
+      color: $cloudBurst;
+      border-color: $white;
+    }
+  }
+
+  &.btn-transparent-black {
+    background-color: transparent;
+    color: $black;
+    border: 2px solid $black;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+      border-color: $black;
+    }
+  }
+
+
+  &.btn-transparent-red {
+    background-color: transparent;
+    color: $papaGreen;
+    border: 2px solid $coralRed;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+
+    &:hover {
+      background-color: $coralRed;
+      color: $white;
+    }
+  }
+
+  &.btn-orange-yellow {
+    color: $white;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right, $orange, $yellow, $yellow, $orange);
+    box-shadow: 0 4px 12px 0 rgba($orange, 0.75);
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+
+    &:hover {
+      background-position: 100% 0;
+      transition: all .4s ease-in-out;
+    }
+  }
+
+  &.btn-outline-info {
+    background-color: $eastenBlue;
+    border-color: $eastenBlue;
+    color: $white;
+    display: inline-block;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 15px;
+    border: 2px solid $eastenBlue;
+
+    &:hover {
+      background-color: $blueChill;
+    }
+  }
+}
+
+//CUSTOM HEADING
+h1 {
+  font-size: rem(60px);
+  font-weight: 700;
+  color: $cloudBurst;
+  margin-bottom: 40px;
+
+  @media #{$tab-max} {
+    font-size: rem(42px);
+    margin-bottom: 20px;
+  }
+
+  @media #{$tab-min} {
+    font-size: rem(36px);
+    margin-bottom: 13px;
+  }
+
+  @media #{$mobile} {
+    font-size: rem(26px);
+    margin-bottom: 10px;
+  }
+}
+
+h2 {
+  font-size: rem(36px);
+  font-weight: 500;
+  color: $cloudBurst;
+  margin-bottom: 13px;
+  word-break: break-word;
+
+  @media #{$mobile} {
+    font-size: rem(28px);
+    margin-bottom: 8px;
+  }
+}
+
+h3 {
+  font-size: rem(20px);
+  font-weight: 500;
+  color: $monza;
+  margin-bottom: 8px;
+
+  @media #{$mobile} {
+    font-size: rem(18px);
+    margin-bottom: 8px;
+  }
+}
+
+h5 {
+  font-size: rem(18px);
+  font-weight: 500;
+  color: $waikawaGray;
+
+  @media #{$mobile} {
+    font-size: rem(16px);
+  }
+}
+
+// CUSTOM UNORDER LIST
+ul {
+  padding-left: 15px;
+  margin-bottom: 20px;
+
+  @media #{$desk-min} {
+    margin-bottom: 14px;
+  }
+  li {
+    position: relative;
+    margin-bottom: 8px;
+    color: $eastBay-2;
+
+    &:before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background-color: $cloudBurst;
+      position: absolute;
+      top: 7px;
+      left: -15px;
+      border-radius: 50%;
+    }
+  }
+}
+
+// STYLE LINK
+a {
+  font-size: rem(18px);
+  font-weight: 500;
+  color: $cloudBurst;
+  position: relative;
+}
+
+.description {
+  font-size: rem(24px);
+  color: $bigStone-1;
+  margin-bottom: 60px;
+  letter-spacing: 1.8px;
+
+  @media #{$tab-max} {
+    font-size: rem(18px);
+    margin-bottom: 30px;
+    letter-spacing: 0;
+  }
+  @media #{$tab-min} {
+    font-size: rem(16px);
+    margin-bottom: 20px;
+  }
+}
+
+
+ol {
+  list-style: none;
+  counter-reset: section;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  @media #{$desk-min} {
+    margin-bottom: 14px;
+  }
+
+  li {
+    position: relative;
+    margin-bottom: 8px;
+    color: $eastBay-2;
+    font-size: rem(16px);
+    font-weight: 300;
+
+    &:before {
+      counter-increment: section;
+      content: counter(section);
+      color: $cloudBurst;
+      font-family: $font-base;
+      font-size: rem(18px);
+      font-weight: 500;
+      position: absolute;
+      top: -2px;
+      left: -15px;
+    }
+  }
+
+  ol {
+    counter-reset: subsection;
+    margin-top: 10px;
+    padding-left: 27px;
+
+    li {
+      &:before {
+        counter-increment: subsection;
+        content: counter(section) "." counter(subsection);
+        left: -27px;
+      }
+    }
+
+    ol {
+      counter-reset: subsection-1;
+      margin-top: 10px;
+      padding-left: 40px;
+
+      li {
+        &:before {
+          counter-increment: subsection-1;
+          content: counter(section) "." counter(subsection) "." counter(subsection-1);
+          left: -40px;
+        }
+      }
+
+      ol {
+        counter-reset: subsection-2;
+        margin-top: 10px;
+        padding-left: 50px;
+
+        li {
+          &:before {
+            counter-increment: subsection-2;
+            content: counter(section) "." counter(subsection) "." counter(subsection-1) "." counter(subsection-2);
+            left: -50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+table, .table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 100%;
+  table-layout: fixed;
+  //border: 1px solid $gray-table-border;
+  @media #{$tab-min-2} {
+    table-layout: auto;
+  }
+
+  thead {
+    th,
+    td {
+      padding: 14px 10px;
+      color: $white;
+      text-align: center;
+      font-size: rem(17px);
+      font-weight: 700;
+      border-right: 1px solid $mirage;
+      background: $mirage;
+      word-break: break-word;
+      vertical-align: inherit;
+      font-family: $font-base;
+      &:not(:last-child) {
+        border-right: 1px solid $gray-table-border;
+      }
+      @media #{$tab-min-2} {
+        padding: 10px;
+        word-break: initial;
+        white-space: nowrap;
+      }
+      p, span {
+        font-size: rem(17px);
+        font-weight: 700;
+        color: $white;
+        margin: 0;
+      }
+    }
+  }
+
+  tr {
+    [scope="row"] {
+      background: $mirage;
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background: $white;
+    }
+    td {
+      padding: 14px 10px;
+      text-align: center;
+      color: $mirage;
+      font-size: rem(15px);
+      font-weight: 400;
+      border: 1px solid $gray-table-border;
+      word-break: break-word;
+      vertical-align: inherit;
+      font-family: $font-base;
+      @media #{$mobile} {
+        padding: 10px;
+      }
+      p, span {
+        font-size: rem(15px);
+        font-weight: 300;
+        color: $mirage;
+        margin: 0;
+        font-family: $font-base;
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    {% include 'partials/_avatar.html.twig' with {'object': object} %}
+{% endblock field %}

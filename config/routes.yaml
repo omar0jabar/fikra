@@ -1,0 +1,18 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+cms_annotations_routes:
+    # loads routes from cms bundle annotation
+    resource: '@CMSBundle/Controller/'
+    type:     annotation
+
+cmi_pay_callback:
+    path: /cmi/callback
+    controller: App\Controller\CmiPayController::callback
+cmi_pay_okFail:
+    path: /cmi/okFail
+    controller: App\Controller\CmiPayController::okFail
+cmi_pay_request:
+    path: /cmi/requestpayment
+    controller: App\Controller\CmiPayController::requestPay

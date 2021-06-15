@@ -1,0 +1,151 @@
+{% trans_default_domain 'company' %}
+
+{% block _company_name_widget %}
+   <label class="required" for="company_name" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.name.placeholder{% endtrans %}">
+      {% trans %}form.name.label{% endtrans %} <i class="icon-Lock"></i>
+   </label>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _company_description_widget %}
+   <label class="required" for="company_description" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.shortDescription.help{% endtrans %}">
+      {% trans %}form.shortDescription.label{% endtrans %} <i class="icon-Lock"></i>
+   </label>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _company_text_widget %}
+   <label class="required" for="company_text" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.description.placeholder{% endtrans %}">
+      {% trans %}form.description.label{% endtrans %} <i class="icon-Lock"></i>
+   </label>
+   {{ form_widget(form) }}
+{% endblock %}
+
+
+{% block _company_duration_widget %}
+   <div class="custom-select-field">
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _company_city_widget %}
+   <div class="custom-select-field">
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _company_fundingObjective_widget %}
+   <label class="required" for="company_fundingObjective" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.fundingObjective.placeholder{% endtrans %}">
+      {% trans %}form.fundingObjective.label{% endtrans %} <i class="icon-Lock"></i>
+   </label>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _company_RIB_widget %}
+   <label class="required" for="company_RIB" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.RIB.placeholder{% endtrans %}">
+      {% trans %}form.RIB.label{% endtrans %} <i class="icon-Lock"></i>
+   </label>
+   {{ form_widget(form) }}
+{% endblock %}
+
+
+{# ADD AVANTAGE #}
+
+{% block _company_useOfFundsCollecteds_widget %}
+   <legend data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="{% trans %}form.useOfFundsCollecteds.placeholder{% endtrans %}">
+      {% trans %}form.useOfFundsCollecteds.label{% endtrans %} <i class="icon-Lock"></i>
+   </legend>
+      <div class="avantages">
+         <div class="block-avantages-delete">
+            {{ form_widget(form) }}
+         </div>
+         <div class="row block-avantage-add">
+            <div class="col-md-10 b-input p-0">
+               <input id="txt-first-fund" name="txt-first-fund" type="text" class="form-control"
+                      placeholder="{{ 'form.useOfFundsCollecteds.placeholder'|trans }}" >
+            </div>
+            <div class="col-md-1 btn-plus">
+               <input type="hidden" id="widgets-counter" value="0">
+               <button id="add-fund" type="button" class="btn btn-bg-blue btn-h40 btn-w13">
+                  <i class="icon-add"></i>
+               </button>
+            </div>
+         </div>
+      </div>
+{% endblock %}
+
+{% block _company_useOfFundsCollecteds_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _company_useOfFundsCollecteds_entry_widget  %}
+   <div id="block_{{ id }}" class="form-group use-fund">
+      <div class="row avantage-delete">
+         <div class="col-md-10 b-input p-0">
+            {{ form_row(form.description) }}
+         </div>
+         <div class="col-md-1 btn-delete">
+            <button type="button" data-action="delete-fund" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w13">
+               <i class="icon-garbage"></i>
+            </button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+
+{# ADD Document #}
+
+{% block _company_documents_widget %}
+   <div class="documents-content">
+      <div class="document-intro">
+         <p class="text-muted">{% trans %}form.documents.help{% endtrans %}</p>
+      </div>
+      <div class="form-widget">
+         {{ form_widget(form) }}
+      </div>
+      <div class="b-btn-add">
+         <div>
+            <input type="hidden" id="document-counter" value="0">
+         </div>
+         <button id="add-document" type="button" class="btn btn-bg-blue btn-h40 btn-w35">
+            <i class="icon-add"></i> {% trans %}form.documents.btnAdd{% endtrans %}
+         </button>
+      </div>
+   </div>
+{% endblock %}
+
+{% block _company_documents_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _company_documents_entry_widget %}
+   <div id="block_{{ id }}" class="form-document c-form-upload">
+      <div class="row justify-content-center">
+         <div class="col-lg-10 col-md-12 p-0">
+            <div class="row">
+               <div class="col-md-5 field-select">
+                  <div class="custom-select-field">
+                     {{ form_widget(form.type) }}
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  {{ form_row(form.file) }}
+               </div>
+               <div class="col-md-1">
+                  <button type="button" data-action="delete-document" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w35">
+                     <i class="icon-garbage"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+

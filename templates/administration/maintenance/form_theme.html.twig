@@ -1,0 +1,31 @@
+{% block _maintenance_form_ips_widget %}
+    <p>Here, You can add or remove Ips</p>
+    {{ form_widget(form) }}
+    <div class="form-group">
+        <input type="hidden" id="widgets-counter" value="0">
+        <button id="add-ip" type="button" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Add ip
+        </button>
+    </div>
+{% endblock %}
+
+{% block _maintenance_form_ips_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _maintenance_form_ips_entry_widget  %}
+    <div id="block_{{ id }}" class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                {{ form_widget(form.ip) }}
+            </div>
+            <div class="col-md-2">
+                <button type="button" data-action="delete-ip" data-target="#block_{{ id }}" class="btn btn-danger">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock %}

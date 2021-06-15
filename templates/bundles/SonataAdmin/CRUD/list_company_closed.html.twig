@@ -1,0 +1,21 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% trans_default_domain 'company' %}
+
+{% block field %}
+   {% set approvedCompany = object.approvedCompany %}
+   {% set type = 'default' %}
+   {% set message = 'No'|trans %}
+   {% if approvedCompany %}
+      {% if approvedCompany.isClosed %}
+         {% set type = 'danger' %}
+         {% set message = 'Yes'|trans %}
+      {% endif %}
+   {% else %}
+      {% if object.isClosed %}
+         {% set type = 'danger' %}
+         {% set message = 'Yes'|trans %}
+      {% endif %}
+   {% endif %}
+   <span class="label label-{{ type }}">{{ message }}</span>
+{% endblock %}

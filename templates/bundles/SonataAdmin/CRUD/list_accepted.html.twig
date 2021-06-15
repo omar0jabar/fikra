@@ -1,0 +1,15 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+   {# {{ dump() }} you can dump all variables here #}
+   {% if object.isAccepted is null %}
+      <span class="label label-default">null</span>
+   {% endif %}
+   {% if object.isAccepted == false and object.isAccepted is not null %}
+      <span class="label label-danger">non</span>
+   {% endif %}
+   {% if object.isAccepted == true %}
+      <span class="label label-success">Oui</span>
+   {% endif %}
+   {# or you can use a twig filter with your own logic #}
+{% endblock field %}

@@ -1,0 +1,371 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block title %}
+   {% if action == "edit" %}
+      {% trans %}Update your project{% endtrans %}
+   {% else %}
+      {% trans %}Send your project{% endtrans %}
+   {% endif %}
+{% endblock %}
+
+{% if flow.currentStep == 3 %}
+   {% form_theme form 'startuper/project/theme_team.html.twig' %}
+   {% elseif flow.currentStep == 5 %}
+      {% form_theme form 'startuper/project/theme_gallery.html.twig' %}
+   {% else %}
+   {% form_theme form 'startuper/project/theme_project.html.twig' %}
+{% endif %}
+
+{% block body %}
+   <div class="b-create-project">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+               <div class="en-tete text-center">
+                  {% include 'partials/_notice.html.twig' %}
+                  <h2 class="c-heading">
+                     {% if action == "edit" %}
+                        {% trans %}form.title.update{% endtrans %}
+                     {% else %}
+                        {% trans %}form.title.send{% endtrans %}
+                     {% endif %}
+                  </h2>
+                  <div class="intro">
+                     {% if action == "edit" %}
+                        {% trans %}form.message.update{% endtrans %}
+                     {% else %}
+                        {% trans %}form.message.send{% endtrans %}
+                     {% endif %}
+                  </div>
+                  <div class="row b-steps">
+                     <ul class="craue_formflow_steplist stepbar">
+                        {% for label in flow.stepLabels %}
+                           {% if loop.index < flow.currentStepNumber %}
+                              {% set active = 'craue_formflow_current_step active' %}
+                           {% else %}
+                              {% set active = '' %}
+                           {% endif %}
+                           {% if loop.index == 1 %}
+                              {% set f_active = ' first_level' %}
+                           {% else %}
+                              {% set f_active = '' %}
+                           {% endif %}
+                           <li class="{{ active ~ f_active }}">
+                              {% if action == "complete" or action == "edit" %}
+                                <a href="{{ path('startuper_project_skipto', {id: project.id, slug: project.slug, step: loop.index}) }}">
+                                    <i></i>
+                                 </a>
+                                 <a href="{{ path('startuper_project_skipto', {id: project.id, slug: project.slug, step: loop.index}) }}" class="d-none d-sm-block">
+                                    {{ label | trans({}, 'project') }}
+                                 </a>
+                              {% else %}
+                                 <i></i>
+                                 <span class="d-none d-sm-block">
+                                    {{ label | trans({}, 'project') }}
+                                 </span>
+                              {% endif %}
+                           </li>
+                        {% endfor %}
+                     </ul>
+                  </div>
+               </div>
+                  {{ form_start(form) }}
+                  <div class="form-title text-center">
+                     <h3>{{ flow.currentStepLabel | trans({}, 'project') }}</h3>
+                  </div>
+               <div class="form-contents">
+                  {#
+                  {% if flow.currentStep == 1 and action == "edit" %}
+                     <div class="project-langue">
+                        <div class="col-md-6 p-0">
+                           {% set lang = 'English'|trans %}
+                           {% if project.language == 'fr' %}
+                              {% set lang = 'French'|trans %}
+                           {% endif %}
+                           <label class="required" for="project_form_language">{% trans %}Language{% endtrans %}</label>
+                           <input id="project_form_language" name="project_form_language" type="text" class="form-control" value="{{ lang }}" disabled>
+                        </div>
+                     </div>
+                  {% endif %}
+                  {% if flow.currentStep == 1 and action == "create" %}
+                     <div class="project-langue">
+                        <div class="col-md-6 p-0">
+                           {{ form_row(form.language) }}
+                        </div>
+                     </div>
+                  {% endif %}
+                  #}
+                  {{ form_errors(form) }}
+
+                  {% if flow.currentStep == 1 %}
+                     <div class="name-project">
+                        <div class="col-md-6 p-0">
+                           {{ form_row(form.name) }}
+                           <p class="ml-md-2 text-muted small"><em>{% trans %}form.name.help{% endtrans %}</em></p>
+                        </div>
+                     </div>
+                     <div class="description-courte">
+                        {{ form_row(form.description) }}
+                     </div>
+                     <div class="sectors-activities">
+                        <div class="row">
+                           <div class="col-lg-10 col-md-12 sectors">
+                                 {{ form_row(form.sectors) }}
+                              <p class="ml-md-2 text-muted small"><em>{% trans %}form.sectors.help{% endtrans %}</em></p>
+                           </div>
+                           <div class="col-lg-2 col-md-12 other">
+                              <label for="">{% trans %}form.moreSectors.label{% endtrans %}</label>
+                              {{ form_widget(form.moreSectors) }}
+                              {{ form_errors(form.moreSectors) }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="summary">
+                        {{ form_row(form.summary) }}
+                     </div>
+                     <div class="steps">
+                        {{ form_row(form.step) }}
+                     </div>
+
+                     <div class="main-products">
+                        {#{{ form_row(form.mainProducts) }}#}
+                        {{ form_row(form.services) }}
+                     </div>
+
+                     <div class="Revenus-generes">
+                        <div class="col-md-6 p-0">
+                           <label for="" data-toggle="tooltip" data-placement="top" title="">
+                                  {#data-original-title="{% trans %}Confidential information{% endtrans %}">#}
+                              {% trans %}form.earned.label{% endtrans %} {#<i class="icon-Lock"></i>#}
+                           </label>
+                           {{ form_row(form.earned) }}
+                        </div>
+                     </div>
+
+                     <div class="startup">
+                        {{ form_row(form.startup) }}
+                     </div>
+
+                     <div class="status-startup">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="denomination">
+                                 {{ form_row(form.denomination) }}
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="creating-date">
+                                 {{ form_row(form.creatingDate) }}
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-rc">
+                                 {{ form_row(form.rc) }}
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="city">
+                                 {{ form_row(form.city) }}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                  {% endif %}
+
+                  {% if flow.currentStep == 2 %}
+
+                     <div class="sales-channel parnet-check-fieldset">
+                        {{ form_row(form.salesChannels) }}
+                        <div class="more-sales-channel">
+                           {{ form_row(form.otherSalesChannels) }}
+                           {{ form_row(form.moreSalesChannels) }}
+                        </div>
+                        <span class="error-check-placement"></span>
+                     </div>
+                     <div class="business-model parnet-check-fieldset">
+                        <div class="selectors">
+                           {{ form_row(form.businessModels) }}
+                        </div>
+                        <div class="selectors-other">
+                           {{ form_row(form.otherBusinessModel) }}
+                           {{ form_row(form.moreBusinessModel) }}
+                        </div>
+                        <span class="error-check-placement"></span>
+                     </div>
+
+
+                     <div class="avantages-concurrent">
+                        {{ form_row(form.avantages) }}
+                     </div>
+
+                     <div class="montant">
+                        <div class="col-lg-5 col-md-6 amount-leve">
+                           {{ form_row(form.raised) }}
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-5 col-md-6 amount">
+                              {{ form_row(form.amount) }}
+                           </div>
+                           <div class="non-defini">
+                              {{ form_row(form.hasNotAmount) }}
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="project-finances">
+                        {{ form_row(form.projectFinances) }}
+                     </div>
+                     <div class="express">
+                        {{ form_row(form.express) }}
+                     </div>
+
+                  {% endif %}
+                  {% if flow.currentStep == 3 %}
+                     {{ form_row(form.teamMembers) }}
+                  {% endif %}
+                  {% if flow.currentStep == 4 %}
+                     <input type="hidden" id="maxDocuments" value="{{ maxDocuments }}">
+                     {{ form_row(form.documents) }}
+                  {% endif %}
+                  {% if flow.currentStep == 5 %}
+                     <input type="hidden" id="maxPhotos" value="10">
+                     {{ form_row(form.galleryPhotos) }}
+                  {% endif %}
+                  {#{{ form_rest(form) }}#}
+                  <div class="champ-requis">
+                     <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                     {% if flow.currentStep < 3 %}
+                        <p><i class="icon icon-Lock"></i> {% trans %}Confidential information{% endtrans %}</p>
+                     {% endif %}
+                  </div>
+               </div>
+
+               {# div for invisible recaptcha #}
+               {#<div class="g-recaptcha"
+                    data-sitekey="{{ recaptcha_site_key }}"
+                    data-callback="onSubmitMessage"
+                    data-size="invisible">
+               </div>#}
+
+               <div class="block-subbmission">
+                  <div class="row justify-content-center soumission">
+                     <div class="col-lg-10 col-md-12 p-0">
+                        <div class="text-center">
+                           {% if flow.currentStep > 1 %}
+                              <a href="{{ path('startuper_project_previous', {id: project.id, slug: project.slug}) }}"
+                                 id="btn-prev" class="btn btn-bg-blue btn-prev btn-h50 btn-w35 alert-rappel">
+                                 <i class="icon-caret-down left"></i> {% trans %}Previous{% endtrans %}
+                              </a>
+                           {% endif %}
+
+                           {{ form_widget(form.saveWithoutSkip1) }}
+
+                           <button class="btn btn-bg-red btn-h50 btn-w35" type="submit">
+                              {% if flow.currentStep == 5 %}
+                                 {% trans %}Submit the project{% endtrans %} <i class="icon-caret-down right"></i>
+                              {% else %}
+                                 {% trans %}Save & skip{% endtrans %} <i class="icon-caret-down right"></i>
+                              {% endif %}
+                           </button>
+
+                           {% if flow.currentStep > 1 or action == "edit" %}
+                              {% if flow.currentStep <= 4 %}
+                                 <a href="{{ path('startuper_project_skip', {id: project.id, slug: project.slug}) }}"
+                                    id="btn-next" class="btn btn-bg-blue btn-next btn-h50 btn-w35 alert-rappel">
+                                    {% trans %}Skip{% endtrans %} <i class="icon-caret-down right"></i>
+                                 </a>
+                              {% endif %}
+                           {% endif %}
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="block-subbmission-placement">
+                  <div class="row justify-content-center soumission">
+                     <div class="col-lg-10 col-md-12 p-0">
+                        <div class="text-center">
+                           {% if flow.currentStep > 1 %}
+                              <a href="{{ path('startuper_project_previous', {id: project.id, slug: project.slug}) }}"
+                                 id="btn-prev-placement" class="btn btn-prev btn-h50 btn-w35 alert-rappel">
+                                 <i class="icon-caret-down left"></i> {% trans %}Previous{% endtrans %}
+                              </a>
+                           {% endif %}
+
+                           {{ form_widget(form.saveWithoutSkip2) }}
+
+                           <button class="btn btn-bg-red btn-h50 btn-w35" type="submit">
+                              {% if flow.currentStep == 5 %}
+                                 {% trans %}Submit the project{% endtrans %} <i class="icon-caret-down right"></i>
+                              {% else %}
+                                 {% trans %}Save & skip{% endtrans %} <i class="icon-caret-down right"></i>
+                              {% endif %}
+                           </button>
+
+                           {% if flow.currentStep > 1 or action == "edit" %}
+                              {% if flow.currentStep <= 4 %}
+                                 <a href="{{ path('startuper_project_skip', {id: project.id, slug: project.slug}) }}"
+                                    id="btn-next-placement" class="btn btn-next btn-h50 btn-w35 alert-rappel">
+                                    {% trans %}Skip{% endtrans %} <i class="icon-caret-down right"></i>
+                                 </a>
+                              {% endif %}
+                           {% endif %}
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               {{ form_end(form) }}
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+   <script>
+      $('a.alert-rappel').click(confirmSkip);
+      function confirmSkip(event) {
+         event.preventDefault();
+         if (confirm("{% trans %}Do not forget to save additions made to the project{% endtrans %}"))  {
+            window.location.href = this.href;
+         }
+      }
+   </script>
+   {% if app.user %}
+      <script>
+         function me() {
+            $('#project_form_teamMembers_0_firstName').val('{{ app.user.firstName }}');
+            $('#project_form_teamMembers_0_lastName').val('{{ app.user.lastName }}');
+            $('#project_form_teamMembers_0_porteur').attr('checked', 'checked');
+            $('#project_form_teamMembers_0_position').focus();
+         }
+      </script>
+   {% endif %}
+   <script>
+      {% for step in steps %}
+         {% set help = step.helpFr %}
+         {% if app.request.locale == "en" %}
+         {% set help = step.helpEn %}
+         {% endif %}
+         $('#project_form_step_' + {{ step.id }} + '_help').html('<em>{{ help }}</em>');
+      {% endfor %}
+   </script>
+
+   <script src="{{ asset('js/create-project.js') }}"></script>
+   <script src="{{ asset('js/project-collection.js') }}"></script>
+   {% if flow.currentStep == 3 %}
+      <script src="{{ asset('js/project-collection-members.js') }}"></script>
+   {% endif %}
+   <script src="{{ asset('js/project-collection-docs-photos.js') }}"></script>
+   {#<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script>
+      function onSubmitMessage(token) {
+         $('#project-form').submit();
+      }
+   </script>#}
+{% endblock %}

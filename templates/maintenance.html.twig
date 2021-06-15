@@ -1,0 +1,22 @@
+{% extends 'base-no-header.html.twig' %}
+
+{% block title %}{{ maintenance.title }}{% endblock %}
+{% block body %}
+    <body>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="text-center">
+                        <h1>
+                            <i class="fas fa-cog"></i>
+                            {{ maintenance.message }}
+                        </h1>
+                        <p>{{ maintenance.paragraph }}</p>
+                        <p>Time to life: {{ maintenance.ttl|date('d/m/Y H:i') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% trans_default_domain 'event' %}
+{% if countResults == 0 %}
+	{% set res = 'No result found'|trans %}
+{% else %}
+	{% set count = countResults %}
+	{% set text = 'Results'|trans %}
+	{% set res = count ~ ' ' ~ text %}
+{% endif %}
+<script>
+	$('#more').val({{ more }});
+	$('#countResults').html('<strong>{{ res }}</strong>');
+</script>
+
+{% if pagination|length > 0 %}
+	{% for event in pagination %}
+		{% include '@CMS/front/event/_card_event.html.twig' %}
+	  <br>
+	{% endfor %}
+{% endif %}
+

@@ -1,0 +1,10 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+   {% if object.img is not empty %}
+      {% set src = vich_uploader_asset(object, 'imageFile') %}
+   {% else %}
+      {% set src = '/images/empty.jpg' %}
+   {% endif %}
+   <img src="{{ src }}" alt="" class="w-100">
+{% endblock field %}

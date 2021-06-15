@@ -1,0 +1,150 @@
+// PAGE CONTACTEZ-NOUS
+.contactez-nous {
+  background-color: $white;
+  .contact-banner {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .contact-banner-content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align:  center;
+      z-index: 2;
+    }
+  }
+  .en-tete-contact-heading {
+    padding-top: 60px;
+    margin-bottom: 50px;
+    @media #{$tab-min-2} {
+      padding: 20px 0;
+      margin-bottom: 0;
+    }
+    .en-tete-contact-cell {
+      text-align: center;
+      @media #{$tab-min-2} {
+        margin-bottom: 10px;
+        h3 {
+          font-size: rem(40px);
+        }
+        p {
+          font-size: rem(18px);
+        }
+      }
+    }
+  }
+  .contact-form {
+    background: $bg-white-default;
+    margin-bottom: 120px;
+    padding: 60px 100px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba($black, .2);
+    @media #{$tab-max} {
+      padding: 50px 20px;
+    }
+    @media #{$tab-min} {
+      margin: 30px 0 70px;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+    @media #{$tab-min-2} {
+      margin: 0;
+    }
+
+    .intro {
+      font-size: rem(24px);
+      margin-bottom: 65px;
+      @media #{$tab-min-2} {
+        margin-bottom: 30px;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 26px;
+    }
+
+    label {
+      margin-bottom: 1.5px;
+    }
+
+    select {
+      background: $white;
+    }
+
+    .b-field-phone {
+      .field-pays {
+        padding: 0;
+        max-width: 70px;
+        flex: 0 0 70px;
+        select {
+          width: 100%;
+          padding: 8px;
+        }
+      }
+      .field-phone {
+        padding-right: 0;
+        @media #{$desk-min-2} {
+          max-width: 64%;
+          flex: 0 0 64%;
+        }
+        @media #{$mobile} {
+          max-width: calc(100% - 70px);
+          flex: 0 0 calc(100% - 70px);
+        }
+      }
+    }
+  }
+
+  .b-send {
+    margin: 30px 0 0;
+    text-align: center;
+  }
+  .btn {
+    @media #{$mobile} {
+      height: 40px;
+      line-height: 40px;
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+
+  .champ-requis {
+    padding: 0 15px;
+    .required-field {
+      font-size: rem(18px);
+      font-weight: 300;
+      color: $black;
+    }
+  }
+}
+
+// FORGET PASSWORD PAGE
+.forget-password {
+  padding: 60px 0;
+  min-height: 500px;
+  @media #{$tab-min-2} {
+    min-height: auto;
+  }
+  .card {
+    border: 0;
+  }
+  label {
+    font-size: rem(18px);
+    font-weight: 500;
+    color: $papaGreen-1;
+  }
+
+  .btn {
+    @media #{$tab-min-2} {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+}

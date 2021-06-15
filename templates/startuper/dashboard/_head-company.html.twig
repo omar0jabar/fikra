@@ -1,0 +1,258 @@
+{% trans_default_domain 'company' %}
+
+<div class="card card-banner">
+    <h3>{% trans %}Your company{% endtrans %}</h3>
+    <div class="row dashboard-banner">
+        <div class="col-lg-8 col-md-12 block-img">
+            {% if company.coverName is not empty %}
+                {% set cover = vich_uploader_asset(company, 'coverFile') %}
+            {% else%}
+                {% set cover = asset('assets/img/project_cover.png') %}
+            {% endif %}
+            <img class="card-img-top" src="{{ cover }}" alt="Card image cap">
+        </div>
+        <div class="card-body project-infos show-for-tablet">
+            <div class="row">
+                <div class="col-md-1 project-logo">
+                    {% if company.logoName is not empty %}
+                        {% set logo = vich_uploader_asset(company, 'logoFile') %}
+                    {% else%}
+                        {% set logo = asset('assets/img/project_logo_140.png') %}
+                    {% endif %}
+                    <img src="{{ logo }}" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-7 project-text">
+                    <div class="project-title">
+                        <h2>
+                            {{ company.name }}
+                            {% if company.isVerified == true %}
+                                <small><i class="icon-check-circle"></i><span>{% trans %}Verified{% endtrans %}</span></small>
+                            {% endif %}
+                        </h2>
+                    </div>
+                    <div class="b-details">
+                        <div class="row">
+                            {#<div class="col-md-2 detail-item">
+                                <i class="icon-calendar"></i>{{ company.creatingDate|date('d/m/Y') }}
+                            </div>#}
+                            {% if company.city is not empty %}
+                                <div class="col-md-2 detail-item">
+                                    <i class="icon-placeholder"></i>{{ company.city|default('vide') }}
+                                </div>
+                            {% endif %}
+                            {# <div class="col-md-2 detail-item"><i class="icon-heart"></i>{{ project.likes|length }}</div> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 block-card company">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="montant">
+{#                        <div class="card-icon"><i class="icon-montant"></i></div>#}
+{#                        <div class="card-text">#}
+{#                            <h4>{% trans %}Funding objective{% endtrans %}</h4>#}
+{#                            <h3>#}
+{#                                {{ company.fundingObjective|number_format(0, ',', ' ') }} MAD#}
+{#                            </h3>#}
+{#                        </div>#}
+                        <div class="card-progress has-progress clearfix">
+                            <div class="progress-price-wrapper">
+                                <div class="progress-price company">
+                                    <strong>{{ company.amountCollected|number_format(0, ',', ' ') }}</strong>
+                                    <span>Mad</span>
+                                </div>
+                                /
+                                <div class="progress-price company">
+                                    {% if approvedCompany %}
+                                        <strong>{{ approvedCompany.fundingObjective|number_format(0, ',', ' ') }}</strong>
+                                    {% else %}
+                                        <strong>{{ company.fundingObjective|number_format(0, ',', ' ') }}</strong>
+                                    {% endif %}
+                                    <span>Mad</span>
+                                </div>
+                            </div>
+                            {% if approvedCompany %}
+                                {% set percent = approvedCompany.percentageOfContribution %}
+                            {% else %}
+                                {% set percent = company.percentageOfContribution %}
+                            {% endif %}
+                            <div class="progress-content">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: {{ percent }};" role="progressbar" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"></div>
+                                </div>
+                                <div class="percentage">{{ percent}}</div>
+                            </div>
+                            {% if approvedCompany and approvedCompany.fundingObjective != company.fundingObjective %}
+                                <div class="text-danger">
+                                    {{ company.fundingObjective|number_format(0, ',', ' ') }} MAD
+                                    {{ 'Is your new funding goal in draft mode while the administrator validates it'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    {#<div class="finance">
+                        <div class="card-icon"><i class="icon-finance"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Funding objective{% endtrans %}</h4>
+                            <h3>{{ project.budget|number_format(0, ',', ' ') }} MAD</h3>
+                        </div>
+                    </div>#}
+                    <div class="project">
+                        <div class="card-icon"><i class="icon-archive"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Company{% endtrans %}</h4>
+                            <p>{{ company.description|slice(0, 50) }}..</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="activities">
+                        <div class="card-icon"><i class="icon-secteur"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Use of funds collected{% endtrans %}</h4>
+                            {% if company.useOfFundsCollecteds|length > 0 %}
+                                <ul class="white">
+                                    {% for use in company.useOfFundsCollecteds %}
+                                        <li>{{ use.description }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    {#<div class="activities">
+                        <div class="card-icon"><i class="icon-secteur"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Project phase{% endtrans %}</h4>
+                            {% set label = project.step.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = project.step.labelEn %}
+                            {% endif %}
+                            <h3>{{ label }}</h3>
+                        </div>
+                    </div>#}
+
+                    <hr>
+
+                    <div class="status">
+                        <div class="card-icon"><i class="icon-qualifie"></i></div>
+                        {% if not company.isApproved and not company.isUpdated and not company.isRejected %}
+                            {% set status = 'Under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        {% if company.isApproved and not company.isUpdated and not company.isRejected %}
+                            {% set status = 'Approved'|trans %}
+                            {% set color = 'success' %}
+                        {% endif %}
+                        {% if not company.isApproved and not company.isUpdated and company.isRejected %}
+                            {% set status = 'Declined'|trans %}
+                            {% set color = 'danger' %}
+                        {% endif %}
+                        {% if company.isApproved and company.isUpdated and company.isRejected %}
+                            {% set status = 'Declined modification'|trans %}
+                            {% set color = 'danger' %}
+                        {% endif %}
+                        {% if company.isApproved and company.isUpdated and not company.isRejected %}
+                            {% set status = 'Modification under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        {% if company.isUpdated and not company.isRejected %}
+                            {% set status = 'Under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        <div class="card-text">
+                            <h4>{% trans %}Status{% endtrans %}</h4>
+                            {% if company.isClosed == true %}
+                                <h3 class="danger">{% trans %}Closed{% endtrans %}</h3>
+                            {% else %}
+                                {% if company.isDraft == true %}
+                                    <h3 class="warning">{% trans %}Draft{% endtrans %}</h3>
+                                {% else %}
+                                    <h3 class="{{ color }}">{{ status }}</h3>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body project-infos">
+        <div class="row">
+            <div class="col-md-1 project-logo hide-for-tablet ">
+                {% if company.logoName is not empty %}
+                    {% set logo = vich_uploader_asset(company, 'logoFile') %}
+                {% else%}
+                    {% set logo = asset('assets/img/project_logo_180.png') %}
+                {% endif %}
+                <img src="{{ logo }}" alt="" class="img-responsive">
+            </div>
+            <div class="col-md-5 project-text hide-for-tablet">
+                <div class="project-title">
+                    <h2>
+                        {{ company.name }}
+                        {% if company.isVerified == true %}
+                            <small><i class="icon-check-circle"></i><span>{% trans %}Verified{% endtrans %}</span></small>
+                        {% endif %}
+                    </h2>
+                </div>
+                <div class="b-details">
+                    <div class="row">
+                        {#<div class="col-md-2 detail-item">
+                            <i class="icon-calendar"></i>{{ project.creatingDate|date('d/m/Y') }}
+                        </div>#}
+                        {% if company.city is not empty %}
+                            <div class="col-md-2 detail-item">
+                                <i class="icon-placeholder"></i>{{ company.city|default('vide') }}
+                            </div>
+                        {% endif %}
+                        {# <div class="col-md-2 detail-item"><i class="icon-heart"></i>{{ project.likes|length }}</div> #}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 b-settings">
+                {#{% if app.request.get('_route') == "project_show" %}
+                    {% set project = project.project %}
+                {% endif %}#}
+
+                <div class="col-md-12 settings">
+                    <div class="row">
+                        <div class="col-md-4 settings-icons">
+                            {#<a class="message" href="{{ path('startuper_project_messages', {id: company.id, slug: company.slug}) }}" >
+#}{#                                <i class="icon-message"></i>#}{#
+                                {% trans %}Messages{% endtrans %}
+                            </a>#}
+                        </div>
+
+                        <div class="col-md-4 settings-icons">
+                            <a class="view-project" href="{{ path('startuper_company_show', { id: company.id, slug: company.slug }) }}" >
+{#                                <i class="icon-visibility"></i>#}
+                                {% trans %}View company{% endtrans %}
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 settings-icons">
+                            {% if company.isDeleted == false and company.isLocked == false %}
+                                <a class="setting" href="{{ path('startuper_company_edit', { id: company.id, slug: company.slug }) }}">
+{#                                    <i class="icon-controls"></i>#}
+                                    {% trans %}Update company{% endtrans %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

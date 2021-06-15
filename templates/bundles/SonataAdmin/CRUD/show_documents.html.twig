@@ -1,0 +1,16 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+   {% if object.documents|length > 0 %}
+      {% for document in object.documents %}
+         <div class="row">
+            {% set doc = vich_uploader_asset(document, 'file') %}
+            <div class="col-md-4"><a href="{{ doc }}" target="_blank">{{ document.name }}</a></div>
+            <div class="col-md-4">{{ document.documentType }}</div>
+         </div>
+         <hr>
+      {% endfor %}
+   {% else %}
+      <p>Aucun document</p>
+   {% endif %}
+{% endblock field %}

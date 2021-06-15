@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Payment error'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="pay-success">
+        <div class="container">
+            <div class="row justify-content-center pay-success-content">
+                <div class="col-md-12 text-center c-section-intro">
+                    <h1>{{ 'Payment error'|trans }}</h1>
+                    <p>
+                        {% trans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit.{% endtrans %}
+                    </p>
+                </div>
+
+                <div class="col-md-12 c-section-table">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ 'Customer information'|trans }}</div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <th>{{ 'Name'|trans }}</th>
+                                    <td>{{ cmiData['billToName'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Address'|trans }}</th>
+                                    <td>{{ cmiData['billToCountry'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Phone'|trans }}</th>
+                                    <td>{{ cmiData['tel'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Email'|trans }}</th>
+                                    <td>{{ cmiData['email'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Project name'|trans }}</th>
+                                    <td>{{ companyName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Amount'|trans }}</th>
+                                    <td>{{ cmiData['amount']|number_format(2, ',', ' ') }} MAD</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

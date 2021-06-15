@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}
+    {{ 'Home solidarity campaigns'|trans }}
+{% endblock %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    <div class="header-banner company">
+        {% if header and header.bannerName is not empty %}
+            {% set banner = vich_uploader_asset(header, 'bannerFile') %}
+        {% else %}
+            {% set banner = asset('assets/img/Banner.png') %}
+        {% endif %}
+        {#<img src="./../assets/img/visuel.png" class="img-responsive w-100">#}
+        <img src="{{ banner }}" class="img-responsive w-100" alt>
+        {% if header %}
+            <div class="container">
+                <div class="banner-content">
+                    {{ header.description|raw }}
+                </div>
+            </div>
+        {% endif %}
+    </div><!-- /.jumbotron -->
+    {% if FAQs|length > 0 %}
+        <div class="b-faq">
+            <div class="container">
+                <div class="faq-content">
+                    <div id="accordion" class="accordion-faq">
+                        {% for companyFAQ in FAQs %}
+                            <div class="card">
+                                <div class="card-header" id="heading{{ loop.index }}">
+                                    <h3>
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                            {{ companyFAQ.question }}
+                                            <i class="icon-right-chevron"></i>
+                                        </button>
+                                    </h3>
+                                </div>
+                                <div id="collapse{{ loop.index }}" class="collapse{% if loop.index == 1 %} show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        {{ companyFAQ.response|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+

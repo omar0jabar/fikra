@@ -1,0 +1,91 @@
+{% trans_default_domain 'offerRequest' %}
+<div class="modal fade" id="modalOfferRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    {% trans %}Request to receive an offer{% endtrans %}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="icon-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="div-message" class="text-center">
+                    <span id="message"></span>
+                </div>
+                <form id="form-offer-request" method="post">
+                    <p class="modal-description">
+                        {% trans %}modal.description{% endtrans %}
+                    </p>
+                    <input type="hidden" id="url" value="{{ path('receive_offer') }}">
+                    <input type="hidden" id="token" value="">
+                    <input type="hidden" id="block" value="">
+                    
+                    <div class="row ">
+                        <div class="col-md-6 field-firstname">
+                            <div class="form-group">
+                                <label class="required" for="f-name">{% trans %}form.firstName.label{% endtrans %}</label>
+                                <input type="text" id="f-name" name="f-name" placeholder="{% trans %}form.firstName.placeholder{% endtrans %}"
+                                       class="form-control" {% if app.user %}value="{{ app.user.firstName }}"{% endif %} required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 field-lastname">
+                            <div class="form-group">
+                                <label class="required" for="l-name">{% trans %}form.lastName.label{% endtrans %}</label>
+                                <input type="text" id="l-name" name="l-name" placeholder="{% trans %}form.lastName.placeholder{% endtrans %}"
+                                       class="form-control" {% if app.user %}value="{{ app.user.lastName }}"{% endif %}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="email">{% trans %}form.email.label{% endtrans %}</label>
+                        <input type="email" id="email" name="email" placeholder="{% trans %}form.email.placeholder{% endtrans %}"
+                               {% if app.user %}value="{{ app.user.email }}"{% endif %} class="form-control" required>
+                    </div>
+                    <div class="field choice">
+                        <div class="you-are">
+                            <label class="label required" for="">{% trans %}form.youAre.label{% endtrans %}</label>
+                        </div>
+                        <div class="startuper">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="startuper" name="type" class="custom-control-input type" checked="" value="startuper">
+                                <label for="startuper">{% trans %}Startuper{% endtrans %}</label>
+                            </div>
+                        </div>
+                        <div class="investor">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="investor" name="type" class="custom-control-input type" value="investor">
+                                <label for="investor">{% trans %}Investor{% endtrans %}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="" for="messageText">{% trans %}form.message.label{% endtrans %}</label>
+                        <textarea name="messageText" id="messageText" cols="30" rows="10" placeholder="{% trans %}form.message.placeholder{% endtrans %}" class="form-control"></textarea>
+                    </div>
+                    <div class="champ-requis">
+                        <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                    </div>
+                    {#<div class="g-recaptcha"
+                         data-sitekey="{{ recaptcha_site_key }}"
+                         data-callback="onSubmitReceiveOffer"
+                         data-size="invisible">
+                    </div>#}
+                    {#<button type="submit" class="g-recaptcha btn btn-bg-red btn-h40 btn-w15"
+                            data-sitekey="{{ recaptcha_site_key }}"
+                            data-callback="onSubmitReceiveOffer"
+                            data-size="invisible">
+                        {% trans %}Send{% endtrans %}
+                    </button>#}
+                    <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                        {% trans %}Send{% endtrans %}
+                    </button>
+                    {#<button type="button" class="btn btn-bg-blue btn-h40 btn-w15" data-dismiss="modal">
+                        {% trans %}Cancel{% endtrans %}
+                    </button>#}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

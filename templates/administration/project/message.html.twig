@@ -1,0 +1,43 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% include 'administration/project/_head.html.twig' %}
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+               <a href="{{ path('sonata_admin_project_messages', {id: project.id}) }}">
+                  <i class="fa fa-arrow-left"></i> {% trans %}Messages{% endtrans %}
+               </a>
+               <h1>{{ message.object }}</h1>
+               <p>{{ message.content }}</p>
+               <strong>{{ message.author }}</strong>
+               <span>{{ message.createdAt|date('d/m/Y') }}</span>
+               <hr>
+               {% for response in message.responses %}
+                  {% set color = 'success' %}
+                  {% if response.user == message.author %}
+                     {% set color = 'default' %}
+                  {% endif %}
+                  <div class="alert bg-{{ color }}" style="margin-left: 10%;">
+                     <strong>{{ response.user.email }}</strong>
+                     <span>{{ response.createdAt|date('d/m/Y') }}</span>
+                     <p>{{ response.content }}</p>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

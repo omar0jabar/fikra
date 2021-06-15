@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+   <meta charset="UTF-8">
+   <title>PFE Startup - {% block title %}{% endblock %}</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
+   <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
+
+   <meta name="theme-color" content="#263055">
+   <meta name="url" content="{{ app.request.getSchemeAndHttpHost() ~ app.request.requestUri }}" />
+   <meta property="og:url" content="{{ app.request.getSchemeAndHttpHost() ~ app.request.requestUri }}" />
+
+   <meta name="twitter:card" content="summary_large_image" />
+   <meta name="twitter:site" content="@PFEStartup" />
+   {% block meta %}
+      <meta name="title" content="{{ SEOTitle }}"/>
+      <meta name="description" content="{{ SEODescription }}"/>
+      <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}"/>
+      
+      {% block ogimage %}
+      <meta property="og:title" content="{{ SEOTitle }}"/>
+      <meta property="og:description" content="{{ SEODescription }}"/>
+      <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}"/>
+      {% endblock %}
+      <meta name="twitter:url" content="{{ app.request.getSchemeAndHttpHost() ~ app.request.requestUri }}">
+      {% block ogimageTwitter %}
+      <meta name="twitter:title" content="{{ SEOTitle }}" />
+      <meta name="twitter:description" content="{{ SEODescription }}" />
+      <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/slider/" ~ SEOImage }}" />
+      {% endblock %}
+   {% endblock %}
+ 
+   <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/select2/select2.css') }}">
+   <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/select2/select2-bootstrap.css') }}">
+   <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
+   <script src="{{ asset('js/jquery.min.js') }}"></script>
+   {% block stylesheets %}{% endblock %}
+</head>
+
+{% set current_path = app.request.get('_route') %}
+{% set class = "" %}
+{% if current_path == 'project_show' or current_path == 'startuper_project_show' or current_path == 'company_show' or current_path == 'startuper_company_show' or current_path == 'sonata_admin_company_preview' %}
+   {% set class = "page-project" %}
+{% endif %}
+
+<body class="{{ class }}">
+   {% include 'partials/header.html.twig' %}
+
+   {% block body %}{% endblock %}
+
+   <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
+   {% include 'partials/footer.html.twig' %}
+
+   <script src="{{ asset('js/popper.min.js') }}"></script>
+   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+   <script src="{{ asset('js/jquery.sticky.js') }}"></script>
+   <script src="{{ asset('js/slick-animation.min.js') }}"></script>
+   <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+   <script src="{{ asset('bundles/sonatacore/vendor/select2/select2.js') }}"></script>
+   <script src="{{ asset('js/backtotop.js') }}"></script>
+   <script src="{{ asset('assets/js/bundle.js') }}"></script>
+
+   {% block javascripts %}{% endblock %}
+   <script >
+      // move all modal inside body for skipping error jquery
+      $(document).ready(function() {
+         $('.modal').appendTo("body");
+      });
+   </script>
+</body>
+</html>

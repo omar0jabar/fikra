@@ -1,0 +1,49 @@
+{% trans_default_domain 'article' %}
+
+<div class="col-lg-4 col-md-6 col-sm-12 actusCardStyle">
+    {% set link = path('cmsbundle_article_show', { id: article.id, slug: article.slug}) %}
+    <a href="{{ link }}">
+        <div class="card card-actus">
+            {% if article.bannerDesktop is not empty %}
+                {% set cover = asset("upload/cms/articles-public/" ~ article.bannerDesktop) %}
+            {% else %}
+                {% set cover = asset('assets/img/news_cover.png') %}
+            {% endif %}
+            <div class="card-img-top">
+                <img src="{{ cover | imagine_filter('cms_card') }}" class="img-responsive" alt="{{ article.title }}">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">
+                    {{ article.title }}
+                </h3>
+                <p class="card-text">
+                    {{ article.content|striptags|slice(0, 200)|raw }}
+                    {% if article.content|length > 200 %}
+                        ...
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-6 card-date pl-0">
+                        <span>
+                            {% set date = article.dateTri %}
+                            {% include '@CMS/date/_normal.html.twig' %}
+                        </span>
+                    </div>
+                    <div class="col-6 text-right pr-0 card-like">
+                        {#<a href="{{ path('article_like', {id: article.id}) }}" class="js-like">#}
+                        <span class="js-like-article">
+                            <span class="js-likes">{{ article.likes|length }}</span>
+                            {% if app.user and article.isLikedByUser(app.user) %}
+                                <i class="icon-favorite-heart-button red"></i>
+                            {% else %}
+                                <i class="icon-favorite-heart-button"></i>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

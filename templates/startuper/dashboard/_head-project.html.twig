@@ -1,0 +1,229 @@
+{% trans_default_domain 'project' %}
+
+{% include 'partials/_notice.html.twig' %}
+
+<div class="card card-banner">
+    <h3>{% trans %}Your project{% endtrans %}</h3>
+    <div class="row dashboard-banner">
+        <div class="col-lg-8 col-md-12 block-img">
+            {% if project.imageCoverName is not empty %}
+                {% set cover = vich_uploader_asset(project, 'imageFile') %}
+            {% else%}
+                {% set cover = asset('assets/img/project_cover.png') %}
+            {% endif %}
+            <img class="card-img-top" src="{{ cover }}" alt="Card image cap">
+        </div>
+        <div class="card-body project-infos show-for-tablet">
+        <div class="row">
+            <div class="col-md-1 project-logo">
+                {% if project.logoName is not empty %}
+                    {% set logo = vich_uploader_asset(project, 'logoFile') %}
+                {% else%}
+                    {% set logo = asset('assets/img/project_logo_140.png') %}
+                {% endif %}
+                <img src="{{ logo }}" alt="" class="img-responsive">
+            </div>
+            <div class="col-md-7 project-text">
+                <div class="project-title">
+                    <h2>
+                        {{ project.name }}
+                        {% if project.isVerified == true %}
+                            <small><i class="icon-check-circle"></i><span>{% trans %}Verified{% endtrans %}</span></small>
+                        {% endif %}
+                    </h2>
+                </div>
+                <div class="b-details">
+                    <div class="row">
+                        <div class="col-md-2 detail-item">
+                            <i class="icon-calendar"></i>{{ project.creatingDate|date('d/m/Y') }}
+                        </div>
+                        {% if project.city is not empty %}
+                            <div class="col-md-2 detail-item">
+                                <i class="icon-placeholder"></i>{{ project.city|default('vide') }}
+                            </div>
+                        {% endif %}
+                        {# <div class="col-md-2 detail-item"><i class="icon-heart"></i>{{ project.likes|length }}</div> #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-4 col-md-12 block-card">
+            <div class="card">
+                <div class="card-body">
+                    {#<div class="finance">
+                        <div class="card-icon"><i class="icon-finance"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Funding objective{% endtrans %}</h4>
+                            <h3>{{ project.budget|number_format(0, ',', ' ') }} MAD</h3>
+                        </div>
+                    </div>#}
+                    <div class="project">
+                        <div class="card-icon"><i class="icon-archive"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Project{% endtrans %}</h4>
+                            <p>{{ project.description|slice(0, 50) }}..</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="montant">
+                        <div class="card-icon"><i class="icon-montant"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Amount{% endtrans %}</h4>
+                            <h3>
+                                {% if project.hasNotAmount or project.amount == 0 %}
+                                    {% trans %}Has not amount{% endtrans %}
+                                {% else %}
+                                    {{ project.amount|number_format(0, ',', ' ') }} MAD
+                                {% endif %}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="activities">
+                        <div class="card-icon"><i class="icon-secteur"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Sector{% endtrans %}</h4>
+                            {% set label = project.sectors.first.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = project.sectors.first.labelEn %}
+                            {% endif %}
+                            <h3>{{ label }}</h3>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="activities">
+                        <div class="card-icon"><i class="icon-secteur"></i></div>
+                        <div class="card-text">
+                            <h4>{% trans %}Project phase{% endtrans %}</h4>
+                            {% set label = project.step.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = project.step.labelEn %}
+                            {% endif %}
+                            <h3>{{ label }}</h3>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="status">
+                        <div class="card-icon"><i class="icon-qualifie"></i></div>
+                        {% if not project.isApproved and not project.isUpdated and not project.isRejected %}
+                            {% set status = 'Under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        {% if project.isApproved and not project.isUpdated and not project.isRejected %}
+                            {% set status = 'Approved'|trans %}
+                            {% set color = 'success' %}
+                        {% endif %}
+                        {% if not project.isApproved and not project.isUpdated and project.isRejected %}
+                            {% set status = 'Declined'|trans %}
+                            {% set color = 'danger' %}
+                        {% endif %}
+                        {% if project.isApproved and project.isUpdated and project.isRejected %}
+                            {% set status = 'Declined modification'|trans %}
+                            {% set color = 'danger' %}
+                        {% endif %}
+                        {% if project.isApproved and project.isUpdated and not project.isRejected %}
+                            {% set status = 'Modification under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        {% if project.isUpdated and not project.isRejected %}
+                            {% set status = 'Under study'|trans %}
+                            {% set color = 'warning' %}
+                        {% endif %}
+                        <div class="card-text">
+                            <h4>{% trans %}Status{% endtrans %}</h4>
+                            {% if project.isDraft == true %}
+                                <h3 class="warning">{% trans %}Draft{% endtrans %}</h3>
+                            {% else %}
+                                <h3 class="{{ color }}">{{ status }}</h3>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body project-infos">
+        <div class="row">
+            <div class="col-md-1 project-logo hide-for-tablet ">
+                {% if project.logoName is not empty %}
+                    {% set logo = vich_uploader_asset(project, 'logoFile') %}
+                {% else%}
+                    {% set logo = asset('assets/img/project_logo_180.png') %}
+                {% endif %}
+                <img src="{{ logo }}" alt="" class="img-responsive">
+            </div>
+            <div class="col-md-5 project-text hide-for-tablet">
+                <div class="project-title">
+                    <h2>
+                        {{ project.name }}
+                        {% if project.isVerified == true %}
+                            <small><i class="icon-check-circle"></i><span>{% trans %}Verified{% endtrans %}</span></small>
+                        {% endif %}
+                    </h2>
+                </div>
+                <div class="b-details">
+                    <div class="row">
+                        <div class="col-md-2 detail-item">
+                            <i class="icon-calendar"></i>{{ project.creatingDate|date('d/m/Y') }}
+                        </div>
+                        {% if project.city is not empty %}
+                            <div class="col-md-2 detail-item">
+                                <i class="icon-placeholder"></i>{{ project.city|default('vide') }}
+                            </div>
+                        {% endif %}
+                        {# <div class="col-md-2 detail-item"><i class="icon-heart"></i>{{ project.likes|length }}</div> #}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 b-settings">
+                {% if app.request.get('_route') == "project_show" %}
+                    {% set project = project.project %}
+                {% endif %}
+
+                <div class="col-md-12 settings">
+                    <div class="row">
+                        <div class="col-md-4 settings-icons">
+                            <a class="message" href="{{ path('startuper_project_messages', {id: project.id, slug: project.slug}) }}" >
+{#                                <i class="icon-message"></i>#}
+                                {% trans %}Messages{% endtrans %}
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 settings-icons">
+                            <a class="view-project" href="{{ path('startuper_project_show', { id: project.id, slug: project.slug }) }}" >
+{#                                <i class="icon-visibility"></i>#}
+                                {% trans %}View project{% endtrans %}
+                            </a>
+                        </div>
+
+                        <div class="col-md-4 settings-icons">
+                            {% if project.stepCreating < 7 %}
+                                <a href="{{ path('startuper_project_complete', {id: project.id, slug: project.slug}) }}"
+                                   class="btn btn-bg-red btn-h30 btn-w10">
+                                    {% trans %}Complete the project{% endtrans %}
+                                </a>
+                            {% endif %}
+                            {% if project.stepCreating >= 7 and project.isLocked == false %}
+                                <a class="setting" href="{{ path('startuper_project_edit', { id: project.id, slug: project.slug }) }}">
+{#                                    <i class="icon-controls"></i>#}
+                                    {% trans %}Update project{% endtrans %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

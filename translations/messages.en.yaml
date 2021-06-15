@@ -1,0 +1,188 @@
+#################################
+### ADMINISTRATION #############
+###############################
+
+# request documentation admin controller
+Approved project not found: Approved project not found
+The project is not approved anymore: The project is not approved anymore
+The project has no documentation! email sent to the author of the project: The project has no documentation! email sent to the author of the project
+The request has been successfully accepted: The request has been successfully accepted
+The request already has an answer: The request already has an answer
+The request was rejected successfully: The request was rejected successfully
+This document is reserved for users authorized by the project leader: This document is reserved for users authorized by the project leader
+
+# Project admin controller
+The project is not verified anymore: |
+  The project <strong>%project_name%</strong> is not verified anymore
+The project is verified: |
+  The project <strong>%project_name%</strong> is verified
+The project has been successfully updated: |
+  The project <strong>%project_name%</strong> has been successfully updated
+The project is not qualified anymore: |
+  The project <strong>%project_name%</strong> is not qualified anymore
+The project has been successfully approved: |
+  The project <strong>%project_name%</strong> has been successfully approved
+The project was locked successfully: |
+  The project <strong>%project_name%</strong> was locked successfully
+The project was unlocked successfully: |
+  The project <strong>%project_name%</strong> was unlocked successfully
+The project was successfully rejected: |
+  The project <strong>%project_name%</strong> was successfully rejected
+The project is not rejected anymore: |
+  The project <strong>%project_name%</strong> is not rejected anymore
+The modification of the project was rejected successfully: |
+  The modification of the project <strong>%project_name%</strong> was rejected successfully
+The project is not updated for the rejected: |
+  The project <strong>%project_name%</strong> is not updated for the rejected
+You can not make the project check if it is not approved yet: You can not make the project check if it is not approved yet
+All projects are successfully deleted: All projects are successfully deleted
+Selected items have been removed successfully: The selected projects have been successfully removed
+You must accept Confidentiality & PI engagement: You must accept Confidentiality & PI engagement
+
+# Event admin controller
+The event was successfully created: The event was successfully created
+The event has been successfully modified: The event has been successfully modified
+# Admin profile controller
+Your profile is updated successfully: Your profile is updated successfully
+
+# Global Document admin controller
+Document successfully created: The document was successfully created
+Document successfully edited: The document has been successfully edited
+
+# Admin admin controller
+Account locked successfully: The account has been successfully locked
+Account unlocked successfully: The account has been successfully unlocked
+User not found: User not found
+
+#########################
+### FRONT ##############
+#######################
+
+# Investor controller
+Message not found: Message not found
+Your response has been successfully sent: Your response has been successfully sent
+
+# Global document controller
+Document not found: Document not found
+You don't have access to this resource: You don't have access to this resource
+
+# Comment ca marche controller
+Page not found: Page not found
+
+# Entrepreneur Registration controller
+Registration successfully: Your registration is complete, please activate your account by the link sent to your e-mail address.
+Link registration expired: The activation link has expired, please fill in the registration form
+Account successfully activated: Your account has been activated successfully! You can now submit a project
+
+# Entrepreneur ProjectController
+Is required: |
+  <strong>%field%</strong> is required
+This field is required: This field is required
+Please select at least one sales channel: Please select at least one sales channel
+Please select at least one sector: Please select at least one sector
+Please select at least one business model: Please select at least one business model
+Please define at least one country: Please define at least one country
+You can add only 5 benefits to the maximum: You can add only 5 benefits to the maximum
+You can add only 5 financing details to the maximum: You can add only 5 financing details to the maximum
+You can add only 5 members to the maximum: You can add only 5 members to the maximum
+You can add only 10 photos to the maximum: |
+  You can add only <strong>%max%</strong> pictures to the maximum
+Please enter at least the project leader: Please enter at least the project leader
+Please choose the project leader: Please choose the project leader
+Access denied: Access denied
+The request was made successfully: The request was made successfully
+Project deleted successfully: |
+  Your project: <strong>%project_name%</strong> was successfully deleted
+Your cover photo has been changed successfully: Your cover photo has been changed successfully
+Your logo has been successfully changed: Your logo has been successfully changed
+Your Video has been successfully added: Your Video has been successfully added
+You have exceeded the allowed number: You have exceeded the allowed number
+You have duplicate a document type: You have duplicate a document type
+# Entrepreneur profile controller
+Your profile has been successfully modified: Your profile has been successfully modified
+Current password is wrong: Current password is wrong
+Your password has been successfully changed: Your password has been successfully changed
+
+# Entrepreneur Dashboard controller
+You do not have the right to access the dashboard: You do not have the right to access the dashboard
+Your answer has been successfully registered: Your answer has been successfully registered
+
+# Resetting controller
+No email found: No email found
+email sending: |
+  An email has been sent to <strong>%email%</strong>. contains a link, you must click to reset your password
+No request found: No request found
+Link expired: The reset link has expired, please make a new request
+Your password has been successfully reset: Your password has been successfully reset
+
+# project controller
+Your question has been sent successfully: Your question has been sent successfully
+Project not found: Project not found
+Category not found: Category not found
+You have not access: You have not access
+Your message has been sent successfully: Your message has been sent successfully
+The author of the project has no right to request the documentation of his project: The author of the project has no right to request the documentation of his project
+User invalid: User invalid
+Token invalid: Token invalid
+You already have a request: you already have a request
+Your request can not be null: Your request can not be null
+Your request has been successfully sent: Your request has been successfully sent
+Request not found: Request not found
+Unauthorized: Unauthorized
+Download link has expired: Download link has expired
+Like added: Like added
+Like removed: Like removed
+
+# event page
+Event not found: Event not found
+
+# Contact page
+Your message has been successfully sent: Your message has been successfully sent
+
+# ERROR 403 & 404
+Back to Home: Back to Home
+
+# user checker
+Email could not be found: Email could not be found
+Your account was deleted. Sorry about that: Your account was deleted. Sorry about that
+Your account was banned. Sorry about that: Your account was banned. Sorry about that!
+Your account is disabled. Sorry about that: Your account is disabled. Sorry about that!
+Your account has not access to administration: Your account has not access to administration.
+
+Statistics: Statistics
+Visits: Visits
+Likes: Likes
+
+January: January
+February: February
+March: March
+April: April
+May: May
+June: June
+July: July
+August: August
+September: September
+October: October
+November: November
+December: December
+
+French: French
+English: English
+Payment details: 'Payment details'
+Payment date: 'Payment date'
+Payment number: 'Payment number'
+Authorization code: 'Authorization code'
+Method of payment: 'Method of payment'
+Payment card number: 'Payment card number'
+Transaction number: 'Transaction number'
+Details of the order: 'Details of the order'
+Identifiant: 'Identifiant'
+Amount: 'Amount'
+Customer information: 'Customer information'
+Name: 'Name'
+Address: 'Address'
+Phone: 'Phone'
+Email: 'Email'
+Payment successful: 'Payment successful'
+Payment error: 'Payment error'
+Project name: 'Project name'

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'messages' %}
+
+{% block title %}{% trans %}Page not found{% endtrans %}{% endblock %}
+
+{% block body %}
+
+   <div class="page-notfound">
+      <div class="container">
+         <div class="content-wrapper">
+            <h1>
+               404
+               <span>{% trans %}Oups ! La page que vous recherchez n'existe pas !{% endtrans %}</span>
+            </h1>
+            <p class="intro">
+               {% trans %}On a surement du mal vous renseigner ! Aucun soucis, vous pouvez retourner a l'accueil!{% endtrans %}
+            </p>
+            <a href="{{ path('home') }}" class="btn btn-bg-red btn-h50 btn-w35">
+               {% trans %}Back to Home{% endtrans %} <i class="icon-right-arrow"></i>
+            </a>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,306 @@
+{% extends 'base.html.twig' %}
+
+{% block ogimage %}
+      <meta property="og:title" content="{% trans %}title_fond_og{% endtrans %}"/>
+      <meta property="og:description" content="{% trans %}description_fond_og{% endtrans %}"/>
+      <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/assets/img/programme-financements.jpg"}}"/>
+      <meta property="og:image:width" content="1600"/>
+      <meta property="og:image:height" content="550"/>
+
+{% endblock %}
+
+{% block ogimageTwitter %}
+  <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/assets/img/programme-financements.jpg"}}"/>
+  <meta property="twitter:image:width" content="1600"/>
+  <meta property="twitter:image:height" content="550"/>
+  <meta property="twitter:title" content="{% trans %}title_fond_og{% endtrans %}"/>
+  <meta property="twitter:description" content="{% trans %}description_fond_og{% endtrans %}"/>
+
+{% endblock %}
+
+{% trans_default_domain 'fond' %}
+
+{% block title %}{{fond.title}}{% endblock %}
+
+{% block body %}
+{% set locale = app.request.locale %}
+{% for msg in app.session.flashBag.get('success') %}
+<div class="alert alert-success">
+    {% trans %}message_success{% endtrans %}
+</div>
+{% endfor %}
+<div id="cover-project" class="banner-cover detailled">     
+    <div class="row banner-project">
+        <div class="col-lg-12 col-md-12 block-img">
+            {% if fond.img is not empty %}
+                {% set cover = vich_uploader_asset(fond, 'uploadImg') %}
+            {% else %}
+                {% set cover = asset('assets/img/fond_cover.png') %}
+            {% endif %}
+            <img src="{{cover}}" class="img-responsive banner-img" alt="">
+            <div class="project-info">
+
+                <div class="row">
+                    <div class="col-lg-2 project-logo">
+                        <div id="show-logo-project">
+                            <div class="row">
+                                <div class="col-12 p-0">
+                                    {% if fond.logo is not empty %}
+                                        {% set logo = vich_uploader_asset(fond, 'uploadLogo') %}
+                                    {% else %}
+                                        {% set logo = asset('assets/img/fond_logo.png') %}
+                                    {% endif %}
+                                    <img src="{{ logo }}" class="img-responsive" alt="{{ fond.title }}"
+                                         title="Logo {{ fond.title }}">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 project-text">
+                        <span>{% trans %}fond{% endtrans %}: </span>
+                        <h1>{{fond.title}}</h1>
+                        <div class="b-details">
+                            <p>{{fond.sortDesctiption}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="b-project-content detailled">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 content-bar"> 
+                    {{fond.content|raw}}
+                    <hr>
+                    
+                    <div class="c-block-links">
+                        {% if fond.phone != '' or fond.url != '' or fond.mail != '' %}
+                        <h2>Contact</h2>
+                        {% endif %}
+                        <div class="c-info">
+                            {% if fond.phone != '' %}
+                            <div class="phone">
+                                <h5><i class="icon-call"></i></h5>
+                                <a href="tel:{{fond.phone}}">{{fond.phone}}</a>
+                            </div>
+                            {% endif %}
+                            {% if fond.mail != '' %}
+                            <div class="email">
+                                <h5><i class="icon-open-email"></i></h5>
+                                <a href="mailto:{{fond.mail}}">{{fond.mail}}</a>
+                            </div>
+                            {% endif %}
+                            {% if fond.url != '' %}
+                            <div class="site">
+                                <h5><i class="icon-global"></i></h5>
+                                <a href="{{fond.url}}" target="_blank">{{fond.url}}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 sidebar">
+                    <div class="card info-card detailled">
+                        <div class="card-body">
+                            <div class="secteur">
+                                <h5>{% trans %}secteur{% endtrans %}: </h5>
+
+                                <ul class="tags">
+                                    {% if fond.secteurType|length > 0 %}
+                                    {% for sector in fond.secteurType.toArray %}
+                                        {% set label = sector.name %}
+                                        {% if locale == 'en' %}
+                                        {% set label = sector.nameEn %}
+                                        {% endif %}
+                                        <li>
+                                            <button class="btn btn-tag-light">{{label}}</button>
+                                        </li>
+                                    {% endfor %}
+                                    {% else %}
+                                    <li>
+                                        <button class="btn btn-tag-light">
+                                        {% trans %}all{% endtrans %}
+                                        </button>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            {% if fond.fondType != '' %}
+                            <div class="secteur">
+                                <h5>{% trans %}fondType{% endtrans %}: </h5>
+                                <h4>{{fond.fondType}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% if fond.financements|length > 0 %}
+                            <div class="secteur">
+                                <h5>{% trans %}financeType{% endtrans %}: </h5>
+                                <h4 class="finance">{{fond.financements|join(',')|replace({',': ', '})}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% set gestionnaires = fond.gestionnaires|join(',')|replace({',':', '}) %}
+                            {% if gestionnaires  %}
+                            <div class="secteur">
+                                <h5>{% trans %}gestionnaires{% endtrans %}: </h5>
+                                <h4>{{gestionnaires}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% set phases = fond.fondPhases|join(',')|replace({',':', '}) %}
+                            {% if phases  %}
+                            <div class="secteur">
+                                <h5>{% trans %}phase{% endtrans %}: </h5>
+                                <h4>{{phases}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% set depenses = fond.depenses|join(',')|replace({',':', '}) %}
+                            {% if depenses  %}
+                            <div class="secteur">
+                                <h5>{% trans %}depensestypes{% endtrans %}: </h5>
+                                <h4>{{depenses}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% set eligibilites = fond.eligibiliteCritere %}
+                            {% if eligibilites  %}
+                            <div class="secteur">
+                                <h5>{% trans %}eligibilitecritere{% endtrans %}: </h5>
+                                <h4>{{eligibilites}}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% if fond.min or fond.max %}
+                            <div class="secteur">
+                                <h5>{% trans %}montant{% endtrans %}: </h5>
+                                <h4>
+                                {% if fond.min != '' %}
+                                    {% trans %}min :{% endtrans %}
+                                    {{fond.min.montantMin}}
+                                {% endif %}
+                                {% if fond.min != '' and fond.max != '' %}
+                                -
+                                {% endif %}
+                                {% if fond.max != '' %}
+                                    {% trans %}max :{% endtrans %}
+                                    {{fond.max.montantMax}}
+                                {% endif %}
+                                </h4>
+                            </div>
+                            {% endif %}
+
+
+                            <div class="c-block-links">
+                                <h4>{% trans %}labelsouhite{% endtrans %}</h4>
+                                <a href="#" data-target="#modalContact" data-toggle="modal" class="btn btn-bg-red">
+                                {% trans %}labelcontacter{% endtrans %}
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <p><a class="btn btn-transparent-black btn-h40 btn-w20" title="{% trans %}go_back{% endtrans %}" href="javascript:history.back()">{% trans %}go_back{% endtrans %}</a></p> 
+        </div>
+    </div>
+    
+
+
+
+    <div class="modal fade" id="modalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog contactez-nous" role="document">
+            <div class="modal-content contact-form">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}labelcontacter{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="modal-sub">
+                        <form name="contact" method="post" action="{{ path('fond_contact') }}" id="contact-form">
+                            <input type="hidden" name="programmeId" value="{{fond.id}}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {% set email = '' %}
+                                        {% set firstName = '' %}
+                                        {% set lastName = '' %}
+                                        {% set phone = '' %}
+                                        {% if app.user %}
+                                            {% set email = app.user.email %}
+                                            {% set firstName = app.user.firstName %}
+                                            {% set lastName = app.user.lastName %}
+                                            {% set phone = app.user.phone %}
+                                        {% endif %}
+                                        <label for="contact_firstName" class="required">{% trans %}firstName{% endtrans %}</label>
+                                        <input type="text" id="contact_firstName" name="firstName" required="required" placeholder="{% trans %}firstName_placeholder{% endtrans %}" class="form-control" value="{{firstName}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contact_lastName" class="required">{% trans %}lastName{% endtrans %}</label>
+                                        <input type="text" id="contact_lastName" name="lastName" required="required" placeholder="{% trans %}lastName_placeholder{% endtrans %}" class="form-control"
+                                        value="{{lastName}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contact_email" class="required">{% trans %}email{% endtrans %}</label>
+                                        <input type="email" id="contact_email" name="email" required="required" placeholder="{% trans %}email_placeholder{% endtrans %}" class="form-control" value="{{email}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 b-field-phone">
+                                    <div class="row">
+                                        <div class="col-md-4 field-pays">
+                                            <label for="contact_prefix">{% trans %}countryCode{% endtrans %}</label><br>
+                                            <select name="contact_prefix_phone" id="contact_prefix">
+                                                <option value="+212">+212</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 field-phone">
+                                            <div class="form-group">
+                                                {% set phone = phone|replace({'+212': ''}) %}
+                                                {% set phone = phone|replace({'-': ''}) %}
+                                                <label for="contact_phone">{% trans %}phone{% endtrans %}</label>
+                                                <input type="text" id="contact_phone" name="phone" placeholder="{% trans %}phone_placeholder{% endtrans %}" class="form-control" maxlength="10" value="{{phone}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="contact_message" class="required">{% trans %}labelMessage{% endtrans %}</label>
+                                        <textarea id="contact_message" name="message" required="required" placeholder="{% trans %}placeholderMessage{% endtrans %}" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="champ-requis">
+                                <p class="required-field">{% trans %}requiredFields{% endtrans %}</p>
+                            </div>
+                            <div class="row b-send">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-bg-red btn-h50 btn-w35" type="submit">
+                                        {% trans %}Send{% endtrans %}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

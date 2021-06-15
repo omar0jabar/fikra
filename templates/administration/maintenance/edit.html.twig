@@ -1,0 +1,104 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% form_theme form 'administration/maintenance/form_theme.html.twig' %}
+
+{% block sonata_admin_content %}
+
+    {% block notice %}
+        {% include '@SonataCore/FlashMessage/render.html.twig' %}
+    {% endblock notice %}
+
+    {% if _preview is not empty %}
+        <div class="sonata-ba-preview">{{ _preview|raw }}</div>
+    {% endif %}
+
+    {% if _content is not empty %}
+        <div class="sonata-ba-content">{{ _content|raw }}</div>
+    {% endif %}
+
+    {% if _show is not empty %}
+        <div class="sonata-ba-show">{{ _show|raw }}</div>
+    {% endif %}
+
+    {% if _form is not empty %}
+        <div class="sonata-ba-form">{{ _form|raw }}</div>
+    {% endif %}
+
+    {% if _list_filters is not empty %}
+        <div class="row">
+            {{ _list_filters|raw }}
+        </div>
+    {% endif %}
+
+    {% if _list_table is not empty %}
+        <div class="row">
+            {{ _list_table|raw }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>Maintenance</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.isLocked) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.message) }}
+                    {{ form_row(form.paragraph) }}
+                    {{ form_row(form.ttl) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>IPS Authorized</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.ips) }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = function(){
+
+            $("#add-ip").click(function(){
+                const inputConter = $("#widgets-counter");
+                const divIp = $("#maintenance_form_ips");
+                const index = +inputConter.val();
+                const tmpl = divIp.data('prototype').replace(/__name__/g,index);
+                divIp.append(tmpl);
+                inputConter.val(index + 1);
+                handleDeleteButtons();
+            });
+
+            function handleDeleteButtons(){
+                $('button[data-action="delete-ip"]').click(function(){
+                    const target = this.dataset.target;
+                    $(target).remove();
+                });
+            }
+
+            function updateCounter(){
+                const count = $("#maintenance_form_ips div.form-group").length;
+                $("#widgets-counter").val(count);
+            }
+
+            updateCounter();
+            handleDeleteButtons();
+        };
+    </script>
+{% endblock %}

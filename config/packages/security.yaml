@@ -1,0 +1,87 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_STARTUPER: ROLE_USER
+        ROLE_ADMIN:
+            - ROLE_SONATA_ADMIN # with this role you have a nice navbar with search box
+            # startuper
+            - ROLE_SONATA_ADMIN_STARTUPER_LIST
+            - ROLE_SONATA_ADMIN_STARTUPER_VIEW
+            - ROLE_SONATA_ADMIN_STARTUPER_EDIT
+            # page
+            - ROLE_SONATA_ADMIN_PAGE_LIST
+            - ROLE_SONATA_ADMIN_PAGE_VIEW
+            - ROLE_SONATA_ADMIN_PAGE_CREATE
+            - ROLE_SONATA_ADMIN_PAGE_EDIT
+            - ROLE_SONATA_ADMIN_PAGE_DELETE
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
+            # startuper
+            - ROLE_SONATA_ADMIN_STARTUPER_DELETE
+            # admin
+            - ROLE_SONATA_ADMIN_ADMIN_LIST
+            - ROLE_SONATA_ADMIN_ADMIN_VIEW
+            - ROLE_SONATA_ADMIN_ADMIN_CREATE
+            - ROLE_SONATA_ADMIN_ADMIN_EDIT
+            - ROLE_SONATA_ADMIN_ADMIN_DELETE
+
+
+    providers:
+        in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        admin:
+            pattern: ^/boadmin
+            anonymous: true
+            provider: in_database
+            user_checker: App\Security\AdminChecker
+            guard:
+                authenticators:
+                    - App\Security\AdminSecurityAuthenticator
+            logout:
+                path: admin_account_logout
+                target: admin_account_login
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: in_database
+            user_checker: App\Security\StartuperChecker
+            guard:
+                authenticators:
+                    - App\Security\StartuperAuthenticator
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: home_default
+            logout:
+                path: startuper_logout
+                target: home_default
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/(%locales%)/startuper, roles: ROLE_STARTUPER}
+        - { path: ^/startuper, roles: ROLE_STARTUPER}
+        - { path: ^/boadmin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/boadmin, roles: ROLE_ADMIN }
+        - { path: ^/boadmin/admin, roles: ROLE_SUPER_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

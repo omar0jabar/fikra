@@ -1,0 +1,48 @@
+{% for key,document in documents %}
+	{% set link = path('download_document', {'id': document.id, 'entity': 'global_document'}) %}
+	{% if app.user %}
+		<a id="public_{{ document.id}}" class="row downloadDocument iterPublicDoc{{key}} iter" data-class='globalDocument'
+   			data-type="public" data-id='{{ document.id}}' href="{{ link }}">
+	{% else %}
+			<a id="public_{{ document.id}}" href="{{ link }}"
+				data-toggle="modal" class="row downloadDocument iterPublicDoc{{key}} iter"   data-class='globalDocument'
+			   data-type="public" data-id='{{ document.id}}' data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+	{% endif %}
+
+				<div class="col-8"><p class="docTitle">{{ document.title }}</p></div>
+				<div class="col-3"><p class="docDate">{{ document.date|date('d/m/Y')}}</p></div>
+			<div class="col-1 p-0">
+				<img src="/images/{{ document.fileExtension }}.svg" width="30" alt="">
+			</div>
+		</a>
+{% endfor %}
+
+{% if type == 'public' %}
+	<script type="text/javascript">
+		$("#offsetPublicDocument").val({{ offset }});
+	</script>
+{% else %}
+	<script type="text/javascript">
+		$("#offsetAutoProduction").val({{ offset }});
+	</script>
+{% endif %}
+
+{% if loadMorePublicDoc == 0 %}
+	<script type="text/javascript">
+		$("#morePublicDoc").hide();
+	</script>
+{% else %}
+	<script type="text/javascript">
+		$("#morePublicDoc").show();
+	</script>
+{% endif %}
+
+{% if loadMoreAutoDoc == 0 %}
+	<script type="text/javascript">
+		$("#moreAutoDoc").hide();
+	</script>
+{% else %}
+	<script type="text/javascript">
+		$("#moreAutoDoc").show();
+	</script>
+{% endif %}

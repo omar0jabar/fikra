@@ -1,0 +1,36 @@
+Myself: Moi même
+form:
+    title: L'équipe
+
+    firstName:
+        label: Prénom
+        placeholder: Prénom ...
+
+    lastName:
+        label: Nom
+        placeholder: Nom ...
+
+    position:
+        label: Position / poste
+        placeholder: Position / poste ...
+
+    biography:
+        label: Mini-bio
+        help: Limite 400 caractères
+        placeholder: Mini bio ...
+
+    avatar:
+        label: Avatar
+        placeholder: Parcourir ...
+
+    cv:
+        label: |
+            CV <i class="fas fa-lock"></i>
+        placeholder: Parcourir ...
+
+    porteur:
+        label: Porteur
+
+    button:
+        add: Ajouter un membre
+        delete: Supprimer cet membre

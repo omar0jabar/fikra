@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block title %}{% trans %}Projects{% endtrans %}{% endblock %}
+
+{% block body %}
+
+   {% set locale = app.request.locale %}
+
+   <div class="header-banner">
+      {% if header and header.bannerName is not empty %}
+         {% set banner = vich_uploader_asset(header, 'bannerFile') %}
+      {% else %}
+         {% set banner = asset('assets/img/Banner.png') %}
+      {% endif %}
+      {#<img src="./../assets/img/visuel.png" class="img-responsive w-100">#}
+      <img src="{{ banner }}" class="img-responsive w-100" alt>
+      <div class="container">
+         <div class="banner-content">
+            {{ header ? header.description|raw : '' }}
+         </div>
+      </div>
+   </div><!-- /.jumbotron -->
+
+   <div class="block-tabs">
+      {#<ul class="nav nav-tabs" id="myTab" role="tablist">
+         <li class="nav-item">
+            <a class="nav-link{% if current_sectors == null %} active{% endif %}" href="javascript:allProjects()" id="link-all">
+               {% trans %}All{% endtrans %}
+            </a>
+         </li>
+         {% for sector in sectors %}
+            {% set active = "" %}
+            {% for choiceSector in choicesSectors %}
+               {% if choiceSector == sector.id %}
+                  {% set active = "active" %}
+               {% endif %}
+            {% endfor %}
+            <li class="nav-item">
+               <a class="nav-link {{ active }}" id="link-{{ sector.id }}" href="javascript:searchBySector('{{ sector.id }}')">
+                  {% set label = sector.labelFr %}
+                  {% if locale == "en" %}
+                     {% set label = sector.labelEn %}
+                  {% endif %}
+                  {{ label }}
+               </a>
+            </li>
+         {% endfor %}
+      </ul>#}
+      <div class="row select-filter">
+         <div class="col-md-6 filter-choose">
+            <div class="custom-select-field">
+               <select id="sectors-select-picker" class="form-control w-100" multiple>
+                  {% for sector in sectors %}
+                     {% set selected = "" %}
+                     {% for choiceSector in choicesSectors %}
+                        {% if choiceSector == sector.id %}
+                           {% set selected = "selected" %}
+                        {% endif %}
+                     {% endfor %}
+                     <option {{ selected }} value="{{ sector.id }}">
+                        {% set label = sector.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = sector.labelEn %}
+                        {% endif %}
+                        {{ label }}
+                     </option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+         <div class="col-md-6 b-search">
+            <div class="search">
+               <input type="text" name="search" id="search" class="form-control" value="{{ search }}">
+               <label for="search">{% trans %}label.search.label{% endtrans %}...</label>
+               <button type="button" onclick="filterProject()"></button>
+            </div>
+         </div>
+      </div>
+      <input type="hidden" id="sectors" name="sectors" value="{{ current_sectors }}">
+      <input type="hidden" id="offset" name="offset" value="6">
+      <input type="hidden" id="loadMore" name="load" value="{{ showMore }}">
+
+      <div class="row filter">
+         <div class="col-lg-2 col-md-4 b-verified">
+            <label for="verified">{% trans %}label.verified.label{% endtrans %}</label>
+            <div class="custom-select-field">
+               <select id="verified" name="verified" class="form-control">
+                  <option value="">{% trans %}label.verified.placeholder{% endtrans %}</option>
+                  <option value="1" {% if verified == "1" %}selected{% endif %}>{% trans %}Yes{% endtrans %}</option>
+                  <option value="0" {% if verified == "0" %}selected{% endif %}>{% trans %}No{% endtrans %}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-6 b-finance">
+            <label for="raised">{% trans %}Budget{% endtrans %}</label>
+            <div class="custom-select-field">
+            <select id="raised" name="raised" class="form-control">
+               <option value="">{% trans %}label.raised.placeholder{% endtrans %}</option>
+               {% for choice in choicesFundingObjectives %}
+                  <option value="{{ choice.id }}" {% if amount == choice.id %}selected{% endif %}>
+                     {% set max = choice.max|number_format(0, ',', ' ') %} 
+                     {% if choice.min is not null %}
+                        {% trans %}Between{% endtrans %} {{ choice.min|number_format(0, ',', ' ') }} {% trans %}&{% endtrans %} {{ max }}
+                     {% else %}
+                        + {{ max }}
+                     {% endif %}
+                  </option>
+               {% endfor %}
+            </select>
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-4 b-langue">
+            <label for="language">{% trans %}label.language.label{% endtrans %}</label>
+            <div class="custom-select-field">
+            <select id="language" name="language" class="form-control">
+               <option value="">{% trans %}label.language.placeholder{% endtrans %}</option>
+               <option value="fr" {% if language == 'fr' %}selected{% endif %}>{% trans %}French{% endtrans %}</option>
+               <option value="en" {% if language == 'en' %}selected{% endif %}>{% trans %}English{% endtrans %}</option>
+            </select>
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-4 b-trier">
+            <label for="order">{% trans %}label.order.label{% endtrans %}</label>
+            <div class="custom-select-field">
+            <select id="order" name="order" class="form-control">
+               <option value="" {% if order is null %}selected{% endif %}>{% trans %}Choose an order{% endtrans %}</option>
+               <option value="1" {% if order == '1' %}selected{% endif %}>{% trans %}Recent{% endtrans %}</option>
+               <option value="2" {% if order == '2' %}selected{% endif %}>{% trans %}Older{% endtrans %}</option>
+               <option value="4" {% if order == '4' %}selected{% endif %}>{% trans %}Higher budget{% endtrans %}</option>
+               <option value="3" {% if order == '3' %}selected{% endif %}>{% trans %}Lower budget{% endtrans %}</option>
+            </select>
+            </div>
+         </div>
+         <div class="col-md-2 reset text-center">
+            <a href="{{ path('project_list') }}" class="btn btn-transparent-red btn-h50 btn-w25">{% trans %}Reset{% endtrans %}</a>
+         </div>         
+      </div>
+   </div>
+
+   <div class="container">
+      <div class="text-center mb-4">
+            <p id="countResults">
+               <strong>
+                  {% if countResults == 0 %}
+                     {% trans %}No result found{% endtrans %}
+                  {% else %}
+                     {{ countResults }} {% trans %}results{% endtrans %}
+                  {% endif %}
+               </strong>
+            </p>
+      </div>
+
+      <div class="row" id="results">
+         {% include 'project/_results.html.twig' %}
+      </div>
+
+      <div class="col-md-12 load-more-project">
+         <div class="text-center">
+            {% if showMore == true %}
+               <button id="btn-load-more" type="button" class="btn btn-bg-red btn-h40 btn-w40" style="display: none;">
+                  {% trans %}Load more{% endtrans %}
+               </button>
+               <img id="gif" src="{{ asset('assets/img/loader-1.gif') }}" alt="" class="gif">
+            {% endif %}
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+   <script type="text/javascript">
+      var locale = '{{ app.request.locale }}';
+      var linkMore = '{{ path('project_more_projects') }}';
+   </script>
+
+   <script src="{{ asset('js/project_list.js') }}"></script>
+   {#<script src="{{ asset('js/axios.min.js') }}"></script>
+   <script src="{{ asset('js/project-like.js') }}"></script>#}
+
+   <script>
+      $('#sectors-select-picker').select2({
+         placeholder: "{{ 'sectors.placeholder'|trans }}"
+      });
+   </script>
+{% endblock %}

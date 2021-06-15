@@ -1,0 +1,364 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% include 'administration/company/_head.html.twig' %}
+
+   {% set locale = app.request.locale %}
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Statistics{% endtrans %}</h3>
+            </div>
+            {% if approvedCompany %}
+               {% set percentage = approvedCompany.percentageOfContribution %}
+               {% set fundingObjective = approvedCompany.fundingObjective %}
+            {% else %}
+               {% set percentage = company.percentageOfContribution %}
+               {% set fundingObjective = company.fundingObjective %}
+            {% endif %}
+            <div class="box-body">
+               {{ percentage }}
+               <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: {{ percentage }}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+               </div>
+            </div>
+            <div class="box-body">
+               <label for="">{{ 'form.totalAmount.label'|trans }}</label>
+               <div class="view-project">
+                  {{ company.amountCollected|number_format(2, ',', ' ') }} MAD
+               </div>
+               <label for="">{{ 'form.fundingObjective.label'|trans }}</label>
+               <div class="view-project">
+                  {{ fundingObjective|number_format(2, ',', ' ') }} MAD
+               </div>
+               {% if approvedCompany and approvedCompany.fundingObjective != company.fundingObjective %}
+                  <span class="text-danger">
+                     {{ 'The funding objective was changed'|trans }}
+                     <strong>{{ company.fundingObjective|number_format(2, ',', ' ') }} MAD</strong>
+                  </span>
+               {% endif %}
+            </div>
+            <div class="box-body">
+               <label for="">{{ 'Contributors'|trans }}</label>
+               <div class="view-project">
+                  {{ company.contributors|length }}
+               </div>
+            </div>
+            <div class="box-body">
+               <label for="">{{ 'Visits'|trans }}</label>
+               <div class="view-project">
+                  {{ company.views|length }}
+               </div>
+            </div>
+            <div class="box-body">
+               <label for="">{{ 'Likes'|trans }}</label>
+               <div class="view-project">
+                  {{ company.likes|length }}
+               </div>
+            </div>
+            <div class="box-body">
+               <label for="">{{ 'Comments'|trans }}</label>
+               <div class="view-project">
+                  {{ company.comments|length }}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Company{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+
+               <label for="">{% trans %}form.name.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.name }}
+               </div>
+
+               <label for="">{% trans %}form.associationName.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.associationName }}
+               </div>
+
+               <label for="">{% trans %}form.shortDescription.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.description }}
+               </div>
+
+               <label for="">{% trans %}form.description.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.text|raw }}
+               </div>
+
+               <label for="">{% trans %}form.domains.label{% endtrans %}</label>
+               <div class="view-project">
+                  <ul>
+                     {% for domain in company.domain %}
+                        {% set label = domain.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = domain.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">{% trans %}form.city.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.city|default('#') }}
+               </div>
+
+               <label for="">{% trans %}form.fundingObjective.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.fundingObjective|number_format(0, "", " ") }}
+               </div>
+
+               <label for="">{% trans %}form.duration.label{% endtrans %}</label>
+               <div class="view-project">
+                  {% if company.duration is not empty %}
+                     {{ company.duration|default("#") }} {{ 'Month'|trans }}
+                  {% else %}
+                  {% endif %}
+               </div>
+
+               <label for="">{% trans %}form.RIB.label{% endtrans %}</label>
+               <div class="view-project">
+                  {{ company.RIB|default("#") }}
+               </div>
+
+               <label for="">{% trans %}form.useOfFundsCollecteds.label{% endtrans %}</label>
+               <div class="view-project">
+                  <ul>
+                     {% for use in company.useOfFundsCollecteds %}
+                        <li>{{ use.description }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">{% trans %}form.webSite.label{% endtrans %}</label>
+               <div class="view-project">
+                  {% if company.webSite is not empty %}
+                     <a href="{{ company.webSite }}" target="_blank">
+                        {{ company.webSite }}
+                     </a>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Documents{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               {% if company.documents|length > 0 %}
+                  {% for document in company.documents %}
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <h1 class="panel-title">{{ document.type }}</h1>
+                        </div>
+                        <div class="panel-body">
+                           <div class="view-project">
+                              {% if company.name %}
+                                 <a href="{{ vich_uploader_asset(document, 'file') }}" target="_blank">
+                                    {{ document.name|default("#") }}
+                                 </a>
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div><!-- /.panel -->
+                  {% endfor %}
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Dates{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <div class="panel-body">
+                  <label for="">{% trans %}form.createdAt.label{% endtrans %}</label>
+                  <div class="view-project">
+                     {{ company.createdAt|date("d-m-Y H:i") }}
+                  </div>
+                  <label for="">{% trans %}form.updatedAt.label{% endtrans %}</label>
+                  <div class="view-project">
+                     {{ company.updatedAt|date("d-m-Y H:i") }}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+               <h2>
+                  {% if company.contributors|length > 1 %}
+                     {{ company.contributors|length }} {% trans %}contributors{% endtrans %}
+                  {% else %}
+                     {{ 'No contributor found'|trans }}
+                  {% endif %}
+               </h2>
+               <table class="table table-hover" style="margin-top: 5rem">
+                  <tr>
+                     <th>{{ 'form.status.label'|trans }}</th>
+                     <th>{{ 'Count of contributors'|trans }}</th>
+                     <th>{{ 'Amount'|trans }}</th>
+                  </tr>
+                  <tr>
+                     <th>{{ 'CONFIRMED'|trans }}</th>
+                     <th>{{ company.contributorsByStatus('CONFIRMED')|length }}</th>
+                     <th>{{ company.amountCollected('CONFIRMED')|number_format(0, '', ' ') }}</th>
+                  </tr>
+                  <tr>
+                     <th>{{ 'PENDING'|trans }}</th>
+                     <th>{{ company.contributorsByStatus('PENDING')|length }}</th>
+                     <th>{{ company.amountCollected('PENDING')|number_format(0, '', ' ') }}</th>
+                  </tr>
+                  <tr>
+                     <th>{{ 'CANCELLED'|trans }}</th>
+                     <th>{{ company.contributorsByStatus('CANCELLED')|length }}</th>
+                     <th>{{ company.amountCollected('CANCELLED')|number_format(0, '', ' ') }}</th>
+                  </tr>
+               </table>
+               <table class="table table-hover" style="margin-top: 5rem">
+                  <thead>
+                  <tr>
+                     <th>{{ 'form.firstName.label'|trans }}</th>
+                     <th>{{ 'form.lastName.label'|trans }}</th>
+                     <th>{{ 'form.email.label'|trans }}</th>
+                     <th>{{ 'form.contributionAmount.labelBo'|trans }}</th>
+                     <th>{{ 'form.contributionDate.label'|trans }}</th>
+                     <th>{{ 'form.status.label'|trans }}</th>
+                     <th>{{ 'form.action.label'|trans }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% if company.contributors|length > 0 %}
+                     {% for contributor in company.contributors %}
+                        <tr>
+                           <td>{{ contributor.firstName }}</td>
+                           <td>{{ contributor.lastName }}</td>
+                           <td>{{ contributor.email }}</td>
+                           <td align="right">
+                              {{ contributor.contributionAmount|number_format(2, ',', ' ') }} MAD
+                           </td>
+                           <td>{{ contributor.createdAt|date('d/m/Y H:i') }}</td>
+                           <td>{{ contributor.status|trans }}</td>
+                           <td>
+                              <a href="{{ path('sonata_admin_contributor_show', {id: contributor.id}) }}" class="btn btn-default">
+                                 <i class="fa fa-eye"></i> {{ 'Show'|trans }}
+                              </a>
+                           </td>
+                        </tr>
+                     {% endfor %}
+                  {% else %}
+                     <tr>
+                        <td colspan="6">
+                           <h4 class="text-warning text-center">
+                              {{ 'No contributor found'|trans }}
+                           </h4>
+                        </td>
+                     </tr>
+                  {% endif %}
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="sonata-ba-form-actions well well-small form-actions">
+      <div class="text-center">
+         <a href="{{ admin.generateObjectUrl('lock', company) }}" class="btn btn-default btn-lg">
+            {% if company.isLocked %}
+               {% set label = 'Unlock'|trans %}
+               {% set icon = 'unlock' %}
+            {% else %}
+               {% set label = 'Lock'|trans %}
+               {% set icon = 'lock' %}
+            {% endif %}
+            <i class="fa fa-{{ icon }}"></i>  {{ label }}
+         </a>
+         <a href="{{ admin.generateObjectUrl('edit', company) }}" class="btn btn-default btn-lg">
+            <i class="fa fa-pencil"></i> {% trans %}Edit{% endtrans %}
+         </a>
+         <a href="{{ admin.generateObjectUrl('delete', company) }}" class="btn btn-danger btn-lg">
+            <i class="fa fa-trash"></i> {% trans %}Delete{% endtrans %}
+         </a>
+         {% if not company.isRejected %}
+            {% if company.isApproved %}
+               {% if company.isUpdated %}
+                  <a href="{{ admin.generateObjectUrl('compare', company) }}" class="btn btn-lg btn-warning">
+                     <i class="fa fa-binoculars"></i> {% trans %}Comparer{% endtrans %}
+                  </a>
+               {% else %}
+                  <a href="{{ admin.generateObjectUrl('approve', company) }}" class="btn btn-lg btn-default">
+                     <i class="fa fa-ban"></i> {% trans %}Disapprove{% endtrans %}
+                  </a>
+               {% endif %}
+            {% else %}
+               <a href="{{ admin.generateObjectUrl('approve', company) }}" class="btn btn-lg btn-success">
+                  <i class="fa fa-check"></i> {% trans %}Approve{% endtrans %}
+               </a>
+            {% endif %}
+         {% endif %}
+
+         {% if not company.isApproved and not company.isUpdated %}
+            {% if company.isRejected %}
+               {% set label = 'Unreject'|trans %}
+               {% set color = 'danger'|trans %}
+            {% else %}
+               {% set label = 'Reject'|trans %}
+               {% set color = 'danger'|trans %}
+            {% endif %}
+            <a href="{{ admin.generateObjectUrl('reject', company) }}" class="btn btn-lg btn-{{ color }}">
+               <i class="fa fa-remove"></i> {{ label }}
+            </a>
+         {% endif %}
+
+         {% if company.isApproved %}
+            {% if company.isVerified %}
+               {% set label = 'Unverify'|trans %}
+               {% set icon = 'minus-circle' %}
+               {% set color = 'info' %}
+            {% else %}
+               {% set label = 'Verify'|trans %}
+               {% set icon = 'check' %}
+               {% set color = 'info' %}
+            {% endif %}
+            <a href="{{ admin.generateObjectUrl('verify', company) }}" class="btn btn-{{ color }} btn-lg">
+               <i class="fa fa-{{ icon }}"></i> {{ label }}
+            </a>
+         {% endif %}
+      </div>
+   </div>
+
+{% endblock %}

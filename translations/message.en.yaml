@@ -1,0 +1,17 @@
+form:
+  object:
+    label: Object
+    placeholder: Object ...
+  content:
+    label: Message
+    placeholder: Your message
+
+My messages: My messages
+
+Object: Object
+Project: Project
+
+Reply: Reply
+
+You: You
+Send: Send

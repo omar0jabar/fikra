@@ -1,0 +1,37 @@
+{% trans_default_domain 'document' %}
+{% for document in tools %}
+    {% set link = path('download_document', {'id': document.id, 'entity': 'Tools'}) %}
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{document.getLinkIcon()}}" alt="">
+        </div>
+        <div class="col-md-9">
+            <h2>{{ document.title }}</h2>
+            <p>{{ document.content }}</p>
+
+            {% if app.user %}
+            <a href="{{ link }}" target="_BLANK" class="btn btn-primary">
+                {% else %}
+                {% if not app.user %}
+                <a href="{{ link }}" target="_BLANK" data-toggle="modal" class="btn btn-primary"
+                   data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+                    {% else %}
+                    <a href="{{ link }}" target="_BLANK" class="btn btn-primary">
+                        {% endif %}
+                        {% endif %}
+                        {% trans %}Download{% endtrans %}
+                    </a>
+        </div>
+    </div>
+    <hr class="my-4">
+{% endfor %}
+
+<script>
+    $('#offsetTools').val({{ offset }});
+</script>
+
+{% if moreTools == 0 %}
+    <script>
+        $('#loadMoreTools').remove();
+    </script>
+{% endif %}

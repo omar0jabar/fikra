@@ -1,0 +1,89 @@
+form:
+  profile:
+    label: You are ?
+    startup: Startuper
+    investor: Investor
+    bearerOfAnAssociativeProject: bearer of an associative project
+  firstName:
+    label: First name
+    placeholder: First name...
+  lastName:
+    label: Last name
+    placeholder: Last name...
+  city:
+    label: Choose your city
+    placeholder: -- Choose your city --
+  socialReason:
+    label: Social reason
+    placeholder: Social reason ...
+  phone:
+    label: Phone
+    placeholder: Phone number (optional)
+  imageFile:
+    label: Avatar
+  birthday:
+    label: Birthday
+  address:
+    label: Your address
+    placeholder: Your address
+  email:
+    label: Email
+    placeholder: Your email
+  password:
+    label: Password
+    help: |
+      Minimum 8 characters
+    placeholder: Password
+
+  confirmPassword:
+    label: Confirm password
+    placeholder: Confirm password...
+  currentPassword:
+    label: Current password
+    placeholder: Current password...
+  newPassword:
+    label: New password
+    placeholder: New password...
+
+formLogin:
+  email:
+    placeholder: Email...
+  password:
+    placeholder: Password...
+
+# Change password
+formChangePassword:
+  help: |
+    Minimum 8 characters.
+Password: Password
+Update password: Change password
+
+# modify my profile
+Edit my profile: Edit Profile
+Save Changes: Save changes
+
+Registration: Registration
+Login: Login
+Forgot your password: Forgot your password
+Remember me: Remember me
+Register: Register
+
+# my account
+Your profile: My profile
+Modify my profile: Edit profile
+Change my password: Change password
+Birthday: Birthday
+Email: Email
+Phone: Phone
+Address 1: Address 1
+Address 2: Address 2
+empty: Empty
+
+Are you Startuper or Investor? Create your account now to access all our features: Are you Startuper or Investor? Create your account now to access all our features
+Congratulations, your registration has been successfully completed: Congratulations, your registration has been successfully completed
+You will receive a confirmation email in a few moments, confirm your registration to access your private area: You will receive a confirmation email in a few moments, confirm your registration to access your private area
+
+You are new in PFE Startup? create your account now to be able to access all the features: You are new in PFE Startup? create your account now to be able to access all the features
+Text field not required: Text field not required
+
+City: City

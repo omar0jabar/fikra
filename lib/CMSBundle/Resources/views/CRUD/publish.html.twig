@@ -1,0 +1,8 @@
+<a href="{{ admin.generateObjectUrl('publish', object) }}" class="btn btn-sm btn-default">
+    <i class="fa fa-share"></i>
+    {% if object.isActive == true %}
+        Unpublish
+    {% else %}
+        Publish
+    {% endif %}
+</a>

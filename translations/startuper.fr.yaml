@@ -1,0 +1,89 @@
+form:
+  profile:
+    label: Vous êtes ?
+    startup: Entrepreneur
+    investor: Investisseur
+    bearerOfAnAssociativeProject: Porteur d'un projet associatif
+  firstName:
+    label: Prénom
+    placeholder: Votre prénom ...
+  lastName:
+    label: Nom
+    placeholder: Votre nom ...
+  city:
+    label: Choisissez votre ville
+    placeholder: -- Choisissez votre ville --
+  socialReason:
+    label: Raison social
+    placeholder: Raison social ...
+  phone:
+    label: Téléphone
+    placeholder: Votre numéro de téléphone (facultatif)
+  imageFile:
+    label: Avatar
+  birthday:
+    label: Date de naissance
+  address:
+    label: Votre adresse
+    placeholder: Votre adresse
+  email:
+    label: E-mail
+    placeholder: Votre email
+  password:
+    label: Mot de passe
+    help: |
+      Utilisez au moins 8 caractères
+    placeholder: Mot de passe
+
+  confirmPassword:
+    label: Confirmer votre mot de passe
+    placeholder: Confirmer votre mot de passe ...
+  currentPassword:
+    label: Votre mot de passe actuel
+    placeholder: Votre mot de passe actuel ...
+  newPassword:
+    label: Nouveau mot de passe
+    placeholder: Nouveau mot de passe ...
+
+formLogin:
+  email:
+    placeholder: Votre Email ...
+  password:
+    placeholder: Votre mot de passe ...
+
+# Change password
+formChangePassword:
+  help: |
+    Utilisez au moins 8 caractères.
+Password: Mot de passe
+Update password: Mettre à jour mon mot de passe
+
+# modify my profile
+Edit my profile: Éditer mon profile
+Save Changes: Enregistrer les modifications
+
+Registration: Inscription
+Login: Connexion
+Forgot your password: Mot de passe oublié
+Remember me: Se souvenir de moi
+Register: S'inscrire
+
+# my account
+Your profile: Votre profile
+Modify my profile: Modifier mon profile
+Change my password: Modifier mon mot de passe
+Birthday: Date de naissance
+Email: Email
+Phone: Téléphone
+Address 1: Adresse 1
+Address 2: Adresse 2
+empty: vide
+
+Are you Startuper or Investor? Create your account now to access all our features: Vous êtes Startuper ou Investisseur ? Créez votre compte dès maintenant pour accéder à toutes nos fonctionnalités
+Congratulations, your registration has been successfully completed: Félicitations, votre inscription a bien été effectuée
+You will receive a confirmation email in a few moments, confirm your registration to access your private area: Vous allez recevoir un email de confirmation dans quelques instants, confirmez votre inscription pour accéder à votre espace privé
+
+You are new in PFE Startup? create your account now to be able to access all the features: Nouveau sur PFE Startup? créez votre compte dès maintenant pour pouvoir accéder à toutes les fonctionnalités
+Text field not required: Champ texte non obligatoire
+
+City: Ville

@@ -1,0 +1,193 @@
+/* FORM STEP PROJECT */
+
+/*progressbar*/
+.craue_formflow_steplist {
+   margin-bottom: 30px;
+   overflow: hidden;
+   /*CSS counters to number the steps*/
+   counter-reset: step;
+}
+
+.craue_formflow_steplist li {
+   list-style-type: none;
+   /*text-transform: uppercase;*/
+   font-size: 13px;
+   width: 16.66%;
+   float: left;
+   position: relative;
+   letter-spacing: 1px;
+   text-align: center;
+}
+
+.craue_formflow_steplist li:before {
+   content: counter(step);
+   counter-increment: step;
+   width: 24px;
+   height: 24px;
+   line-height: 26px;
+   display: block;
+   font-size: 12px;
+   color: #333;
+   background: #eeeeee;
+   border-radius: 25px;
+   margin: 0 auto 10px auto;
+}
+
+/*progressbar connectors*/
+.craue_formflow_steplist li:after {
+   content: '';
+   width: 100%;
+   height: 6px;
+   background: #eeeeee;
+   position: absolute;
+   left: -50%;
+   top: 9px;
+   z-index: -1; /*put it behind the numbers*/
+}
+
+.craue_formflow_steplist li:first-child:after {
+   /*connector not needed before the first step*/
+   content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+.craue_formflow_steplist li.craue_formflow_current_step:before,
+.craue_formflow_steplist li.craue_formflow_current_step:after,
+.craue_formflow_steplist li.craue_formflow_done_step:before,
+.craue_formflow_steplist li.craue_formflow_done_step:after {
+   background: black;
+   color: white;
+}
+
+
+.img-tmp{
+   max-width: 100%;
+   position: relative;
+   top: 50%;
+   transform: translateY(-50%);
+}
+
+/* LIST PROJECTS */
+
+#card-img-cover{
+   position: relative;
+}
+#project-card-icons {
+   color: white;
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+   position: absolute;
+   bottom: 10px;
+   left: 10px;
+}
+
+#project-card-langue {
+   position: absolute;
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+   right: 10px;
+}
+
+#project-card-langue a {
+   color: white;
+   text-decoration: none;
+}
+#project-card-likes a {
+   color: white;
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+   position: absolute;
+   right: 10px;
+   bottom: 10px;
+   text-decoration: none;
+}
+
+.danger {
+   color: darkred !important;
+}
+
+/* SHOW PROJECT*/
+
+#cover-project {
+   background-repeat: no-repeat;
+   height: 500px;
+   position: relative;
+   background-size: cover;
+   background-position: center center;
+}
+
+#cover-project h1, #cover-project h4, #cover-project h5, #cover-project a, #cover-project p{
+   color: white;
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+#cover-project a:hover{
+   color: ghostwhite;
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+#btn-change-cover{
+   display: none;
+   width: 100%;
+   background-color: rgba(1, 1, 1, 0.6);
+   padding: 1em;
+   text-decoration: none;
+   text-align: center;
+}
+
+#btn-change-cover:hover{
+   background-color: rgba(1, 1, 1, 0.8);
+}
+
+#cover-project:hover #btn-change-cover{
+   display: block;
+}
+
+#card-img-cover {
+   height: 160px;
+   background-size: cover;
+   background-position: center center;
+}
+
+#logo_project {
+   max-height: 300px;
+}
+
+#show-logo-project {
+   height: 160px;
+   position: relative;
+   background-size: cover;
+   background-position: center center;
+   border: 4px solid white;
+}
+
+#show-logo-project:hover #btn-change-logo{
+   display: block;
+}
+
+#btn-change-logo{
+   width: 100%;
+   background-color: rgba(1, 1, 1, 0.6);
+   position: absolute;
+   bottom: 0;
+   padding: 1em;
+   display: none;
+}
+
+#btn-change-logo:hover{
+   width: 100%;
+   background-color: rgba(1, 1, 1, 0.8);
+   padding: 1em;
+   text-decoration: none;
+   display: none;
+}
+
+div.carousel-caption{
+   text-shadow: 3px 3px 3px rgba(0,0,0,0.7);
+}
+
+.div-img-slide {
+   height: 460px;
+   background-position: center;
+   background-size: 100%;
+   background-repeat: no-repeat;
+   background-color: gainsboro;
+}

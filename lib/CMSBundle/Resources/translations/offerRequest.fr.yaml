@@ -1,0 +1,30 @@
+Request to receive an offer: Reçevoir une offre
+
+Your offer request has been successfully sent: Votre demande d'offre a été envoyée avec succès
+
+modal:
+    description: Remplissez les informations ci-dessous, un conseiller se chargera de vous contacter
+
+form:
+    firstName:
+        label: Prénom
+        placeholder: Votre prénom
+    lastName:
+        label: Nom
+        placeholder: Votre nom
+    email:
+        label: Email
+        placeholder: Votre adresse email
+    youAre:
+        label: Vous êtes ?
+    message:
+        label: Message
+        placeholder: Votre message ...
+
+Startuper: Entrepreneur
+Investor: Investisseur
+
+Required Field: Champ obligatoire
+
+Send: Recevoir une offre
+Cancel: Annuler

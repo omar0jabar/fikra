@@ -1,0 +1,413 @@
+Action: Action
+User: Utilisateur
+Contributors: Contributeurs
+contributors: contributeurs
+contributor: Contributeur
+Contributor: Contributeur
+Contributor List: Liste des contributeurs
+Home solidarity campaigns: Accueil des projets associatifs
+Create your solidarity company: Créer votre projet associatif
+Update your solidarity company: Modifier votre projet associatif
+FAQ: FAQ
+F A Q List: Liste des FAQ
+See all FAQs: Voir toutes les FAQ
+Id: Id
+form:
+    message:
+        send: |
+            <p>Vous pouvez enregistrer ce formulaire à tout moment et venir le compléter ultérieurement.<br>
+               Les informations transmises seront examinées par nos équipes avant d'être publiées.</p>
+        update: |
+            <p>Nous vous informons qu'après toute modification</p>
+            <p>votre projet sera mis en brouillon le temps d'être validé par un de nos experts !</p>
+    id:
+        label: Id
+    name:
+        label: Nom de le projet associatif
+        placeholder: "ex: Opération IFTAR"
+        help: "ex: Opération IFTAR"
+    shortDescription:
+        label: Description courte
+        placeholder: Résumé de le projet associatif
+        help: "De quoi s'agit-il? Résumez votre projet en seule phrase - ex: distribution de 500 paniers ftour pour les personnes dans le besoin"
+    domain:
+        label: Domaines d'intervention
+        placeholder: Domaines d'intervention
+    domains:
+        label: Domaines
+        placeholder: Domaines
+    useOfFundsCollecteds:
+        label: Utilisation des fonds collectés
+        placeholder: "ex: achat de denrées alimentaires"
+        help: "ex: achat de denrées alimentaires"
+    useFund:
+        label: Utilisation des fonds collectés
+        placeholder: Utilisation des fonds collectés
+    city:
+        label: Zone géographique
+        placeholder: Zone géographique
+    duration:
+        label: Durée souhaitée de le projet associatif
+        placeholder: Durée souhaitée de le projet associatif
+    fundingObjective:
+        label: Objectif de financement, en MAD
+        placeholder: "Indiquez le montant nécessaire pour réaliser votre projet - ex: 100000"
+        help: "Indiquez le montant nécessaire pour réaliser votre projet - ex: 100000"
+    RIB:
+        label: Relevé d'identité bancaire
+        placeholder: "Indiquez le n° de compte bancaire dans lequel les fonds collectés seront reversés après la cloture de le projet associatif"
+        help: "Indiquez le n° de compte bancaire dans lequel les fonds collectés seront reversés après la cloture de le projet associatif"
+    webSite:
+        label: Site web de l'association
+        placeholder: Site web de l'association
+    documentType:
+        label: Type de document
+        placeholder: Parcourir...
+    documentFile:
+        label: Document
+        placeholder: Parcourir...
+    documents:
+        label: Documents
+        help: Les fichiers autorisés PDF, DOCX et EXCEL | Taille maximum 3Mb
+        btnAdd: Ajouter un document
+    logoFile:
+        label: Logo de l'association
+        placeholder: Parcourir...
+        help: "Logo de votre projet (Taille idéale 180x180px)"
+    coverFile:
+        label: Photo de couverture
+        placeholder: Parcourir...
+        help: "Image de couverture de votre projet (Taille idéale 1000x600px)"
+    isLegalRepresentativeOfTheAssociation:
+        label: "Je déclare être le représentant légal de l'association faisant appel à dons, et disposer de tous les pouvoirs nécessaires pour initier l'opération d'appel à générosité publique au nom de ladite association. Je donne ainsi mandat à la plateforme pfestartup.com pour procéder au nom de l'association, à la publication et la mise en oeuvre de la collecte de dons en ligne."
+    isAcceptedTheConditionOfSecurity:
+        label: "J'accepte les conditions de sécurité, de transparence et de protection des données personnelles"
+    user:
+        label: Auteur
+        placeholder: Auteur
+    isDraft:
+        label: Brouillon
+    isVerified:
+        label: Vérifié
+        placeholder: Choisissez une option
+    isApproved:
+        label: Approuvé
+    isUpdated:
+        label: Modifié
+    isRejected:
+        label: Rejeté
+    metaTitle:
+        label: Meta titre
+    metaDescription:
+        label: Meta description
+    search:
+        label: Recherche
+    order:
+        label: Ordre
+        placeholder: Choisissez une option
+    createdAt:
+        label: Crée le
+    updatedAt:
+        label: Modifié le
+    orderBy:
+        label: Ordre
+    isClosed:
+        label: Clôturé
+    startDate:
+        label: Date de mise en ligne
+    endDate:
+        label: Date de fin de le projet associatif
+    totalAmount:
+        label: Montant total des contributions
+    comment:
+        label: Commentaire
+        placeholder: Commentaire
+    responses:
+        label: Réponses
+    author:
+        label: Auteur
+    isPublished:
+        label: Est publié
+    action:
+        label: Action
+    firstName:
+        label: Prénom
+        placeholder: Prénom
+    lastName:
+        label: Nom
+        placeholder: Nom
+    isAnonymous:
+        label: Je souhaite garder l'anonymat
+        labelBo: Anonyme
+    email:
+        label: Email
+        placeholder: Email
+    contributionAmount:
+        label: Montant de votre contribution en MAD
+        labelBo: Montant contribué
+        placeholder: Montant de votre contribution en MAD
+    chosenPayment:
+        label: Choisissez votre methode de paiement
+        placeholder: Choisissez votre methode de paiement
+    amountDebited:
+        label: Montant à débiter
+        placeholder: Montant à débiter
+    contributedAt:
+        label: Contribué le
+    contributionDate:
+        label: Date de la contribution
+    associationName:
+        label: Nom de l'association
+        placeholder: Nom de l'association
+    description:
+        label: Description
+        placeholder: "Décrivez en détail votre projet : Votre mission, les bénéficiaires... tout ce qui inciterait la communauté à contribuer à votre cause"
+    phone:
+        label: Téléphone
+    question:
+        label: Question
+    response:
+        label: Réponse
+    language:
+        label: Langue
+    status:
+        label: Statut
+
+1 month: 1 mois
+2 month: 2 mois
+3 month: 3 mois
+4 month: 4 mois
+5 month: 5 mois
+6 month: 6 mois
+
+Attestation RIB: Attestation RIB
+Autorisation SGG: Autorisation SGG
+Présentation association: Présentation association
+Autres: Autres
+
+Send company: Soumettre le projet associatif
+Save changes: Enregistrer les modifications
+Required fields: Champs obligatoire
+A manager will contact you to validate the information before the company is published.: Un responsable vous contactera pour valider l'information avant la publication de le projet associatif
+The collection of donations is reserved for Moroccan associations which have the authorization of the General Secretariat of the Government (SGG) for the call to public generosity *: La collecte de dons est réservées aux associations marocaines qui disposent de l'autorisation du Secretariat Général du Gouvernement (SGG) pour l’appel à la générosité publique*
+error.message.minMessage: Ce champ doit contenir minimum 4 caractères
+
+congrats:
+    title: projet associatif validation
+    message: |
+        Félicitations
+    details: |
+        Votre projet associatif est en cours d'examination, vous serez notifié par mail une fois validé.
+
+# DASHBOARD
+
+Companies: projets associatifs de dons
+Your company: Votre projet associatif
+Company: projet associatif
+Funding objective: Objectif de financement
+Domain: Domaine
+Status: Statut
+Use of funds collected: Utilisation des fonds collectés
+
+Draft: Brouillon
+Declined: Rejeté
+Declined modification: Modification rejetée
+Under study: En cours d'étude
+Modification under study: Modification en cours d'étude
+Approved: Approuvé
+
+View company: Voir le projet associatif
+Update company: Modifier le projet associatif
+Delete company: Supprimer le projet associatif
+
+Publish: Publier
+Published: Publié
+Disable publishing: Désactiver la publication
+Comment is no longer published: Le commentaire n'est plus publiée
+The comment was successfully published: Le commentaire a été publié avec succés
+Parent comment is not published yet: Le parent commentaire n'est pas encore publié
+
+Is your new funding goal in draft mode while the administrator validates it: Votre nouvel objectif de financement est-il en mode brouillon pendant que l'administrateur le valide
+Statistics: Statistiques
+Visits: Visites
+Likes: Likes
+
+#create
+Your company created successfully: Votre nouveau projet associatif a été crée avec succées
+Your company updated successfully: Votre projet associatif a été mise à jour avec succès
+Your company is temporarily locked: Votre projet associatif est verrouillée temporairement
+Your company cover photo  has been changed successfully: La photo de couverture de votre projet associatif a été modifiée avec succès
+Your company logo has been changed successfully: Le logo de votre projet associatif a été modifié avec succès
+
+# Show
+
+Show: Afficher
+Share: Partager
+Description: Description
+Edit cover photo: Modifier la photo de couverture
+Edit logo: Modifier le logo
+The company: le projet associatif
+Domains: Domaines
+Use of funds collecteds: Utilisation des fonds collectés
+Web site: Site web
+Similar companies: projets associatifs similaires
+Like: J'aime
+Unlike: Je n'aime plus
+Required Field: Champ obligatoire
+Information: Information
+Verified: Verifié
+Contribution: Contribution
+No contributor: Aucun contributeur
+
+To make a project a favorite, you must authenticate: Pour pouvoir mettre un projet en favori, vous devez vous authentifier
+Login: Connexion
+Register: S'inscrire
+
+Comments: Commentaires
+Your comment has been sent successfully: Votre commentaire a été envoyé avec succès
+Your response has been sent successfully: Votre réponse a été envoyée avec succès
+We cannot save an empty response: Nous ne pouvons pas enregistrer une réponse vide
+Send: Envoyer
+Reply: Répondre
+
+To contribute: Je contribue
+Contribute: Contribuer
+Contribute for: Contribuer pour
+Required field: Champ obligatoire
+Validate my contribution: Valider ma contribution
+Your contribution has been sent successfully: Votre contribution a été envoyé avec succés
+messageLogin:  Veuillez vous authentifier ou vous inscrire pour pouvoir accéder aux fiches projets
+
+# add cover
+
+Change the cover of your company: Changer la photo de couverture pour votre projet associatif
+Choose a cover photo for your company: Choisissez la photo de couverture pour votre projet associatif
+Change the logo: Modifier le logo de votre projet associatif
+Change logo of your company: Modifier le logo de votre projet associatif
+Cancel: Annuler
+Change: Changer
+
+# delete action
+
+Deletion confirmation: Confirmation de suppression
+Are you sure you want to delete this company: Voulez-vous vraiment supprimer votre projet associatif
+Yes, delete: Oui, supprimer
+Your company has been deleted successfully: Votre projet associatif a bien été supprimée
+
+# Messages
+The company was locked successfully: La comagne a été verrouillée avec succées
+The company was unlocked successfully: La comagne a été deverrouillée avec succées
+The modification of the company was rejected successfully: La modification de la société a été rejetée avec succès
+The company is not approved and updated for the rejected: le projet associatif n'est pas approuvée et mise à jour pour les refusés
+The modification of the company is already rejected: La modification de la société est déjà rejetée
+# Action BO
+Delete: Supprimer
+Approve: Qualifier
+Disapprove: Disqualifier
+Lock: Bloquer
+Unlock: Débloquer
+Edit: Modifier
+Reject: Rejeter
+Verify: Vérifier
+Unverify: Annuler la vérification
+
+Approved company: projet associatif Qualifié
+Draft company: projet associatif brouillon
+
+Month: Mois
+
+The funding objective was changed: L'objectif de financement a été modifié
+
+##############################
+### listing project #########
+############################
+results: résultats trouvés
+All: Tout
+Between: Entre
+Reset: Réinitialiser
+Yes: Oui
+No: Non
+
+Recent: Plus récent
+Older: Plus ancien
+Higher budget: Budget plus élevé
+Lower budget: Budget moins élevé
+
+Closed: Clôturée
+days left: Restants
+day left: Restants
+days : jours
+day : jour
+
+Amount collected: Montant des dons collectés
+
+No more results: Pas plus de résultats #just added this line
+Load more: Afficher plus de résultats
+
+Error registering company, please try again later: Erreur lors de l'enregistrement de la société, veuillez réessayer plus tard
+Company not found: projet associatif non trouvée
+Company List: Liste des projets associatifs
+
+Name: Nom
+Cities: Villes
+City: Ville
+City List: Liste des villes
+City Create: Création de ville
+Cannot remove this city because it is already used in another table: Impossible de supprimer cette ville car elle est déjà utilisée dans une autre table
+
+Company updated successfully: projet associatif mise à jour avec succès
+Your changes are in draft mode: Vos modifications sont en mode brouillon
+Go to the dashboard: Accédez au tableau de bord
+This campaign is not yours.: Cette projet associatif ne vous appartient pas.
+
+Recent campaigns: projets associatifs récents
+Discover the campaigns: Découvrir les projets associatifs
+Do you have a campaign ?: Lancer une projet associatif ?
+
+Carte bancaire nationale (2.60 % de frais bancaires): Carte bancaire nationale (2.60 % de frais bancaires)
+Carte bancaire internationale (3.60 % de frais bancaires): Carte bancaire internationale (3.60 % de frais bancaires)
+
+About your campaign: À propos de votre projet associatif
+About your association: À propos de l'association
+
+No contributor found: Aucun contributeur trouvé
+You cannot send comment without login: Vous ne pouvez pas envoyer de commentaire sans vous connecter
+You cannot respond without login: Vous ne pouvez pas répondre sans vous connecter
+
+This campaign is closed: Cette projet associatif est fermée
+
+Anonymous contributor: Contributeur anonyme
+January: Janvier
+February: Février
+March: Mars
+April: Avril
+May: Mai
+June: Juin
+July: Juillet
+August: Août
+September: Septembre
+October: Octobre
+November: Novembre
+December: Décembre
+
+Thank you for advancing the project: Merci d’avoir fait progressé le projet
+on: le
+
+Find answers to the most frequently asked questions.: Trouver les réponses aux questions les plus fréquemment posées.
+
+Count of contributors: Nombre des contributeurs
+Amount: Montant
+PENDING: EN ATTENTE
+CONFIRMED: CONFIRMÉ
+CANCELLED: ANNULÉ
+Areas of intervention: 'Domaine(s) d’intervention'
+Association: 'Association'
+Invite those around you to contribute: 'Invitez votre entourage à contribuer'
+Number of days left: 'Nombre de jours restant'
+Back to the list of campaigns: 'Retour à la liste des projets associatifs'
+Comment: 'Commentaire'
+Show more contributors: 'Afficher plus de contributeurs'
+Amount debited not found: 'Montant débité introuvable'
+I accept: J'accepte
+the general sales conditions: 'les conditions générales de vente'
+Please accept the general sales conditions: 'Veuillez acceptez les conditions générales de vente'

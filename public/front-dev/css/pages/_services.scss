@@ -1,0 +1,436 @@
+//// Service investisseurs //
+.service-investisseurs {
+    .container {
+        max-width: $max-w;
+
+        @media #{$desk-1} {
+            padding: 0 15px;
+        }
+
+        @media #{$mobile} {
+            padding: 0;
+        }
+    }
+
+    .container-section-block {
+      .btn {
+        margin: 0 10px 10px 0;
+        height: auto;
+        padding: 11px 25px;
+        line-height: normal;
+      }
+    }
+}
+
+//// Service startupers //
+.service-startupers {
+  .container-section-block {
+    padding: 0;
+    
+    .btn {
+      margin: 0 10px 10px 0;
+      height: auto;
+      padding: 11px 25px;
+      line-height: normal;
+    }
+  }
+    .container {
+        max-width: $max-w;
+
+        @media #{$desk-1} {
+            padding: 0 15px;
+        }
+
+        @media #{$mobile} {
+            padding: 0;
+        }
+    }
+
+    .block-blue1,
+    .block-blue2 {
+        p:last-child {
+            // margin-left: 82px;
+            font-weight: 300;
+            color: $white;
+
+            @media #{$tab-min} {
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////// SERVICE /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+.service-startupers {
+  .container-section {
+    overflow: hidden;
+
+    &:nth-child(odd):not(.bg-color) {
+      &:last-of-type {
+        background: none;
+      }
+      .item-content {
+        margin: 0;
+        padding-bottom: 100px;
+        position: relative;
+
+        @media #{$desk-2} {
+          padding-bottom: 70px;
+        }
+
+        @media #{$mobile} {
+          padding-top: 20;
+          padding-bottom: 20px;
+        }
+
+        &:after {
+          content: '';
+          background: transparent url(#{$img}grilles.png) no-repeat;
+          position: absolute;
+          left: -100px;
+          top: 240px;
+          width: 500px;
+          height: 500px;
+          z-index: 0;
+
+          @media #{$tab-min} {
+            background: none;
+            width: 0;
+            height: 0;
+            display: none;
+          }
+        }
+
+        .content:first-child {
+          padding: 70px 70px 0;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+
+        .content:last-child {
+          padding: 80px 20px 20px;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+
+          .row {
+            padding-left: 20px;
+          }
+          .row>div {
+            max-width: 100%;
+            padding: 0 15px 0 0;
+
+            @media #{$desk-1} {
+              padding-right: 20px;
+            }
+
+            @media #{$desk-min} {
+              margin-bottom: 15px;
+              padding-right: 10px;
+            }
+
+            @media #{$mobile} {
+              padding: 0;
+              max-width: 100%;
+            }
+            ul {
+              padding-left: 40px;
+            }
+          }
+        }
+
+        p:last-child {
+          font-size: rem(14px);
+        }
+      }
+    }
+
+    &:nth-child(even):not(.bg-color) {
+      background: transparent url(#{$img}bg-cms.png) repeat;
+
+      &:last-of-type {
+        background: none;
+      }
+
+      .item-content:not(.block-blue1),
+      .item-content:not(.block-blue2) {
+        margin: 0;
+        padding-bottom: 100px;
+        position: relative;
+
+        @media #{$desk-2} {
+          padding-bottom: 70px;
+        }
+
+        @media #{$mobile} {
+          padding-top: 20;
+          padding-bottom: 20px;
+        }
+
+        &:after {
+          content: '';
+          background: transparent url(#{$img}grilles.png) no-repeat;
+          position: absolute;
+          right: 0px;
+          top: 220px;
+          width: 500px;
+          height: 500px;
+          z-index: 0;
+
+          @media #{$tab-min} {
+            background: none;
+            width: 0;
+            height: 0;
+            display: none;
+          }
+        }
+
+        .content:first-child {
+          padding: 80px 20px 20px;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$desk-min} {
+            order: 2;
+          }
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+
+        .content:last-child {
+          padding: 70px 70px 0;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      background-color: $white;
+      .item-content {
+        &:after {
+          background: none;
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////// SERVICE /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+.service-investisseurs {
+  .container-section-block {
+    padding: 0;
+  }
+  .container-section {
+    overflow: hidden;
+
+    &:nth-child(2n+1):not(.bg-color) {
+      background: transparent url(#{$img}bg-cms.png) repeat;
+
+      &:last-of-type {
+        background: none;
+      }
+
+      .item-content:not(.block-blue1),
+      .item-content:not(.block-blue2) {
+        margin: 0;
+        padding-bottom: 100px;
+        position: relative;
+
+        @media #{$desk-2} {
+          padding-bottom: 70px;
+        }
+
+        @media #{$mobile} {
+          padding-top: 20;
+          padding-bottom: 20px;
+        }
+
+        &:after {
+          content: '';
+          background: transparent url(#{$img}grilles.png) no-repeat;
+          position: absolute;
+          left: -100px;
+          top: 240px;
+          width: 500px;
+          height: 500px;
+          z-index: 0;
+
+          @media #{$tab-min} {
+            background: none;
+            width: 0;
+            height: 0;
+            display: none;
+          }
+        }
+
+        .content:first-child {
+          padding: 70px 70px 0;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$desk-2} {
+            padding: 70px 70px 0;
+          }
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+
+        .content:last-child {
+          padding: 80px 20px 20px;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+
+          .row>div {
+            max-width: 32.33333%;
+            padding: 0;
+
+            @media #{$desk-1} {
+              padding-right: 20px;
+            }
+
+            @media #{$desk-min} {
+              margin-bottom: 15px;
+              padding-right: 10px;
+            }
+
+            @media #{$mobile} {
+              padding: 0;
+              max-width: 100%;
+            }
+          }
+        }
+
+        p:last-child {
+          font-size: rem(14px);
+        }
+      }
+    }
+
+    &:nth-child(2n):not(.bg-color) {
+      background: none;
+
+      &:last-of-type {
+        background: none;
+      }
+
+      .item-content:not(.block-blue1),
+      .item-content:not(.block-blue2) {
+        margin: 0;
+        padding-bottom: 100px;
+        position: relative;
+
+        @media #{$desk-2} {
+          padding-bottom: 70px;
+        }
+
+        @media #{$mobile} {
+          padding-top: 20;
+          padding-bottom: 20px;
+        }
+
+        &:after {
+          content: '';
+          background: transparent url(#{$img}grilles.png) no-repeat;
+          position: absolute;
+          right: 0px;
+          top: 220px;
+          width: 500px;
+          height: 500px;
+          z-index: 0;
+
+          @media #{$tab-min} {
+            background: none;
+            width: 0;
+            height: 0;
+            display: none;
+          }
+        }
+
+        .content:first-child {
+          padding: 80px 20px 20px;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$desk-min} {
+            order: 2;
+          }
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+
+        .content:last-child {
+          padding: 70px 70px 0;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+
+          @media #{$mobile} {
+            padding: 10px;
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      background: none;
+      .item-content {
+        &:after {
+          background: none;
+          display: none;
+        }
+      }
+    }
+  }
+}

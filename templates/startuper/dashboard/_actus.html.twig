@@ -1,0 +1,28 @@
+{% trans_default_domain 'project' %}
+<div class="b-decouvrir">
+    <img src="{{ asset('assets/img/business-woman.png') }}" alt="Discover">
+    <div class="discover-content">
+        <h3>{% trans %}Benefit from personalized support for your projects{% endtrans %}</h3>
+        <a class="btn btn-bg-red btn-h40 btn-w25" href="{{ path('services', { actor: 'startupers'}) }}">
+            {% trans %}Discover{% endtrans %}
+        </a>
+    </div>
+</div>
+
+{% if articles|length > 0 %}
+    <div class="b-actus-card">
+        <h3>{% trans %}News{% endtrans %}</h3>
+        <div class="row">
+            {% for article in articles %}
+                {% include '@CMS/front/article/_card.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="all-actus">
+        <div class="text-center">
+            <a href="{{ path('cmsbundle_article_list') }}" class="btn btn-bg-red btn-h40 btn-w25">
+                {% trans %}See all news{% endtrans %}
+            </a>
+        </div>
+    </div>
+{% endif %}

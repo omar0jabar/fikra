@@ -1,0 +1,83 @@
+{% trans_default_domain 'fond' %}
+<div class="header-banner search-engine-banner">
+	<div class="container">
+		<div class="banner-content">
+			{{ header ? header.description|raw : '' }}
+		</div>
+	</div>
+</div>
+<div class="block-tabs search-engine">
+	    <form method="GET" accept="{{path('fond')}}">
+	   		<input type="hidden" id="search" value="search" name="search">
+	    	<div class="row">
+		        <div class="col-md-12 b-type">
+					<div class="row">
+						<div class="col-lg-5">
+							<label>{% trans %}label2{% endtrans %}</label>
+						</div>
+						<div class="col-lg-6">
+							<div class="custom-select-field">
+								<select class="browser-default custom-select" name="financement[]" id="financeType" multiple="multiple">
+									<option value=""></option>
+									{% for financement in financements %}
+										<option value="{{financement.id}}" >{{financement.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+		        </div>
+		      	<div class="col-md-12 b-secteur">
+					<div class="row">
+						<div class="col-lg-5">
+							<label>{% trans %}label3{% endtrans %}</label>
+						</div>
+						<div class="col-lg-6">
+							<div class="custom-select-field">
+								<select class="browser-default custom-select" name="secteur[]" id="sectors" autocomplete="off" multiple="multiple">
+									<option value=""></option>
+									{% for secteur in secteurs %}
+										<option value="{{secteur.id}}" >{{secteur.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+		        </div>
+		        <div class="col-md-12 b-besoin">
+					<div class="row">
+						<div class="col-lg-5">
+							<label>{% trans %}label4{% endtrans %}</label>
+						</div>
+						<div class="col-lg-6">
+							<div class="custom-select-field">
+								<select class="browser-default custom-select" name="phase">
+								  <option value="">{% trans %}labelAll{% endtrans %}</option>
+									{% for phase in phases %}
+								  <option value="{{phase.id}}" >{{phase.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+		        </div>
+	    	</div>
+		<div class="search-btn">
+			<button class="btn btn-bg-red">{% trans %}labelButton{% endtrans %}</button>
+		</div>
+	    </form>
+    </div>
+
+{% block javascripts %}
+	<script>
+		$(document).ready( function () {
+			$('#financeType').select2({
+				placeholder: "{{ 'labelAll'|trans|raw }}",
+			});
+			$('#sectors').select2({
+				placeholder: "{{ 'labelAll'|trans|raw }}"
+			});
+
+		})
+	</script>
+{% endblock %}

@@ -1,0 +1,218 @@
+body {
+  &.modal-open {
+    padding-right: 0 !important; 
+  }
+}
+.service-startupers,
+.service-investisseurs {
+  .modal {
+    .modal-dialog {
+      @media #{$tab-min-2} {
+        top: 10%;
+        transform: translate(-50%, 0%) !important;
+      }
+    }
+  }
+}
+.modal {
+  padding-right: 0 !important; 
+  .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
+    max-width: 670px;
+    width: 100%;
+    overflow: hidden;
+
+    @media #{$tab-min-2} {
+      max-width: 95%;
+    }
+
+    &.contactez-nous {
+      background: transparent;
+      @media #{$mobile} {
+        max-height: 90%;
+        border-radius: 8px;
+        overflow-y: scroll;
+      }
+      .contact-form {
+        background: $white;
+        margin: 0;
+        label {
+          font-weight: 400;
+          margin-bottom: 1.5px;
+          line-height: 1.5;
+          &:not(.error) {
+            font-size: rem(16px);
+            color: $cloudBurst;
+            white-space: nowrap;
+          }
+          &.error {
+            font-size: rem(14px);
+            font-weight: 300;
+          }
+        }
+        input {
+          &::placeholder {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      form {
+        >.row {
+          margin: 0 -15px;
+        }
+        .b-field-phone {
+          .field-phone {
+            max-width: calc(100% - 70px);
+            flex: 0 0 calc(100% - 70px);
+          }
+        }
+      }
+      .champ-requis {
+        padding: 0;
+      }
+    }
+
+    .modal-content {
+      padding: 19px 20px;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .modal-header,
+      .modal-body {
+        padding: 0;
+        border: 0;
+      }
+
+      .modal-header {
+        .modal-title {
+          font-size: rem(32px);
+          font-weight: 600;
+          line-height: normal;
+          margin-bottom: 16px;
+          color: $cloudBurst;
+        }
+        button {
+          color: $papaGreen;
+          opacity: 1;
+
+          &:focus,
+          &:active {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+      }
+
+      .modal-body {
+        .modal-description {
+          font-size: rem(24px);
+          font-weight: 400;
+          margin-bottom: 25px;
+        }
+
+        form {
+          .form-group {
+            margin-bottom: 32px;
+            &.has-error {
+              textarea {
+                border: 1px solid $coralRed;
+              }
+            }
+          }
+          .field-firstname {
+            padding-left: 0;
+            @media #{$tab-min-2} {
+              padding: 0;
+            }
+          }
+          .field-lastname {
+            padding-right: 0;
+            @media #{$tab-min-2} {
+              padding: 0;
+            }
+          }
+          .field {
+            &.email {
+              margin-bottom: 20px;
+            }
+            &.choice {
+              margin-bottom: 35px;
+
+              .startuper,
+              .investor {
+                display: inline-block;
+
+                .custom-control {
+                  padding: 0;
+                  padding-right: 22px;
+                }
+
+                [type=radio]+label {
+                  padding-left: 25px;
+                  &:before {
+                    top: 2px;
+                  }
+                  &:after {
+                    top: 6px;
+                  }
+                }
+              }
+            }
+
+            label.label {
+              font-family: $font-base;
+              font-size: rem(14px);
+              font-weight: 400;
+              color: $black;
+              margin-bottom: 13px;
+            }
+          }
+        }
+
+        .btn:not(:last-child) {
+          margin-right: 16px;
+          @media #{$tab-min-2} {
+            margin-right: 10px;
+          }
+        }
+
+        .btn-transparent-black {
+          color: $cloudBurst;
+          border-color: $cloudBurst;
+
+          &:hover {
+            background-color: $cloudBurst;
+            color: $white;
+          }
+        }
+
+        textarea {
+          min-height: 140px;
+        }
+      }
+    }
+  }
+
+  .champ-requis {
+    padding: 0;
+    .required-field {
+      font-size: rem(18px);
+      font-weight: 300;
+      color: $black;
+    }
+  }
+}
+
+.page {
+  .container-section-block {
+    padding: 40px 0;
+  }
+  .item-content {
+    margin: 40px 0;
+  }
+}

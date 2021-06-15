@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ company.name }} - {{ 'To contribute'|trans }}{% endblock %}
+
+{% trans_default_domain 'company' %}
+
+{% block body %}
+    <div class="contact-porteur">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 contact-porteur-card contributor">
+                    {{ include('partials/_notice.html.twig') }}
+                    <div class="contact-porteur-card-intro">
+                        <h3>{% trans %}Contribute for{% endtrans %} : {{ company.name }}</h3>
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="contributor">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.lastName) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.firstName) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.contributionAmount) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.chosenPayment) }}
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>{{ 'form.amountDebited.label'|trans }} : </label>
+                                    <h4 id="amount-debited">100 MAD</h4>
+                                    <input type="hidden" id="input-amount-debited" name="amount_debited" value="100">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(form.isAnonymous) }}
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-check controls">
+                                        <input type="checkbox" id="cgv" name="cgv" class="form-check-input">
+                                        <label class="form-check-label" for="cgv">
+                                            {{ 'By submitting this form, you realize all our'|trans }}
+                                            <a href="{{ cgvUrl }}" target="_blank">
+                                                {{ 'general sales conditions'|trans }}
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit-form">
+                            <button type="submit" class="btn btn-bg-red btn-h50 btn-w25">
+                                {% trans %}Validate my contribution{% endtrans %}
+                            </button>
+                        </div>
+                        <div class="paiment">
+                            <div class="row">
+                                <div class="col-md-12 p-0">
+                                    <p class="text-muted text-center">{% trans %}Paiment sécurisé assuré par Maroc Telecommerce{% endtrans %}</p>
+                                    <div class="row text-center">
+                                        <div class="col-md-3 mb-3">
+                                            <img src="{{ asset('assets/img/mtc.png') }}" alt="">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <img src="{{ asset('assets/img/cmi.png') }}" alt="">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <img src="{{ asset('assets/img/verisign.png') }}" alt="">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <img src="{{ asset('assets/img/visa.png') }}" alt="">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <img src="{{ asset('assets/img/mastercard.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center p-0">
+                                            <img src="{{ asset('assets/img/paypal_method.jpg') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-form">
+                        <div class="champ-requis">
+                            <p class="required-field">{% trans %}Required fields{% endtrans %}</p>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div><!-- /.container -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/contribute.js') }}"></script>
+{% endblock %}
+

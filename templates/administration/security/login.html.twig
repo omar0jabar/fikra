@@ -1,0 +1,62 @@
+{% extends 'base-no-header.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}Admin - {% trans %}Login{% endtrans %}!{% endblock %}
+
+{% block body %}
+   <body class="Login-boadmin">
+      <div class="container">
+         <div class="card">
+                  <div class="card-header text-light">
+                     <h1 class="h4 font-weight-normal"><i class="fas fa-lock mr-2"></i> Admin - {% trans %}Login{% endtrans %}!</h1>
+                  </div>
+                  <div class="card-body">
+                     {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                     {% endif %}
+                     {% if app.user %}
+                        <p>Logged by <a href="#">{{ app.user.email }}</a> | <a href="{{ path('admin_account_logout') }}">{% trans %}Logout{% endtrans %}</a></p>
+                     {% endif %}
+                     {% include 'partials/_notice.html.twig' %}
+                     <form method="post">
+                        <div class="form-group field-email">
+                           <label for="inputEmail">{% trans %}form.email.label{% endtrans %}</label>
+                           <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                 class="form-control" placeholder="{% trans %}form.email.placeholder{% endtrans %}"
+                                 required autofocus>
+                        </div>
+                        <div class="form-group field-password">
+                           <label for="inputPassword">{% trans %}form.password.label{% endtrans %}</label>
+                           <input type="password" name="password" id="inputPassword" class="form-control"
+                                 placeholder="{% trans %}form.password.placeholder{% endtrans %}" required>
+                           <input type="hidden" name="_csrf_token"
+                                 value="{{ csrf_token('authenticate') }}"
+                           >
+                        </div>
+                        {#
+                           Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                           See https://symfony.com/doc/current/security/remember_me.html
+
+                           <div class="checkbox mb-3">
+                              <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                              </label>
+                           </div>
+                        #}
+                        <div class="admin-forget-password">
+                           <a href="{{ path('resetting_request') }}">{% trans %}Forgot your password ?{% endtrans %}</a>
+                        </div>
+                        <div class="row b-submit">
+                           <button class="btn btn-bg-red btn-h40 btn-w25 btn-block" type="submit">
+                              <i class="fas fa-sign-in"></i>
+                              {% trans %}Login{% endtrans %}
+                           </button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+      </div>
+   </body>
+
+{% endblock %}

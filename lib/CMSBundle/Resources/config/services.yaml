@@ -1,0 +1,78 @@
+services:
+
+    EgioDigital\CMSBundle\Controller\:
+        resource: '%kernel.project_dir%/lib/CMSBundle/Controller'
+        tags: ['controller.service_arguments']
+
+    EgioDigital\CMSBundle\Repository\:
+        resource: '%kernel.project_dir%/lib/CMSBundle/Repository'
+        autowire: true
+        tags: ['doctrine.repository_service']
+
+    EgioDigital\CMSBundle\Controller\AdminEventController:
+        autowire: true
+        tags: ['controller.service_arguments']
+
+    sonata.admin.pages:
+        class: EgioDigital\CMSBundle\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages", label: Pages }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\Page
+            - EgioDigital\CMSBundle\Controller\AdminPageController
+
+    sonata.admin.category_page:
+        class: EgioDigital\CMSBundle\Admin\CategoryPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages", label: Category Page }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\CategoryPage
+            - ~
+
+    sonata.admin.articles:
+        class: EgioDigital\CMSBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Articles", label: Articles }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\Article
+            - EgioDigital\CMSBundle\Controller\AdminArticleController
+
+    sonata.admin.category_article:
+        class: EgioDigital\CMSBundle\Admin\CategoryArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Articles", label: Category Article }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\CategoryArticle
+            - ~
+
+    sonata.admin.events:
+        class: EgioDigital\CMSBundle\Admin\EventAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Events", label: Events }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\Event
+            - EgioDigital\CMSBundle\Controller\AdminEventController
+
+    sonata.admin.category_event:
+        class: EgioDigital\CMSBundle\Admin\CategoryEventAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Category event", label: Category event }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\CategoryEvent
+            - ~
+
+    sonata.admin.offer_request:
+        class: EgioDigital\CMSBundle\Admin\OfferRequestAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Offer request", label: Offer request }
+        arguments:
+            - ~
+            - EgioDigital\CMSBundle\Entity\OfferRequest
+            - ~
+

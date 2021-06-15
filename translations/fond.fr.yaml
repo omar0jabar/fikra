@@ -1,0 +1,74 @@
+titleSearch: Rechercher un Programme de Financement
+sortDescriptionSearch: PFE Startup mets à la disposition de tous les acteurs de écosystème entrepreneurial marocain, un moteur de recherche exclusivement dédié aux Programmes de Financement actifs au Maroc,destinés aux Start-ups et TPME, à toute phases de leur développement
+labelSearch: Choisissez un ou plusieurs secteurs d’activité
+label1: Je recherche un financement
+label1placeholder: financement
+label2: Je recherche un financement de type
+label2placeholder: type
+label3: Dans le(s) secteur(s)
+label3placeholder: secteur
+label4: Pour mes besoins de
+label4placeholder: besoins
+label5: Je recherche un montant entre
+label5placeholder: min
+label6: et
+label6placeholder: max
+labelButton: Trouver un Programme
+labelSearchResult: programme(s) trouvé(s)
+labelSearchResultEmpty: Aucun programme trouvé
+labelNoMore: Pas d'autre résultats
+labelSearchGestionnaire: Gestionnaire
+labelSearchFinancement: Financement proposé
+labelSearchPhase: Phase de développement
+labelSearchTypeFond: Type de programme
+labelSearchMontant: Chiffre d'affaires annuel
+entre: Entre 
+et: et 
+fond: Programme
+secteur: Secteur(s)
+fondType: Type de programme
+financeType: Financement proposé
+financeTypeLabel: Financement proposé
+phaseLabel: Phase de développement
+phase: Phase de développement
+montants: Montants
+de: De
+a: à
+depenseType: Type de dépense couvertes
+savoir: Vous souhaitez en savoir plus ?
+contacter: Nous contacter
+savoirPlus: En savoir plus
+phone: Téléphone
+mail: Email
+site: Site web
+labelsouhite: Vous souhaitez bénéficier de ce programme ?
+labelcontacter: Contactez-nous
+labelAll: Tous
+depensestypes: Type de dépenses
+eligibilitecritere:  Critère(s) d’éligibilité
+montant: Chiffre d’affaire annuel 
+beetwen: Entre
+and: Et
+labelSujet: Sujet
+placeholderSujet: Sujet
+labelMessage: Message
+placeholderMessage: Votre message
+firstName: Prénom
+firstName_placeholder: Votre prénom
+lastName: Nom
+lastName_placeholder: Votre nom
+email: Mail
+email_placeholder: Votre addresse email
+countryCode: Code pays
+phone_placeholder: Votre numéros de téléphone
+requiredFields: Champs obligatoires
+Send: Envoyer
+message_success: Votre demande a bien été envoyée. Un responsable vous contactera sous-peu
+label_mot: Rechercher par mots-clés
+Reset: Réinitialiser
+all: Tous
+go_back: Retour vers la liste des programmes
+gestionnaires: Gestionnaire(s)
+similar_fond: Programmes de financement similaires
+title_fond_og: Programme de financement
+description_fond_og: PFE Startup met a la disposition de tous les acteurs de l écosystéme entreprenariat Marocain un moteur de recherche exclusivement dédié aux programmes de financement actifs au Maroc destinés aux start-ups et TPME a toutes phases de leur développement.

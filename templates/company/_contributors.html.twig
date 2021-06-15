@@ -1,0 +1,27 @@
+{% for contributor in contributors %}
+    <div class="col-md-3 item">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if contributor.isAnonymous %}
+                        {{ 'Anonymous contributor'|trans }}
+                    {% else %}
+                        {{ contributor.fullName }}
+                    {% endif %}
+                </h5>
+                <p class="card-text">
+                    {{ 'Thank you for advancing the project'|trans }}
+                    <strong class="amount">
+                        {{ contributor.contributionAmount|number_format(0, '', ' ') }} MAD
+                    </strong>
+                    <strong class="date">
+                        {{ 'on'|trans }}
+                        {{ contributor.createdAt|date('d') }}
+                        {{ contributor.createdAt|date('F')|trans }}
+                        {{ contributor.createdAt|date('Y') }}
+                    </strong>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

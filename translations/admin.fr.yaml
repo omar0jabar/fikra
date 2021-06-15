@@ -1,0 +1,84 @@
+form:
+  local: loooo
+  avatar:
+    label: Avatar
+  profile:
+    label: Vous êtes ?*
+    startup: Entrepreneur
+    investor: Investisseur
+  firstName:
+    label: Prénom
+    placeholder: Votre prénom ...
+  lastName:
+    label: Nom
+    placeholder: Votre nom ...
+  full_name:
+    label: Nom complet
+  phone:
+    label: Téléphone
+    placeholder: Votre numéro de téléphone
+  imageFile:
+    label: Avatar
+  birthday:
+    label: Date de naissance
+  address:
+    label: Adresse 1
+    placeholder: Adresse 1
+  address2:
+    label: Adresse 2
+    placeholder: Adresse 2
+  email:
+    label: E-mail
+    placeholder: Votre email
+  password:
+    label: Mot de passe
+    help: |
+      - Utilisez au moins 8 caractères.<br>
+      - Ne choisissez pas un mot de passe que vous utilisez déjà sur un autre site
+    placeholder: Mot de passe
+
+  confirmPassword:
+    label: Confirmer votre mot de passe
+    placeholder: Confirmer votre mot de passe ...
+  currentPassword:
+    label: Votre mot de passe actuel
+    placeholder: Votre mot de passe actuel ...
+  newPassword:
+    label: Nouveau mot de passe
+    placeholder: Nouveau mot de passe ...
+  created_at:
+    label: Créé le
+
+formLogin:
+  email:
+    placeholder: Votre Email ...
+  password:
+    placeholder: Votre mot de passe ...
+
+# Change password
+formChangePassword:
+  help: |
+    Utilisez au moins 6 caractères. <br>
+    Ne choisissez pas un mot de passe que vous utilisez déjà sur un autre site.
+Password: Mot de passe
+Update password: Mettre à jour mon mot de passe
+
+# modify my profile
+Edit my profile: Éditer mon profile
+Save Changes: Enregistrer les modifications
+
+Registration: Inscription
+Login: Connexion
+Forgot your password ?: Mot de passe oublié?
+Register: S'inscrire
+
+# my account
+Your profile: Votre profile
+Modify my profile: Modifier mon profile
+Change my password: Modifier mon mot de passe
+Birthday: Date de naissance
+Email: Email
+Phone: Téléphone
+Address 1: Adresse 1
+Address 2: Adresse 2
+empty: vide

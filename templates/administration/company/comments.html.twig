@@ -1,0 +1,78 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% include 'administration/company/_head.html.twig' %}
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+               <h2>
+                  {{ company.comments|length }}
+                  {% if company.comments|length > 1 %}
+                     {% trans %}Comments{% endtrans %}
+                  {% else %}
+                     {% trans %}Comment{% endtrans %}
+                  {% endif %}
+               </h2>
+               <table class="table table-hover">
+                  <thead>
+                  <tr>
+                     <th>{{ 'form.comment.label'|trans }}</th>
+                     <th>{{ 'form.author.label'|trans }}</th>
+                     <th>{{ 'form.responses.label'|trans }}</th>
+                     <th>{{ 'form.isPublished.label'|trans }}</th>
+                     <th>{{ 'form.createdAt.label'|trans }}</th>
+                     <th>{{ 'form.action.label'|trans }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     {% for comment in company.comments %}
+                        <tr>
+                           <td>{{ comment.content }}</td>
+                           <td>
+                              {{ comment.author ? comment.author.email : '' }}
+                           </td>
+                           <td>{{ comment.responses|length }}</td>
+                           <td>
+                              {% if comment.isPublished %}
+                                 <span class="label label-success">{{ 'Yes'|trans }}</span>
+                              {% else %}
+                                 <span class="label label-danger">{{ 'No'|trans }}</span>
+                              {% endif %}
+                           </td>
+                           <td>{{ comment.createdAt|date('d/m/Y H:i') }}</td>
+                           <td>
+                              <a href="{{ path('admin_show_company_comment', { id: company.id, commentId: comment.id}) }}" class="btn btn-default">
+                                 <i class="fa fa-eye"></i> {{ 'Show'|trans }}
+                              </a>
+                              <a href="{{ path('admin_publish_company_comment', { id: company.id, commentId: comment.id}) }}" class="btn btn-default">
+                                 {% if comment.isPublished %}
+                                    {% set label = 'Disable publishing'|trans %}
+                                    {% set icon = 'share' %}
+                                 {% else %}
+                                    {% set label = 'Publish'|trans %}
+                                    {% set icon = 'share' %}
+                                 {% endif %}
+                                 <i class="fa fa-{{ icon }}"></i> {{ label }}
+                              </a>
+                           </td>
+                        </tr>
+                     {% endfor %}
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

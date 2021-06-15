@@ -1,0 +1,120 @@
+{% extends 'base-no-header.html.twig' %}
+{% trans_default_domain 'page' %}
+
+{% block meta %}
+    <meta name="title" content="{{ page.metaTitle }}">
+    <meta name="description" content="{{ page.metaDescription }}">
+    <meta name="keywords" content="{{ page.metaTags }}">
+
+    <meta property="og:title" content="{{ page.metaTitle }}">
+    <meta property="og:description" content="{{ page.metaDescription }}">
+{#    <meta property="og:image:width" content="{{width}}">#}
+{#    <meta property="og:image:height" content="{{height}}">#}
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/cms/pages-public/" ~ page.bannerDesktop }}" />
+
+    <meta name="twitter:title" content="{{ page.metaTitle }}" />
+    <meta name="twitter:description" content="{{ page.metaDescription }}" />
+    <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/upload/cms/pages-public/" ~ page.bannerDesktop }}" />
+{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/cms/css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <body id="{{ page.htmlIdAttr }}" class="page {{ page.htmlClassAttr }}">
+
+    {% include 'partials/header.html.twig' %}
+
+    <div class="cms-header-banner">
+        {% if page.bannerDesktop is not empty %}
+            {% set cover = "/upload/cms/pages-public/" ~ page.bannerDesktop %}
+        {% else %}
+            {% set cover = asset('assets/img/Banner.png') %}
+        {% endif %}
+            <img src="{{ cover }}" alt="" class="img-responsive hide-for-mobile">
+        {% if page.bannerMobile is not empty %}
+            {% set cover = "/upload/cms/pages-public/" ~ page.bannerMobile %}
+        {% else %}
+            {% set cover = asset('assets/img/banner-mobile.png') %}
+        {% endif %}
+            <img src="{{ cover }}" alt="" class="img-responsive show-for-mobile">
+        <div class="cms-banner-content">
+            <h1>{{ page.title }}</h1>
+            {{ page.contentBanner|raw }}
+        </div>
+    </div>
+
+    <div class="container-section-block">
+        {% for key,row in blocks %}
+            <div class="container-section">
+                <div class="container">
+                    <div class="row {{ rows[key].class }} item-content" id="{{ rows[key].idHTml }}">
+                        {% for block in row %}
+                            <div class="col-lg-{{block.colLarge}} col-md-12 content">
+                                {#{% if block.title is not empty %}
+                                    <h3>{{ block.title }}</h3>
+                                {% endif %}#}
+                                {% if block.type == 'image' %}
+                                    {% if block.imageName is not empty %}
+                                        {% set img = "/upload/cms/pages-public/blocks/" ~ block.imageName %}
+                                    {% else %}
+                                        {% set img = asset('assets/img/block-875x500.png') %}
+                                    {% endif %}
+                                    {% if block.linkImage is not empty %}
+                                        <a href="{{ block.linkImage }}">
+                                            <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                                        </a>
+                                    {% else %}
+                                        <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                                    {% endif %}
+                                    {% if block.legend is not empty %}
+                                        <em>{{ block.legend }}</em>
+                                    {% endif %}
+                                    {% if block.textImage is not empty %}
+                                        {{ block.textImage|raw }}
+                                    {% endif %}
+                                {% elseif block.type == 'text' %}
+                                    {{ block.content|raw }}
+                                {% elseif block.type == 'video' %}
+                                    <iframe width="{{ block.width }}" height="{{ block.height }}"
+                                            src="//www.youtube.com/embed/{{ block.idVideo }}?controls=0&showinfo=0"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                {% endif %}
+                            </div>
+                            {% if block.clearfix %}
+                                <div class="w-100"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% include '@CMS/front/page/modal.html.twig' %}
+
+    {% include 'partials/footer.html.twig' %}
+    </body>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/bundle.js') }}"></script>
+    <script src="{{ asset('bundles/cms/js/offer-request.js') }}"></script>
+    {% set block = app.request.get('block') %}
+    {% if block is not empty %}
+        <script>
+            if ($("#{{ block }}").length) {
+                $('html,body').animate({
+                    scrollTop: $("#{{ block }}").offset().top
+                },1000);
+            }
+        </script>
+    {% endif %}
+{% endblock %}

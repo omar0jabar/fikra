@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'fond' %}
+
+{% block title %}No Programme in this languague{% endblock %}
+
+{% block body %}
+{% set locale = app.request.locale %}
+
+<div id="cover-project" class="banner-cover detailled">     
+    <div class="row banner-project">
+        <div class="col-lg-12 col-md-12 block-img">
+            {% set cover = asset('assets/img/fond_cover.png') %}
+            <img src="{{cover}}" class="img-responsive banner-img" alt="">
+        </div>
+    </div>
+</div>
+<div class="b-project-content detailled">
+    <div class="container">
+        <div class="row">
+        No product in this language
+        </div>
+    </div>
+</div>
+{% endblock %}

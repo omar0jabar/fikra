@@ -1,0 +1,175 @@
+{% extends 'base-no-header.html.twig' %}
+
+{% trans_default_domain 'event' %}
+
+{% block meta %}
+   <meta name="title" content="{{ event.metaTitle }}">
+   <meta name="description" content="{{ event.metaDescription }}">
+   <meta name="keywords" content="{{ event.metaTags }}">
+{% endblock %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('bundles/cms/css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+
+   <body id="{{ event.htmlIdAttr }}" class="{{ event.htmlClassAttr }}">
+
+   {% include 'partials/header.html.twig' %}
+
+   <div class="article-detail">{% if event.bannerDesktop is not empty %}
+         {% set cover = vich_uploader_asset(event, "uploadBannerDesktop") %}
+      {% else %}
+         {% set cover = asset('assets/img/Banner.png') %}
+      {% endif %}
+      <div class="row banner-actus hide-for-mobile">
+         <img src="{{ cover }}" alt="" class="img-responsive">
+      </div>
+      {% if event.bannerMobile is not empty %}
+         {% set cover = asset("upload/cms/articles-public/" ~ event.bannerMobile) %}
+      {% else %}
+         {% set cover = asset('assets/img/banner-mobile.png') %}
+      {% endif %}
+      <div class="row banner-actus show-for-mobile">
+         <img src="{{ cover | imagine_filter('cms_cover') }}" alt="" class="img-responsive">
+      </div>
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+               <div class="back-to-actus">
+                  <a href="{{ path('cmsbundle_article_list') }}">
+                     <i class="icon-right-arrow"></i> {% trans %}events{% endtrans %}
+                  </a>
+               </div>
+               <h2 class="c-heading">{{ event.title }}</h2>
+               <div class="block-addis">
+                  <div class="row">
+                     <div class="col-md-6 p-0 c-tags">
+                        <ul class="tags">
+                           <li>
+                              <h5>
+                                 <i class="icon-calendar"></i> {{ event.createdAt|date('d/m/Y') }}
+                              </h5>
+                           </li>
+                           <li>
+                              <h5>
+                                 <a href="#" class="js-like-event">
+                                    <span class="js-likes">0</span>
+                                       <i class="icon-favorite-heart-button"></i>
+                                 </a>
+                              </h5>
+                           </li>
+                        </ul>
+                     </div>
+
+                     <div class="col-md-6 p-0 addis-icons">
+                        <div class="addthis_inline_share_toolbox"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="">
+                  {{ event.content|raw }}
+               </div>
+            </div>
+         </div>
+
+
+         {% for key,row in blocks %}
+            <div class="row {{ rows[key].class }}  justify-content-center" id="{{ rows[key].idHTml }}">
+               <div class="col-lg-10 col-md-12 p-0">
+                  <div class="row">
+                     {% for block in row %}
+                        <div class="col-md-{{block.colLarge}} col-sm-12">
+                           {#{% if block.title is not empty %}
+                              <h3>{{ block.title }}</h3>
+                           {% endif %}#}
+                           {% if block.type == 'image' %}
+                              {% if block.imageName is not empty %}
+                                 {% set img = vich_uploader_asset(block, "uploadImage") %}
+                              {% else %}
+                                 {% set img = asset('assets/img/block-875x500.png') %}
+                              {% endif %}
+                              {% if block.linkImage is not empty %}
+                                 <a href="{{ block.linkImage }}">
+                                    <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                                 </a>
+                              {% else %}
+                                 <img src="{{ img }}" class="img-responsive" alt="{{ block.alt }}">
+                              {% endif %}
+                              {% if block.legend is not empty %}
+                                 <em>{{ block.legend }}</em>
+                              {% endif %}
+                              {% if block.textImage is not empty %}
+                                 {{ block.textImage|raw }}
+                              {% endif %}
+
+                           {% elseif block.type == 'text' %}
+                              {{ block.content|raw }}
+                           {% elseif block.type == 'video' %}
+                              <div class="video-content">
+                                 <iframe width="{{ block.width }}" height="{{ block.height }}"
+                                         src="//www.youtube.com/embed/{{ block.idVideo }}?controls=0&showinfo=0"
+                                         frameborder="0"
+                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                         allowfullscreen></iframe>
+                              </div>
+                           {% endif %}
+                        </div>
+                        {% if block.clearfix %}
+                           <div class="w-100"></div>
+                        {% endif %}
+                     {% endfor %}
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+
+
+
+         <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 p-0">
+               <div class="row block-addis">
+                  {% if tags|length > 0 %}
+                     <div class="col-md-6">
+                        <p>{% trans %}tags{% endtrans %}:</p>
+                        <div class="detail-tags">
+                           {% for tag in tags %}
+                              <button class="btn btn-bg-blue btn-h30 btn-w18">{{ tag }}</button>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  {% endif %}
+                  <div class="col-md-6 addis-icons text-left">
+                     <p>{% trans %}share{% endtrans %}:</p>
+                     <div class="addthis_inline_share_toolbox"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+         <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 p-0">
+               <div class="row">
+                  <div class="col-12">
+                     <h3>{% trans %}related_events{% endtrans %}</h3>
+                  </div>
+                  {% for event in events %}
+                     {% include '@CMS/front/event/_card.html.twig' %}
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% include 'partials/footer.html.twig' %}
+
+   </body>
+{% endblock %}
+
+{% block javascripts %}
+   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c93906a67926205"></script>
+{% endblock %}

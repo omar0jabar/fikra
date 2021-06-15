@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .active {
+            background-color: #bfd9ff;
+            color: white !important;
+        }
+    </style>
+{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+
+    <div class="dashboard-project">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 sidebar-project-menu">
+                {% include 'startuper/dashboard/_menu.html.twig' %}
+            </div>
+            <div class="col-lg-9 sidebar-project-content">
+                {% include 'startuper/dashboard/_head.html.twig' %}
+
+                <h3 class="mt-5 mb-3">{{ question.question }}</h3>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="btn btn-bg-red btn-h50 btn-w15">Reply</button>
+                {{ form_end(form) }}
+
+            </div><!-- /.col-md-9 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    </div>
+{% endblock %}

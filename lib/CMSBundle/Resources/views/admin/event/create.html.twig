@@ -1,0 +1,212 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% form_theme form '@CMSBundleViews/views/admin/event/form_theme.html.twig' %}
+
+{% block stylesheets %}
+    {% for stylesheet in sonata_admin.adminPool.getOption('stylesheets', []) %}
+        <link rel="stylesheet" href="{{ asset(stylesheet) }}">
+    {% endfor %}
+    <link rel="stylesheet" href="{{ asset('bundles/cms/css/style.css') }}">
+{% endblock %}
+
+{% block sonata_page_content_header %}
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                {% if action == 'create' %}
+                    <a href="#" class="navbar-brand">Créer</a>
+                {% else %}
+                    <a href="#" class="navbar-brand">Éditer "{{ event.title }}"</a>
+                {% endif %}
+
+                {% if preview %}
+                    <input type="hidden" id="btn-preview"
+                           value="{{ url('cmsbundle_event_preview', {id: event.id, Slug: event.slug}) }}">
+                    {# <input type="hidden" id="btn-preview-public"
+                      value="{{ url('cmsbundle_event_preview_public',
+                         {id: eventPublished.id, Url: eventPublished.Url}) }}"> #}
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock sonata_page_content_header %}
+
+{% block sonata_admin_content %}
+
+    {% block notice %}
+        {% include '@SonataCore/FlashMessage/render.html.twig' %}
+    {% endblock notice %}
+
+    {{ form_start(form) }}
+
+    <div class="row">
+        <input type="hidden" id="idCms" value="{{ idCms }}">
+        <input type="hidden" id="rowsValue" value="{{ rowsValue }}">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>Event</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.lang) }}
+                    {{ form_row(form.category) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.date_debut) }}
+                    {{ form_row(form.heureDebut) }}
+                    {{ form_row(form.date_fin) }}
+                    {{ form_row(form.heureFin) }}
+                    {{ form_row(form.lieu) }}
+                    {{ form_row(form.url) }}
+                    {{ form_row(form.slug) }}
+                    {{ form_row(form.isActive) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>HTML</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.metaTitle) }}
+                    {{ form_row(form.metaTags) }}
+                    {{ form_row(form.metaDescription) }}
+                    <div style="display: none;">
+                        {{ form_row(form.htmlIdAttr) }}
+                        {{ form_row(form.htmlClassAttr) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>Content</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.uploadBannerDesktop) }}
+                    {{ form_row(form.uploadBannerMobile) }}
+                    {{ form_row(form.content) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h1>Blocks</h1>
+                                </div>
+                                <div class="panel-body listBlocks">
+                                    <input type="hidden" id="deleteBlocks" name="deleteBlocks" value="">
+                                    <input type="hidden" id="totalRow" name="totalRow" value="{{ totalRow }}">
+
+                                    <div id="blockSortable" class="list-group">
+                                        {{ form_row(form.blocks) }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.row -->
+
+
+    <div class="sonata-ba-form-actions well well-small form-actions">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBlock">
+            <i class="fa fa-plus"></i> Ajouter un block
+        </button>
+        <button type="button" class="btn btn-primary addRow">
+            <i class="fa fa-plus"></i> Ajouter ligne
+        </button>
+        {% if action == "edit" %}
+            {{ form_widget(form.preview) }}
+        {% endif %}
+        {{ form_widget(form.saveDraft) }}
+        {{ form_widget(form.savePublic) }}
+    </div>
+
+    {{ form_end(form) }}
+
+    <!-- Modal -->
+    <div class="modal fade" id="addBlock" tabindex="-1" role="dialog" aria-labelledby="addBlockLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3>Blocks</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="card text-white mb-3">
+                                <img class="card-img-top" src="//via.placeholder.com/245x100" alt="Card image cap">
+                                <div class="card-body">
+                                    <button id="add-block-image" type="button" class="btn btn-primary btn-block">
+                                        <i class="fa fa-plus"></i> Ajouter un block image
+                                    </button>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card text-white mb-3">
+                                <img class="card-img-top" src="//via.placeholder.com/245x100" alt="Card image cap">
+                                <div class="card-body">
+                                    <button id="add-block-text" type="button" class="btn btn-primary btn-block">
+                                        <i class="fa fa-plus"></i> Ajouter un block texte
+                                    </button>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card text-white mb-3">
+                                <img class="card-img-top" src="//via.placeholder.com/245x100" alt="Card image cap">
+                                <div class="card-body">
+                                    <button id="add-block-video" type="button" class="btn btn-primary btn-block">
+                                        <i class="fa fa-plus"></i> Ajouter un block video
+                                    </button>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal-->
+
+    {% if preview %}
+        <script type="text/javascript">
+            window.open($('#btn-preview').val(), '_blank');
+            //window.open($('#btn-preview-public').val(), '_blank');
+            // add block Image
+            $(document).on("click", "#add-block-image", function () {
+                $('#addBlock').modal('toggle');
+            });
+        </script>
+    {% endif %}
+    <script type="text/javascript">
+        var linkGetRows = '{{ path('list_rows_event') }}'
+        var linkGetCategories = '{{ path('list_categories_event_by_lang') }}'
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/cms/js/cms-event.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cms/js/sortable.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cms/js/touch-punch.min.js') }}"></script>
+
+{% endblock %}
+
+

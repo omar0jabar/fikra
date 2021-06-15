@@ -1,0 +1,151 @@
+.b-projets-recents {
+  background-color: $cloudBurst;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  overflow: hidden;
+  @media #{$mobile} {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  &.companies-recents {
+    background-color: $egioColor;
+  }
+
+  .c-heading {
+    color: $white;
+    margin-bottom: 38px;
+    @media #{$tab-max} {
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    @media #{$mobile} {
+      margin-bottom: 10px;
+    }
+  }
+
+  .b-projets-slider {
+    padding: 0 70px 33px;
+
+    @media #{$tab-max} {
+      padding: 0 30px 33px;
+    }
+    @media #{$tab-min} {
+      padding: 0 40px 33px;
+    }
+    @media #{$mobile} {
+      padding: 0 10px 0px;
+      margin-bottom: 0px;
+    }
+  }
+
+  .slider-projects {
+    position: relative;
+    padding-bottom: 33px;
+    opacity: 0;
+    @media#{$mobile} {
+      margin-bottom: 20px;
+    }
+    &.slick-initialized {
+      opacity: 1;
+    }
+
+    .styleCard {
+      height: 100%;
+      max-width: 100%;
+    }
+
+
+    .card-project {
+      .card-img-top {
+        height: 240px;
+        position: relative;
+        overflow: hidden;
+      }
+    }
+
+    .slick-list {
+      overflow: hidden;
+    }
+
+    .slick-track {
+      display: flex;
+      padding-top: 10px;
+    }
+
+    .slick-slide {
+      display: flex;
+
+      &, * {
+          outline: none; 
+        }
+
+      >div {
+        width: 100%;
+      }
+    }
+
+    .slick-arrow {
+      background-color: $coralRed;
+      width: 40px;
+      height: 40px;
+      top: 40%;
+
+      &:before {
+        font-size: rem(24px);
+        font-weight: 600;
+        color: $white;
+      }
+    }
+
+    .slick-next {
+      right: -38px;
+      &:before {
+        top: 4px;
+      }
+      @media #{$tab-min} {
+        right: -35px;
+      }
+    }
+    .slick-prev {
+      left: -38px;
+      &:before {
+        top: 5px;
+        left: 2px;
+      }
+      @media #{$tab-min} {
+        left: -35px;
+      }
+    }
+
+    .slick-dots {
+      right: 0;
+      left: 0;
+
+      li {
+        border-color: $white;
+
+        &.slick-active {
+          button {
+            background-color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  .projets-btn {
+    padding-left: 18px;
+    @media #{$mobile} {
+      padding: 0 15px;
+    }
+    .btn {
+      margin: 0 10px;
+
+      @media #{$mobile} {
+        margin: 0 0 10px;
+        width: 100%;
+      }
+    }
+  }
+}

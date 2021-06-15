@@ -1,0 +1,98 @@
+
+.avatar{
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium{
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.avatar-mini{
+    max-width: 24px;
+    max-height: 24px;
+}
+
+/* Bootstrap 4 */
+
+.w-100 {
+    width: 100%;
+}
+.w-25 {
+    width: 33.33%;
+}
+
+.mb-3 {
+    margin-bottom: 30px;
+}
+
+.text-right {
+   text-align: right !important;
+}
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-2 {
+    padding: 0.5em;
+}
+
+.m-0 {
+    margin: 0px !important;
+}
+
+.ml-1 {
+    margin-left: 0.25em;
+}
+
+.mr-1 {
+    margin-right: 0.25em;
+}
+
+.mb-1 {
+    margin-bottom: 0.25em;
+}
+
+/* end Bootstrap 4*/
+
+/* Visualize project */
+
+.view-project {
+    width: 100%;
+    border: 1px solid lightgrey;
+    padding: 6px;
+    margin-bottom: 10px;
+}
+
+.border-danger {
+    border: 1px solid orangered;
+}
+.border-success {
+    border: 1px solid forestgreen;
+}
+.center {
+    text-align: center;
+}
+
+.logo {
+    height: 160px;
+    width: 160px;
+}
+
+#div-cover {
+    height: 300px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.video {
+    padding: 40px 0 10px;
+}
+
+.handle {
+    cursor: grab;
+}
+
+

@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'contact' %}
+
+{% block title %}{% trans %}Contact{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="contactez-nous">
+        <div class="contact-banner">
+            {% if header and header.bannerName is not empty %}
+                {% set banner = vich_uploader_asset(header, "bannerFile") %}
+            {% else %}
+                {% set banner = asset('assets/img/Banner.png') %}
+            {% endif %}
+            <img src="{{ banner }}" class="img-responsive" alt="">
+        </div>
+        <div class="container">
+            {% include 'partials/_notice.html.twig' %}
+
+            <div class="en-tete-contact-heading">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="row">
+                        {% for info in infos %}
+                            <div class="col-md-4 en-tete-contact-cell">
+                                <h3>{{ info.title|trans }}</h3>
+                                <p>
+                                    {% if info.title == 'email' %}
+                                        <a href="mailto:{{ info.info }}">
+                                            {{ info.info }}
+                                        </a>
+                                    {% elseif info.title == "phone" %}
+                                        <a href="TEL:{{ info.info|replace({' ': ''}) }}">
+                                            {{ info.info }}
+                                        </a>
+                                    {% else %}
+                                        {{ info.info }}
+                                    {% endif %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-sm-12 contact-form">
+                    <div class="text-center intro">
+                        <h1>{% trans %}Contact us{% endtrans %}</h1>
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.firstName) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.lastName) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.email) }}
+                        </div>
+                        
+                        <div class="col-md-6 b-field-phone">
+                            <div class="row">
+                                <div class="col-md-4 field-pays">
+                                    <label for="contact_prefix">{% trans %}form.prefix.phone{% endtrans %}</label><br>
+                                    <select name="contact_prefix_phone" id="contact_prefix">
+                                        <option value="+212">+212</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8 field-phone">
+                                    {{ form_row(form.phone) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_row(form.object) }}
+                            {{ form_row(form.message) }}
+                            {#{{ form_row(form.recaptcha) }}#}
+                        </div>
+                    </div>
+
+                    <div class="champ-requis">
+                        <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                    </div>
+
+                    <div class="g-recaptcha"
+                         data-sitekey="{{ recaptcha_site_key }}"
+                         data-callback="onReCaptchaSuccess"
+                         data-size="invisible">
+                    </div>
+
+                    <div class="row b-send">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-bg-red btn-h50 btn-w35" type="submit">
+                                {% trans %}Send{% endtrans %}
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        function onReCaptchaSuccess(data){
+            $('#contact-form').submit();
+        }
+    </script>
+{% endblock %}

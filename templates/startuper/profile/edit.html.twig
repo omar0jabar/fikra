@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'startuper' %}
+
+{% block title %}{% trans %}Edit my profile{% endtrans %}{% endblock %}
+
+{% form_theme form 'startuper/profile/form_theme.html.twig' %}
+
+{% block body %}
+   <div class="edit-my-profile">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+               <div class="card">
+                  <div class="card-header">
+                     <h3 class="h3">
+                        {% trans %}Edit my profile{% endtrans %}
+                     </h3>
+                  </div>
+                  <div class="card-body">
+                     {{ form_start(form) }}
+                     <div class="row">
+                        <div class="col-md-6 p-0">
+                           {{ form_row(form.imageFile) }}
+                        </div>
+                        <div class="col-md-6">
+                           {{ form_row(form.firstName) }}
+                           {{ form_row(form.lastName) }}
+                           <div class="row">
+                              <div class="col-4 p-0 field-pays">
+                                 <label for="startuper_registration_prefix_phone">Pays</label><br>
+                                 <select name="startuper_registration_prefix_phone" id="startuper_registration_prefix_phone" class="form-control">
+                                    <option value="+212">+212</option>
+                                 </select>
+                              </div>
+                              <div class="col pr-0">
+                                 {{ form_row(form.phone) }}
+                              </div>
+                           </div>
+                           <div class="field-date">
+                              {{ form_row(form.socialReason) }}
+                           </div>
+                           {{ form_row(form.city) }}
+                        </div>
+                     </div>
+
+                     <div class="g-recaptcha"
+                          data-sitekey="{{ recaptcha_site_key }}"
+                          data-callback="onReCaptchaSuccess"
+                          data-size="invisible">
+                     </div>
+
+                     <div class="row">
+                        <div class="col-md-12">
+                           <button class="btn btn-bg-red btn-h50 btn-w25" type="submit">
+                              {#                     <i class="icon-correct-symbol"></i> #}
+                              {% trans %}Save Changes{% endtrans %}
+                           </button>
+                        </div>
+                     </div>
+
+
+                     {{ form_end(form) }}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script>
+      function onReCaptchaSuccess(data){
+         $('registration-form').submit();
+      }
+      function showIMG(input) {
+         if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+               $('#img_avatar').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+            var path = $(input).val();
+            var array = path.split("\\");
+            $(input).next('.custom-file-label').html(array[array.length - 1]);
+         }
+      }
+   </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block title %}{% trans %}Project updated successfully{% endtrans %}{% endblock %}
+
+{% block body %}
+   <div class="project-update">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-9 text-center">
+               <h1>{% trans %}Project updated successfully{% endtrans %}</h1>
+               <p>{% trans %}Vos modifications sont en mode brouillon {% endtrans %}</p>
+               <a class="btn btn-bg-red btn-h50 btn-w15" href="{{ path('startuper_project_dashboard_show', { id: project.id, slug: project.slug}) }}">
+                  {% trans %}Go to the dashboard{% endtrans %}
+               </a>
+            </div>
+         </div>
+
+      </div>
+   </div>
+{% endblock %}
+

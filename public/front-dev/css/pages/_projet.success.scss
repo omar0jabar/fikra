@@ -1,0 +1,8 @@
+.registration-success,
+.pay-success {
+    padding: 60px 0;
+    min-height: calc(100vh - 400px);
+    display: flex;
+    align-items: center;
+    flex-flow: wrap;
+}

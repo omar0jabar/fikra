@@ -1,0 +1,54 @@
+// PAGE PAYMENT SUCCESS
+.pay-success {
+    &-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .c-section {
+        &-intro {
+            margin-bottom: 60px;
+        }
+        &-table {
+            margin-bottom: 40px;
+        }
+    }
+
+    .panel {
+        &-heading {
+            font-family: $font-base;
+            font-size: rem(32px);
+            font-weight: 600;
+            line-height: normal;
+            text-align: center;
+            color: $cloudBurst;
+            margin-bottom: 24px;
+            @media #{$mobile} {
+                font-size: rem(24px);
+                margin-bottom: 14px; 
+            }
+        }
+
+        table {
+
+            tr {
+                background: $white;
+            }
+            th {
+                width: 35%;
+                border: 1px solid $gray-table-border;
+                background: $cloudBurst;
+                color: $white;
+                padding: 14px 10px;
+                @media #{$mobile} {
+                    width: 40%;
+                }
+            }
+            td {
+                width: 65%;
+                @media #{$mobile} {
+                    width: 60%;
+                }
+            }
+        }
+    }
+}

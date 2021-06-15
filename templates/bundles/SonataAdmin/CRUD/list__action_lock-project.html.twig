@@ -1,0 +1,7 @@
+<a href="{{ admin.generateObjectUrl('lock', object) }}" class="btn btn-sm btn-default">
+   {% if object.isLocked %}
+      <i class="fa fa-unlock"></i> Débloquer
+   {% else %}
+      <i class="fa fa-lock"></i> Bloquer
+   {% endif %}
+</a>

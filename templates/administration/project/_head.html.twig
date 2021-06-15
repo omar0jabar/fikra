@@ -1,0 +1,72 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                {% if not project.isApproved and not project.isUpdated and not project.isRejected %}
+                    {% set status = 'Under study'|trans %}
+                    {% set color = 'warning' %}
+                {% endif %}
+                {% if project.isApproved and not project.isUpdated and not project.isRejected %}
+                    {% set status = 'Approved'|trans %}
+                    {% set color = 'success' %}
+                {% endif %}
+                {% if not project.isApproved and not project.isUpdated and project.isRejected %}
+                    {% set status = 'Declined'|trans %}
+                    {% set color = 'danger' %}
+                {% endif %}
+                {% if project.isApproved and project.isUpdated and project.isRejected %}
+                    {% set status = 'Declined modification'|trans %}
+                    {% set color = 'danger' %}
+                {% endif %}
+                {% if project.isApproved and project.isUpdated and not project.isRejected %}
+                    {% set status = 'Modification under study'|trans %}
+                    {% set color = 'warning' %}
+                {% endif %}
+                <h1><strong>{{ project.name }}</strong><span class="label label-secondary">{{ project.language }}</span></h1>
+                <h2><span class="label label-{{ color }}">{{ status|default('Draft') }}</span></h2>
+            </div>
+            <div class="box-body">
+
+                <label for="">Logo</label><br>
+                {% if project.logoName %}
+                    {% set logo = '/upload/projects/project-logo/' ~ project.logoName %}
+                {% else %}
+                    {% set logo = asset('assets/img/project_logo_180.png') %}
+                {% endif %}
+                <img src="{{ logo }}" alt="" class="logo mb-3">
+
+                <br>
+                {% if project.imageCoverName %}
+                    {% set cover = '/upload/projects/gallery-photo/' ~ project.imageCoverName %}
+                {% else %}
+                    {% set cover = asset('assets/img/project_cover.png') %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Photo de couverture</label>
+                        <br>
+                        <img src="{{ cover }}" alt="" class="img-responsive">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ project.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Author</th>
+                            <td>{{ project.author.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de création</th>
+                            <td>{{ project.createdAt|date('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{% block _tools_icon_widget %}
+    <div class="form-group iconList">
+        {{ form_widget(form) }}
+    </div>
+    <script>
+        $('label[for="tools_icon_0"]').text('');
+        $('label[for="tools_icon_0"]').append( "<img src='/images/calcule.png' style='width: 100px;' />" );
+
+        $('label[for="tools_icon_1"]').text('');
+        $('label[for="tools_icon_1"]').append( "<img src='/images/money.png' style='width: 100px;' />" );
+
+        $('label[for="tools_icon_2"]').text('');
+        $('label[for="tools_icon_2"]').append( "<img src='/images/justice.png' style='width: 100px;' />" );
+
+        $('.form-check').css('float', 'left');
+        $('.form-check').css('margin-right', '20px');
+    </script>
+
+{% endblock %}
+
+

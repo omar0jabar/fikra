@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'message' %}
+
+{% block title %}{% trans %}Messages{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="dashboard-project">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 sidebar-project-menu">
+                    {% include 'startuper/dashboard/_menu.html.twig' %}
+                </div>
+                <div class="col-md-9 sidebar-project-content">
+
+                <div class="block-messagerie">
+                    <div class="c-messagerie-heading">
+                        <a href="{{ path('investor_messages') }}" class="more">
+                            {% trans %}Messages{% endtrans %}
+                        </a>
+                        <h5 class="h-project">Projet</h5>
+                        {% set project = message.project %}
+                        <h1 class="h-title">
+                            <a href="{{ path('project_show', {id: project.id, slug: project.slug }) }}">
+                                {{ project.name }}
+                            </a>
+                        </h1>
+                        <h3>{{ message.object }}</h3>
+                    </div>
+                    <div class="msg-content">
+                        <div class="row justify-content-start">
+                            <div class="col-md-7 b-info-author my-msg">
+                                {% set author = message.author %}
+                                <div class="avatar-user">
+                                    <img src="{{ vich_uploader_asset(author, 'imageFile') }}" alt="" class="img-responsive">
+                                </div>
+                                <div class="avatar-details">
+                                    {% if message.author == app.user %}
+                                        {% set author = 'You'|trans %}
+                                    {% endif %}
+                                    <div class="c-author-name">{{ author }} </div>
+                                    <div class="c-dtate-time">
+                                        <ul>
+                                            <li><i class="icon-calendar"></i> {{ message.createdAt|date('d/m/Y') }}</li>
+                                            <li><i class="icon-clock"></i> {{ message.createdAt|date('H:i:s') }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="response-msg">
+                                    {{ message.content }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="b-messageries-line">
+                        {% for response in message.responses %}
+                            {% set author = response.user.email %}
+                            {% set color = 'light' %}
+                            {% set class = 'justify-content-start'  %}
+                            {% if response.user == app.user %}
+                                {% set author = 'You'|trans %}
+                                {% set color = 'response' %}
+                                {% set class = 'justify-content-end'  %}
+                            {% endif %}
+                            <div class="msg-content">
+                                <div class="row {{ class }}">
+                                    <div class="col-md-7">
+                                        <div class="massage-field {{ color }}">
+                                            
+                                            {% set user = response.user %}
+                                            <div class="avatar-user">
+                                                <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="" class="img-responsive">
+                                            </div>
+                                            <div class="avatar-details">
+                                                <div class="c-author-name">{{ author }}</div>
+                                                <div class="c-dtate-time">
+                                                    <ul>
+                                                        <li><i class="icon-calendar"></i> {{ response.createdAt|date('d/m/Y') }}</li>
+                                                        <li><i class="icon-clock"></i> {{ response.createdAt|date('H:i:s') }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="response-msg">{{ response.content }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="form-add-new-msg">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_start(form) }}
+                                <div class="field-message">
+                                    {{ form_widget(form) }}
+                                </div>
+                                <button class="btn btn-bg-red btn-h50 btn-w15">
+                                    {% trans %}Send{% endtrans %}
+                                </button>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}

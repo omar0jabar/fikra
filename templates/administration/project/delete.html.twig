@@ -1,0 +1,61 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% if _preview is not empty %}
+      <div class="sonata-ba-preview">{{ _preview|raw }}</div>
+   {% endif %}
+
+   {% if _content is not empty %}
+      <div class="sonata-ba-content">{{ _content|raw }}</div>
+   {% endif %}
+
+   {% if _show is not empty %}
+      <div class="sonata-ba-show">{{ _show|raw }}</div>
+   {% endif %}
+
+   {% if _form is not empty %}
+      <div class="sonata-ba-form">{{ _form|raw }}</div>
+   {% endif %}
+
+   {% if _list_filters is not empty %}
+      <div class="row">
+         {{ _list_filters|raw }}
+      </div>
+   {% endif %}
+
+   {% if _list_table is not empty %}
+      <div class="row">
+         {{ _list_table|raw }}
+      </div>
+   {% endif %}
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box box-danger">
+            <div class="box-header">
+               <h3>Confirmation de suppression</h3>
+            </div>
+            <div class="box-body">
+
+               <p>Êtes-vous sûr de vouloir supprimer l'élément "{{ project.name }}" sélectionné? </p>
+
+               {{ form_start(form) }}
+               {{ form_widget(form) }}
+               <button class="btn btn-danger" type="submit">
+                  <i class="fa fa-trash"></i> Oui, supprimer
+               </button>
+               ou
+               <a class="btn btn-success" href="{{ path('sonata_admin_project_edit', {'id': project.id}) }}">
+                  <i class="fa fa-pencil"></i> Editer
+               </a>
+               {{ form_end(form) }}
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

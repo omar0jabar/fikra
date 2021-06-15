@@ -1,0 +1,11 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+   {%- if value is not empty -%}
+      {% set month = value|date('F') %}
+      {{ value|date('d') }}
+      {{ month|trans }}
+      {{ value|date('Y') }}
+      {{ value|date('H:i') }}
+   {%- endif -%}
+{% endblock %}

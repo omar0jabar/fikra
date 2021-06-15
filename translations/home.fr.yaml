@@ -1,0 +1,71 @@
+Raise funds for your projects in Morocco: Levez des fonds pour vos projets au Maroc
+
+how it works: Comment ça marche ?
+
+how_to_use:
+  title: Comment ça marche
+  description: |
+    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+    Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
+    assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait
+    que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
+    soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des
+    passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte,
+    comme Aldus PageMaker
+
+best_projects:
+  title: Découvrez les meilleurs projets
+  categories: Catégories
+
+chosen:
+  title: Ils ont choisi PFE Startup
+
+projects_recents:
+  title: Projets récents
+  btn_explorer: Explorer les projets
+  btn_have_project: Vous avez un projet ?
+news:
+  title: Actualités
+
+partners:
+  title: Nos partenaires
+  text: |
+    Aidez les Startupers d'aujourd'hui à devenir les grandes <br>
+    entreprises de demain
+  btn: Devenir partenaire
+
+All: Tout
+Discover the projects: Découvrir les projets
+
+See all news: Voir toute l’actualité
+
+login:
+  title: Accédez à votre espace
+  text: Accédez à votre espace Entrepreneur
+  email:
+    label: Email
+    placeholder: Votre email
+  password:
+    label: Mot de passe
+    placeholder: Votre mot de passe
+  btn:
+    login: Connexion
+    register: Inscription
+  forgot: Mot de passe oublié ?
+
+# newsletter in news section
+Do not miss any news: Ne ratez plus aucune actualité
+Subscribe to the newsletter: Inscrivez vous à la newsletter
+Register: S'inscrire
+
+#newsletter footer
+newsletter:
+  title: Newsletter
+  text: Inscrivez-vous et ne ratez plus aucune nouvelle
+  checkbox1: je souhaite recevoir les dernières actualités
+  checkbox2: je souhaite être tenu informé des nouveaux projets publiés
+
+La vidéo qui vous explique tout: La vidéo qui vous explique tout
+recent_event: Événements récents
+see_more: Voir tous les événements
+Home: 'Accueil'

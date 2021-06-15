@@ -1,0 +1,6 @@
+{% if object.avatar %}
+    {% set avatar = vich_uploader_asset(object, 'imageFile') %}
+{% else %}
+    {% set avatar = 'upload/users/empty.jpg' %}
+{% endif %}
+<img class="avatar avatar-mini" alt="{{ object.fullName }}" src="{{ avatar }}"/>

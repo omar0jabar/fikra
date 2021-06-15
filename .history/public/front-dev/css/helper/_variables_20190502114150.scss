@@ -1,0 +1,73 @@
+/* color  */
+
+$heading-2: #1e303d;
+$jaune-1: #ffd800;
+$jaune-2: #ffde6b;
+$marzipan: #f5dd92;
+$orange: #ff963b;
+$paarl :#995426;
+$rouge: #c61833;
+$rose: #e40050;
+$rose-1: #e5004e;
+$bleu: #00a7d4;
+$gris-1: #303030;
+$gris-2: #606060;
+$gris-3: #dfdfdf;
+$gris-4: #f8f8f8;
+$gris-5: #5f5f5f;
+$gris-6: #f9f9f9;
+$gris-7: #505050;
+$gris-8: #3a3a3a;
+$gris-9: #c7c7c7;
+$gris-10: #2e2e2e;
+$gris-11: #5c5c5c;
+$noir: #1a1a1a;
+$noir-1: #000000;
+$white: #ffffff;
+
+/* fonts
+DIN Pro (condensed)
+Permanent Marker
+Helvetica
+
+*/
+
+$font-base: 'Fira Sans';
+$font-base-2: 'DIN Pro Cond';
+$font-second: 'Permanent Marker';
+$font-icon: 'icomoon';
+
+/* page width*/
+
+$max-w :1200px;
+$page: 1048px;
+$page-content: 1024px;
+$page-min: 744px;
+//Define Breakpoints var -----------------------------
+$large-breakpoint-desk-4k: 1910px !default;
+$large-breakpoint-desk: 1370px !default;
+$small-breakpoint-desk: 1290px !default;
+$small-breakpoint-desk-1: 1090px !default;
+$large-breakpoint-tab: 1025px !default;
+$small-breakpoint-tab: 992px !default;
+$breakpoint-mobile: 641px !default;
+$breakpoint-mobile-xs: 324px !default;
+$breakpoint-mobile-landscape: 738px !default;
+$screen: "only screen" !default;
+$small-up: $screen !default;
+$desk-4k: "#{$screen} and (min-width: #{($large-breakpoint-desk-4k)})" !default;
+$desk-max: "#{$screen} and (max-width: #{($large-breakpoint-desk)})" !default;
+$desk-min: "#{$screen} and (max-width: #{($small-breakpoint-desk)})" !default;
+$desk-min-1: "#{$screen} and (max-width: #{($small-breakpoint-desk-1)})" !default;
+$tab-max: "#{$screen} and (max-width: #{($large-breakpoint-tab)})" !default;
+$tab-min: "#{$screen} and (max-width: #{($small-breakpoint-tab)})" !default;
+$tab-min-landscape: "#{$screen} and (orientation: #{($breakpoint-mobile-landscape) }) and (orientation: landscape)" !default;
+$mobile: "#{$screen} and (max-width: #{($breakpoint-mobile)})" !default;
+$mobile-xs: "#{$screen} and (max-width: #{($breakpoint-mobile-xs)})" !default;
+// @media #{$desk-4k} {}
+// @media #{$desk-max} {}
+// @media #{$desk-min} {}
+// @media #{$desk-min-1} {}
+// @media #{$tab-max} {}
+// @media #{$tab-min} {}
+// @media #{$mobile} {}

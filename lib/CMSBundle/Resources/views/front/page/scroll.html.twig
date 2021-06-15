@@ -1,0 +1,30 @@
+{% trans_default_domain 'page' %}
+
+{% if pagination|length > 0 %}
+   {% for page in pagination %}
+      <div class="col-md-4 my-3">
+         <div class="card ">
+            {% if page.bannerDesktop is not empty %}
+               {% set cover = "upload/cms/pages-public/" ~ page.bannerDesktop %}
+            {% else%}
+               {% set cover = 'http://placehold.it/400x300' %}
+            {% endif %}
+            <div class="card-img-top" style="background-image: url({{ cover }})"></div>
+            <div class="card-body">
+               {% set link = path('cmsbundle_page_show', { id: page.id, slug: page.slug}) %}
+               <h4 class="card-title"><a href="{{ link }}">
+                     {{ page.title }}
+                  </a></h4>
+               <a href="{{ link}}" class="btn btn-primary">{% trans %}show{% endtrans %}</a>
+            </div>
+         </div>
+      </div>
+
+      <br>
+   {% endfor %}
+
+{%  else %}
+   <div class="col-md-12 text-center">
+      <div id='no-more' style="color:#ccc"><h3>{% trans %}no_more_results{% endtrans %}</h3></div>
+   </div>
+{% endif %}

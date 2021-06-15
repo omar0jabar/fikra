@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'message' %}
+
+{% block title %}{% trans %}Messages{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="dashboard-project">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 sidebar-project-menu">
+                    {#<div id="accordion" class="accordion">
+                        {% include 'startuper/dashboard/_menu_documents.html.twig' %}
+                    </div>#}
+                    {% include 'startuper/dashboard/_menu.html.twig' %}
+                </div>
+                <div class="col-lg-9 sidebar-project-content">
+
+                    <div class="project-table my-messages">
+                        {% include 'partials/_notice.html.twig' %}
+                        <h3>{% trans %}My messages{% endtrans %}</h3>
+                        {% include 'partials/_notice.html.twig' %}
+
+                        <div class="table-head">
+                            <div class="row table-row">
+                                <div class="col-md-3 project">
+                                    <strong>
+                                        {% trans %}Project{% endtrans %}
+                                    </strong>
+                                </div>
+                                <div class="col-md-7 object">
+                                    <strong>
+                                        {% trans %}Object{% endtrans %}
+                                    </strong>
+                                </div>
+                                <div class="col-md-2 date">
+                                    <strong>
+                                        {% trans %}Date{% endtrans %}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-body">
+                            {% if pagination|length > 0 %}
+                                {% for message in pagination %}
+                                    {% set class = "" %}
+                                    {% if message.isSeen(app.user) == 1 %}
+                                        {% set class = "active" %}
+                                    {% endif %}
+                                    {% set link = path('investor_reply_message', {id: message.id}) %}
+                                    <a href="{{ link }}">
+                                        <div class="row table-row {{ class }}">
+                                            <div class="col-md-3 project">
+                                                {{ message.project.name }}
+                                            </div>
+                                            {% set countResponse = message.responses|length %}
+                                            <div class="col-md-7 object">
+                                                {{ message.object }}
+                                                ({{ countResponse }} Message{% if countResponse > 1 %}s{% endif %})
+                                            </div>
+                                            <div class="col-md-2 date">
+                                                {{ message.createdAt|date('d/m/Y H:i:s') }}
+                                            </div>
+                                        </div>
+                                    </a>
+                            {% endfor %}
+                            {% else %}
+                                <div class="row">
+                                    <div class="text-center table-active">
+                                        {% trans %}No Message{% endtrans %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+
+                    {% include 'startuper/dashboard/_actus.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'startuper' %}
+
+{% set startuper = app.user %}
+
+{% block title %}{% trans %}Your profile{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="edit-profil">
+        <div class="profile-content">
+            <div class="container">
+                {% include 'partials/_notice.html.twig' %}
+                <div class="row justify-content-center">
+                    <div class="col-md-10 p-0">
+                        <div class="row">
+                        <div class="col-md-12 p-0 profile-avatar">
+                            {% set object = app.user %}
+                            {% include 'partials/_avatar.html.twig' %}
+                        </div>
+                        <div class="col-md-12 p-0">
+                            <h2>{{ startuper.fullName }}</h2>
+                            <a href="{{ path('startuper_profile_edit') }}" class="btn btn-bg-red btn-h34 btn-w15">
+                                <i class="icon-controls"></i> {% trans %}Modify my profile{% endtrans %}
+                            </a>
+                            <a href="{{ path('startuper_change_password') }}" class="btn btn-bg-blue btn-h34 btn-w15">
+                                <i class="icon-controls"></i> {% trans %}Change my password{% endtrans %}
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profil-infos">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 p-0">
+                        <table class="table">
+                            <tr>
+                                <th>{% trans %}Birthday{% endtrans %}</th>
+                                <td>
+                                    {% set date = startuper.birthday %}
+                                    {% include 'date/_normal.html.twig' %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{% trans %}Email{% endtrans %}</th>
+                                <td>{{ startuper.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans %}Phone{% endtrans %}</th>
+                                <td>{{ startuper.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans %}City{% endtrans %}</th>
+                                <td>{{ startuper.city }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

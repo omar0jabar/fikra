@@ -1,0 +1,58 @@
+// PAGE ABOUT US
+.about-us {
+  .container-section-block {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    min-height: 400px;
+    // text-align: center;
+    @media #{$tab-min} {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .bg-secondary {
+      height: 300px
+    }
+
+    .content {
+      //padding-top: 20px;
+      //padding-bottom: 20px;
+    }
+
+    img {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    
+    .btn {
+      margin: 0 10px 10px 0;
+    }
+
+
+
+
+  }
+}
+
+
+.center-x {
+  .content {
+    display: flex !important;
+    flex-flow: column !important;
+    align-items: center !important;
+  }
+}.center-y {
+  .content {
+    display: flex !important;
+    flex-flow: column !important;
+    justify-content: center !important;
+  }
+}
+.center-xy {
+  .content {
+    display: flex !important;
+    flex-flow: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}

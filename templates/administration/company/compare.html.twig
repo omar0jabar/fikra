@@ -1,0 +1,318 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% set locale = app.request.locale %}
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box box-success">
+            <div class="box-header">
+               <h3>{% trans %}Approved company{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+
+               <label for="">{% trans %}form.logoFile.label{% endtrans %}</label><br>
+               {% if approvedCompany.logoName %}
+                  {% set logo = approvedCompany.logoPath %}
+                  {% else %}
+                  {% set logo = asset('assets/img/project_logo_180.png') %}
+               {% endif %}
+               <img src="{{ logo }}" alt="" class="logo mb-3">
+
+               <br>
+               <label for="">{% trans %}form.coverFile.label{% endtrans %}</label>
+               {% if approvedCompany.coverName %}
+                  {% set cover = approvedCompany.coverPath %}
+               {% else %}
+                  {% set cover = asset('assets/img/project_cover.png') %}
+               {% endif %}
+
+               <img src="{{ cover }}" alt="" class="img-responsive">
+
+            </div><!-- /.box-body -->
+         </div>
+      </div>
+
+      <!-- DRAFT PROJECT -->
+
+      <div class="col-md-6">
+         <div class="box box-warning">
+            <div class="box-header">
+               <h3>{% trans %}Draft company{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+
+               <label for="">{% trans %}form.logoFile.label{% endtrans %}</label><br>
+               {% if company.logoName %}
+                  {% set logo = company.logoPath %}
+               {% else %}
+                  {% set logo = asset('assets/img/project_logo_180.png') %}
+               {% endif %}
+               <img src="{{ logo }}" alt="" class="logo mb-3">
+
+               <br>
+               <label for="">{% trans %}form.coverFile.label{% endtrans %}</label>
+               {% if company.coverName %}
+                  {% set cover = company.coverPath %}
+               {% else %}
+                  {% set cover = asset('assets/img/project_cover.png') %}
+               {% endif %}
+
+               <img src="{{ cover }}" alt="" class="img-responsive">
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Company{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <label for="">{% trans %}form.name.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.name != company.name %} border-danger{% endif %}">
+                  {{ approvedCompany.name }}
+               </div>
+
+               <label for="">{% trans %}form.associationName.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.associationName != company.associationName %} border-danger{% endif %}">
+                  {{ approvedCompany.associationName }}
+               </div>
+
+               <label for="">{% trans %}form.shortDescription.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.description != company.description %} border-danger{% endif %}">
+                  {{ approvedCompany.description }}
+               </div>
+
+               <label for="">{% trans %}form.description.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.text != company.text %} border-danger{% endif %}">
+                  {{ approvedCompany.text|raw }}
+               </div>
+
+               <label for="">{% trans %}form.domains.label{% endtrans %}</label>
+               <div class="view-project{% if updatedDomains == true %} border-danger{% endif %}">
+                  <ul>
+                     {% for domain in approvedCompany.domain %}
+                        {% set label = domain.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = domain.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">{% trans %}form.fundingObjective.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.fundingObjective != company.fundingObjective %} border-danger{% endif %}">
+                  {{ approvedCompany.fundingObjective|number_format(0, "", " ") }} MAD
+               </div>
+
+               <label for="">{% trans %}form.RIB.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.RIB != company.RIB %} border-danger{% endif %}">
+                  {{ approvedCompany.RIB|default('#') }}
+               </div>
+
+               <label for="">{% trans %}form.city.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.city != company.city %} border-danger{% endif %}">
+                  {{ approvedCompany.city|default('vide') }}
+               </div>
+
+               <label for="">{% trans %}form.duration.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.duration != company.duration %} border-danger{% endif %}">
+                  {{ approvedCompany.duration }} {% trans %}Month{% endtrans %}
+               </div>
+
+               <label for="">{% trans %}form.webSite.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.webSite != company.webSite %} border-danger{% endif %}">
+                  {% if  approvedCompany.webSite is not empty %}
+                     <a href="{{ approvedCompany.webSite }}" target="_blank">{{ approvedCompany.webSite }}</a>
+                  {% else %}
+                     {{ approvedCompany.webSite|default("#") }}
+                  {% endif %}
+               </div>
+
+               <label for="">{% trans %}form.useOfFundsCollecteds.label{% endtrans %}</label>
+               <div class="view-project{% if updatedUseFunds == true %} border-danger{% endif %}">
+                  <ul>
+                     {% for use in approvedCompany.useOfFundsCollected %}
+                        <li>{{ use.description }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Company{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               <label for="">{% trans %}form.name.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.name != company.name %} border-success{% endif %}">
+                  {{ company.name }}
+               </div>
+
+               <label for="">{% trans %}form.associationName.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.associationName != company.associationName %} border-success{% endif %}">
+                  {{ company.associationName }}
+               </div>
+
+               <label for="">{% trans %}form.shortDescription.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.description != company.description %} border-success{% endif %}">
+                  {{ company.description }}
+               </div>
+
+               <label for="">{% trans %}form.description.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.text != company.text %} border-success{% endif %}">
+                  {{ company.text|raw }}
+               </div>
+
+               <label for="">{% trans %}form.domains.label{% endtrans %}</label>
+               <div class="view-project{% if updatedDomains == true %} border-success{% endif %}">
+                  <ul>
+                     {% for domain in company.domain %}
+                        {% set label = domain.labelFr %}
+                        {% if locale == "en" %}
+                           {% set label = domain.labelEn %}
+                        {% endif %}
+                        <li>{{ label }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+               <label for="">{% trans %}form.fundingObjective.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.fundingObjective != company.fundingObjective %} border-success{% endif %}">
+                  {{ company.fundingObjective|number_format(0, "", " ") }} MAD
+               </div>
+
+               <label for="">{% trans %}form.RIB.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.RIB != company.RIB %} border-success{% endif %}">
+                  {{ company.RIB|default('#') }}
+               </div>
+
+               <label for="">{% trans %}form.city.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.city != company.city %} border-success{% endif %}">
+                  {{ company.city|default('vide') }}
+               </div>
+
+               <label for="">{% trans %}form.duration.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.duration != company.duration %} border-success{% endif %}">
+                  {{ company.duration }} {% trans %}Month{% endtrans %}
+               </div>
+
+               <label for="">{% trans %}form.webSite.label{% endtrans %}</label>
+               <div class="view-project{% if approvedCompany.webSite != company.webSite %} border-success{% endif %}">
+                  {% if  company.webSite is not empty %}
+                     <a href="{{ company.webSite }}" target="_blank">{{ company.webSite }}</a>
+                  {% else %}
+                     {{ company.webSite|default("#") }}
+                  {% endif %}
+               </div>
+
+               <label for="">{% trans %}form.useOfFundsCollecteds.label{% endtrans %}</label>
+               <div class="view-project{% if updatedUseFunds %} border-success{% endif %}">
+                  <ul>
+                     {% for use in company.useOfFundsCollecteds %}
+                        <li>{{ use.description }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Document{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               {% if approvedCompany.documents|length > 0 %}
+                  <div class="panel panel-{% if documentsUpdated %}danger{% else %}default{% endif %}">
+                     <div class="panel-heading">
+                        <h1 class="panel-title">{{ 'Documents'|trans }}</h1>
+                     </div>
+                     <div class="panel-body">
+                        {% for document in approvedCompany.documents %}
+                           <label for="">{{ 'form.documentType.label'|trans }}</label>
+                           <div class="view-project">
+                              {{ document.type|default("#") }}
+                           </div>
+                           <label for="">{{ 'form.documentFile.label'|trans }}</label>
+                           <div class="view-project">
+                              <a href="{{ document.documentPath }}" target="_blank">
+                                 {{ document.name|default("#") }}
+                              </a>
+                           </div>
+                        {% endfor %}
+                     </div>
+                  </div><!-- /.panel -->
+               {% endif %}
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="box">
+            <div class="box-header">
+               <h3>{% trans %}Document{% endtrans %}</h3>
+            </div>
+            <div class="box-body">
+               {% if company.documents|length > 0 %}
+                  <div class="panel panel-{% if documentsUpdated %}success{% else %}default{% endif %}">
+                     <div class="panel-heading">
+                        <h1 class="panel-title">{{ 'Documents'|trans }}</h1>
+                     </div>
+                     <div class="panel-body">
+                        {% for document in company.documents %}
+                           <label for="">{{ 'form.documentType.label'|trans }}</label>
+                           <div class="view-project">
+                              {{ document.type|default("#") }}
+                           </div>
+                           <label for="">{{ 'form.documentFile.label'|trans }}</label>
+                           <div class="view-project">
+                              {% if company.name %}
+                                 <a href="{{ vich_uploader_asset(document, 'file') }}" target="_blank">
+                                    {{ document.name|default("#") }}
+                                 </a>
+                              {% endif %}
+                           </div>
+                        {% endfor %}
+                     </div>
+                  </div><!-- /.panel -->
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+
+   {% if company.isUpdated == true %}
+   <div class="sonata-ba-form-actions well well-small form-actions">
+      <div class="text-center">
+         <a href="{{ admin.generateObjectUrl('approve', company) }}" class="btn btn-success btn-lg">
+            <i class="fa fa-check"></i> {% trans %}Approve{% endtrans %}
+         </a>
+         {% if company.isRejected == false  %}
+            <a href="{{ admin.generateObjectUrl('reject_update', company) }}" class="btn btn-danger btn-lg">
+               <i class="fa fa-ban"></i> {% trans %}Reject{% endtrans %}
+            </a>
+         {% endif %}
+      </div>
+   </div>
+   {% endif %}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+form:
+  file:
+    placeholder: Choose ...
+  document_type:
+    placeholder: -- Choose --
+
+Public document: Public document (free access by all authenticated users on the site)
+Confidential document: Confidential document (access restricted to users authorized by the project leader)

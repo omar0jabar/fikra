@@ -1,0 +1,378 @@
+.actus-listings {
+  padding-top: 50px;
+  padding-bottom: 60px;
+  @media #{$tab-max} {
+    padding-top: 10px;
+    //padding-bottom: 40px;
+  }
+  .block-tabs {
+    //@media #{$mobile} {
+      box-shadow: 0 0 12px rgba($black, .3);
+    //}
+  }
+
+  .c-heading {
+    margin-bottom: 30px;
+    @media #{$tab-max} {
+      font-size: rem(36px);
+    }
+    @media #{$mobile} {
+      margin-bottom: 15px;
+    }
+  }
+
+  .card-actus {
+    .card-title {
+      //overflow: hidden;
+      //text-overflow: ellipsis;
+      //display: -webkit-box;
+      //height: 60px;
+      //-webkit-line-clamp: 2;
+      //-webkit-box-orient: vertical;
+    }
+    .card-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      max-height: 118px;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  #articles {
+    &.row {
+      margin-left: -15px;
+      margin-right: -15px;
+      @media #{$tab-max} {
+        margin: 0;
+      }
+    }
+  }
+
+  &.events {
+    min-height: calc(100vh - 650px);
+  }
+}
+
+// Page Actualité detail
+.article-detail {
+  padding: 0 0 70px 0; 
+  @media #{$tab-min} {
+    padding-bottom: 30px;
+  }
+
+  .row {
+    margin-bottom: 20px;
+    @media #{$tab-min} {
+      margin-bottom: 10px;
+    }
+
+    .row {
+      // margin-bottom: 0;
+      margin: 0 -15px 0;
+      // @media #{$tab-min} {
+      //   margin: 0;
+      // }
+    }
+  }
+
+  .link-target {
+    padding: 10px 0 20px;
+    a, i {
+      font-size: rem(18px);
+      font-weight: 600;
+      color: $papaGreen-1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a {
+      text-decoration: underline;
+    }
+    i {
+      margin-left: 6px;
+    }
+  }
+
+
+
+  img {
+    @media #{$tab-min} {
+      margin-bottom: 25px;
+    }
+  }
+
+  .back-to-actus {
+    margin-bottom: 24px;
+    @media #{$tab-min} {
+      margin-bottom: 10px;
+    }
+    a {
+      font-size: rem(18px);
+      font-weight: 500;
+      color: $cloudBurst;
+      position: relative;
+      padding-left: 30px;
+      transition: all .3s ease-in-out;
+
+      i {
+        font-weight: 600;
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%) rotate(180deg);
+        transition: all .3s ease-in-out;
+      }
+
+      &:hover {
+        i {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .banner-actus {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 24px;
+    @media #{$tab-min} {
+      height: 300px;
+    }
+
+    img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .c-heading {
+    margin-bottom: 37px;
+    color: $black;
+    @media #{$tab-max} {
+      font-size: rem(42px);
+      margin-bottom: 20px;
+    }
+    @media #{$mobile} {
+      margin-bottom: 15px;
+    }
+  }
+
+  h2 {
+    font-size: rem(52px);
+    color: $black;
+  }
+
+  h3 {
+    font-size: rem(32px);
+    color: $black;
+    @media #{$tab-max} {
+      margin-bottom: 16px;
+    }
+    @media #{$mobile} {
+      margin-bottom: 10px;
+    }
+  }
+
+  p {
+    font-size: rem(18px);
+    font-weight: 300;
+    color: $black;
+    margin-bottom: 14px;
+    word-break: break-word;
+  }
+
+  .video-content {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56%;
+    position: relative;
+    overflow: hidden;
+    margin: 0px auto;
+    @media #{$tab-max} {
+      width: 100%;
+      padding-bottom: 60%;
+    }
+    @media #{$tab-min} {
+      margin-bottom: 10px;
+    }
+
+    iframe {
+      width: 100% !important;
+      height: 100% !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .block-addis {
+    margin-bottom: 40px;
+    @media #{$tab-min} {
+      margin-bottom: 15px;
+    }
+
+    .addis-icons {
+      text-align: right;
+
+      @media #{$tab-min-2} {
+        text-align: left;
+      }
+    }
+
+    .at-style-responsive {
+      .at-share-btn {
+        padding: 0;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        @media #{$tab-min-2} {
+          margin-right: 5px;
+          margin-bottom: 5px;
+        }
+      }
+      .at-label {
+        font-size: 0 !important;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .c-tags {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    @media #{$tab-min-2} {
+      margin-bottom: 10px;
+    }
+  }
+
+  .tags {
+    margin: 0;
+    padding: 0;
+
+    div {
+      display: inline-block;
+      &:not(:last-child) {
+        padding-right: 20px;
+        @media #{$tab-min} {
+          padding-right: 15px;
+        }
+      }
+      h5 {
+        font-size: rem(18px);
+        font-weight: 400;
+        margin: 0;
+        color: $gray;
+      }
+      a {
+        color: $gray;
+        span {
+          font-weight: 400;
+          font-family: $font-base;
+        }
+      }
+    }
+  }
+
+  .actusCardStyle {
+    .card-img-top {
+      height: 240px;
+    }
+  }
+  .cardActusParent {
+    @media #{$tab-min} {
+      margin-bottom: 20px;
+    }
+    .card-actus {
+
+      .card-img-top {
+        height: 210px;
+      }
+
+      .card-title {
+        font-size: rem(20px);
+      }
+      .card-text {
+        font-size: rem(16px);
+      }
+
+      .card-footer {
+        padding: 15px 20px 10px;
+      }
+    }
+  }
+
+  .detail-tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 7px;
+      .btn {
+        font-size: rem(14px);
+        font-weight: 400;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        @media #{$mobile} {
+          margin-right: 5px;
+          margin-bottom: 5px;
+        }
+      }
+  }
+  ul {
+    padding-left: 15px;
+    margin-bottom: 20px;
+
+    @media #{$desk-min} {
+        margin-bottom: 14px;
+    }
+    li {
+        position: relative;
+        margin-bottom: 8px;
+        color: $black;
+        font-size: rem(18px);
+        font-weight: 300;
+
+        &:before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: $cloudBurst;
+            position: absolute;
+            top: 8px;
+            left: -15px;
+            border-radius: 50%;
+        }
+    }
+  }
+  
+  .btn {
+    margin: 0 10px 10px 0;
+  }
+}
+
+.actus-header-banner {
+  background-color: $white;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .banner-content {
+    max-width: 1406px;
+    margin: 0 auto;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translateY(-50%);
+  }
+}

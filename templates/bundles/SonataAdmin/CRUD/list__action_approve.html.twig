@@ -1,0 +1,15 @@
+{% if object.isApproved %}
+  {% if object.isUpdated %}
+     <a href="{{ admin.generateObjectUrl('visualise', object) }}" class="btn btn-sm btn-default">
+        <i class="fa fa-eye"></i> Visualiser
+     </a>
+  {% else %}
+     <a href="{{ admin.generateObjectUrl('approve', object) }}" class="btn btn-sm btn-default">
+        <i class="fa fa-ban"></i> Disqualifier
+     </a>
+  {% endif %}
+{% else %}
+    <a href="{{ admin.generateObjectUrl('approve', object) }}" class="btn btn-sm btn-default">
+        <i class="fa fa-check"></i> Qualifier
+    </a>
+{% endif %}

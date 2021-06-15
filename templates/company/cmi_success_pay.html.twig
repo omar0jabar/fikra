@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Payment successful'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="pay-success">
+        <div class="container">
+            <div class="row justify-content-center pay-success-content">
+                <div class="col-md-12 text-center c-section-intro">
+                    <h1>{{ 'Payment successful'|trans }}</h1>
+                    <p>
+                        {% trans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit.{% endtrans %}
+                    </p>
+                </div>
+                <div class="col-md-12 c-section-table">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ 'Payment details'|trans }}</div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <th>{{ 'Payment date'|trans }}</th>
+                                    <td>{{ cmiData['EXTRA_TRXDATE'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Payment number'|trans }}</th>
+                                    <td>{{ cmiData['acqStan'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Authorization code'|trans }}</th>
+                                    <td>{{ cmiData['AuthCode'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Method of payment'|trans }}</th>
+                                    <td>{{ cmiData['EXTRA_CARDBRAND'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Payment card number'|trans }}</th>
+                                    <td>{{ cmiData['maskedCreditCard'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Transaction number'|trans }}</th>
+                                    <td>{{ cmiData['TransId'] }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 c-section-table">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ 'Details of the order'|trans }}</div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <th>{{ 'Identifiant'|trans }}</th>
+                                    <td>{{ cmiData['ReturnOid'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Amount'|trans }}</th>
+                                    <td>{{ cmiData['amount'] }} MAD</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 c-section-table">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ 'Customer information'|trans }}</div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <th>{{ 'Name'|trans }}</th>
+                                    <td>{{ cmiData['billToName'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Address'|trans }}</th>
+                                    <td>{{ cmiData['billToCountry'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Phone'|trans }}</th>
+                                    <td>{{ cmiData['tel'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'Email'|trans }}</th>
+                                    <td>{{ cmiData['email'] }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

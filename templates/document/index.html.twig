@@ -1,0 +1,345 @@
+{% extends 'base.html.twig' %}
+
+
+{% trans_default_domain 'document' %}
+
+{% block title %}PFE Startup Document{% endblock %}
+
+{% block body %}
+<div  id="documents">
+	<div class="header-banner">
+		{% if header and header.bannerName is not empty %}
+			{% set banner = vich_uploader_asset(header, 'bannerFile') %}
+		{% else %}
+			{% set banner = asset('assets/img/Banner.png') %}
+		{% endif %}
+		{#<img src="./../assets/img/visuel.png" class="img-responsive w-100">#}
+		<img src="{{ banner }}" class="img-responsive w-100" alt>
+		<div class="banner-content">
+			{{ header ? header.description|raw : '' }}
+		</div>
+	</div><!-- /.jumbotron -->
+
+
+	<div class="container">
+		<div class="col-12">
+			<ul class="nav nav-tabs col-md-12" id="myTabs">
+				<li class="nav-item col-md-4">
+					{#<a class="nav-link a_la_une {% if type == 'tools' %} active {% endif %}" data-toggle="tab" href="#a_la_une">#}
+					<a class="nav-link a_la_une {% if type == 'tools' %} active {% endif %}" href="{{ path('global_document', {type: 'tools'}) }}">
+						<i class="icon-Docutheque--la-une"></i>
+						{% trans %}In the headlines{% endtrans %}
+					</a>
+				</li>
+				<li class="nav-item col-md-4">
+					{#<a class="nav-link document_public {% if type == 'document-public' %} active {% endif %}" data-toggle="tab" href="#document_public">#}
+					<a class="nav-link document_public {% if type == 'document-public' %} active {% endif %}" href="{{ path('global_document', {type: 'document-public'}) }}">
+						<i class="icon-documents-publics"></i>
+						{% trans %}Public documents{% endtrans %}
+					</a>
+				</li>
+				<li class="nav-item col-md-4">
+					{#<a class="nav-link auto_production {% if type == 'auto-production' %} active {% endif %}" data-toggle="tab" href="#auto_production">#}
+					<a class="nav-link auto_production {% if type == 'auto-production' %} active {% endif %}" href="{{ path('global_document', {type: 'auto-production'}) }}">
+					   <i class="icon-auto-production"></i>
+					   {% trans %}Auto-productions{% endtrans %}
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade {% if type == 'tools' %}active show{% endif %}" id="a_la_une">
+
+				<h4>{% trans %}The startupers toolbox{% endtrans %}</h4>
+
+				<div class="row">
+					<div class="col-lg-7 col-md-12">
+						<div class="jumbotron">
+							{#
+							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="min-height: 600px;">
+								<div class="carousel-inner">
+									{% for key,documents in tools %}
+										<div class="carousel-item {% if key == 0 %} active {% endif %} ">
+											{% for document in documents %}
+												{% set link = path('download_document', {'id': document.id, 'entity': 'Tools'}) %}
+												<div class="row">
+													<div class="col-md-3">
+														<img src="{{document.getLinkIcon()}}" alt="">
+													</div>
+													<div class="col-md-9">
+														<h2>{{ document.title }}</h2>
+														<p>{{ document.content }}</p>
+
+														{% if app.user %}
+															<a href="{{ link }}" target="_BLANK" class="btn btn-primary">
+														{% else %}
+															{% if app.session.get('newsletter') is empty or app.session.get('newsletter') == "NotRegistred" %}
+																<a href="{{ link }}" target="_BLANK" data-toggle="modal" class="btn btn-primary"
+															   		data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+															{% else %}
+																<a href="{{ link }}" target="_BLANK" class="btn btn-primary">
+															{% endif %}
+														{% endif %}
+															{% trans %}Download{% endtrans %}
+														</a>
+													</div>
+												</div>
+												<hr class="my-4">
+											{% endfor %}
+										</div>
+									{% endfor %}
+								</div>
+								<ol class="CarouselDots">
+									{% for key,documents in tools %}
+										<li data-target="#carouselExampleIndicators" data-slide-to="{{key}}"
+											class="{% if key == 0 %} active {% endif %}">
+
+										</li>
+									{% endfor %}
+								</ol>
+							</div>
+							#}
+							<div id="tools">
+								{% for document in tools %}
+									{% set link = path('download_document', {'id': document.id, 'entity': 'Tools'}) %}
+									<div class="row">
+										<div class="col-md-3">
+											<img src="{{document.getLinkIcon()}}" alt="">
+										</div>
+										<div class="col-md-9">
+											<h2>{{ document.title }}</h2>
+											<p>{{ document.content }}</p>
+
+											{% if app.user %}
+												<a href="{{ link }}" target="_BLANK" class="btn btn-primary">
+											{% else %}
+												<a href="{{ link }}" target="_BLANK" data-toggle="modal" class="btn btn-primary"
+												   data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+											{% endif %}
+													{% trans %}Download{% endtrans %}
+												</a>
+										</div>
+									</div>
+									<hr class="my-4">
+								{% endfor %}
+							</div>
+							<div class="text-center">
+								<input type="hidden" id="offsetTools" value="3">
+								{% if moreTools %}
+									<a id="loadMoreTools" href="javascript:loadMoreTools();" class="btn btn-secondary">
+										{% trans %}Load more{% endtrans %}
+									</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5 col-md-12">
+						<div class="jumbotron jumbotronRight">
+							<div class="text-center">
+								<h2>{% trans %}Latest public documents{% endtrans %}</h2>
+							</div>
+							<hr class="my-hr">
+							{% for document in publicDocuments %}
+								{% set link = path('download_document', {'id': document.id, 'entity': 'global_document'}) %}
+								{% if app.user %}
+									<a href="{{ link }}" target="_BLANK">
+								{% else %}
+									<a href="{{ link }}" target="_BLANK"
+										data-toggle="modal" data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+								{% endif %}
+									<div class="row">
+										<div class="col-3"><p class="docDate">{{ document.date|date('d/m/Y')}}</p></div>
+										<div class="col-8"><p class="docTitle">{{ document.title}}</p></div>
+										<div class="col-1 p-0">
+											<img src="/images/{{ document.fileExtension }}.svg" width="26" alt="">
+										</div>
+									</div>
+								</a>
+								<hr class="my-hr">
+							{% endfor %}
+							<div class="row text-center">
+								{#<a data-toggle="tab" href="#" class="more" data-tab="document_public" onclick="active(this)">#}
+								<a href="{{ path('global_document', {type: 'document-public'}) }}" class="more">
+									{% trans %}All the documents{% endtrans %}
+								</a>
+							</div>
+						</div>
+						<div class="jumbotron jumbotronRight">
+							<div class="text-center">
+								<h2>{% trans %}Latest Auto-productions{% endtrans %}</h2>
+							</div>
+							<hr class="my-hr">
+							{% for document in autoProductions %}
+								{% set link = path('download_document', {'id': document.id, 'entity': 'global_document'}) %}
+							{% if app.user %}
+									<a href="{{ link }}" target="_BLANK">
+								{% else %}
+									<a href="{{ link }}" target="_BLANK" data-toggle="modal"
+										data-target="#ModalNewsletter" onclick="javascript:getLinkDownload(this)">
+								{% endif %}
+											<div class="row">
+												<div class="col-3"><p class="docDate">{{ document.date|date('d/m/Y')}}</p></div>
+												<div class="col-8"><p class="docTitle">{{ document.title}}</p></div>
+												<div class="col-1 p-0">
+													<img src="/images/{{ document.fileExtension }}.svg" width="26" alt="">
+												</div>
+											</div>
+										</a>
+								<hr class="my-hr">
+							{% endfor %}
+							<div class="row text-center">
+								{#<a data-toggle="tab" href="#" class="more" data-tab="auto_production" onclick="active(this)">#}
+								<a href="{{ path('global_document', {type: 'auto-production'}) }}" class="more">
+									{% trans %}All the documents{% endtrans %}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="tab-pane fade {% if type == 'document-public' %}active show{% endif %}" id="document_public">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<form class="col-12 p-0" method="get" action="{{path('global_document', {type: 'document-public'})}}">
+						<div class="row">
+							<div class="form-group p-0 col-sm-9">
+								<input type="hidden" name="type" value="public">
+								<input class="form-control" id="searchPublicDoc" type="text" name="q"  placeholder="{% trans %}Search{% endtrans %}">
+								<button class="btn btn-secondary " type="button" onclick="javascript:searchPublicDocsOnclick();"><i class="icon-search"></i></button>
+							</div>
+							<div class="form-group p-0 col-sm-3">
+								<select class="form-control select2" name="date" id="searchPublicDocDate" placeholder="{% trans %}All{% endtrans %}">
+									<option></option>
+									{% for date in datesPublicDocs %}
+										<option value="{{date.year}}" >{{date.year}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</form>
+				</nav>
+				<div class="jumbotron">
+					<div class="row mb-4">
+						<div class="col-8"><p>Document</p></div>
+						<div class="col-2"><p data-title="{% trans %}Date{% endtrans %}">{% trans %}Date of posting{% endtrans %}</p></div>
+						<div class="col-2">
+						</div>
+					</div>
+					<input type="hidden" name="publicIter" id="publicIter" value="0">
+					<input type="hidden" name="limitPublicDoc" id="limitPublicDoc" value="10">
+					<input type="hidden" name="offsetPublicDocument" id="offsetPublicDocument" value="10">
+					<div id="docPub">
+						{% include 'document/search.html.twig' with {'documents': publicDocumentsTab} %}
+					</div>
+					{% if loadMorePublicDoc %}
+						<div class="text-center">
+							<button id="morePublicDoc" class="btn btn-outline-primary">{% trans %}Learn more{% endtrans %}</button>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="tab-pane {% if type == 'auto-production' %}active show{% endif %}" id="auto_production">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<form class="col-12 p-0" method="get" action="{{path('global_document', {type: 'auto-production'})}}">
+						<div class="row">
+							<div class="form-group p-0 col-sm-9">
+								<input type="hidden" name="type" value="auto_production">
+								<input class="form-control" id="searchAutoProduction" type="text" name="q"  placeholder="{% trans %}Search{% endtrans %}">
+								<button type="button" onclick="javascript:searchAutoProdOnclick()"><i class="icon-search"></i></button>
+							</div>
+							<div class="form-group p-0 col-sm-3">
+								<select class="form-control select2" name="date" id="searchAutoDate" placeholder="{% trans %}All{% endtrans %}">
+									<option></option>
+									{% for date in datesAutoProduction %}
+										<option value="{{date.year}}" >{{date.year}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</form>
+				</nav>
+				<div class="jumbotron">
+					<div class="row mb-4">
+						<div class="col-8"><p>Document</p></div>
+						<div class="col-3"><p>{% trans %}Date of posting{% endtrans %}</p></div>
+						<div class="col-1">
+						</div>
+					</div>
+					<input type="hidden" name="limitAutoProduction" id="limitAutoProduction" value="10">
+					<input type="hidden" name="offsetAutoProduction" id="offsetAutoProduction" value="10">
+					<div id="autoProduction">
+						{% include 'document/search.html.twig' with {'documents': autoProductionsTab} %}
+					</div>
+					{% if loadMoreAutoDoc %}
+						<div class="text-center">
+							<button id="moreAutoDoc" class="btn btn-outline-primary">{% trans %}Learn more{% endtrans %}</button>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div class="modal fade" id="ModalNewsletter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">{% trans %}Newsletter Sign-Up{% endtrans %}</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"><i class="icon-close"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="modal-description">
+						{% trans %}To download the documents please subscribe to the newsletter{% endtrans %}
+					</p>
+					<a href="{{ path('startuper_login') }}" class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Login{% endtrans %}</a>
+					<a href="{{ path('startuper_registration') }}" class="btn btn-transparent-black btn-h50 btn-w15">{% trans %}Register{% endtrans %}</a>
+					{#<div class="text-center">
+						<p id="message"></p>
+						<input type="hidden" id="linkDownload">
+					</div>
+					<form id="form-newsletter-docs" method="post">
+						<div class="field email">
+							<label class="label required" for="email">{% trans %}Email{% endtrans %}</label>
+							<input type="email" id="email" name="email-newsletter-docs" class="form-control" placeholder="exemple@exemple.com" required>
+						</div>
+						<div class="field choice">
+							<div class="you-are">
+								<label class="label required" for="">{% trans %}You are{% endtrans %} ?</label>
+							</div>
+							<div class="startuper">
+								<div class="custom-control custom-radio">
+									<input type="radio" id="startuper" name="type" class="custom-control-input type" checked="" value="startuper">
+									<label for="startuper">{% trans %}Startuper{% endtrans %}</label>
+								</div>
+							</div>
+							<div class="investor">
+								<div class="custom-control custom-radio">
+									<input type="radio" id="investor" name="type" class="custom-control-input type" value="investor">
+									<label for="investor">{% trans %}Investor{% endtrans %}</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="champ-requis">
+							<p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+						</div>
+
+						<div class="field submit">
+							<button type="submit" class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Subscribe to the newsletter{% endtrans %}</button>
+						</div>
+					</form>#}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/document.js') }}"></script>
+	<script src="{{ asset('js/newsletter-document.js') }}"></script>
+{% endblock %}
+

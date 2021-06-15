@@ -1,0 +1,153 @@
+sonata_block:
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    title: PFE Startup Admin
+    title_logo: /bundles/sonataadmin/logo_title.png
+    security:
+        handler: sonata.admin.security.handler.role
+    dashboard:
+        groups:
+            Projets:
+                on_top:          true
+                icon: '<i class="fa fa-product-hunt"></i>'
+                items:
+                    - sonata.admin.project
+#            Companies:
+#                label: "Companies"
+#                label_catalogue: 'company'
+#                icon: '<i class="fa fa-building"></i>'
+#                items:
+#                    - sonata.admin.city
+#                    - sonata.admin.domain
+#                    - sonata.admin.company
+#                    - sonata.admin.contributor
+#                    - sonata.admin.company.comment
+#                    - sonata.admin.company.faq
+            Demande documentation:
+                on_top:          true
+                icon: '<i class="fa fa-envelope"></i>'
+                items:
+                    - sonata.admin.request_documentation
+#            Fond:
+#                icon: '<i class="fa fa-file"></i>'
+#                items:
+#                    - sonata.admin.fond
+#                    - sonata.admin.gestionnaire
+#                    - sonata.admin.fondType
+#                    - sonata.admin.secteur
+#                    - sonata.admin.phase
+#                    - sonata.admin.financementType
+#                    - sonata.admin.eligibiliteCritere
+#                    - sonata.admin.depensesType
+#                    - sonata.admin.montant
+            Labels:
+                icon: '<i class="fa fa-tags"></i>'
+#            Documents:
+#                icon: '<i class="fa fa-folder"></i>'
+            Pages:
+                icon: '<i class="fa fa-file"></i>'
+                items:
+                    - route: sonata_admin_page_create
+                      label: Create page
+                    - sonata.admin.pages
+                    - sonata.admin.category_page
+            Articles:
+                icon: '<i class="fa fa-file"></i>'
+                items:
+                    - route: sonata_admin_article_create
+                      label: Create article
+                    - sonata.admin.articles
+                    - sonata.admin.category_article
+#            Events:
+#                icon: '<i class="fa fa-file"></i>'
+#                items:
+#                    - route: sonata_admin_event_create
+#                      label: Create event
+#                    - sonata.admin.events
+#                    - sonata.admin.category_event
+            Partners:
+                icon: '<i class="fa fa-briefcase"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.partner
+            Testimonial:
+                icon: '<i class="fa fa-user"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.testimonial
+            Utilisateurs:
+                icon: '<i class="fa fa-users"></i>'
+            Home:
+                icon: '<i class="fa fa-cog"></i>'
+            Header:
+                icon: '<i class="fa fa-image"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.header
+            Contact info:
+                icon: '<i class="fa fa-info"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.contact_info
+            Contact:
+                icon: '<i class="fa fa-user"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.contact
+            Email template:
+                icon: '<i class="fa fa-file"></i>'
+                on_top:          true
+                items:
+                    - sonata.admin.email_template
+#            Offer Request:
+#                icon: '<i class="fa fa-envelope"></i>'
+#                on_top:          true
+#                items:
+#                    - sonata.admin.offer_request
+    templates:
+        layout:                     'bundles/SonataAdmin/standard_layout.html.twig'
+        ajax:                       '@SonataAdmin/ajax_layout.html.twig'
+        list:                       '@SonataAdmin/CRUD/list.html.twig'
+        show:                       '@SonataAdmin/CRUD/show.html.twig'
+        show_compare:               '@SonataAdmin/CRUD/show_compare.html.twig'
+        edit:                       'bundles/SonataAdmin/CRUD/edit.html.twig'
+        history:                    '@SonataAdmin/CRUD/history.html.twig'
+        preview:                    '@SonataAdmin/CRUD/preview.html.twig'
+        delete:                     '@SonataAdmin/CRUD/delete.html.twig'
+        batch:                      '@SonataAdmin/CRUD/list__batch.html.twig'
+        acl:                        '@SonataAdmin/CRUD/acl.html.twig'
+        action:                     '@SonataAdmin/CRUD/action.html.twig'
+        select:                     '@SonataAdmin/CRUD/list__select.html.twig'
+        filter:                     '@SonataAdmin/Form/filter_admin_fields.html.twig'
+        dashboard:                  '@SonataAdmin/Core/dashboard.html.twig'
+        search:                     '@SonataAdmin/Core/search.html.twig'
+        batch_confirmation:         '@SonataAdmin/CRUD/batch_confirmation.html.twig'
+        inner_list_row:             '@SonataAdmin/CRUD/list_inner_row.html.twig'
+        base_list_field:            '@SonataAdmin/CRUD/base_list_field.html.twig'
+        list_block:                 '@SonataAdmin/Block/block_admin_list.html.twig'
+        user_block:                 'bundles/SonataAdmin/Core/user_block.html.twig'
+        add_block:                  '@SonataAdmin/Core/add_block.html.twig'
+        pager_links:                '@SonataAdmin/Pager/links.html.twig'
+        pager_results:              '@SonataAdmin/Pager/results.html.twig'
+        tab_menu_template:          '@SonataAdmin/Core/tab_menu_template.html.twig'
+        history_revision_timestamp: '@SonataAdmin/CRUD/history_revision_timestamp.html.twig'
+        short_object_description:   '@SonataAdmin/Helper/short-object-description.html.twig'
+        search_result_block:        '@SonataAdmin/Block/block_search_result.html.twig'
+        action_create:              '@SonataAdmin/CRUD/dashboard__action_create.html.twig'
+        button_acl:                 '@SonataAdmin/Button/acl_button.html.twig'
+        button_create:              '@SonataAdmin/Button/create_button.html.twig'
+        button_edit:                '@SonataAdmin/Button/edit_button.html.twig'
+        button_history:             '@SonataAdmin/Button/history_button.html.twig'
+        button_list:                '@SonataAdmin/Button/list_button.html.twig'
+        button_show:                '@SonataAdmin/Button/show_button.html.twig'
+    assets:
+        extra_stylesheets:
+            - 'css/admin.css'
+        # javascript paths to add to the page in addition to the list above
+        extra_javascripts: []
+        # javascript paths to remove from the page
+        remove_javascripts: []

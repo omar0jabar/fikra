@@ -1,0 +1,30 @@
+Contact us: Contact us
+form:
+  firstName:
+    label: First name
+    placeholder: First name...
+  lastName:
+    label: Last name
+    placeholder: Last name...
+  email:
+    label: Email
+    placeholder: Email address ...
+  prefix:
+    phone: Country code
+  phone:
+    label: Phone
+    placeholder: Phone number...
+  object:
+    label: Object
+    placeholder: Object ...
+  message:
+    label: Message
+    placeholder: Message ...
+
+Required Field: Required Field
+
+Send: Send
+
+phone: Phone
+email: Email
+address: Address

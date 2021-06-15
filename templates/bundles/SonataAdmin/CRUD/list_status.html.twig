@@ -1,0 +1,6 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+{% trans_default_domain 'company' %}
+
+{% block field %}
+   {{ value|default('PENDING')|trans }}
+{% endblock field %}

@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Please choose the type of project you wish to submit{% endtrans %}{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+
+    <div class="contact-porteur select-action b-comment-ca-marche">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="c-heading">{% trans %}Please choose the type of project you wish to submit{% endtrans %}</h2>
+            </div>
+            <div class="row justify-content-center">
+
+                <div class="col-lg-6 styleCard-HowToUse">
+                    <div class="card how-to-use-card">
+                        <div class="card-img">
+                            <img src="/assets/img/project_cover.png" alt="" class="img-responsive">
+                        </div>
+                        <div class="card-body">
+                            <div class="text-light">
+                                <h3 class="card-title">Lorem ipsum dolor sit amet</h3>
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 card-btns">
+                                <a class="btn btn-orange-yellow btn-h40 btn-w20" href="{{ path('startuper_project_create') }}">
+                                    {% trans %}Startup project / TPME{% endtrans %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 styleCard-HowToUse">
+                    <div class="card how-to-use-card">
+                        <div class="card-img">
+                            <img src="/assets/img/project_cover.png" alt="" class="img-responsive">
+                        </div>
+                        <div class="card-body">
+                            <div class="text-light">
+                                <h3 class="card-title">Lorem ipsum dolor sit amet</h3>
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 card-btns">
+                                <a class="btn btn-orange-yellow btn-h40 btn-w20" href="{{ path('startuper_company_create') }}">
+                                    {% trans %}Associative project{% endtrans %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

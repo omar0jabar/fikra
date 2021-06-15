@@ -1,0 +1,64 @@
+
+{% trans_default_domain 'fond' %}
+<h2 class="title-finance">{% trans %}similar_fond{% endtrans %}: </h2>
+<div class="row" id="rs-finances">
+    {% for fond in fonds %}
+        <div class="col-md-12 search-item content" >
+            <a href="{{path('fond_show_lang',{id:fond.id, slug:fond.slug})}}">
+                <div class="row">
+                    <div class="col-md-2 item-photo" >
+                        {% if fond.logo is not empty %}
+                            {% set cover = vich_uploader_asset(fond, 'uploadLogo') %}
+                        {% else %}
+                            {% set cover = asset('assets/img/fond_logo.png') %}
+                        {% endif %}
+                        <img src="{{ cover }}" class="img-responsive banner-img" alt="">
+                    </div>
+                    <div class="col-md-6 item-desc" >
+                        <h6>{% trans %}fond{% endtrans %}: </h6>
+                        <h2>{{fond.title}}</h2>
+                        <p>{{fond.sortDesctiption}}</p>
+                        <div class="secteur">
+                            <h5>{% trans %}secteur{% endtrans %}: </h5>
+                            <ul class="tags">
+                                {% if fond.secteurType|length > 0 %}
+                                    {% for sector in fond.secteurType.toArray %}
+                                        {% set label = sector.name %}
+                                        {% if locale == 'en' %}
+                                            {% set label = sector.nameEn %}
+                                        {% endif %}
+                                        <li>
+                                            <button class="btn btn-tag-light">{{label}}</button>
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>
+                                        <button class="btn btn-tag-light">
+                                            {% trans %}all{% endtrans %}
+                                        </button>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 item-info" >
+                        {% set phases = fond.fondPhases|join(',')|replace({',':', '}) %}
+                        {% if phases  %}
+                            <div class="secteur">
+                                <h5>{% trans %}phase{% endtrans %}: </h5>
+                                <h4>{{phases}}</h4>
+                            </div>
+                        {% endif %}
+                        {% if fond.financements|length > 0 %}
+                            <div class="secteur">
+                                <h5>{% trans %}financeType{% endtrans %}: </h5>
+                                <h4 class="finance">{{fond.financements|join(',')|replace({',': ', '})}}</h4>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+

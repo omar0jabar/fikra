@@ -1,0 +1,181 @@
+.b-comment-ca-marche {
+  background-color: $bg-white-default;
+  padding-top: 51px;
+  padding-bottom: 40px;
+
+  @media #{$desk-max} {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  @media #{$mobile} {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .c-heading {
+    margin-bottom: 50px;
+
+    @media #{$tab-max} {
+      margin-bottom: 20px;
+    }
+    @media #{$mobile} {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.styleCard-HowToUse {
+  max-width: 48%;
+  flex: 0 0 48%;
+  @media #{$tab-min} {
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+  @media #{$mobile} {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  @media #{$tab-min} {
+    margin-bottom: 20px;
+  }
+  &:nth-child(2n) {
+    padding-right: 220px;
+    padding-left: 6px;
+
+    @media #{$desk-max} {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    @media #{$mobile-xs} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &:nth-child(2n+1) {
+    padding-left: 220px;
+    padding-right: 13px;
+
+    @media #{$desk-max} {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    @media #{$mobile-xs} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.how-to-use-card {
+  background-color: $white;
+  height: 100%;
+  padding: 40px;
+  border-radius: 8px;
+  border: 0;
+  box-shadow: 0 0 6px rgba($black, .2);
+  @media #{$tab-min-2} {
+    padding: 20px;
+  }
+  @media #{$mobile-xs} {
+    padding: 10px;
+  }
+
+  .card-img {
+    position: relative;
+    background-color: transparent;
+    text-align: center;
+
+    img {
+      height: 300px;
+    }
+  }
+
+  .card-body {
+    background-color: transparent;
+    padding: 10px 0 30px;
+    margin-top: 0px;
+
+    .card-title {
+      font-weight: 500;
+      color: $papaGreen-1;
+      @media #{$mobile} {
+        font-size: rem(28px);
+      }
+      @media #{$mobile-xs} {
+        font-size: rem(25px);
+      }
+    }
+
+    .card-text {
+      font-size: rem(22px);
+      font-weight: 300;
+      line-height: normal;
+      color: $pickledBluewood-3;
+
+      @media #{$desk-min} {
+        text-align: justify;
+      }
+    }
+    ul {
+      padding: 0 0px 0 18px;
+      margin: 0;
+      list-style: initial;
+
+      li {
+
+        color: $black;
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .card-btns {
+    padding: 0;
+    justify-content: center;
+    display: flex;
+    flex-flow: wrap;
+
+    @media #{$mobile} {
+      flex-flow: wrap;
+    }
+    .btn:first-child {
+      margin-right: 10px;
+      @media #{$tab-min-1} {
+        margin: 0 0 10px;
+      }
+      @media #{$mobile} {
+        margin-right: 0;
+      }
+    }
+
+    .btn-transparent-black {
+      float: right; 
+
+      @media #{$desk-max} {
+        float: none;
+      }
+    }
+
+    .btn {
+
+      @media #{$tab-min} {
+        width: 48%;
+      }
+      @media #{$tab-min-1} {
+        width: 100%;
+      }
+
+      @media #{$mobile} {
+        width: 100%;
+        &:not(:last-child) {
+          margin-right: 0;
+          margin-left: 0;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% form_theme form 'startuper/company/theme_company.html.twig' %}
+
+{% block title %}
+    {% if action == "edit" %}
+        {% trans %}Update your solidarity company{% endtrans %}
+    {% else %}
+        {% trans %}Create your solidarity company{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="contact-porteur">
+        <div class="container">
+            {% include 'partials/_notice.html.twig' %}
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 contact-porteur-card">
+                    <div class="contact-porteur-card-intro">
+                        {% if action == "edit" %}
+                            <h3>{% trans %}Update your solidarity company{% endtrans %}</h3>
+                        {% else %}
+                            <h3>{% trans %}Create your solidarity company{% endtrans %}</h3>
+                        {% endif %}
+                        {% if action == "edit" %}
+                            {% trans %}form.message.update{% endtrans %}
+                        {% else %}
+                            {% trans %}form.message.send{% endtrans %}
+                        {% endif %}
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="company">
+                        <h2>{{ 'About your campaign'|trans }}</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.domain) }}
+                            </div>
+                        </div>
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.text) }}
+                        <div class="row">
+                            <div class="col-md-7">
+                                {{ form_row(form.fundingObjective) }}
+                            </div>
+                            <div class="col-md-5">
+                                {{ form_row(form.useOfFundsCollecteds) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.duration) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.city) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="association">
+                        <h2>{{ 'About your association'|trans }}</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.associationName) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.webSite) }}
+                            </div>
+                        </div>
+                        {{ form_row(form.RIB) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.logoFile) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.coverFile) }}
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                    </div>
+                    <div class="submit-form">
+                        <div class="champ-requis">
+                            <p class="required-field">{% trans %}Required fields{% endtrans %}</p>
+                        </div>
+                        <button type="submit" class="btn btn-bg-red btn-h50 btn-w35">
+                            {% if action == "edit" %}
+                                {% trans %}Save changes{% endtrans %}
+                            {% else %}
+                                {% trans %}Send company{% endtrans %}
+                            {% endif %}
+                        </button>
+                    </div>
+                    <p>
+                        {% trans %}A manager will contact you to validate the information before the company is published.{% endtrans %}
+                    </p>
+                    <p>
+                        {% trans %}The collection of donations is reserved for Moroccan associations which have the authorization of the General Secretariat of the Government (SGG) for the call to public generosity *{% endtrans %}
+                    </p>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div><!-- /.container -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/company-collection.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+resetting:
+  request:
+    title: Réinitialisation de mot de passe !
+    email:
+      label: Email
+      placeholder: Votre email ...
+    btn: Envoyer
+  reset:
+    title: Réinitialisation de mot de passe !
+    btn: Modifier

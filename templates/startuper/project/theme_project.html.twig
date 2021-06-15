@@ -1,0 +1,377 @@
+{% trans_default_domain 'project' %}
+
+{% block _project_form_language_widget %}
+   <br>
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.language.help{% endtrans %}
+   </p>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_name_widget %}
+   <br>
+   {#<p class="ml-md-2 text-muted small">
+      {% trans %}form.name.help{% endtrans %}
+   </p>#}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_description_widget %}
+   <br>
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.description.help{% endtrans %}
+   </p>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block choice_widget_expanded %}
+   {% for child in form %}
+      {{ form_widget(child) }}
+      {{ form_label(child) }}
+   {% endfor %}
+{% endblock %}
+
+{% block _project_form_step_widget %}
+   {% for child in form %}
+      {{ form_widget(child) }}
+      {{ form_label(child) }}
+      <p id="{{ child.vars.id }}_help" class="test"></p>
+   {% endfor %}
+{% endblock %}
+
+{% block _project_form_salesChannels_widget %}
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.salesChannels.help{% endtrans %}
+   </p>
+   <div class="row">
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_salesChannels_entry_widget %}
+      <div class="col-md-4">
+         {{ form_widget(form) }}
+      </div>
+{% endblock %}
+
+{% block _project_form_marketResearch_widget %}
+   <ul>
+      {{ form_widget(form) }}
+   </ul>
+{% endblock %}
+
+{% block _project_form_marketResearch_entry_widget %}
+   <li>
+      {{ form_widget(form) }}
+   </li>
+{% endblock %}
+
+{% block _project_form_businessModels_widget %}
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.businessModels.help{% endtrans %}
+   </p>
+   <div class="row">
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_businessModels_entry_widget %}
+   <div class="col-md-4">
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_mainProducts_widget %}
+   {{ form_widget(form) }}
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.mainProducts.help{% endtrans %}
+   </p>
+{% endblock %}
+
+{% block _project_form_denomination_widget %}
+   <div id="div-denomination">
+      <label for="" data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="{% trans %}Confidential information{% endtrans %}">
+         {% trans %}form.denomination.label{% endtrans %} <i class="icon-Lock"></i>
+      </label>
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_creatingDate_widget %}
+   <div id="div-creating-date">
+      <label for="" data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="{% trans %}Confidential information{% endtrans %}">
+         {% trans %}form.creatingDate.label{% endtrans %} <i class="icon-Lock"></i>
+      </label>
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_rc_widget %}
+   <div id="div-city">
+      <label for="project_form_city" data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="{% trans %}Confidential information{% endtrans %}">
+         {% trans %}form.rc.label{% endtrans %} <i class="icon-Lock"></i>
+      </label>
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+{% block _project_form_city_widget %}
+   <div id="div-rc">
+      <label for="" data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="{% trans %}Confidential information{% endtrans %}">
+         {% trans %}form.city.label{% endtrans %} <i class="icon-Lock"></i>
+      </label>
+      {{ form_widget(form) }}
+   </div>
+{% endblock %}
+
+
+
+{# === step 2 ============================================================================== #}
+
+{% block _project_form_morocco_widget %}
+   <div class="marginlow">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_otherCountry_widget %}
+   <div class="marginlowa">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_otherBusinessModel_widget %}
+   <div class="marginlowa">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_otherSalesChannels_widget %}
+   <div class="marginlowa">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_otherSectors_widget %}
+   <div class="marginlowa">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_sectors_widget %}
+   <div class="marginlowa">{{ form_widget(form) }}</div>
+{% endblock %}
+
+{% block _project_form_budget_widget %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_express_widget %}
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.express.help{% endtrans %}
+   </p>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_summary_widget %}
+   {#<p class="ml-md-2 text-muted small">
+      {% trans %}form.summary.help1{% endtrans %}
+   </p>#}
+   <p class="ml-md-2 text-muted small">
+      {% trans %}form.summary.help2{% endtrans %}
+   </p>
+   {{ form_widget(form) }}
+   <p class="ml-md-2 text-muted small">
+      <em>{% trans %}form.summary.help3{% endtrans %}</em>
+   </p>
+{% endblock %}
+
+{# add services #}
+
+{% block _project_form_services_widget %}
+   <div class="avantages">
+      <div class="block-avantages-delete">
+         {{ form_widget(form) }}
+      </div>
+      <div class="row block-avantage-add">
+         <div class="col-md-6 b-input p-0">
+            <input id="txt-first-service" name="txt-first-service" type="text" class="form-control"
+                   placeholder="{{ 'form.mainProducts.placeholder'|trans }}" >
+         </div>
+         <div class="col-md-1 btn-plus">
+            <input type="hidden" id="widgets-counter-services" value="0">
+            <button id="add-service" type="button" class="btn btn-bg-blue btn-h40 btn-w13">
+               <i class="icon-add"></i>
+            </button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block _project_form_services_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_services_entry_widget  %}
+   <div id="block_{{ id }}" class="form-group">
+      <div class="row avantage-delete">
+         <div class="col-md-6 b-input p-0">
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+         </div>
+         <div class="col-md-1 btn-delete">
+            <button type="button" data-action="delete-service" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w13">
+               <i class="icon-garbage"></i>
+               {#               {% trans %}Remove{% endtrans %}#}
+            </button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{# ADD AVANTAGE #}
+
+{% block _project_form_avantages_widget %}
+   <p class="text-muted">{% trans %}form.avantages.help{% endtrans %}</p>
+
+      <div class="avantages">
+         <div class="block-avantages-delete">
+            {{ form_widget(form) }}
+         </div>
+         <div class="row block-avantage-add">
+            <div class="col-md-6 b-input p-0">
+               <input id="txt-first-avantage" name="txt-first-avantage" type="text" class="form-control"
+                      placeholder="{{ 'form.avantages.placeholder'|trans }}" >
+            </div>
+            <div class="col-md-1 btn-plus">
+               <input type="hidden" id="widgets-counter" value="0">
+               <button id="add-avantage" type="button" class="btn btn-bg-blue btn-h40 btn-w13">
+                  <i class="icon-add"></i>
+               </button>
+            </div>
+         </div>         
+         {#<p class="ml-md-2 text-muted small">
+            {% trans %}form.avantages.help2{% endtrans %}
+         </p>#}
+      </div>
+      <p class="text-muted"><em>{% trans %}form.avantages.help2{% endtrans %}</em></p>
+{% endblock %}
+
+{% block _project_form_avantages_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_avantages_entry_widget  %}
+   <div id="block_{{ id }}" class="form-group">
+      <div class="row avantage-delete">
+         <div class="col-md-6 b-input p-0">
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+         </div>
+         <div class="col-md-1 btn-delete">
+            <button type="button" data-action="delete-avantage" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w13">
+               <i class="icon-garbage"></i>
+{#               {% trans %}Remove{% endtrans %}#}
+            </button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{# ADD Project Finance #}
+
+{% block _project_form_projectFinances_widget %}
+   <p class="text-muted">{% trans %}form.finance.help{% endtrans %}</p>
+      <div class="finance">
+         <div class="block-finance-delete">
+            {{ form_widget(form) }}
+         </div>
+         <div class="row block-finance-add">
+            <div class="col-md-6 b-input">
+               <input id="txt-first-finance" name="txt-first-finance" type="text" class="form-control"
+                      placeholder="{{ 'form.finance.placeholder'|trans }}" >
+            </div>
+            <div class="col-md-1 btn-plus">
+               <input type="hidden" id="widgets-finance-counter" value="0">
+               <button id="add-finance" type="button" class="btn btn-bg-blue btn-h40 btn-w13">
+                  <i class="icon-add"></i>
+                  {#               {% trans %}Add{% endtrans %}#}
+               </button>
+            </div>
+         </div>  
+         {#<p class="ml-md-2 text-muted small">
+            {% trans %}form.finance.help2{% endtrans %}
+         </p>#}
+      </div>
+   <p class="text-muted"><em>{% trans %}form.finance.help2{% endtrans %}</em></p>
+{% endblock %}
+
+{% block _project_form_projectFinances_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_projectFinances_entry_widget  %}
+   <div id="block_{{ id }}" class="form-finance">
+      <div class="row finance-delete">
+         <div class="col-md-6 b-input">
+            {{ form_row(form.detail) }}
+         </div>
+         <div class="col-md-1 btn-delete">
+            <button type="button" data-action="delete-finance" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w13">
+               <i class="icon-garbage"></i>
+{#               {% trans %}Remove{% endtrans %}#}
+            </button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+
+{# ADD Document #}
+
+{% block _project_form_documents_widget %}
+   <div class="documents-content">
+      <div class="document-intro">
+         <p class="text-muted">{% trans %}form.documents.help{% endtrans %}</p>
+      </div>
+      <div class="form-widget">
+         {{ form_widget(form) }}
+      </div>
+      <div class="b-btn-add">
+         <div>
+            <input type="hidden" id="document-counter" value="0">
+         </div>
+         <button id="add-document" type="button" class="btn btn-bg-blue btn-h40 btn-w35">
+            <i class="icon-add"></i> {% trans %}form.documents.btnAdd{% endtrans %}
+         </button>
+      </div>
+   </div>
+{% endblock %}
+
+{% block _project_form_documents_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_documents_entry_widget %}
+
+         <div id="block_{{ id }}" class="form-document c-form-upload">
+            <div class="row justify-content-center">
+               <div class="col-lg-10 col-md-12 p-0">
+                  <div class="row">
+                     <div class="col-md-4 field-upload">
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                     </div>
+                     <div class="col-md-8 field-select">
+                        <div class="b-select-form">
+                           <div class="custom-select-field">
+                              {{ form_widget(form.documentType) }}
+                           </div>
+                           <div class="document-choice">
+                              {{ form_widget(form.isPrivate) }}
+                           </div>
+                           {{ form_errors(form.documentType) }}
+                        </div>
+                        <button type="button" data-action="delete-document" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h40 btn-w35">
+                           <i class="icon-garbage"></i>  {% trans %}Remove{% endtrans %}
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+{% endblock %}

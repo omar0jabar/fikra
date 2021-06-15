@@ -1,0 +1,143 @@
+// ==================================================
+// Rem
+// Sass mixin and function to use rem units with pixel fallback
+// https://github.com/pierreburel/rem
+// ==================================================
+$rem-baseline: 16px !default;
+@function rem($values) {
+  $rem: unquote("");
+  @each $value in $values {
+    @if type-of($value)=="number" and unit($value)=="px" {
+      $rem: append($rem, $value / ($rem-baseline / 1rem));
+    }
+    @else {
+      $rem: append($rem, $value);
+    }
+    @return $rem;
+  }
+}
+
+@mixin rem($property, $values, $important: false) {
+  $important: if($important, unquote(" !important"), null);
+  #{$property}: append($values, $important);
+  #{$property}: append(rem($values), $important);
+}
+
+@mixin max-width {
+  width: 100%;
+  max-width: 1280px;
+}
+
+@mixin border($size, $border, $color) {
+  border: $size $border $color;
+}
+
+@mixin opacity($value) {
+  opacity: #{"." + $value};
+  filter: alpha(opacity=$value);
+  -ms-filter: "alpha(opacity=$value)";
+  -khtml-opacity: #{"." + $value};
+  -moz-opacity: #{"." + $value};
+}
+
+@mixin box-shadow($top, $left, $blur, $spread, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow: inset $top $left $blur $spread $color;
+    -moz-box-shadow: inset $top $left $blur $spread $color;
+    box-shadow: inset $top $left $blur $spread $color;
+  }
+  @else {
+    -webkit-box-shadow: $top $left $blur $spread $color;
+    -moz-box-shadow: $top $left $blur $spread $color;
+    box-shadow: $top $left $blur $spread $color;
+  }
+}
+
+@mixin border_radius($tl: 5px, $tr: 5px, $br: 5px, $bl: 5px) {
+  -moz-border-radius: $tl $tr $br $bl;
+  -webkit-border-top-left-radius: $tl;
+  -webkit-border-top-right-radius: $tr;
+  -webkit-border-bottom-right-radius: $br;
+  -webkit-border-bottom-left-radius: $bl;
+  border-radius: $tl $tr $br $bl;
+}
+
+@mixin transition-mixin($value) {
+  @if $value==transform {
+    -webkit-transition: -webkit-transform 0.3s ease-in 0s;
+    -ms-transition: transform 0.3s ease-in 0s;
+    transition: transform 0.3s ease-in 0s;
+  }
+  @else {
+    -webkit-transition: $value 0.3s ease-in 0s;
+    -moz-transition: $value 0.3s ease-in 0s;
+    transition: $value 0.3s ease-in 0s;
+  }
+}
+
+// Browser Prefixes
+@mixin transform($transforms) {
+  transform: $transforms;
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms; 
+}
+
+// Rotate
+// @include rotate(0);
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// Scale
+// @include scale(0);
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+// Skew
+@mixin skew ($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+// Translate
+// @include translateX(-50%);
+@mixin translateX ($x) {
+  @include transform(translateX($x));
+}
+
+// Translate
+// @include translateY(-50%);
+@mixin translateY ($y) {
+  @include transform(translateY($y));
+}
+
+// Translate
+// @include translates(-50%, 0);
+@mixin translates ($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+// Transform Origin
+@mixin transform-origin ($origin) {
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+// Linear Gradient
+@mixin linear-gradient ($direction, $color1, $color2) {
+  background: -webkit-linear-gradient($direction, $color1, $color2);
+  background: -moz-linear-gradient($direction, $color1, $color2);
+  background: -o-linear-gradient($direction, $color1, $color2);
+  background: linear-gradient($direction, $color1, $color2); 
+}
+
+// Placeholder
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content}  
+}

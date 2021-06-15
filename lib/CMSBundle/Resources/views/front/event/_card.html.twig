@@ -1,0 +1,49 @@
+{% trans_default_domain 'event' %}
+
+<div class="col-lg-4 col-md-6 col-sm-12 actusCardStyle">
+    {% set link = path('cmsbundle_event_show', { id: event.id, slug: event.slug}) %}
+    <a href="{{ link }}">
+        <div class="card card-actus">
+            {% if event.bannerDesktop is not empty %}
+                {% set cover = "/upload/cms/events-public/" ~ event.bannerDesktop %}
+            {% else %}
+                {% set cover = asset('assets/img/news_cover.png') %}
+            {% endif %}
+            <div class="card-img-top">
+                <img src="{{ cover }}" class="img-responsive" alt>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">
+                    {{ event.title }}
+                </h3>
+                <p class="card-text">
+                    {{ event.content|striptags|slice(0, 200)|raw }}
+                    {% if event.content|length > 200 %}
+                        ...
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-6 card-date pl-0">
+                        <span>
+                            {% set date = event.createdAt %}
+                            {% include '@CMS/date/_normal.html.twig' %}
+                        </span>
+                    </div>
+                    <div class="col-6 text-right pr-0 card-like">
+                        {#<a href="{{ path('event_like', {id: event.id}) }}" class="js-like-event" >#}
+                        <span href="#" class="js-like-event" onclick="return false;">
+                            <span class="js-likes">{{ event.likes|length }}</span>
+                            {% if app.user and event.isLikedByUser(app.user) %}
+                                <i class="icon-favorite-heart-button red"></i>
+                            {% else %}
+                                <i class="icon-favorite-heart-button"></i>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

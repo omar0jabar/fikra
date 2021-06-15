@@ -1,0 +1,136 @@
+.b-faq {
+  padding: 60px 15px;
+  background: $cloudBurst;
+  @media #{$tab-min} {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .c-heading,
+  .intro {
+    color: $white;
+  }
+
+  .accordion-faq {
+    margin-bottom: 40px;
+
+    .card {
+      background-color: rgba($white, 0.2);
+      margin-bottom: 20px;
+      border-radius: 40px;
+      padding: 0;
+      cursor: pointer;
+      border: 1px solid transparent;
+      overflow: hidden;
+      .card-header {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+        h3 {
+          padding: 0;
+          margin: 0;
+        }
+        button {
+          display: block;
+          width: 100%;
+          text-align: left;
+          padding: 22px 38px;
+          padding-right: 80px;
+          font-size: rem(24px);
+          line-height: 1.33;
+          color: $white;
+          font-weight: 500;
+          position: relative;
+          text-decoration: none;
+          @media #{$tab-min} {
+            padding: 14px 20px;
+            padding-right: 60px;
+            font-size: rem(20px);
+          }
+          &.collapsed {
+            i {
+              transform: translateY(-50%) rotate(90deg);
+            }
+          }
+          i {
+            font-size: rem(20px);
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            color: $white;
+            background-color: $coralRed;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+            @media #{$tab-min} {
+              right: 12px;
+            }
+          }
+        }
+        + div {
+          padding: 0 38px;
+          @media #{$tab-min} {
+            padding: 0 20px;
+          }
+        }
+      }
+
+
+      .card-body {
+        padding: 22px 0;
+        border-top: 1px solid rgba($white, 0.2);
+        @media #{$tab-min} {
+          padding: 14px 0;
+        }
+        &, * {
+          color: $white;
+        }
+        h4 {
+          @media #{$tab-min} {
+            font-size: rem(20px);
+          }
+        }
+        p {
+          font-size: rem(20px);
+          @media #{$tab-min} {
+            font-size: rem(16px);
+          }
+        }
+        ul {
+          padding: 0;
+          li {
+            position: relative;
+            margin-bottom: 8px;
+            color: $white;
+            font-size: 1.125rem;
+            font-weight: 300;
+            padding-left: 15px;
+            &:before {
+              content: "";
+              width: 6px;
+              height: 6px;
+              background-color: $white;
+              position: absolute;
+              top: 8px;
+              left: 0;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .action {
+    &.faq {
+      text-align: center;
+    }
+  }
+}
+

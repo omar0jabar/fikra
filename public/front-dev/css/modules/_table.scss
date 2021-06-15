@@ -1,0 +1,96 @@
+table, .table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 100%;
+  table-layout: fixed;
+  //border: 1px solid $gray-table-border;
+  @media #{$tab-min-2} {
+    table-layout: auto;
+  }
+
+  thead {
+    th,
+    td {
+      padding: 14px 10px;
+      color: $white;
+      text-align: center;
+      font-size: rem(17px);
+      font-weight: 700;
+      border-right: 1px solid $mirage;
+      background: $mirage;
+      word-break: break-word;
+      vertical-align: inherit;
+      font-family: $font-base;
+      &:not(:last-child) {
+        border-right: 1px solid $gray-table-border;
+      }
+      @media #{$tab-min-2} {
+        padding: 10px;
+        word-break: initial;
+        white-space: nowrap;
+      }
+      p, span {
+        font-size: rem(17px);
+        font-weight: 700;
+        color: $white;
+        margin: 0;
+        font-family: $font-base;
+      }
+    }
+  }
+
+  tr {
+    [scope="row"] {
+      background: $mirage;
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background: $white;
+    }
+    td {
+      padding: 14px 10px;
+      text-align: center;
+      color: $mirage;
+      font-size: rem(15px);
+      font-weight: 400;
+      border: 1px solid $gray-table-border;
+      word-break: break-word;
+      vertical-align: inherit;
+      font-family: $font-base;
+      @media #{$mobile} {
+        padding: 10px;
+      }
+      p, span {
+        font-size: rem(15px);
+        font-weight: 300;
+        color: $mirage;
+        margin: 0;
+        font-family: $font-base;
+      }
+    }
+  }
+}
+
+.overflow-x-auto {
+  width: 100%;
+  overflow-y: auto;
+  _overflow: auto;
+  margin: 0 0 1em;
+
+  &::-webkit-scrollbar
+  {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 8px;
+    border: 3px solid $white;
+    background-color: rgba($black, .3);
+  }
+}

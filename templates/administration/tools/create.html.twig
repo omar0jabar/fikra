@@ -1,0 +1,62 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% form_theme form 'administration/tools/form_theme.html.twig' %}
+
+{% block sonata_admin_content %}
+
+    {% block notice %}
+        {% include '@SonataCore/FlashMessage/render.html.twig' %}
+    {% endblock notice %}
+
+    {% if _preview is not empty %}
+        <div class="sonata-ba-preview">{{ _preview|raw }}</div>
+    {% endif %}
+
+    {% if _content is not empty %}
+        <div class="sonata-ba-content">{{ _content|raw }}</div>
+    {% endif %}
+
+    {% if _show is not empty %}
+        <div class="sonata-ba-show">{{ _show|raw }}</div>
+    {% endif %}
+
+    {% if _form is not empty %}
+        <div class="sonata-ba-form">{{ _form|raw }}</div>
+    {% endif %}
+
+    {% if _list_filters is not empty %}
+        <div class="row">
+            {{ _list_filters|raw }}
+        </div>
+    {% endif %}
+
+    {% if _list_table is not empty %}
+        <div class="row">
+            {{ _list_table|raw }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>Tools</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.icon) }}
+                    {{ form_row(form.content) }}
+                    {{ form_row(form.uploadFile) }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,592 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block meta %}
+    {% if approvedCompany %}
+        <meta name="title" content="{{ company.company.metaTitle }}">
+        <meta name="description" content="{{ company.company.metaDescription }}">
+
+        <meta property="og:title" content="{{ company.company.metaTitle }}"/>
+        <meta property="og:description" content="{{ company.company.metaDescription }}"/>
+        {% block ogimage %}
+            <meta property="og:image:width" content="{{ width }}"/>
+            <meta property="og:image:height" content="{{ height }}"/>
+        {% endblock %}
+        <meta name="twitter:title" content="{{ company.company.metaTitle }}"/>
+        <meta name="twitter:description" content="{{ company.company.metaDescription }}"/>
+    {% endif %}
+    {% if company.coverName is not empty %}
+        {% if approvedCompany == false %}
+            {% set cover = vich_uploader_asset(company, 'coverFile') %}
+            <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}">
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+            <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+        {% elseif 'approvedcompany' == true %}
+            {% set cover = '/upload/approved-company/images/' ~ company.coverName %}
+            <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}">
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+            <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+{% trans_default_domain 'company' %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    {% if company.coverName is not empty %}
+        {% if approvedCompany == false %}
+            {% set cover = vich_uploader_asset(company, 'coverFile') %}
+        {% elseif 'approvedCompany' == true %}
+            {% set cover = company.coverPath %}
+        {% else %}
+            {% set cover = asset('assets/img/company_cover.png') %}
+        {% endif %}
+    {% else %}
+        {% set cover = asset('assets/img/project_cover.png') %}
+    {% endif %}
+    <div id="cover-project" class="banner-cover">
+        <div class="row banner-project">
+            <div class="col-lg-8 col-md-12 block-img">
+                <img src="{{ cover }}" class="img-responsive banner-img" alt="">
+
+                <div class="project-info">
+                    {% if app.user and app.user == company.user %}
+                        <div class="row change-cover">
+                            {% if approvedCompany == true %}
+                                {% set id = company.company.id %}
+                                {% set slug = company.slug %}
+                            {% else %}
+                                {% set id = company.id %}
+                                {% set slug = company.slug %}
+                            {% endif %}
+                            <a id="btn-change-cover" class="btn btn-bg-white btn-h30 btn-w10"
+                               href="{{ path('startuper_company_update_cover', { id: id, slug: slug}) }}">
+                                <i class="icon-exchange-arrows mr-1"></i> {% trans %}Edit cover photo{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="row logo-change">
+                        {% if app.user and app.user == company.user %}
+                            {% if approvedCompany == true %}
+                                {% set id = company.company.id %}
+                                {% set slug = company.slug %}
+                            {% else %}
+                                {% set id = company.id %}
+                                {% set slug = company.slug %}
+                            {% endif %}
+                            <a href="{{ path('startuper_company_update_logo', { id: id, slug: slug }) }}"
+                               id="btn-change-logo" class="btn btn-bg-white btn-h30 btn-w10"><i
+                                        class="icon-exchange-arrows mr-1"></i> {% trans %}Edit logo{% endtrans %}</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        {% if company.logoName is not empty %}
+                            {% if approvedCompany == false %}
+                                {% set logo = vich_uploader_asset(company, 'logoFile') %}
+                            {% elseif 'approvedCompany' == true %}
+                                {% set logo = company.logoPath %}
+                            {% else %}
+                                {% set logo = asset('assets/img/project_logo_180.png') %}
+                            {% endif %}
+                        {% else %}
+                            {% set logo = asset('assets/img/project_logo_180.png') %}
+                        {% endif %}
+                        <div class="col-lg-2 project-logo">
+                            <div id="show-logo-project">
+                                <div class="row">
+                                    <div class="col-12 p-0">
+                                        <img src="{{ logo }}" class="img-responsive" alt="{{ company.name }}"
+                                             title="Logo {{ company.name }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 project-text">
+                            <h1>
+                                {{ company.name }}
+                                {% if company.isVerified == true %}
+                                    <small class="text-success">
+                                        <i class="icon-Verifi"></i><span>{% trans %}Verified{% endtrans %}</span>
+                                    </small>
+                                {% endif %}
+                                {% if company.isClosed %}
+                                    <span class="badge badge-danger">{{ 'Closed'|trans }}</span>
+                                {% endif %}
+                            </h1>
+                            <div class="b-details">
+                                <ul class="row">
+                                    {% if company.city is not empty %}
+                                        <li class="detail-item">
+                                            <h5>
+                                                <i class="icon-placeholder"></i>
+                                                <span>
+                                                    {{ company.city|default('vide') }}
+                                                </span>
+                                            </h5>
+                                        </li>
+                                    {% endif %}
+                                    {% if approvedCompany == true %}
+                                        <li class="detail-item">
+                                            <h5>
+                                                <a href="{{ path('company_like', {id: company.id}) }}"
+                                                   class="js-like-company">
+                                                    {% if approvedCompany == true %}
+                                                        <span id="js-likes"
+                                                              class="js-likes">{{ company.company.likes|length }}</span>
+                                                    {% else %}
+                                                        <span id="js-likes"
+                                                              class="js-likes">{{ company.likes|length }}</span>
+                                                    {% endif %}
+                                                    {% if app.user and company.company.isLikedByUser(app.user) %}
+                                                        <i class="icon-favorite-heart-button red"></i>
+                                                        <span class="js-text">{% trans %}Unlike{% endtrans %}</span>
+                                                    {% else %}
+                                                        <i class="icon-favorite-heart-button"></i>
+                                                        <span class="js-text">{% trans %}Like{% endtrans %}</span>
+                                                    {% endif %}
+                                                </a>
+                                            </h5>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 block-card company">
+                <div id="project" class="card section">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h3>{{ company.associationName }}</h3>
+                        </div>
+                        <hr>
+                        <div class="card-progress has-progress clearfix">
+                            <div class="progress-price-wrapper">
+                                <div class="progress-price company">
+                                    <strong>{{ company.amountCollected('CONFIRMED')|number_format(0, ",", " ") }}</strong>
+                                    <span>Mad</span>
+                                </div>
+                                /
+                                <div class="progress-price company">
+                                    <strong>{{ company.fundingObjective|number_format(0, ",", " ") }}</strong>
+                                    <span>Mad</span>
+                                </div>
+                            </div>
+                            <div class="progress-content">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width:{{ company.percentageOfContribution }};"
+                                         role="progressbar" aria-valuenow="50" aria-valuemin="50"
+                                         aria-valuemax="100"></div>
+                                </div>
+                                <div class="percentage">{{ company.percentageOfContribution }}</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="phase group">
+                            <div class="contributors">
+{#                              <h3>{% trans %}Contribution{% endtrans %}</h3>#}
+                                {% if totalContributors == 0 %}
+                                    <h3>0</h3>
+                                    <h4>{{ 'Contributor'|trans }}</h4>
+{#                                    <h4>{{ 'No contributor'|trans }}</h4>#}
+                                {% else %}
+                                    <h3>{{ totalContributors }}</h3>
+                                    {% if totalContributors > 1 %}
+                                        <h4>{{ 'Contributors'|trans }}</h4>
+                                    {% else %}
+                                        <h4>{{ 'Contributor'|trans }}</h4>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="days-left">
+{#                              <h4>{{ 'Number of days left'|trans }}</h4>#}
+                                {% set days = company.numberOfDays %}
+                                {% set daysLength = days > 1 ? 'days'|trans : 'day'|trans %}
+                                {% set word = days > 1 ? 'days left'|trans : 'day left'|trans %}
+                                {% if days > 0 %}
+                                    <h3>
+                                        {{ days }} {{ ' ' ~ daysLength }}
+                                    </h3>
+                                    <h4>{{ word }}</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        {% if approvedCompany %}
+                            {% set isLocked = company.company.isLocked %}
+                            {% set id = company.company.id %}
+                            {% set slug = company.slug %}
+                        {% else %}
+                            {% set isLocked = company.isLocked %}
+                            {% set id = company.id %}
+                            {% set slug = company.slug %}
+                        {% endif %}
+                        {% if app.user and app.user == company.user %}
+                        {% else %}
+                            <div class="phase">
+                                {% if approvedCompany and company.isClosed == false %}
+                                    <a href="{{ path('company_contribute', {id: company.id, slug: slug}) }}"
+                                       class="btn btn-bg-red btn-h60 btn-w15 w-100">
+                                        {% trans %}To contribute{% endtrans %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <hr>
+                        {% endif %}
+                        <div class="phase">
+                            <h4>{{ 'Invite those around you to contribute'|trans }}</h4>
+                            <div class="block-addis">
+                                <div class="addthis_inline_share_toolbox_sggx"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 navigation-links">
+                    <div class="navigation-project-logo">
+                        <img src="{{ logo }}" class="img-responsive" alt="{{ company.name }}"
+                             title="Logo {{ company.name }}">
+                    </div>
+                    <ul>
+                        {% if company.description %}
+                            <li data-scroll="executive-summary">
+                                <a href="#executive-summary">{% trans %}The company{% endtrans %}</a>
+                            </li>
+                        {% endif %}
+                        {% if useOfFundsCollecteds|length > 0 %}
+                            <li data-scroll="useOfFundsCollecteds">
+                                <a href="#useOfFundsCollecteds">{% trans %}Use of funds collecteds{% endtrans %}</a>
+                            </li>
+                        {% endif %}
+                        {% if company.commentsCountForFront > 0 %}
+                            <li data-scroll="comments">
+                                <a href="#comments">
+                                    {{ comments|length > 1 ? 'Comments'|trans : 'Comment'|trans }}
+                                    <span class="badge badge-info">{{ company.commentsCountForFront }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if totalContributors > 0 %}
+                            <li data-scroll="contributors">
+                                <a href="#contributors">
+                                    {{ totalContributors > 1 ? 'Contributors'|trans : 'Contributor'|trans }}
+                                    <span class="badge badge-info">{{ totalContributors }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-12 navigations-buttons">
+                    {% if approvedCompany %}
+                        {% set isLocked = company.company.isLocked %}
+                        {% set id = company.company.id %}
+                        {% set slug = company.slug %}
+                    {% else %}
+                        {% set isLocked = company.isLocked %}
+                        {% set id = company.id %}
+                        {% set slug = company.slug %}
+                    {% endif %}
+                    {% if app.user and app.user == company.user %}
+                        {% if isLocked == false %}
+                            <a href="{{ path('startuper_company_edit', { id: id, slug: slug }) }}"
+                               class="btn btn-transparent-black  btn-h30 btn-w10">
+                                <i class="icon-controls"></i>{% trans %}Update company{% endtrans %}
+                            </a>
+                        {% endif %}
+                        <a href="{{ path('startuper_company_confirm_delete', { id: id, slug: slug }) }}"
+                           class="btn btn-transparent-black  btn-h30 btn-w10">
+                            <i class="icon-garbage"></i>{% trans %}Delete company{% endtrans %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="container-fp" class="b-project-content project">
+        <div class="container">
+            {% include 'partials/_notice.html.twig' %}
+            <div class="row">
+                <div class="col-lg-8 col-md-12 content-bar">
+                    {% if company.description %}
+                        <div id="executive-summary" class="summary section">
+                            <h3 class="">{% trans %}form.shortDescription.label{% endtrans %}</h3>
+                            <p>{{ company.description }}</p>
+                        </div>
+                    {% endif %}
+                    {% if useOfFundsCollecteds|length > 0 %}
+                        <div id="project-avantages-finances" class="project-avantages-finances section">
+                            <div class="row">
+                                <div id="useOfFundsCollecteds" class="col-md-12 project-avantages">
+                                    <h3>{% trans %}Use of funds collecteds{% endtrans %}</h3>
+                                    <ul>
+                                        {% for use in useOfFundsCollecteds %}
+                                            <li>{{ use.description }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if company.text %}
+                        <div class="summary section">
+                            <h3 class="">{% trans %}form.description.label{% endtrans %}</h3>
+                            {{ company.text|raw }}
+                        </div>
+                    {% endif %}
+                    {% if approvedCompany %}
+                        <div id="comments" class="comments">
+                            {% if app.user or company.company.commentsCountForFront > 0 %}
+                                <h3 class="faq-title">{% trans %}Comments{% endtrans %}</h3>
+                            {% endif %}
+                            {% if comments|length > 0 %}
+                                {% for comment in comments %}
+                                    {% if comment.isPublished %}
+                                        <div class="row comments-form">
+                                            <div class="b-info-author">
+                                                <div class="avatar-user">
+                                                    <img src="{{ vich_uploader_asset(comment.author, 'imageFile') }}"
+                                                         class="media-object" alt>
+                                                </div>
+                                                <div class="avatar-details">
+                                                    <div class="c-author-name">{{ comment.author.fullName }} </div>
+                                                    <div class="c-dtate-time">
+                                                        <ul>
+                                                            <li>
+                                                                <i class="icon-calendar"></i> {{ comment.createdAt|date('d-m-Y') }}
+                                                            </li>
+                                                            <li>
+                                                                <i class="icon-clock"></i> {{ comment.createdAt|date('H:i') }}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="comments-msg">
+                                                    {{ comment.content }}
+                                                    <a href="{{ path('company_comment_response', {id: comment.id}) }}"
+                                                       class="reply-comment">
+                                                        {% trans %}Reply{% endtrans %}
+                                                    </a>
+                                                </div>
+                                                <div class="col-12 comments-form-form">
+                                                    {% if comment.responses|length > 0 %}
+                                                        {% for response in comment.responses %}
+                                                            {% if response.isPublished %}
+                                                                <div class="avatar-details">
+                                                                    <div class="c-author-name">{{ response.user.fullName }} </div>
+                                                                    <div class="c-dtate-time">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <i class="icon-calendar"></i> {{ response.createdAt|date('d-m-Y H:i') }}
+                                                                            </li>
+                                                                            <li>
+                                                                                <i class="icon-clock"></i> {{ response.createdAt|date('H:i') }}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="comments-msg">
+                                                                    {{ response.content }}
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <form id="form-reply-comment" method="post" class="company_comment_response"
+                                      style="display: none">
+                                    <div class="form-group">
+                                        <textarea title="{{ 'Reply'|trans }}" name="response_comment" cols="100"
+                                                  class="form-control" placeholder="{{ 'Reply'|trans }}"
+                                                  required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                                        {% trans %}Reply{% endtrans %}
+                                    </button>
+                                </form>
+                            {% endif %}
+                            {% if app.user %}
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                                    {% trans %}Send{% endtrans %}
+                                </button>
+                                {{ form_end(form) }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if contributors|length > 0 %}
+                        {% set companyId = company.id %}
+                        {% if approvedCompany %}
+                            {% set companyId = company.company.id %}
+                        {% endif %}
+                        <div id="contributors" class="project-contributors section">
+                            <h3>{{ 'Contributors'|trans }}</h3>
+                            <div class="row items">
+                                {% include 'company/_contributors.html.twig' %}
+                            </div>
+                            {% if totalContributors > contributors|length %}
+                                <div class="text-center">
+                                    <a href="{{ path('company_more_contributors', {id: companyId}) }}"
+                                       id="btn-show-more-contributors"
+                                       data-offset="16" data-company-id="{{ companyId }}">
+                                        {{ "Show more contributors"|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div><!-- /.col-md-8 -->
+
+                <div class="col-lg-4 col-md-12 sidebar">
+                    <div class="card info-card company-card">
+                        <div class="card-body">
+                            {% if company.associationName is not empty %}
+                                <div class="secteur">
+                                    <h5>{{ 'Association'|trans }} : </h5>
+                                    {{ company.associationName }}
+                                </div>
+                            {% endif %}
+                            {% if company.domain|length > 0 %}
+                                <div class="secteur">
+                                    <h5>{{ 'Areas of intervention'|trans }} : </h5>
+                                    <ul class="tags">
+                                        {% for sector in company.domain %}
+                                            {% set label = sector.labelFr %}
+                                            {% if locale == "en" %}
+                                                {% set label = sector.labelEn %}
+                                            {% endif %}
+                                            <li>
+                                                <button class="btn btn-bg-blue btn-h30 btn-w18">{{ label }}</button>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            <div class="secteur">
+                                <h5>{{ 'e-mail' }} : </h5>
+                                {{ company.user.email }}
+                            </div>
+                            {% if company.user.phone is not empty %}
+                                <div class="secteur">
+                                    <h5>{% trans %}form.phone.label{% endtrans %} : </h5>
+                                    {{ company.user.phone }}
+                                </div>
+                            {% endif %}
+                            {% if company.webSite %}
+                                <div class="secteur">
+                                    <h5>{% trans %}Web site{% endtrans %} : </h5>
+                                    <a href="{{ company.webSite }}" target="_blank">
+                                        {{ company.webSite }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div><!-- /.col-md-4 -->
+            </div><!-- /.row -->
+
+            <div class="text-center pb-5">
+                <a href="{{ path('companies_list') }}" class="btn btn-bg-red btn-h50 btn-w15">
+                    {{ 'Back to the list of campaigns'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInformationRead" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Login{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="modal-sub">
+                        {% trans %}messageLogin{% endtrans %}
+                    </h6>
+                    {% include 'company/modal-login.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInformationLike" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Information{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">{% trans %}To make a project a favorite, you must authenticate{% endtrans %}</p>
+                    <a href="{{ path('startuper_login') }}"
+                       class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Login{% endtrans %}</a>
+                    <a href="{{ path('startuper_registration') }}"
+                       class="btn btn-transparent-black btn-h50 btn-w15">{% trans %}Register{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- share buttons -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c93906a67926205"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/company-like.js') }}"></script>
+    <script src="{{ asset('js/company-comment.js') }}"></script>
+    <script>
+        let divContributors = $('#contributors')
+        let btnShowMoreContributors = $('#btn-show-more-contributors')
+        btnShowMoreContributors.on('click', function (e) {
+            e.preventDefault()
+            let url = $(this).attr('href')
+            let offset = $(this).data('offset')
+            let companyId = $(this).data('company-id')
+            $.ajax({
+                url: url,
+                data: {offset: offset},
+                type: 'POST',
+                success: function (response) {
+                    if (response.success) {
+                        btnShowMoreContributors.data('offset', response.offset)
+                        divContributors.children('div.items').append(response.html)
+                        if (!response.more) {
+                            btnShowMoreContributors.hide()
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+    </script>
+{% endblock %}

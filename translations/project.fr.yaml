@@ -1,0 +1,443 @@
+#head titles
+Projects: Projets startups
+Send your project : Soumettez votre projet
+Update your project : Modifier votre projet
+
+Create Company: Crée une campagne
+Messages: Messages
+Idea: L'idée
+The project: Le projet
+Team: L'équipe
+Gallery Photos: Galerie photos
+#form
+
+form:
+    metaTitle:
+        label: Meta Title 
+    metaDescription:
+        label: Meta Description 
+    ogTitle:
+        label: OG Title 
+    ogDescription:
+        label: OG Description 
+
+    title:
+        send: Soumettre votre projet
+        update: Modifier votre projet
+    message:
+        send: |
+            <p>Vous pouvez enregistrer ce formulaire à tout moment et venir le compléter ultérieurement.<br>
+               Les informations transmises seront examinées par nos équipes avant d'être publiées.</p>
+        update: |
+            <p>Nous vous informons qu'après toute modification</p>
+            <p>votre projet sera mis en brouillon le temps d'être validé par un de nos experts !</p>
+    language:
+        label: Langue
+        french: Français
+        english: Anglais
+        help: Selectionner la langue avec laquelle vous souhaitez soumettre de votre projet.
+    name:
+        label: Nom du projet
+        placeholder: |
+            Ex: Nova project
+        help: |
+            Champ alphanumérique à limite de 100 caractères
+    description:
+        label: Votre projet en une phrase
+        help: |
+            De quoi s'agit-il? Résumez votre projet en seule phrase
+        placeholder: |
+            Ex: Plateforme de mise en relation entre particuliers et artisans.
+    step:
+        label: Stades du projet
+    earned:
+        label: Revenus générés jusqu'à maintenant
+    mainProducts:
+        label: Produits et services principaux
+        placeholder: |
+            Ex: mise en relation directe entre utilisateurs, notation et recommandation, mise en avant de produits pour une audience ciblée...
+        help: Utilisez des virgules ' , ' pour séparer entre les différents produits/services considérés
+
+    # 
+    startup:
+        label: La startup
+    denomination:
+        name: Dénomination
+        label: Dénomination
+        placeholder: Votre dénomination
+    creatingDate:
+        name: Date de création
+        label: Date de création
+    rc:
+        name: Numéro de RC
+        label: Numéro de RC
+        placeholder: Numéro de RC
+    city:
+        name: Ville
+        label: Ville
+        placeholder: Ville
+
+
+    salesChannels:
+        label: Canaux de vente
+        help: Choix multiple
+    otherSalesChannels:
+        label: Autre
+    moreSalesChannels:
+        placeholder: Merci de spécifier
+    sectors:
+        label: Secteur d'activité
+        placeholder: 'Ex: mise en relation, mode et habillement'
+        help: Choisissez un ou plusieurs secteur(s) parmi la liste 
+    moreSectors:
+        label: Autre
+        placeholder: Merci de spécifier
+    businessModels:
+        label: Modèle de génération de revenus envisagé (Business Model)
+        help: Choix multiple
+    otherBusinessModels:
+        label: Autre
+    moreBusinessModel:
+        placeholder: merci de spécifier
+
+    market: Marché*
+    country: Marché*
+    morocco:
+        label: Maroc
+
+    otherCountry:
+        label: Étranger
+
+    foreignCountry:
+        placeholder: Spécifiez votre pays ici
+
+    marketResearch:
+        label: Étude de marché disponible ?
+        yes: Oui
+        no: Non
+
+    avantages:
+        label: Avantages concurrentiels
+        help: Qu'est ce qui rend votre proposition de valeur unique?
+        help2: Utilisez le bouton  "+" pour ajouter des éléments
+        placeholder: |
+            Ex: Technologie brevetée
+    budget: Budget global du projet
+    hasNotAmount:
+        label: Non spécifié
+    raised:
+        label: Montant déjà levé/investi (MAD)
+        placeholder: |
+            ex: 2000000
+    amount:
+        label: Montant recherché
+        placeholder: |
+            ex: 2000000
+    projectFinances: Utilisation des fonds à lever
+    finance:
+        help: |
+            Listez les princpaux postes de dépenses dans lequel va être investi le montant levé
+        help2: |
+            Utilisez le bouton  "+" pour ajouter des éléments
+        placeholder: |
+            Ex: développement prototype, communication et marketing, ...
+    summary:
+        label: Proposition de valeur
+        placeholder: |
+            Ex: Nova répond au besoin de plus en plus croissant qu'on les particuliers à trouver des artisans fiables, rapidement, depuis leur mobile etc...
+        help1: |
+            Ex: Nova répond au besoin de plus en plus croissant qu'on les particuliers à trouver des artisans fiables, rapidement, depuis leur mobile etc...
+        help2: |
+            Décrivez votre projet en détail, en prenant soin d'indiquer la problématique identifiée et la solution proposée <br>
+            Utilisez un langage simple, compréhensible par tous
+        help3: |
+            Champ alphanumérique à limite de 10 000 caractères
+    express:
+        #je vais devoir y réfléchir
+        label: Exprimez-vous sur ce que vous voudriez que votre investisseur connaisse
+        help: |
+            Champs libre. Détaillez l'ambition de votre projet, indiquez les concours auxquels vous avez participé...<br>
+            ou simplement exprimez-vous sur votre vision, ou tout autre élément pouvant convaincre un investisseur potentiel
+        placeholder: Décrivez
+
+    author:
+        label: Auteur
+    isDraft:
+        label: Brouillon
+    isVerified:
+        label: Vérifié
+    isApproved:
+        label: Approuvé
+    isUpdated:
+        label: Modifié
+    isRejected:
+        label: Rejeté
+
+    # help Document
+    documents:
+        help: Les fichiers autorisés PDF, DOCX et EXCEL | Taille maximum 3Mb
+        btnAdd: Ajouter un document
+
+    galleryPhotos:
+        help: |
+            Formats d'image autorisés: JPG, PNG | Taille maximum 5Mb
+        btnAdd: Ajouter une photo
+        btnDelete: Supprimer cette photo
+
+    logo:
+        label: Logo
+        help: |
+            Formats d'image autorisés: JPG, PNG | Taille maximum 3Mb
+        placeholder: Selectionner un logo
+    cover:
+        label: Photo de couverture
+        help: |
+            Formats d'image autorisés : JPG, PNG | Taille maximum 5Mb
+        placeholder: Selectionner une photo de couverture
+
+    video:
+        label: URL vidéo
+        placeholder: URL vidéo sur youtube
+
+    save:
+        label: Enregistrer
+sectors:
+    placeholder: Choisissez un ou plusieurs secteur(s) parmi la liste
+
+do you have a startup: Avez vous constitué une entreprise ?
+Do not forget to save additions made to the project: "N'oubliez pas d'enregistrer les ajouts effectués sur le projet, Voulez-vous vraiment quitter cette étape?"
+
+Draft: Brouillon
+Declined: Rejeté
+Declined modification: Modification rejetée
+Under study: En cours d'étude
+Modification under study: Modification en cours d'étude
+Approved: Approuvé
+
+
+Add: Ajouter
+Remove: Supprimer
+# Startuper Validation project
+congrats:
+    title: Projet validation
+    message: |
+        Félicitations
+    details: |
+        Le projet est en cours d'examination, vous serez notifié par mail une fois validé.<br>
+        Entre temps, enrichissez votre page projet avec vos photos, vidéos et contenus depuis votre espace Startuper.
+    btn: Soumettre a la vérification
+
+
+# page form step
+Language: Langue
+French: Français
+English: Anglais
+
+# Helps
+Required Field: Champ obligatoire
+Confidential information: |
+    Données confidentielles : les informations saisies sur ce champ ne figurerons nulle part sur la plateforme
+Use the commas "," to separate the different products: Utilisez les virgules "," pour séparer les différents produits
+
+Here, you can add benefits: Ici, Vous pouvez ajouter des avantages
+Here message: Ici, message
+
+# Buttons
+Save & skip: Enregistrer et passer
+Submit the project: Soumettre le projet
+Skip: Suivant
+Previous: Précédent
+
+# Startuper list projects
+
+My projects: Mes projets
+Name project: Nom projet
+Creating date: Date de création
+Action: Action
+No project: Aucun projet
+Create your first project: Créer votre premier projet
+label:
+    order:
+        label: Trier par
+    verified:
+        label: Vérifié
+        placeholder: Tous
+    raised:
+        label: Montant recherché
+        placeholder: Tous
+    language:
+        label: Langue
+        placeholder: Tous
+    search:
+        label:  Recherchez par mot-cle
+        placeholder:  Recherchez par mot-cle
+
+Verified: Vérifié
+Not verified: Non Vérifié
+No result found: Aucun résultat trouvé
+# card project
+Sectors: Secteurs d'activités
+Sector: Secteur d'activité
+Amount: Montant recherché
+Business models: Business models
+Goal: Objectif
+Budget: Budget
+
+
+###########################
+### Page success ####
+#########################
+Project updated successfully: Projet mis à jour avec succès
+Go to the dashboard: Allez au table de bord
+
+###############################
+# page show project ##########
+#############################
+Share: Partager
+Edit cover photo: Modifier la photo de couverture
+Edit: Modifier
+Edit logo: Modifier le logo
+Invest in: Investir dans
+Has not amount: Non défini
+Complete the project: Completer le projet
+Update project: Modifier le projet
+Delete project: Supprimer le projet
+View project: Voir le projet
+Contact the project leader: Contacter le porteur de projet
+Project: Le projet
+Products / Services: Produits / Services
+Sales channels: Canaux de vente
+Video: Vidéo
+Add video: Ajouter une vidéo
+No video: Pas de vidéo
+Executive summary: Executive summary
+Proposition of value: Proposition de valeur
+Use of raised funds: Utilisation des fonds levés
+Expression: Informations complémentaires
+Technical sheet: Fiche technique
+Our project in pictures: Notre projet en images
+Questions / Responses: Questions / Réponses
+Next: Suivant
+The team: L'équipe
+Lead: Représentant
+Funding objective: Objectif de financement
+Participation: Participation
+Project phase: Phase projet
+Market considered: Marché considéré
+Morocco: Maroc
+Foreign: Étranger
+Does this project interest you ?: Ce projet vous intétesse ?
+Ask for the documentation: Demandez la documentation
+Make a request: Faire une demande
+Ask documentation: Demande de documentation
+Download: Télécharger
+Select the document (s) that interests you and send us your request: Séléctionnez les documents qui vous intéressent, et envoyez-nous votre demande.
+Download the documentation related to this project: Télécharger la documentation liée à ce projet
+To access the documentation, you must authenticate: Pour pouvoir accéder à la documentation, vous devez vous authentifier
+Please authenticate to be able to contact the project leader: Pour pouvoir contacter le porteur du projet, vous devez vous authentifier
+To make a project a favorite, you must authenticate: Pour pouvoir mettre un projet en favori, vous devez vous authentifier
+Login: Connexion
+Register: S'inscrire
+# modal just added
+This project does not contain any documents, please contact the startuper: Ce projet ne content aucun document, vous pouvez toute fois contacter le startuper via le formulaire ci dessous
+SEND: Envoyer
+Send: Envoyer
+
+Avantages: Avantages compétitifs
+
+Similar projects: Projets similaires
+
+##############################
+### listing project #########
+############################
+results: résultats trouvés
+All: Tout
+Between: Entre
+Reset: Réinitialiser
+Yes: Oui
+No: Non
+
+Recent: Plus récent
+Older: Plus ancien
+Higher budget: Budget plus élevé
+Lower budget: Budget moins élevé
+
+No more results: Pas plus de résultats #just added this line
+Load more: Afficher plus de résultats
+
+# page confirmation delete
+Deletion confirmation: Confirmer la suppression
+Are you sure you want to delete this project: Êtes-vous sûr de vouloir supprimer cet projet
+Yes, delete: Oui, supprimer
+Cancel: Annuler
+
+# page add cover
+Change the cover of your project: Changer la photo de couverture de votre projet
+Choose a cover photo for your project: Choisir une photo de couverture a votre projet
+Change: Changer
+
+# page add logos
+Change the logo: Changer le logo
+For your project: Pour votre projet
+
+# page add video
+Edit video: Modifier la vidéo
+Change the video: Changer la vidéo
+Choose a video for your project: Choisir une vidéo à votre projet
+Example: Exemple
+########################
+### dashboard #########
+######################
+Companies: Projets associatifs
+Submit your project: Soumettre un projet
+Your project: Votre projet
+Create project: Créer un projet
+Rejected: Projet rejeté
+Documents & Tools: Documents & Outils
+Public documents: Documents publics
+Auto-productions: Auto-productions
+Tools: Outils
+Document library: Docuthèque
+Status: Statut
+Statistics: Statistiques
+Visits: Visites
+
+Benefit from personalized support for your projects: Bénéficiez d'un accompagnement personnalisé pour vos projets
+Discover: Découvrir
+News: Actualités
+See all news: Voir toutes l'actualité
+
+You: Vous
+Reply: Répondre
+
+Like: J'aime
+Unlike: Je n'aime plus
+
+Other: Autre
+
+empty: Vide
+
+# MESSAGES
+
+Object: Objet
+Author: Auteur
+Date: Date
+
+
+Request: Demande
+
+By completing this form, I pledge to respect the: En remplissant ce formulaire, je m'engage à respecter les
+PI engagement: Engagement CRPI
+of the platform: de la plateforme
+
+In the headlines: À la une
+
+Choose an order: Choisissez un ordre
+
+InformationRead: Pour pouvoir lire la suite, vous devez vous authentifier
+readMore: Lire la suite
+messageLogin:  Veuillez vous authentifier ou vous inscrire pour pouvoir accéder aux fiches projets
+
+Please choose the type of project you wish to submit: Veuillez choisir le type de projet que vous souhaitez soumettre
+Startup project / TPME: Projet de startup / TPME
+Associative project: Projet associatif

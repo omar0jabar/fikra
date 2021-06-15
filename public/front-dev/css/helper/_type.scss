@@ -1,0 +1,178 @@
+/* TYPOGRAPHY */
+
+// Headings
+// -------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-base;
+  color: $papaGreen-1;
+
+  //&:first-letter {
+  //  text-transform: capitalize;
+  //}
+}
+
+h1 {
+  font-size: rem(60px);
+  font-weight: 700;
+  color: $cloudBurst;
+
+  span {
+    font-family: $font-base;
+    font-weight: 600;
+  }
+}
+
+h2 {
+  font-size: rem(40px);
+  font-weight: 500;
+  @media #{$mobile} {
+    font-size: rem(28px);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  span {
+    font-family: $font-base;
+    font-weight: 400;
+  }
+}
+
+h3 {
+  font-size: rem(32px);
+  font-weight: 500;
+}
+
+h4 {
+  font-size: rem(24px);
+  font-weight: 600;
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  span {
+    font-family: $font-second;
+    font-weight: 400;
+  }
+}
+
+h5,
+h6 {
+  font-size: rem(20px);
+  font-weight: 600;
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  span {
+    font-family: $font-second;
+    font-weight: 400;
+  }
+}
+
+table {
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+p {
+  font-size: rem(24px);
+  font-family: $font-base;
+  font-weight: 300;
+  color: $black;
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  } 
+}
+
+ul, ol {
+  list-style: none;
+
+  li {
+    font-family: $font-base;
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+}
+
+a,
+span {
+  font-family: $font-base;
+  transition: all 0.4s ease-out;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+
+  &.img-desc {
+    display: block;
+
+    @media #{$tab-min} {
+      display: none;
+    }
+  }
+
+  &.img-mob {
+    display: none;
+
+    @media #{$tab-min} {
+      display: block;
+    }
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.link {
+  font-size: rem(14px);
+  font-weight: 600;
+  color: $orange;
+  border-bottom: 1px solid;
+  padding-bottom: 1px;
+  line-height: 1.8;
+}
+
+.fa-heart {
+  color: $gray;
+}
+
+.bg-red {
+  color: $coralRed;
+}
+

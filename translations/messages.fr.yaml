@@ -1,0 +1,191 @@
+#################################
+### ADMINISTRATION #############
+###############################
+
+# request documentation admin controller
+Approved project not found: Projet validé non trouvé
+The project is not approved anymore: Le projet n'est plus approuvé
+The project has no documentation! email sent to the author of the project: Le projet n'a pas de documentation! email envoyé à l'auteur du projet
+The request has been successfully accepted: La demande a été accepté avec succés
+The request already has an answer: La demande a déjà une reponse
+The request was rejected successfully: La demande a été rejetée avec succès
+This document is reserved for users authorized by the project leader: Ce document est réservé aux utilisateurs autorisés par le porteur de projet
+
+# Project admin controller
+The project is not verified anymore: |
+  Le projet <strong>%project_name%</strong> n'est plus vérifié
+The project is verified: |
+  Le projet <strong>%project_name%</strong> a été verifié
+The project has been successfully updated: |
+  Le projet <strong>%project_name%</strong> a été actualisé avec succés
+The project is not qualified anymore: |
+  Le projet <strong>%project_name%</strong> n'est plus approuvé
+The project has been successfully approved: |
+  Le projet <strong>%project_name%</strong> a été approuvé avec succés
+The project was locked successfully: |
+  Le projet <strong>%project_name%</strong> a été verrouillé avec succès
+The project was unlocked successfully: |
+  Le projet <strong>%project_name%</strong> a été déverrouillé avec succès
+The project was successfully rejected: |
+  Le projet <strong>%project_name%</strong> a été rejeté avec succés
+The project is not rejected anymore: |
+  Le projet <strong>%project_name%</strong> n'est plus rejeté
+The modification of the project was rejected successfully: |
+  La modification du projet <strong>%project_name%</strong> a été rejeté avec succès
+The project is not updated for the rejected: |
+  Le projet <strong>%project_name%</strong> n'est pas mis à jour pour le rejeté
+You can not make the project check if it is not approved yet: Vous ne pouvez pas rendre le projet vérifier si il est pas encore approuvé
+All projects are successfully deleted: Tous les projets sont supprimés avec succès
+Selected items have been removed successfully: Les projets séléctionnés ont été supprimés avec succès
+You must accept Confidentiality & PI engagement: Vous devez accepter les conditions
+
+# Event admin controller
+The event was successfully created: L'évènement a été créé avec succès
+The event has been successfully modified: L'évènement a été modifié avec succès
+
+# Admin profile controller
+Your profile is updated successfully: Votre profil est mis à jour avec succès
+
+# Global Document admin controller
+Document successfully created: Le document a été créé avec succès
+Document successfully edited: Le document a été modifié avec succès
+
+# Admin admin controller
+Account locked successfully: Le compte a été verrouillé avec succès
+Account unlocked successfully: Le compte a été déverrouillé avec succès
+User not found: Utilisateur non trouvé
+
+
+#########################
+### FRONT ##############
+#######################
+
+# investor controller
+Message not found: Message non trouvé
+Your response has been successfully sent: Votre reponse a été envoyée avec succés
+
+# Global document controller
+Document not found: Document non trouvé
+You don't have access to this resource: Vous n'avez pas accès à cette ressource
+
+# comment ca marche controller
+Page not found: Page non trouvé
+
+
+# Entrepreneur Registration controller
+Registration successfully: Votre inscription est terminée, veuillez activer votre compte par le lien envoyé à votre adresse e-mail.
+Link registration expired: Le lien d'activation a expiré, merci de remplire le formulaire d'inscription
+Account successfully activated: Votre compte a été activé avec succès! Vous pouvez maintenant soumettre un projet
+
+# Entrepreneur ProjectController
+Is required: |
+  <strong>%field%</strong> est obligatoire
+This field is required: Ce champ est obligatoire
+Please select at least one sales channel: Veuillez selectionner au moin un canal de vente
+Please select at least one sector: Veuillez selectionner au moin un secteur
+Please select at least one business model: Veuillez selectionner au moin un business model
+Please define at least one country: Veuillez définir au moins un pays
+You can add only 5 benefits to the maximum: Vous pouvez ajouter que 5 avantages au maximum
+You can add only 5 financing details to the maximum: Vous pouvez ajouter que 5 détail de financement au maximum
+You can add only 5 members to the maximum: Vous ne pouvez ajouter que 5 membres au maximum
+You can add only 10 photos to the maximum:  |
+  Vous ne pouvez ajouter que <strong>%max%</strong> photos au maximum
+Please enter at least the project leader: Veuillez entrer au moin le porteur du projet
+Please choose the project leader: Veuillez choisir le porteur du projet
+Access denied: Accès refusé
+The request was made successfully: La demande a été faite avec succés
+Project deleted successfully: |
+  Votre projet: <strong>%project_name%</strong> a été supprimé avec succès
+Your cover photo has been changed successfully: Votre photo de couverture a été changé avec succés
+Your logo has been successfully changed: Votre logo à été changé avec succés
+Your Video has been successfully added: Votre Vidéo à été ajouté avec succés
+You have exceeded the allowed number: Vous avez dépassé le nombre autorisé
+You have duplicate a document type: Vous avez dupliquer un type de document
+# Entrepreneur profile controller
+Your profile has been successfully modified: Votre profile a été modifié avec succés
+Current password is wrong: Le mot de passe actuel est incorrect
+Your password has been successfully changed: Votre mot de passe a été modifié avec succès
+
+# Entrepreneur Dashboard controller
+You do not have the right to access the dashboard: Vous n'avez pas le droit d'accéder au dashboard
+Your answer has been successfully registered: Votre reponse a été enregistré avec succés
+
+# Resetting controller
+No email found: Aucun email trouvé
+email sending: |
+  Un email a été envoyé à <strong>%email%</strong>. contient un lien,  vous devez cliquer pour réinitialiser votre mot de passe
+No request found: Aucune demande trouvée
+Link expired: Le lien de réinitialisation a expiré, merci de faire une nouvelle demande
+Your password has been successfully reset: Votre mot de passe a été réinitialisé avec succés
+
+# project controller
+Your question has been sent successfully: Votre question a été envoyée avec succès
+Project not found: Projet non trouvé
+Category not found: Catégorie non trouvée
+You have not access: Vous n'avez pas accès
+Your message has been sent successfully: Votre message a été envoyé avec succés
+The author of the project has no right to request the documentation of his project: L'auteur du projet n'a pas le droit de demander la documentation de son projet
+User invalid: Utilisateur invalide
+Token invalid: Jeton invalide
+You already have a request: Vous avez déjà une demande
+Your request can not be null: Votre demande ne peut pas etre null
+Your request has been successfully sent: Votre demande a été envoyée avec succés
+Request not found: Request non trouvé
+Unauthorized: Non autorisé
+Download link has expired: Le lien de téléchargement est expiré
+Like added: Jaime ajouté
+Like removed: jaime supprimé
+
+# event page
+Event not found: Événement non trouvé
+
+# Contact page
+Your message has been successfully sent: Votre message a été envoyée avec succés
+
+# ERROR 403 & 404
+Back to Home: Retour à l'accueil
+
+# user checker
+Email could not be found: Email n'a pas pu être trouvé
+Your account was deleted. Sorry about that: Your account was deleted. Sorry about that
+Your account was banned. Sorry about that: Your account was banned. Sorry about that!
+Your account is disabled. Sorry about that: Votre compte a été désactivé
+Your account has not access to administration: Votre compte n'a pas accès à l'administration
+
+Statistics: Statistiques
+Visits: Visites
+Likes: Likes
+
+January: Janvier
+February: Février
+March: Mars
+April: Avril
+May: Mai
+June: Juin
+July: Juillet
+August: Août
+September: Septembre
+October: Octobre
+November: Novembre
+December: Décembre
+
+French: Français
+English: Anglais
+Payment details: 'Détails de paiement'
+Payment date: 'Date de paiement'
+Payment number: 'N° de paiement'
+Authorization code: Code d'autorisation
+Method of payment: 'Méthode de paiement	'
+Payment card number: 'N° de carte de paiement	'
+Transaction number: 'N° de transaction	'
+Details of the order: 'Détails de la commande'
+Identifiant: 'Identifiant'
+Amount: 'Montant'
+Customer information: 'Informations client'
+Name: 'Nom'
+Address: 'Adresse'
+Phone: 'Tél'
+Email: 'Email'
+Payment successful: 'Paiement réussi'
+Payment error: 'Erreur de paiement'
+Project name: 'Nom du projet'

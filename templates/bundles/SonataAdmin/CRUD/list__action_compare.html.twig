@@ -1,0 +1,5 @@
+{% if object.isApproved and object.isUpdated %}
+     <a href="{{ admin.generateObjectUrl('compare', object) }}" class="btn btn-sm btn-warning">
+        <i class="fa fa-eye"></i> Comparer
+     </a>
+{% endif %}

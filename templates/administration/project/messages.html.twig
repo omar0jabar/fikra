@@ -1,0 +1,55 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% include 'administration/project/_head.html.twig' %}
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+               <h2>{{ project.messages|length }} {% trans %}Message{% endtrans %}</h2>
+               <table class="table table-hover">
+                  <thead>
+                  <tr>
+                     <th>Object</th>
+                     <th>responses</th>
+                     <th>Author</th>
+                     <th>Date</th>
+                     <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                     {% for message in pagination %}
+
+                        <tr>
+                           <td>{{ message.object }}</td>
+                           <td>{{ message.responses|length }}</td>
+                           <td>{{ message.author.email }}</td>
+                           <td>{{ message.createdAt|date('d/m/Y H:i') }}</td>
+                           <td>
+                              <a href="{{ path('admin_show_message', { idProject: project.id, idMessage: message.id}) }}" class="btn btn-default">
+                                 <i class="fa fa-eye"></i> Show
+                              </a>
+                           </td>
+                        </tr>
+                     {% endfor %}
+                  </tbody>
+               </table>
+               <div class="navigation text-center">
+                  {{ knp_pagination_render(pagination) }}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

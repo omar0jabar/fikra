@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Registration{% endtrans %}{% endblock %}
+{% form_theme form _self %}
+{% trans_default_domain 'startuper' %}
+
+{% block body %}
+
+   <div class="RegistrationP">
+      <div class="container">
+         {% include 'partials/_notice.html.twig' %}
+         <div class="row justify-content-center">
+            <div class="col-md-10 col-sm-12 form-registration">
+               <div class="card">
+                  <div class="card-body">
+                     <h3 class="h3">
+                        <i class="fas fa-edit mr-3"></i> {% trans %}Registration{% endtrans %}
+                     </h3>
+                     {{ form_start(form) }}
+                     <div class="b--choice-profile">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <label class="required" for="">{% trans %}form.profile.label{% endtrans %}</label>
+                              {{ form_row(form.profile) }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="b-fullname">
+                        <div class="row">
+                           <div class="col-md-6 field-firstname">
+                              {{ form_row(form.firstName) }}
+                           </div>
+                           <div class="col-md-6 field-lastname">
+                              {{ form_row(form.lastName) }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="b-fullname">
+                        <div class="row">
+                           <div class="col-md-6 field-firstname">
+                              {{ form_row(form.city) }}
+                           </div>
+                           <div class="col-md-6 field-firstname">
+                              {{ form_row(form.socialReason) }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="b-date-phone">
+                        <div class="row">
+                           <div class="col-md-6">
+                              {{ form_row(form.email) }}
+                           </div>
+                           <div class="col-md-6 field-phone">
+                              <div class="row">
+                                 <div class="col-1 field-prefix">
+                                    <label for="startuper_registration_prefix_phone">Préfixe</label><br>
+                                    <select name="startuper_registration_prefix_phone" id="startuper_registration_prefix_phone" class="form-control">
+                                       <option value="+212">+212</option>
+                                    </select>
+                                 </div>
+                                 <div class="col field-phone-input">
+                                    {{ form_row(form.phone) }}
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="b-form-password">
+                        <div class="row">
+                           <div class="col-md-6">
+                              {{ form_row(form.password) }}
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-md-6">
+                              <span class="required-field">{{ 'Required field' }}</span>
+                        </div>
+                     </div>
+
+                     <div class="g-recaptcha"
+                          data-sitekey="{{ recaptcha_site_key }}"
+                          data-callback="onReCaptchaSuccess"
+                          data-size="invisible">
+                     </div>
+
+                     <div class="b-register-btn">
+                        <button class="btn btn-bg-red btn-h50 btn-w50" type="submit">
+                           {% trans %}Register{% endtrans %}
+                        </button>
+                     </div>
+                     {{ form_end(form) }}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+
+{% block javascripts %}
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script type="text/javascript">
+      function onReCaptchaSuccess(data){
+         $('registration-form').submit();
+      }
+   </script>
+{% endblock %}
+
+{% block _startuper_registration_profile_widget %}
+   <div class="row">
+      {% for child in form %}
+         <div class="col">
+            {{ form_widget(child) }}
+            {{ form_label(child) }}
+         </div>
+      {% endfor %}
+   </div>
+{% endblock %}
+
+{% block _startuper_registration_password_first_widget %}
+   {{ form_widget(form) }}
+   <small class="form-text">{% trans %}form.password.help{% endtrans %}</small>
+{% endblock %}

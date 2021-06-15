@@ -1,0 +1,51 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_admin_content %}
+    {{ form_start(form) }}
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4>Profile</h4>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.phone) }}
+                    {{ form_row(form.birthday) }}
+                    {{ form_row(form.address) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4>Account</h4>
+                </div>
+                <div class="box-body">
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                    {{ form_row(form.role) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="sonata-ba-form-actions well well-small form-actions">
+        <div class="text-center">
+            <button class="btn btn-success" type="submit">
+                {% if action == "create" %}
+                    {% set label = "Create" %}
+                    {% set icon = "save" %}
+                {% else %}
+                    {% set label = "Edit" %}
+                    {% set icon = "pencil" %}
+                {% endif %}
+                <i class="fa fa-{{ icon }}"></i>
+                {{ label|trans }}
+            </button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

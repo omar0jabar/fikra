@@ -1,0 +1,263 @@
+.b-nos-garanties {
+  background-color: $bg-white-default;
+  padding-top: 43px;
+  padding-bottom: 40px;
+  @media #{$mobile} {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+    &.company {
+        p {
+            &.intro {
+                margin-bottom: 30px;
+            }
+        }
+        .card-nos-garanties {
+            .content-nos-garanties {
+                p {
+                    font-size: rem(18px);
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+
+  .c-heading {
+    margin-bottom: 0;
+    @media #{$tab-max} {
+      margin-bottom: 10px;
+    }
+  }
+
+  h1 {
+    font-size: rem(44px);
+    font-weight: 500;
+    color: $cloudBurst;
+    margin-bottom: 18px;
+    word-break: break-word;
+
+    @media #{$mobile} {
+        font-size: rem(36px);
+        margin-bottom: 8px;
+    }
+  }
+
+  h2 {
+      font-size: rem(38px);
+      font-weight: 500;
+      color: $cloudBurst;
+      margin-bottom: 13px;
+      word-break: break-word;
+
+      @media #{$mobile} {
+          font-size: rem(28px);
+          margin-bottom: 8px;
+      }
+  }
+  h3 {
+      font-size: rem(22px);
+      font-weight: 500;
+      color: $monza;
+      margin-bottom: 8px;
+      word-break: break-word;
+
+      @media #{$mobile} {
+          // font-size: rem(18px);
+          margin-bottom: 8px;
+      }
+  }
+  h4 {
+      font-size: rem(18px);
+      font-weight: 500;
+      color: $waikawaGray;
+      word-break: break-word;
+
+      @media #{$mobile} {
+          // font-size: rem(16px);
+      }
+  }
+  h5 {
+      font-size: rem(16px);
+      font-weight: 500;
+      color: $waikawaGray;
+      word-break: break-word;
+
+      @media #{$mobile} {
+          // font-size: rem(16px);
+      }
+  }
+
+  p {
+      font-size: rem(18px);
+      font-weight: 300;
+      color: $eastBay-2;
+      // margin: 0;
+      margin-bottom: 13px;
+      &.intro {
+        font-size: rem(24px);
+      }
+  }
+
+  ul {
+      padding-left: 15px;
+      margin-bottom: 20px;
+
+      @media #{$desk-min} {
+          margin-bottom: 14px;
+      }
+      li {
+          position: relative;
+          margin-bottom: 8px;
+          color: $eastBay-2;
+          font-size: rem(14px);
+
+          &:before {
+              content: '';
+              width: 6px;
+              height: 6px;
+              background-color: $cloudBurst;
+              position: absolute;
+              top: 6px;
+              left: -15px;
+              border-radius: 50%;
+          }
+      }
+  }
+
+  .c-reassurance {
+    .c-reassurance-item {
+      margin-bottom: 15px;
+      padding: 0 10px;
+      text-align: center;
+      @media #{$mobile} {
+        padding: 0 15px;
+      }
+      .c-reassurance-img {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 6px;
+        @media #{$tab-min} {
+          height: 130px;
+        }
+        @media #{$mobile} {
+          height: 220px;
+        }
+        img {
+          // width: 100%;
+          // height: 100%;
+          // object-fit: cover;
+          -webkit-user-drag: none;
+          -moz-user-drag: none;
+        }
+      }
+    }
+  }
+
+  .card-nos-garanties {
+    margin-left: 80px;
+    margin-right: 82px;
+    border: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba($black, .2);
+
+    @media #{$desk-min-2} {
+      margin: 0 50px;
+    }
+
+    @media #{$tab-min} {
+      margin: 0 20px;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    @media #{$mobile} {
+      margin: 0 10px;
+    }
+
+    .img-nos-garanties {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      flex: 0 0 47%;
+      max-width: 47%;
+
+      @media #{$tab-min} {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      img {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content-nos-garanties {
+      padding: 76px 60px 0;
+      margin-left: 0;
+      flex: 0 0 52.33333%;
+      max-width: 52.33333%;
+
+      @media #{$desk-min-2} {
+        margin-left: 0;
+        padding: 40px 20px 0 20px;
+      }
+
+      @media #{$tab-min} {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      h3 {
+        font-size: rem(28px);
+        font-weight: 500;
+        color: $coralRed;
+        margin-bottom: 11px;
+      }
+
+      p {
+        font-size: rem(16px);
+        font-weight: 300;
+        color: $gray-Cod;
+        margin-bottom: 46px;
+        line-height: normal;
+
+        @media #{$tab-min} {
+          margin-bottom: 20px;
+        }
+      }
+      span.btn.btn-transparent-red {
+        a {
+          line-height: 38px;
+        }
+      }
+    }
+  }
+}
+
+.intro {
+  font-weight: 300;
+  width: 50%;
+  margin: 0 auto 37px;
+  line-height: normal;
+  padding-left: 10px;
+  @media #{$tab-max} {
+    font-size: rem(18px);
+    margin-bottom: 20px;
+  }
+  @media #{$tab-min} {
+    width: 100%;
+    padding: 0 10px;
+  }
+}

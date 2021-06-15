@@ -1,0 +1,77 @@
+titleSearch: Find a Funding Program
+sortDescriptionSearch: PFE Startup makes available to all actors of the Moroccan entrepreneurial ecosystem, a search engine exclusively dedicated to Financing Programs active in Morocco, intended for Start-ups and TPME, at all stages of their development
+labelSearch: Choose one or more activity sector
+label1: I'm looking for funding
+label1placeholder: funding
+label2: of type
+label2placeholder: type
+label3: in the sector
+label3placeholder: sector
+label4: for my needs of
+label4placeholder: needs
+label5: I am looking for an amount between
+label5placeholder: min
+label6: et
+label6placeholder: max
+labelButton: Found results
+labelSearchResult: program(s) found
+labelSearchResultEmpty: No  Result found
+labelNoMore: No other results
+labelSearchGestionnaire: administrator
+labelSearchFinancement: Funding proposed
+labelSearchPhase: need
+labelSearchTypeFond: Type of program
+labelSearchMontant: Annual sales
+entre: Between 
+et: and 
+fond: Program
+secteur: Sector
+fondType: Device
+financeType: Funding proposed
+phaseLabel: Need
+montants: Amounts
+de: Of
+a: at
+depenseType: Type of expense covered
+savoir: Want to know more ?
+contacter: Contact us
+savoirPlus: Find out more
+phone: Phone
+mail: E-mail
+site: Website
+labelsouhite: Would you like to benefit from this program?
+labelcontacter: Contact Us
+labelAll: All
+depensestypes: Type Of depenses
+eligibilitecritere: Eligibility criteria
+montant: Amount
+beetwen: Beetwen
+and: And
+labelSujet: Topic
+placeholderSujet: Topic
+labelMessage: Message
+placeholderMessage: Your message
+firstName: First name
+firstName_placeholder: Your First name
+lastName: Last name
+lastName_placeholder: Your Last name
+email: Mail
+email_placeholder: Your email address
+countryCode: Country code
+phone_placeholder: Your phone number
+requiredFields: Required fields
+Send: Send
+message_success: Your request has been sent. A manager will contact you shortly
+label_mot: Search by keywords
+Reset: Reset
+all: All
+go_back: Back to the list of programs
+gestionnaires: Manager(s)
+similar_fond: Similar funding programs
+title_fond_og: Funding program
+description_fond_og: PFE Startup makes available to all stakeholders in the Moroccan entrepreneurship ecosystem a search engine exclusively dedicated to active financing programs in Morocco intended for start-ups and MSMEs at all stages of their development.
+
+
+
+
+  

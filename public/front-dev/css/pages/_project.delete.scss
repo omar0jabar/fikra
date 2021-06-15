@@ -1,0 +1,37 @@
+
+.project-delete {
+  padding: 90px 0;
+  min-height: calc(100vh - 400px);
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  @media #{$tab-min} {
+    padding: 40px 0;
+  }
+  @media #{$tab-min} {
+    min-height: auto;
+  }
+  @media #{$mobile} {
+    text-align: center;
+  }
+
+  h2 {
+    @media #{$tab-min-2} {
+      font-size: rem(34px);
+    }
+  }
+
+  .c-block-btn {
+    padding: 10px 0;
+    @media #{$tab-min} {
+      //text-align: center;
+    }
+    .btn {
+      margin: 0;
+
+      &:not(:last-child) {
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+}

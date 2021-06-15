@@ -1,0 +1,69 @@
+.b-actualite {
+  padding-top: 51px;
+  padding-bottom: 66px;
+  @media #{$tab-max} {
+    padding-bottom: 30px;
+  }
+  @media #{$mobile} {
+    padding-top: 30px;
+  }
+
+  .container {
+    max-width: 1281px;
+    padding: 0 10px;
+
+    .row {
+      margin: 0;
+    }
+
+    .c-heading {
+      padding-left: 16px;
+      margin-bottom: 42px;
+      @media #{$tab-max} {
+        margin-bottom: 20px;
+      }
+      @media #{$mobile} {
+        padding: 0;
+        margin-bottom: 10px; 
+      }
+    }
+
+    .block-actus {
+      margin: 0;
+      margin-bottom: 84px;
+      @media #{$tab-max} {
+        margin-bottom: 30px;
+      }
+
+      .styleCardActus-List {
+        .card-list {
+          .card-body {
+            .card-text {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .b-explorer {
+    padding-left: 17px;
+    @media #{$mobile} {
+      padding: 0;
+    }
+  }
+}
+.newsletter {
+  box-shadow: 0 0 6px rgba($black, .2);
+
+  .form-group
+  {
+    margin-bottom: 20px;
+  }
+  input[type=email] {
+    margin-bottom: 0px;
+  }
+}

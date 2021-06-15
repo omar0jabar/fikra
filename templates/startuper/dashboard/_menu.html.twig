@@ -1,0 +1,104 @@
+{% trans_default_domain 'project' %}
+
+<div id="accordion" class="accordion">
+    {% if app.user.projects|length > 0 %}
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="{% if project %}true{% else %}false{% endif %}" aria-controls="collapseOne">
+                    <i class="icon-archive"></i>
+                    <h4>{% trans %}Projects{% endtrans %}</h4>
+                    <i class="icon-right-chevron"></i>
+                </button>
+            </div>
+
+            <div id="collapseOne" class="collapse{% if project%} show{% endif %}" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="list-project">
+                        {% for proj in projects %}
+                            {% set class = "" %}
+                            {% if project and proj.id == project.id %}
+                                {% set class = "active" %}
+                            {% endif %}
+                            <li class="{{ class }}">
+                                <a href="{{ path('startuper_project_dashboard_show', {id: proj.id, slug: proj.slug}) }}">
+                                    {{ proj.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{{ path('startuper_project_create') }}">
+                                {% trans %}Create project{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if app.user.companies|length > 0 %}
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="{% if company %}true{% else %}false{% endif %}" aria-controls="collapseTwo">
+                    <i class="icon-archive"></i>
+                    <h4>{% trans %}Companies{% endtrans %}</h4>
+                    <i class="icon-right-chevron"></i>
+                </button>
+            </div>
+
+            <div id="collapseTwo" class="collapse {% if company %}show{% endif %}" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="list-project">
+                        {% for comp in companies %}
+                            {% set class = "" %}
+                            {% if company and comp.id == company.id %}
+                                {% set class = "active" %}
+                            {% endif %}
+                            <li class="{{ class }}">
+                                <a href="{{ path('startuper_company_dashboard_show', {id: comp.id, slug: comp.slug}) }}">
+                                    {{ comp.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{{ path('startuper_company_create') }}">
+                                {% trans %}Create Company{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{#    <div class="card">#}
+{#        <div class="card-header" id="headingThree">#}
+{#            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">#}
+{#                <i class="icon-settings"></i>#}
+{#                <h4>{% trans %}Documents & Tools{% endtrans %}</h4>#}
+{#                <i class="icon-right-chevron"></i>#}
+{#            </button>#}
+{#        </div>#}
+{#        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">#}
+{#            <div class="card-body">#}
+{#                <ul>#}
+{#                    <li><a href="{{ path('global_document', {type: 'tools'}) }}">{% trans %}In the headlines{% endtrans %}</a></li>#}
+{#                    <li><a href="{{ path('global_document', {type: 'document-public'}) }}">{% trans %}Public documents{% endtrans %}</a></li>#}
+{#                    <li><a href="{{ path('global_document', {type: 'auto-production'}) }}">{% trans %}Auto-productions{% endtrans %}</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+    {% if app.user.messages|length > 0 %}
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <a href="{{ path('investor_messages') }}" class="btn btn-link">
+                    <i class="icon-open-email"></i>
+                    <h4>{% trans %}Messages{% endtrans %}</h4>
+                    {#<i class="icon-right-chevron"></i>#}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>

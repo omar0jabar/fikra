@@ -1,0 +1,118 @@
+{% extends '@VichUploader/Form/fields.html.twig' %}
+
+{% trans_default_domain 'teamMember' %}
+
+{% block vich_image_widget %}
+      {% if image_uri %}
+         <img class="vich-img w-100" src="{{ image_uri }}" alt=""/>
+      {% endif %}
+      {{ form_widget(form.file) }}
+      {% if form.delete is defined %}
+         {{ form_row(form.delete) }}
+      {% endif %}
+      {% if download_uri %}
+         <a class="btn btn-secondary" href="{{ download_uri }}">
+            <i class="fas fa-download"></i>
+            {{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
+         </a>
+      {% endif %}
+{% endblock %}
+
+{# ADD TEAM MEMBERS #}
+
+{% block _project_form_teamMembers_widget %}
+   {#<div class="col-md-12 moi-meme">
+      <button type="button" class="btn btn-outline-info btn-h30 btn-w10" onclick="javascript:me();">
+         <i class="icon-User"></i> {% trans %}Myself{% endtrans %}
+      </button>
+   </div>#}
+   {{ form_widget(form) }}
+   <div class="form-group b-add-member">
+      <input type="hidden" id="member-counter" value="0">
+      <button id="add-member" type="button" class="btn btn-bg-blue btn-h50 btn-w35">
+         <i class="icon-add"></i> {% trans %}form.button.add{% endtrans %}
+      </button>
+   </div>
+{% endblock %}
+
+{% block _project_form_teamMembers_entry_row %}
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _project_form_teamMembers_entry_widget  %}
+   <div id="block_{{ id }}" class="form-team team-mumber-infos">
+      <div class="row">
+         <div class="col-md-3 section-uploads" id="col_{{ id }}">
+
+            <div id="div-img-{{ id }}" class="avatar-img" style="display: none;">
+               <label for="">{% trans %}form.avatar.label{% endtrans %}</label>
+               <div class="custom-file">
+                  <label for="" class="custom-file-label">
+                     <img src="" alt="" id="img_{{ id }}" class="w-100">
+                  </label>
+               </div>
+            </div>
+            <div class="c-upload-img">
+               <label class="label-avatar" for="">{% trans %}form.avatar.label{% endtrans %}</label>
+               {{ form_row(form.imageFile) }}
+            </div>
+         </div>
+         <div class="col-md-9 section-infos">
+            <div class="avatar-infos">
+               <div class="row">
+                  <div class="col-md-6 field-firstname">
+                     {{ form_row(form.firstName) }}
+                  </div>
+                  <div class="col-md-6 field-lastname">
+                     {{ form_row(form.lastName) }}
+                  </div>
+               </div>
+            </div>
+            <div class="avatar-poste">
+               <div class="row">
+                  <div class="col-md-9 p-0">
+                     {{ form_row(form.position) }}
+                  </div>
+                  <div class="col-md-3 porteur">
+                     {#<label>{% trans %}form.porteur.label{% endtrans %}</label>#}
+                     {{ form_widget(form.porteur) }}
+                  </div>
+               </div>
+            </div>
+            <div class="avatar-biographie">
+               <label for="">{% trans %}form.biography.label{% endtrans %}</label>
+               {{ form_row(form.biography) }}
+               <p class="text-muted small ml-2"><em>{% trans %}form.biography.help{% endtrans %}</em></p>
+            </div>
+            <div class="avatar-socials">
+               <div class="row">
+                  <div class="col-md-4">
+                     {{ form_row(form.linkedin) }}
+                  </div>
+                  <div class="col-md-4">
+                     {{ form_row(form.twitter) }}
+                  </div>
+                  <div class="col-md-4">
+                     {{ form_row(form.facebook) }}
+                  </div>
+               </div>
+            </div>
+            <div class="block-upload-cv">
+               <div class="c-upload-cv">
+                  <label for="">{% trans %}form.cv.label{% endtrans %}</i></label>
+                  <div class="upload-cv">
+                     {{ form_row(form.cvFile) }}
+                  </div>
+               </div>
+            </div>
+
+         </div>
+         {% set index = id|slice(25) %}
+         {% if index != "0" %}
+            <button id="btn-delete-{{ id }}" type="button" data-action="delete-member" data-target="#block_{{ id }}" class="btn btn-bg-red btn-h30 btn-w10">
+               <i class="icon-close"></i> {% trans %}form.button.delete{% endtrans %}
+            </button>
+         {% endif %}
+      </div>
+   </div>
+{% endblock %}

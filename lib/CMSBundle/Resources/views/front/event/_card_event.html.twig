@@ -1,0 +1,60 @@
+{% trans_default_domain 'event' %}
+
+<div class="col-lg-4 col-md-6 col-sm-12 actusCardStyle">
+    {% set link = path('cmsbundle_event_show', { id: event.id, slug: event.slug}) %}
+    <a href="{{ link }}">
+        <div class="card card-actus {% if event.event.isExpired == 1 %}passed{% endif %}">
+            {% if event.bannerDesktop is not empty %}
+                {% set cover = asset("upload/cms/events-public/" ~ event.bannerDesktop) %}
+            {% else %}
+                {% set cover = asset('assets/img/news_cover.png')  %}
+            {% endif %}
+            {% if event.event.isExpired == 1 %}
+                <div class="passed-flag">
+                    {% trans %}Event expired{% endtrans %}
+                </div>
+            {% endif %}
+            <div class="card-img-top">
+                <img src="{{ cover | imagine_filter('cms_card') }}" class="img-responsive" alt>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">
+                    {{ event.title }}
+                    {% if event.event.isExpired == 1 %}
+                        <br><span class="badge badge-warning">{% trans %}Event expired{% endtrans %}</span>
+                    {% endif %}
+                </h3>
+                <p class="card-text">
+                    {{ event.content|striptags|slice(0, 200)|raw }}
+                    {% if event.content|length > 200 %}
+                        ...
+                    {% endif %}
+                </p>
+                <div class="category">
+                    <h5>{% trans %}Category{% endtrans %} : </h5>
+                    <div class="tags">
+                        <span class="badge badge-pill badge-primary btn btn-bg-blue btn-h30 btn-w18">
+                            {{ event.category.title }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12 card-date-df pl-0">
+                        <span>
+                            {% set dateDebut = event.dateDebut %}
+                            {% set dateFin = event.dateFin %}
+                            {% include '@CMS/date/_normal_event.html.twig' %}
+                        </span>
+                    </div>
+                    <div class="col-6 text-right pr-0 card-like">
+                        {#<a href="{{ path('event_like', {id: event.id}) }}" class="js-like-event" >#}
+                        <span href="#" class="js-like-event" onclick="return false;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

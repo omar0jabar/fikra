@@ -1,0 +1,68 @@
+{% trans_default_domain 'company' %}
+<div class="b-statistiques">
+    <h3>{% trans %}Statistics{% endtrans %}</h3>.
+{#    <div class="row b-cards">#}
+{#        <div class="col-md-6 progress-dash">#}
+{#            {{ company.amountCollected|number_format(0, ',', ' ') }} MAD#}
+{#            <br>#}
+{#            {% if approvedCompany %}#}
+{#                {{ approvedCompany.fundingObjective|number_format(0, ',', ' ') }} MAD#}
+{#            {% else %}#}
+{#                {{ company.fundingObjective|number_format(0, ',', ' ') }} MAD#}
+{#            {% endif %}#}
+{#            {% if approvedCompany and approvedCompany.fundingObjective != company.fundingObjective %}#}
+{#                <br>#}
+{#                <span class="text-danger">#}
+{#                    <small>#}
+{#                        {{ company.fundingObjective|number_format(0, ',', ' ') }} MAD#}
+{#                        {{ 'Is your new funding goal in draft mode while the administrator validates it'|trans }}#}
+{#                    </small>#}
+{#                </span>#}
+{#            {% endif %}#}
+{#            {% if approvedCompany %}#}
+{#                {% set percent = approvedCompany.percentageOfContribution %}#}
+{#            {% else %}#}
+{#                {% set percent = company.percentageOfContribution %}#}
+{#            {% endif %}#}
+{#            <div class="progress-content mt-3">#}
+{#                <div class="progress">#}
+{#                    <div class="progress-bar" style="width: {{ percent }};" role="progressbar" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"></div>#}
+{#                </div>#}
+{#                <div class="percentage">{{ percent}}</div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="row b-cards">
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-visites"></i></div>
+            <div class="card-text">
+                <h5>{{ company.views|default(0) }}</h5>
+                <h4>{% trans %}Visits{% endtrans %}</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-like"></i></div>
+            <div class="card-text">
+                <h5>
+                    {{ company.likes|length }}
+                </h5>
+                <h4>{% trans %}Likes{% endtrans %}</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-secteur"></i></div>
+            <div class="card-text">
+                <h5>
+                    {{ company.contributors|length }}
+                </h5>
+                <h4>
+                    {% if company.contributors|length > 1 %}
+                        {% trans %}Contributors{% endtrans %}
+                    {% else %}
+                        {% trans %}Contributor{% endtrans %}
+                    {% endif %}
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>

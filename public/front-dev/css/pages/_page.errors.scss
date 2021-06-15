@@ -1,0 +1,72 @@
+
+.page-notfound,
+.access-ignored {
+  padding: 120px 0;
+  text-align: center;
+  @media #{$tab-min-2} {
+    padding: 60px 0;
+  }
+
+  .content-wrapper {
+    width: 60%;
+    margin: 0 auto;
+    @media #{$tab-min} {
+      width: 85%;
+    }
+    @media #{$tab-min-2} {
+      width: 100%;
+      padding: 0 15px;
+    }
+  }
+
+  h1 {
+    font-size: rem(230px);
+    line-height: .8;
+    margin-bottom: 20px;
+    @media #{$tab-min} {
+      margin-bottom: 10px;
+    }
+    @media #{$tab-min-2} {
+      font-size: rem(190px);
+    }
+
+    span {
+      font-size: rem(50px);
+      color: $cloudBurst;
+      line-height: 1.2;
+      display: block;
+      @media #{$tab-min-2} {
+        font-size: rem(40px);
+      }
+    }
+  }
+  .intro {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 60px;
+    @media #{$tab-max} {
+      font-size: rem(28px);
+    }
+    @media #{$tab-min} {
+      margin-bottom: 40px;
+    }
+    @media #{$tab-min-2} {
+      font-size: rem(18px);
+    }
+  }
+
+  i {
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+}
+
+// PAGE 404
+.page-notfound {
+
+}
+
+// PAGE 403
+.access-ignored {
+
+}

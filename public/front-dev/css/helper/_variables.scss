@@ -1,0 +1,194 @@
+/* color  */
+$black : #000000;
+$white : #ffffff;
+$white-1 : #F1F1F1;
+$catskillWhite : #e6eff3;
+$catskillWhite-1 : #E5E9F2;
+$athens-Gray : #e8e6ef;
+$athens-Gray-1 : #e5e6ec;
+$athens-Gray-2 : #e1e4eb;
+$athens-Gray-3 : #F8F9FA;
+$bg-white-Gray: #f6f6f6;
+$bg-white-default: #F5F6FA;
+$papaGreen: #1e303d;
+$papaGreen-1: #1E313E;
+$cloudBurst: #263055;
+$cloudBurst-1: #1e2642;
+$cloudBurst-2 : #242F50;
+$coralRed: #FF453D;
+$monza: #CA021A;
+$orange: #fe9301;
+$yellow :#fcc603;
+$gray-Cod: #111111;
+$gray-Emperor: #525252;
+$gray-Scorpion: #595959;
+$gray-scorpion-1: #5a5a5a;
+$gray-Raven: #74818b;
+$gray: #7f7f7f;
+$gray-Gull: #97A0B0;
+$gray-Gull-1: #9EA4B9;
+$heather: #b6c2cd;
+$blackPearl: #031827;
+$bigStone: #152836;
+$bigStone-1: #162734;
+$pickledBluewood: #2e3c4c;
+$pickledBluewood-1: #2b3949;
+$pickledBluewood-3: #2D3F4B;
+$pickledBluewood-4 : #384F5F;
+$pickledBluewood-5 : #303856;
+$dodgerBlue: #0db7ff;
+$dodgerBlue-1: #288dff;
+$dodgerBlue-2: #504cff;
+$dodgerBlue-3: #4C84FF;
+$pigeonPost: #A6C5D9;
+$mirage: #171d33;
+$aliceBlue: #f2f8ff;
+$whisper: #f9f9fc;
+$comet: #636985;
+$comet-2: #5F6888;
+$eastBay: #465179;
+$eastBay-1: #384370;
+$eastBay-2: #404a72;
+$eastBay-3: #4B5373;
+$nepal: #98a7c2;
+$silverSand: #BABCBE;
+$zircon: #FDFEFF;
+$zircon-1 : #F2F7FF;
+$zicron-2 : #FBFCFF;
+$zircon-3 : #F7FAFF;
+$zicron-4 : #f2f2f2;
+$alabaster : #F7F7F7;
+$gray : #8f8f8f;
+$gray-table-border : #ddd6d6;
+$iron : #e6e7e8;
+$osloGray : #878c91;
+$osloGray-1 : #edf0f7;
+$AliceBlue : #F9FAFC;
+$AliceBlue-2 : #F2F8FF;
+$linkWater : #E3EAF8;
+$LinkWater-2 : #C3CCD4;
+$linkWater-3 : #EFF3FA;
+$waikawaGray : #566187;
+$WaikawaGrey-2 : #646B89; 
+$ShipCove : #7C83A1;
+$Solitude : #EDF1F8;
+$PortGore : #3D4667;
+$AliceBlue-3 : #FAFCFF;
+$KashmirBlue : #576784; 
+$RegentStBlue : #b0d1e5;
+$mercury: #E5E5E5;
+$btnRedHover : #e60800;
+$btnBgTransparentHover: #181e34;
+$btnBgTransparentBorderHover : #6e83aa;
+$btnOrangeYellowHover : #e48601;
+$btnOrangeYellowHover-1 : #e3b202;
+$RedOrange : #F23E36;
+$HawkesBlue : #DCE0ED;
+$HawkesBlue-1 : #E0E8FE;
+$egioColor : #4fd1b8;
+$btnBlueHover : #37467b;
+$sanJuan : #344178;
+$grayChateau : #A2AAAF;
+$grayChateau-1 : #A2A7B5;
+$spunPearl : #A8ACBB;
+$montainMeadow : #18B793;
+$eastenBlue : #17A2B8;
+$blueChill : #148C9F;
+$malibu : #7498FB;
+$waterloo : #7A8398;
+$sulu : #ACF259;
+$yellowSea : #FDAF02;
+$midnightBlue : #002862;
+$midnightBlue-1 : #84b3e6;
+$kimberly : #6C78A6;
+$PaleSky : #6C757D;
+$whiteLilac : #DAE3F1;
+$cloudBrust : #212A4A;
+$fern : #68B460;
+$apple: #55CD38;
+$doveGray : #1E303D;
+$doveGray-1 : #263343;
+$doveGray-2 : #9C9C9C;
+/* fonts
+DIN Pro (condensed)
+Permanent Marker
+Helvetica
+
+*/
+$img       : '../../assets/img/' !default;
+
+$font-base: 'Fira Sans';
+$font-base-2: 'DIN Pro Cond';
+$font-second: 'Permanent Marker';
+$font-icon: 'icomoon';
+
+/* page width*/
+
+$max-w :1406px;
+$page: 1280px;
+$page-content: 1024px;
+$page-cms: 1690px;
+$page-services: 1710px;
+$page-min: 744px;
+//Define Breakpoints var -----------------------------
+$large-breakpoint-desk-4k: 1910px !default;
+$large-breakpoint-desk-0: 1800px !default;
+$large-breakpoint-desk-1: 1700px !default;
+$large-breakpoint-desk-2: 1600px !default;
+$large-breakpoint-desk-3: 1440px !default;
+$large-breakpoint-desk: 1370px !default;
+$small-breakpoint-desk-2: 1310px !default;
+$small-breakpoint-desk: 1290px !default; 
+$small-breakpoint-desk-1: 1110px !default;
+$large-breakpoint-tab-gt: 1026px !default;
+$large-breakpoint-tab: 1025px !default;
+$large-breakpoint-tab-sm: 1023px !default;
+$small-breakpoint-tab: 992px !default;
+$small-breakpoint-tab-1: 768px !default;
+$small-breakpoint-tab-2: 767px !default;
+$breakpoint-mobile: 641px !default;
+$breakpoint-mobile-xs: 324px !default;
+$breakpoint-mobile-xs-1: 414px !default;
+$breakpoint-mobile-xs-2: 400px !default;
+$breakpoint-mobile-landscape: 738px !default;
+$screen: "only screen" !default;
+$small-up: $screen !default;
+$desk-4k: "#{$screen} and (min-width: #{($large-breakpoint-desk-4k)})" !default;
+$desk-0: "#{$screen} and (max-width: #{($large-breakpoint-desk-0)})" !default;
+$desk-1: "#{$screen} and (max-width: #{($large-breakpoint-desk-1)})" !default;
+$desk-2: "#{$screen} and (max-width: #{($large-breakpoint-desk-2)})" !default;
+$desk-3: "#{$screen} and (max-width: #{($large-breakpoint-desk-3)})" !default;
+$desk-max: "#{$screen} and (max-width: #{($large-breakpoint-desk)})" !default;
+$desk-min: "#{$screen} and (max-width: #{($small-breakpoint-desk)})" !default;
+$desk-min-2: "#{$screen} and (max-width: #{($small-breakpoint-desk-2)})" !default;
+$desk-min-1: "#{$screen} and (max-width: #{($small-breakpoint-desk-1)})" !default;
+$tab-max-gt: "#{$screen} and (min-width: #{($large-breakpoint-tab-gt)})" !default;
+$tab-max: "#{$screen} and (max-width: #{($large-breakpoint-tab)})" !default;
+$tab-max-sm: "#{$screen} and (max-width: #{($large-breakpoint-tab-sm)})" !default;
+$tab-min: "#{$screen} and (max-width: #{($small-breakpoint-tab)})" !default;
+$tab-min-1: "#{$screen} and (max-width: #{($small-breakpoint-tab-1)})" !default;
+$tab-min-2: "#{$screen} and (max-width: #{($small-breakpoint-tab-2)})" !default;
+$tab-min-landscape: "#{$screen} and (orientation: #{($breakpoint-mobile-landscape) }) and (orientation: landscape)" !default;
+$mobile: "#{$screen} and (max-width: #{($breakpoint-mobile)})" !default;
+$mobile-xs: "#{$screen} and (max-width: #{($breakpoint-mobile-xs)})" !default;
+$mobile-xs-1: "#{$screen} and (max-width: #{($breakpoint-mobile-xs-1)})" !default;
+$mobile-xs-2: "#{$screen} and (max-width: #{($breakpoint-mobile-xs-2)})" !default;
+// @media #{$desk-4k} {}
+// @media #{$desk-0} {}
+// @media #{$desk-1} {}
+// @media #{$desk-2} {}
+// @media #{$desk-3} {}
+// @media #{$desk-max} {}
+// @media #{$desk-min} {}
+// @media #{$desk-min-1} {}
+// @media #{$desk-min-2} {}
+// @media #{$tab-max} {}
+// @media #{$tab-max-gt} {}
+// @media #{$tab-max-sm} {}
+// @media #{$tab-min} {}
+// @media #{$tab-min-1} {}
+// @media #{$tab-min-2} {}
+// @media #{$mobile} {}
+// @media #{$mobile-xs} {}
+// @media #{$mobile-xs-1} {}
+// @media #{$mobile-xs-2} {}

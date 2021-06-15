@@ -1,0 +1,69 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   {% set company = comment.company %}
+
+   <div class="row">
+      <div class="col-md-12">
+         <div class="box">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+               <a href="{{ path('sonata_admin_company_comment_list') }}">
+                  <i class="fa fa-arrow-left"></i> {% trans %}Comments{% endtrans %}
+               </a>
+               <h1>{{ comment.author.fullName }}</h1>
+               <p>{{ comment.content }}</p>
+               <span>{{ comment.createdAt|date('d/m/Y H:i') }}</span>
+               <span>
+                  {{ 'Published'|trans }}
+                  {% if comment.isPublished %}
+                     <span class="label label-success">{{ 'Yes'|trans }}</span>
+                  {% else %}
+                     <span class="label label-danger">{{ 'No'|trans }}</span>
+                  {% endif %}
+               </span>
+               <hr>
+               {% for response in comment.responses %}
+                  {% set color = 'success' %}
+                  {% if response.user == comment.author %}
+                     {% set color = 'default' %}
+                  {% endif %}
+                  <div class="{{ color }}" style="margin-left: 10%;">
+                     <strong>{{ response.user.fullName }}</strong>
+                     <p>{{ response.content }}</p>
+                     <span>{{ response.createdAt|date('d/m/Y H:i') }}</span>
+                     <span>
+                        {{ 'Published'|trans }}
+                        {% if response.isPublished %}
+                           <span class="label label-success">{{ 'Yes'|trans }}</span>
+                        {% else %}
+                           <span class="label label-danger">{{ 'No'|trans }}</span>
+                        {% endif %}
+                     </span>
+                     <a class="btn btn-default"
+                        href="{{ path('admin_publish_company_comment_response', {id: company.id, commentId: comment.id, responseId: response.id}) }}">
+                        {% if response.isPublished %}
+                           {% set label = 'Disable publishing'|trans %}
+                           {% set icon = 'share' %}
+                        {% else %}
+                           {% set label = 'Publish'|trans %}
+                           {% set icon = 'share' %}
+                        {% endif %}
+                        <i class="fa fa-{{ icon }}"></i> {{ label }}
+                     </a>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<div class="b-statistiques">
+    <h3>{% trans %}Statistics{% endtrans %}</h3>.
+    <div class="row b-cards">
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-visibility"></i></div>
+            <div class="card-text">
+                <h5>{{ project.prints|default(0) }}</h5>
+                <h4>Impressions</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-visites"></i></div>
+            <div class="card-text">
+                <h5>{{ project.views|default(0) }}</h5>
+                <h4>{% trans %}Visits{% endtrans %}</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-icon"><i class="icon-like"></i></div>
+            <div class="card-text">
+                <h5>
+                    {{ project.likes|length }}
+                </h5>
+                <h4>{% trans %}Likes{% endtrans %}</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            {#                        {% if messages|length > 0 %}#}
+            {#                            <a href="{{ path('startuper_project_messages', {id: project.id, slug: project.slug}) }}">#}
+            {#                                #}
+            {#                                <div class="card-icon"><i class="icon-message"></i></div>#}
+            {#                                <div class="card-text">#}
+            {#                                    <h5>#}
+            {#                                        {{ messages|length }}#}
+            {#                                    </h5>#}
+            {#                                    <h4>Messages</h4>#}
+            {#                                </div>#}
+            {#                            </a>#}
+            {#                        {% else %}#}
+            <div class="card-icon"><i class="icon-message"></i></div>
+            <div class="card-text">
+                <h5>
+                    {{ messages|length }}
+                </h5>
+                <h4>Messages</h4>
+            </div>
+            {#                        {% endif %}#}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'project' %}
+
+{% block title %}{{ project.name }} - {% trans %}Add video{% endtrans %}{% endblock %}
+
+{% block body %}
+   <div class="b-add-video">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-8 add-video-card">
+               <h2>
+               {% if project.video %}
+                  {% trans %}Change the video{% endtrans %}
+               {% else %}
+                  {% trans %}Add Video{% endtrans %}
+               {% endif %}
+               </h2>
+               <p>{% trans %}Choose a video for your project{% endtrans %}: "{{ project.name }}"</p>
+               {{ form_start(form) }}
+               {{ form_widget(form) }}
+               <a href="{{ path('startuper_project_show', { id: project.id, slug: project.slug}) }}" class="btn btn-bg-blue btn-h50 btn-w15">
+                  <i class="fas fa-times mr-2"></i> {% trans %}Cancel{% endtrans %}
+               </a>
+               <button class="btn btn-bg-red btn-h50 btn-w15" type="submit">
+                  <i class="fas fa-check mr-2"></i> {% trans %}Add video{% endtrans %}
+               </button>
+               {{ form_end(form) }}
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

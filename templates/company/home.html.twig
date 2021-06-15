@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}
+    {{ 'Home solidarity campaigns'|trans }}
+{% endblock %}
+
+{% if header and header.bannerName is not empty %}
+    {% set banner = vich_uploader_asset(header, 'bannerFile') %}
+{% else %}
+    {% set banner = asset('assets/img/Banner.png') %}
+{% endif %}
+
+{% block meta %}
+    <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ banner }}">
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ banner }}">
+    <meta property="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ banner }}">
+{% endblock %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    <div class="header-banner company">
+        <img src="{{ banner }}" class="img-responsive" alt>
+        {% if header %}
+            <div class="container">
+                <div class="banner-content">
+                    {{ header.description|raw }}
+                </div>
+            </div>
+        {% endif %}
+    </div><!-- /.jumbotron -->
+
+    {% if reassuranceBlock %}
+        <div class="b-nos-garanties">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{{ reassuranceBlock.title }}</h2>
+                    <p class="intro">{{ reassuranceBlock.paragraph }}</p>
+                </div>
+                <div class="row c-reassurance">
+                    {% for col in reassuranceBlock.cols %}
+                        <div class="col-md-{{ col.col }} c-reassurance-item">
+                            <div class="c-reassurance-img">
+                                <img src="{{ vich_uploader_asset(col, 'imgFile') }}" alt="{{ reassuranceBlock.title }}">
+                            </div>
+                            {{ col.description|raw }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if companies|length > 0 %}
+        <div class="b-projets-recents companies-recents">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{% trans %}Recent campaigns{% endtrans %}</h2>
+                </div>
+                <div class="b-projets-slider">
+                    <div class="slider-projects">
+                        {% for company in companies %}
+                            {% include 'company/_card_company.html.twig' %}
+                        {% endfor %}
+                    </div>
+                    <div class="projets-btn text-center">
+                        <a href="{{ path('companies_list') }}" class="btn btn-bg-red btn-h50 btn-w36">
+                            {% trans %}Discover the campaigns{% endtrans %}
+                        </a>
+                        <a href="{{ path('startuper_company_create') }}" class="btn btn-bg-transparent-white btn-h50 btn-w40">
+                            {% trans %}Do you have a campaign ?{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if warrantyBlock %}
+        <div class="b-nos-garanties company">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{{ warrantyBlock.title }}</h2>
+                    <p class="intro">{{ warrantyBlock.introduction|raw }}</p>
+                </div>
+                <div class="card card-nos-garanties">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 img-nos-garanties">
+                            {% if warrantyBlock.img is not empty %}
+                                {% set img = vich_uploader_asset(garantiesBlock, 'imageFile') %}
+                            {% else %}
+                                {% set img = '/images/empty.jpg' %}
+                            {% endif %}
+                            <img src="{{ img }}" alt="" class="img-responsive">
+                        </div>
+                        <div class="col-lg-5 col-md-12 content-nos-garanties">
+                            {{ warrantyBlock.content|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if FAQs|length > 0 %}
+        <div class="b-faq">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{{ 'FAQ'|trans }}</h2>
+                    <p class="intro">{{ 'Find answers to the most frequently asked questions.'|trans }}</p>
+                </div>
+                <div class="faq-content">
+                    <div id="accordion" class="accordion-faq">
+                        {% for companyFAQ in FAQs %}
+                            <div class="card">
+                                <div class="card-header" id="heading{{ loop.index }}">
+                                    <h3>
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                            {{ companyFAQ.question }}
+                                            <i class="icon-right-chevron"></i>
+                                        </button>
+                                    </h3>
+                                </div>
+                                <div id="collapse{{ loop.index }}" class="collapse{% if loop.index == 1 %} show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        {{ companyFAQ.response|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="action faq">
+                        <a href="{{ path('company_faq') }}" class="btn btn-bg-red btn-h50 btn-w15">
+                            {{ 'See all FAQs'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,36 @@
+Myself: My self
+form:
+    title: Team
+
+    firstName:
+        label: First name
+        placeholder: First name ...
+
+    lastName:
+        label: Last name
+        placeholder: Last name ...
+
+    position:
+        label: Position / job
+        placeholder: Position / job ...
+
+    biography:
+        label: Mini-bio
+        help: Limit 400 characters
+        placeholder: Mini biography ...
+
+    avatar:
+        label: Avatar
+        placeholder: Choose ...
+
+    cv:
+        label: |
+            CV <i class="fas fa-lock"></i>
+        placeholder: Choose ...
+
+    porteur:
+        label: Leader
+
+    button:
+        add: Add team member
+        delete: Delete membre

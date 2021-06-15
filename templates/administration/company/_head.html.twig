@@ -1,0 +1,75 @@
+{% trans_default_domain 'company' %}
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                {% if not company.isApproved and not company.isUpdated and not company.isRejected %}
+                    {% set status = 'Under study'|trans %}
+                    {% set color = 'warning' %}
+                {% endif %}
+                {% if company.isApproved and not company.isUpdated and not company.isRejected %}
+                    {% set status = 'Approved'|trans %}
+                    {% set color = 'success' %}
+                {% endif %}
+                {% if not company.isApproved and not company.isUpdated and company.isRejected %}
+                    {% set status = 'Declined'|trans %}
+                    {% set color = 'danger' %}
+                {% endif %}
+                {% if company.isApproved and company.isUpdated and company.isRejected %}
+                    {% set status = 'Declined modification'|trans %}
+                    {% set color = 'danger' %}
+                {% endif %}
+                {% if company.isApproved and company.isUpdated and not company.isRejected %}
+                    {% set status = 'Modification under study'|trans %}
+                    {% set color = 'warning' %}
+                {% endif %}
+                <h1><strong>{{ company.name }}</strong></h1>
+                <h2>
+                    {% if company.isClosed %}
+                        <span class="label label-danger">{{ 'Closed'|trans }}</span>
+                    {% else %}
+                        <span class="label label-{{ color }}">{{ status|default('Draft') }}</span>
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="box-body">
+
+                <label for="">Logo</label><br>
+                {% if company.logoName %}
+                    {% set logo = vich_uploader_asset(company, 'logoFile') %}
+                {% else %}
+                    {% set logo = asset('assets/img/project_logo_180.png') %}
+                {% endif %}
+                <img src="{{ logo }}" alt="" class="logo mb-3">
+
+                <br>
+                {% if company.coverName %}
+                    {% set cover = vich_uploader_asset(company, 'coverFile') %}
+                {% else %}
+                    {% set cover = asset('assets/img/project_cover.png') %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Photo de couverture</label>
+                        <br>
+                        <img src="{{ cover }}" alt="" class="img-responsive">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ company.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Auteur</th>
+                            <td>{{ company.user.email }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

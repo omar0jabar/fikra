@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block body %}
+   <div class="change-your-cover">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-8 change-cover-card">
+               {% if company.coverName %}
+                  {% set cover = vich_uploader_asset(company, 'coverFile') %}
+                  <h2>{% trans %}Change the cover of your company{% endtrans %}!</h2>
+               {% else %}
+                  {% set cover = 'http://placehold.it/1800x300' %}
+                  <h2>{% trans %}Change the cover of your company{% endtrans %}!</h2>
+               {% endif %}
+               <p>{% trans %}Choose a cover photo for your company{% endtrans %} "<strong>{{ company.name }}</strong>"</p>
+               <div id="div-cover" style="background-image: url({{ cover }})" class="mb-3"></div>
+               <img src="" alt="" class="w-100" id="img_cover_project">
+
+               {{ form_start(form) }}
+                  {{ form_widget(form) }}
+                  <a href="{{ path('startuper_company_show', { id: company.id, slug: company.slug}) }}" class="btn btn-bg-blue btn-h40 btn-w15">
+                     <i class="fas fa-times mr-2"></i> {% trans %}Cancel{% endtrans %}
+                  </a>
+                  <button class="btn btn-bg-red btn-h40 btn-w15" type="submit">
+                     <i class="fas fa-check mr-2"></i> {% trans %}Change{% endtrans %}
+                  </button>
+               {{ form_end(form) }}
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+
+   <script src="{{ asset('js/project_add_cover.js') }}"></script>
+
+{% endblock %}

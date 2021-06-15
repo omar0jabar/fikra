@@ -1,0 +1,83 @@
+form:
+  avatar:
+    label: Avatar
+  profile:
+    label: You are ?*
+    startup: Startuper
+    investor: Investor
+  firstName:
+    label: First name
+    placeholder: First name...
+  lastName:
+    label: Last name
+    placeholder: Last name...
+  full_name:
+    label: Name
+  phone:
+    label: Phone
+    placeholder: Phone number
+  imageFile:
+    label: Avatar
+  birthday:
+    label: Birthday
+  address:
+    label: Address 1
+    placeholder: Address 1
+  address2:
+    label: Address 2
+    placeholder: Address 2
+  email:
+    label: Email
+    placeholder: Address email
+  password:
+    label: Password
+    help: |
+      - Minimum 8 characters.<br>
+      - Do not choose a password you already use on another site.
+    placeholder: Password
+
+  confirmPassword:
+    label: Confirm password
+    placeholder: Confirm password...
+  currentPassword:
+    label: Current password
+    placeholder: Current password...
+  newPassword:
+    label: New password
+    placeholder: New password...
+  created_at:
+    label: Created at
+
+formLogin:
+  email:
+    placeholder: Email ...
+  password:
+    placeholder: Password ...
+
+# Change password
+formChangePassword:
+  help: |
+    Minimum 8 characters. <br>
+    Do not choose a password you already use on another site.
+Password: Password
+Update password: Change password
+
+# modify my profile
+Edit my profile: Edit Profile
+Save Changes: Save Changes
+
+Registration: Registration
+Login: Login
+Forgot your password ?: Forgot your password ?
+Register: Register
+
+# my account
+Your profile: My profile
+Modify my profile: Edit my profile
+Change my password: Change my password
+Birthday: Birthday
+Email: Email
+Phone: Phone
+Address 1: Address 1
+Address 2: Address 2
+empty: Empty

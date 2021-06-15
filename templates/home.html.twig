@@ -1,0 +1,469 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'home' %}
+
+{% block title %}
+    {{ seo ? seo.title : 'Home'|trans }}
+{% endblock %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    <div class="carousel">
+        <style>
+            .b-slider-content {
+                background-image: url({{ background ? vich_uploader_asset(background, 'bannerDesktopFile') : '' }});
+            }
+            @media only screen and(max-width: 641px) {
+                .b-slider-content {
+                    background-image: url({{ background ? vich_uploader_asset(background, 'bannerMobileFile') : '' }});
+                }
+            }
+        </style>
+            <div class="b-slider-content"> <div class="slider-hp">
+                {% for slider in sliders %}
+                        <div class="slider-content{% if slider.imageName is not empty %} img-silde{% endif %}"> <div class="slider-img">
+                            {% if slider.imageName is not empty %}
+                                <img src="{{ vich_uploader_asset(slider, 'imageFile') }}" class="img-responsive{% if slider.imageMobileName is not empty %} hide-for-mobile{% endif %}" alt="">
+                            {% endif %}
+                            {% if slider.imageMobileName is not empty %}
+                                <img src="{{ vich_uploader_asset(slider, 'imageMobileFile') }}" class="img-responsive show-for-mobile" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="slider-caption">
+                            <div class="container">
+                                <div class="slider-caption-inner{% if slider.colorText is not empty %} {{ slider.colorText }}{% endif %}">
+                                    <h2 class="c-heading">
+                                        {{ slider.title }}
+                                    </h2>
+                                    <div class="content">
+                                        {{ slider.content|raw }}
+                                    </div>
+                                    <div class="button">
+                                        {{ slider.button|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="b-comment-ca-marche">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="c-heading">{% trans %}how it works{% endtrans %}</h2>
+            </div>
+            <div class="row justify-content-center">
+                {% for card in commentCaMarcheCards %}
+                    <div class="col-lg-6 styleCard-HowToUse">
+                        <div class="card how-to-use-card">
+                            <div class="card-img">
+                                {% if card.img is not empty %}
+                                    {% set img = vich_uploader_asset(card, 'imageFile') %}
+                                {% else %}
+                                    {% set img = '/images/empty.jpg' %}
+                                {% endif %}
+                                <img src="{{ img }}" alt="" class="img-responsive">
+                            </div>
+                            <div class="card-body">
+                                <div class="text-light">
+                                    <h3 class="card-title">{{ card.title }}</h3>
+                                    {{ card.description|raw }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 card-btns">
+                                    <a href="{{ card.btn1Link }}" class="btn btn-bg-red btn-h50 btn-w15" target="{{ card.btn1Target }}">
+                                        {{ card.btn1Text }}
+                                    </a>
+                                    {% if card.btn2Text is not empty %}
+                                        <a href="{{ card.btn2Link }}" class="btn btn-transparent-black btn-h50 btn-w15" target="{{ card.btn2Target }}">
+                                            {{ card.btn2Text }}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="b-discover">
+        <div class="container">
+            <div class="text-center">
+                <div class="title_heading">
+                    <h2 class="c-heading">
+                        {% trans %}best_projects.title{% endtrans %}
+                    </h2>
+                    <div class="slider-categories">
+                        {% for sector in sectors %}
+                            {% set label = sector.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = sector.labelEn %}
+                            {% endif %}
+                            <p class="item">{{ label }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 b-categories">
+                    <div
+                        class="categories-tags text-center">
+                        {#<a href="{{ path('project_list') }}" class="btn btn-bg-red btn-h50 btn-w29">
+                                                    {% trans %}All{% endtrans %}
+                                                </a>#}
+                        {% for sector in sectors %}
+                            {% set label = sector.labelFr %}
+                            {% if locale == "en" %}
+                                {% set label = sector.labelEn %}
+                            {% endif %}
+                            <a href="{{ path('project_list', { sectors : sector.id }) }}" class="btn btn-transparent-red btn-h50 btn-w29">
+                                {{ label }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="explorer-btn text-center">
+                        <a href="{{ path('project_list') }}" class="btn btn-bg-red btn-h50 btn-w35">
+                            {% trans %}Discover the projects{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if testimonials|length > 0 %}
+        <div class="b-testimonials">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{% trans %}chosen.title{% endtrans %}</h2>
+                </div>
+                <div class="slider">
+                    {% for testimonial in testimonials %}
+                        <div class="col-md-12 styleCard-Choose-flowingo">
+                            <div class="card">
+                                <div class="text-center">
+                                    <div class="card-img">
+                                        {% set object = testimonial %}
+                                        {% include 'partials/_avatar.html.twig' with {'object': object} %}
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{ testimonial.fullName }}</h3>
+                                        <h4>{{ testimonial.position }}</h4>
+                                        <p class="card-text">{{ testimonial.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if reassuranceBlock %}
+        <div class="b-nos-garanties">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{{ reassuranceBlock.title }}</h2>
+                    <p class="intro">{{ reassuranceBlock.paragraph }}</p>
+                </div>
+                <div class="row c-reassurance">
+                    {% for col in reassuranceBlock.cols %}
+                        <div class="col-md-{{ col.col }} c-reassurance-item">
+                            <div class="c-reassurance-img">
+                                <img src="{{ vich_uploader_asset(col, 'imgFile') }}" alt="">
+                            </div>
+                            {{ col.description|raw }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if projects|length > 0 %}
+        <div class="b-projets-recents">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{% trans %}projects_recents.title{% endtrans %}</h2>
+                </div>
+                <div class="b-projets-slider">
+                    <div class="slider-projects">
+                        {% for project in projects %}
+                            {% include 'project/_card_project.html.twig' %}
+                        {% endfor %}
+                    </div>
+                    <div class="projets-btn text-center">
+                        <a href="{{ path('project_list') }}" class="btn btn-bg-red btn-h50 btn-w36">
+                            {% trans %}Discover the projects{% endtrans %}
+                        </a>
+                        <a href="{{ path('submit_project_index') }}" class="btn btn-bg-transparent-white btn-h50 btn-w40">
+                            {% trans %}projects_recents.btn_have_project{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if garantiesBlock %}
+        <div class="b-nos-garanties">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{{ garantiesBlock.title }}</h2>
+                    <p class="intro">{{ garantiesBlock.introduction|raw }}</p>
+                </div>
+                <div class="card card-nos-garanties">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 img-nos-garanties">
+                            {% if garantiesBlock.img is not empty %}
+                                {% set img = vich_uploader_asset(garantiesBlock, 'imageFile') %}
+                            {% else %}
+                                {% set img = '/images/empty.jpg' %}
+                            {% endif %}
+                            <img src="{{ img }}" alt="" class="img-responsive">
+                        </div>
+                        <div class="col-lg-5 col-md-12 content-nos-garanties">
+                            {{ garantiesBlock.content|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if articles|length > 0 %}
+        <div class="b-actualite">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{% trans %}news.title{% endtrans %}</h2>
+                </div>
+                {% set article = articles[0] %}
+                <div class="row block-actus">
+                    <div class="col-md-6 styleCardActus">
+                        {% set link = path('cmsbundle_article_show', { id: article.id, slug: article.slug}) %}
+                        <div class="card card-actus">
+                            {% if article.bannerDesktop is not empty %}
+                                {% set cover = '/upload/cms/articles-public/' ~ article.bannerDesktop %}
+                                {% else%}
+                                {% set cover = asset('assets/img/news_cover.png') %}
+                            {% endif %}
+                            <div class="card-img-top">
+                                <a href="{{ link }}">
+                                    <img src="{{ cover }}" class="img-responsive" alt="">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ link }}">
+                                    {% set three = '' %}
+                                    {% if article.title|length > 75 %}
+                                        {% set three = ' ...' %}
+                                    {% endif %}
+                                    <h3 class="card-title">{{ article.title|slice(0, 75) ~ three }}</h3>
+                                    {% set three = '' %}
+                                    {% if article.content|striptags|length > 400 %}
+                                        {% set three = ' ...' %}
+                                    {% endif %}
+                                    <p class="card-text">{{ article.content|striptags|slice(0, 400)|raw }}{{ three }}</p>
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="card-date">
+                                        <span>
+                                            {% set date = article.dateTri %}
+                                            {% include 'date/_normal.html.twig' %}
+                                        </span>
+                                    </div>
+                                    <div class="card-like text-right">
+                                        <a href="#" class="js-like" onclick="return false;">
+                                            <span class="js-likes">{{ article.likes|length }}</span>
+                                            {% if app.user and article.isLikedByUser(app.user) %}
+                                                <i class="icon-favorite-heart-button red"></i>
+                                            {% else %}
+                                                <i class="icon-favorite-heart-button"></i>
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 styleCardActus-List">
+                        {% for article in articles|slice(1, 3) %}
+                            {% if article.bannerDesktop is not empty %}
+                                {% set cover = '/upload/cms/articles-public/' ~ article.bannerDesktop %}
+                                {% else%}
+                                {% set cover = asset('assets/img/news_cover.png') %}
+                            {% endif %}
+                            {% set link = path('cmsbundle_article_show', { id: article.id, slug: article.slug}) %}
+                            <div class="card card-list">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-12 card-img-left p-0">
+                                        <div class="card-img">
+                                            <a href="{{ link }}">
+                                                <img src="{{ cover }}" class="img-responsive" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-12 p-0">
+                                        <div class="card-body">
+                                            <a href="{{ link }}">
+                                                <h3 class="card-title"> {{ article.title }}</h3>
+                                                <p class="card-text">{{ article.content|striptags|raw }}</p>
+                                            </a>
+                                        </div>
+                                        <div class="card-footer m-0">
+                                            <div class="row">
+                                                <div class="card-date">
+                                                    <span>
+                                                        {% set date = article.dateTri %}
+                                                        {% include 'date/_normal.html.twig' %}
+                                                    </span>
+                                                </div>
+                                                <div class="card-like text-right">
+                                                    <a href="#" class="js-like" style="float: right;" onclick="return false;">
+                                                        <span class="js-likes">{{ article.likes|length }}</span>
+                                                        {% if app.user and article.isLikedByUser(app.user) %}
+                                                            <i class="icon-favorite-heart-button red"></i>
+                                                        {% else %}
+                                                            <i class="icon-favorite-heart-button"></i>
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="text-center b-explorer">
+                    <a href="{{ path('cmsbundle_article_list') }}" class="btn btn-bg-red btn-h50 btn-w33">
+                        {% trans %}See all news{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if partners|length > 0 %}
+        <div class="b-nos-partenaires">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="c-heading">{% trans %}partners.title{% endtrans %}</h2>
+                </div>
+                <div class="row justify-content-center block-imgs">
+                    {% for partner in partners %}
+                        <div class="partenaires-img">
+                            {% if partner.logo is not empty %}
+                                {% set logo = vich_uploader_asset(partner, 'logoFile') %}
+                            {% else %}
+                                {% set logo = asset('assets/img/project_logo_180.png') %}
+                            {% endif %}
+                            <a href="{{ partner.url }}" target="_blank">
+                                <img src="{{ logo }}" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="description-partenaire text-center">
+                    <p>{% trans %}partners.text{% endtrans %}</p>
+                </div>
+                <div class="devenir-partenaire text-center">
+                    <a href="{{ path('contact') }}" class="btn btn-bg-white btn-h50 btn-w42">{% trans %}partners.btn{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="b-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 card-contact">
+                    <div class="form-contact">
+                        <div class="text-center">
+                            <h3>{% trans %}login.title{% endtrans %}</h3>
+                            {#<h4>{% trans %}login.text{% endtrans %}</h4>#}
+                        </div>
+                        <form action="{{ path('startuper_login') }}" method="post" name="accueil-contact">
+                            <div class="form-group">
+                                <label for="email">{% trans %}login.email.label{% endtrans %}</label>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="{% trans %}login.email.placeholder{% endtrans %}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">{% trans %}login.password.label{% endtrans %}</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="{% trans %}login.password.placeholder{% endtrans %}" autocomplete="off">
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="row contact-btns">
+                                <div class="col-md-6">
+                                    <button class="btn btn-bg-red btn-h50 btn-w btn-block" type="submit">
+                                        {% trans %}login.btn.login{% endtrans %}
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ path('startuper_registration') }}" class="btn btn-transparent-white btn-h50 btn-w btn-block">
+                                        {% trans %}login.btn.register{% endtrans %}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a href="{{ path('resetting_request') }}" class="forget-password">
+                                    {% trans %}login.forgot{% endtrans %}
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 b-newsletter">
+                    <div class="form-newsletter">
+                        <div class="text-center text-light">
+                            <h3>{% trans %}newsletter.title{% endtrans %}</h3>
+                            <h4>{% trans %}newsletter.text{% endtrans %}</h4>
+                            <p id="response-newsletter-footer"></p>
+                        </div>
+                        <form method="post" id="form-newsletter-footer">
+                            <div class="form-group field">
+                                <label for="email-newsletter-footer">Email</label>
+                                <input id="email-newsletter-footer" type="email" name="email-newsletter-footer" class="form-control" placeholder="{% trans %}login.email.placeholder{% endtrans %}" required>
+                            </div>
+                            <div class="choice">
+                                <input type="checkbox" class="custom-control-input" id="newsletter-insc" checked="">
+                                <label for="newsletter-insc">{% trans %}newsletter.checkbox1{% endtrans %}</label>
+                                <input type="hidden" id="check-news" value="1">
+                            </div>
+                            <div class="choice">
+                                <input type="checkbox" class="custom-control-input" id="receive-projects">
+                                <label for="receive-projects">{% trans %}newsletter.checkbox2{% endtrans %}</label>
+                                <input type="hidden" id="check-receive" value="0">
+                            </div>
+                            <div class="newsletter-btn text-center">
+                                <button type="submit" class="btn btn-bg-red btn-h50 btn-w57">{% trans %}Register{% endtrans %}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {#<script src="{{ asset('bundles/cms/js/axios.min.js') }}"></script>
+        <script src="{{ asset('bundles/cms/js/article-like.js') }}"></script>
+        <script src="{{ asset('js/project-like.js') }}"></script>#}
+    <script src="{{ asset('js/slid-cards.js') }}"></script>
+    <script src="{{ asset('js/newsletter-home.js') }}"></script>
+{% endblock %}

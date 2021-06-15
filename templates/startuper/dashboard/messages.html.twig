@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .active {
+            background-color: #bfd9ff;
+            color: white !important;
+        }
+    </style>
+{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+
+    <div class="dashboard-project">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 sidebar-project-menu">
+                {% include 'startuper/dashboard/_menu.html.twig' %}
+            </div>
+            <div class="col-lg-9 sidebar-project-content">
+{#                {% include 'startuper/dashboard/_head.html.twig' %}#}
+                {% include 'partials/_notice.html.twig' %}
+
+                <div class="project-table">
+                    <h3 class="">Messages</h3>
+
+                    <div class="table-head">
+                        <div class="row table-row">
+                            <div class="col-md-3 project">
+                                <strong>
+                                    {% trans %}Project{% endtrans %}
+                                </strong>
+                            </div>
+                            <div class="col-md-4 object">
+                                <strong>
+                                    {% trans %}Object{% endtrans %}
+                                </strong>
+                            </div>
+                            <div class="col-md-2 author">
+                                <strong>
+                                    {% trans %}Author{% endtrans %}
+                                </strong>
+                            </div>
+                            <div class="col-md-2 date">
+                                <strong>
+                                    {% trans %}Date{% endtrans %}
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-body">
+                        {% for message in pagination %}
+                            {% set class = "" %}
+                            {% if message.seen == 0 %}
+                                {% set class = 'active' %}
+                            {% elseif message.isSeen(app.user) == 1 %}
+                                {% set class = "active" %}
+                            {% endif %}
+                            <a href="{{ path('startuper_project_reply_message',
+                            {id: project.id, slug:project.slug, idMessage: message.id}) }}">
+                                <div class="row table-row {{ class }}">
+                                    <div class="col-md-3 project">
+                                        {{ message.project.name }}
+                                    </div>
+                                    {% set countResponse = message.responses|length %}
+                                    <div class="col-md-4 object">
+                                        {{ message.object }}
+                                        ({{ countResponse }} Message{% if countResponse > 1 %}s{% endif %})
+                                    </div>
+                                    <div class="col-md-2 author">
+                                        {{ message.author.fullName }}
+                                    </div>
+                                    <div class="col-md-2 date">
+                                        {{ message.createdAt|date('d/m/Y - H:i:s') }}
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div><!-- /.col-md-9 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    </div>
+{% endblock %}

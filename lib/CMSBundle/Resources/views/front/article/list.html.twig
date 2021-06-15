@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'article' %}
+
+{% block title %}{% trans %}Articles{% endtrans %}{% endblock %}
+
+{% block stylesheets %}
+   {# <link rel="stylesheet" href="{{ asset('bundles/cms/css/style.css') }}"> #}
+{% endblock %}
+
+{% block body %}
+
+    <div class="actus-header-banner">
+        {% if header and header.bannerName is not empty %}
+            {% set banner = vich_uploader_asset(header, 'bannerFile') %}
+        {% else %}
+            {% set banner = asset('assets/img/Banner.png') %}
+        {% endif %}
+        {#<img src="./../assets/img/visuel.png" class="img-responsive w-100">#}
+        <img src="{{ banner }}" class="img-responsive" alt="">
+        <div class="banner-content">
+            {{ header ? header.description|raw : '' }}
+        </div>
+    </div><!-- /.jumbotron -->
+
+   <div class="actus-listings">
+       <div class="container">
+
+           <input id="more" type="hidden" value="{{ more }}">
+           <input id="page" type="hidden" value="2">
+           <input id="path" type="hidden" value="{{path('cmsbundle_article_list_scroll')}}">
+
+           <input id="categories" type="hidden" name="categories" value="{{ currentCategories }}">
+           <div class="block-tabs">
+               <ul class="nav nav-tabs" id="myTab" role="tablist">
+                   <li class="nav-item">
+                       <a class="nav-link{% if currentCategories == null %} active{% endif %}" href="javascript:allArticles()" id="link-all">
+                           {% trans %}All{% endtrans %}
+                       </a>
+                   </li>
+                   {% for category in allCategories %}
+                       {% set active = "" %}
+                       {% for currentCategory in currentCategories %}
+                           {% if currentCategory == category.id %}
+                               {% set active = "active" %}
+                           {% endif %}
+                       {% endfor %}
+                       <li class="nav-item">
+                           <a class="nav-link {{ active }}" id="link-{{ category.id }}" href="javascript:searchByCategory('{{ category.id }}')">
+                               {{ category.title }}
+                           </a>
+                       </li>
+                   {% endfor %}
+               </ul>
+           </div>
+
+           <div class="text-center">
+               <p id="countResults">
+                   {% if countResults > 0 %}
+                        <strong>{{ countResults }} {% trans %}Results{% endtrans %}</strong>
+                   {% else %}
+                       <strong>{% trans %}No result found{% endtrans %}</strong>
+                   {% endif %}
+               </p>
+           </div>
+
+           <div id="results" class="row">
+
+               {% for article in pagination %}
+                   {% include '@CMS/front/article/_card.html.twig' %}
+                   <br>
+               {% endfor %}
+           </div>
+
+           <div class="text-center">
+               <img id="gif1" src="{{ asset('assets/img/loader-1.gif') }}" alt="" class="gif">
+               <div id='no-more' style="display: none;color:#ccc"><h3>{% trans %}no_more_results{% endtrans %}</h3></div>
+           </div>
+           {# display navigation #}
+           {#
+          <div class="navigation">
+              knp_pagination_render(pagination, '@CMSBundleViews/views/paginator/pagination.html.twig')
+          </div>
+          #}
+       </div>
+   </div>
+{% endblock %}
+
+{% block javascripts %}
+    {#<script src="https://unpkg.com/axios/dist/axios.min.js"></script>#}
+    {#<script src="{{ asset('bundles/cms/js/axios.min.js') }}"></script>
+    <script src="{{ asset('bundles/cms/js/article-like.js') }}"></script>#}
+    <script src="{{ asset('bundles/cms/js/article-list.js') }}"></script>
+{% endblock %}

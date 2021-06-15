@@ -1,0 +1,10 @@
+{% set avatar = '' %}
+{% if object.avatar %}
+    {% set avatar = vich_uploader_asset(object, 'imageFile') %}
+{% endif %}
+{% set exist = object.file_existes(avatar) %}
+{% if exist %}
+	<img class="avatar" alt="{{ object.fullName }}" src="{{ avatar }}"/>
+{% else %}
+	<img class="avatar" alt="{{ object.fullName }}" src="/upload/users/empty.jpg"/>
+{% endif %}

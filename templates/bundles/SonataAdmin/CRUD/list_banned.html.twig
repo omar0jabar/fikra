@@ -1,0 +1,14 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {# {{ dump() }} you can dump all variables here #}
+    {% if object.isBanned == false %}
+        {% set type = 'success' %}
+        {% set message = 'Non' %}
+    {% else %}
+        {% set type = 'danger' %}
+        {% set message = 'Oui' %}
+    {% endif %}
+    <span class="label label-{{ type }}">{{ message }}</span>
+    {# or you can use a twig filter with your own logic #}
+{% endblock field %}

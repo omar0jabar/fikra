@@ -1,0 +1,8 @@
+{% if object.isRejected %}
+   {% set label = 'Unreject' %}
+{% else %}
+    {% set label = 'Reject' %}
+{% endif %}
+<a href="{{ admin.generateObjectUrl('reject', object) }}" class="btn btn-sm btn-default">
+    {{ label }}
+</a>

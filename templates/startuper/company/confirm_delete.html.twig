@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'company' %}
+
+{% block title %}{% trans %}Deletion confirmation{% endtrans %}{% endblock %}
+
+{% block body %}
+   <div class="project-delete">
+      <div class="container">
+         {% include 'partials/_notice.html.twig' %}
+         <div class="row justify-content-center">
+            <div class="col-md-9 text-center">
+               <h2>{% trans %}Deletion confirmation{% endtrans %}</h2>
+               <p>{% trans %}Are you sure you want to delete this company{% endtrans %} "<strong>{{ company.name }}</strong>"?</p>
+               <form action="{{ url('startuper_company_delete', { id: company.id, slug: company.slug }) }}" method="post">
+                  <input type="hidden" name="token" value="{{ csrf_token('startuper-delete-company' ~ company.id) }}" />
+                  <div class="c-block-btn">
+                     <button type="submit" class="btn btn-bg-red btn-h50 btn-w25">
+                        <i class="fa fa-trash"></i> {% trans %}Yes, delete{% endtrans %}
+                     </button>
+                     <a href="{{ path('startuper_company_show', {id: company.id, slug: company.slug}) }}" class="btn btn-bg-blue btn-h50 btn-w25">
+                        <i class="fa fa-times"></i> {% trans %}Cancel{% endtrans %}
+                     </a>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

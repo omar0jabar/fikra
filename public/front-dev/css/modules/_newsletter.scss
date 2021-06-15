@@ -1,0 +1,43 @@
+.newsletter {
+  background-image: linear-gradient(to right, $orange, $yellow);
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 0;
+
+  h2, h3, h4 {
+    color: $white;
+  }
+
+  h3 {
+    font-size: rem(28px);
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+  h4 {
+    font-size: rem(18px);
+    font-weight: 500;
+  }
+
+  form {
+    padding-top: 4px;
+    width: 62%;
+    margin: 0 auto;
+    text-align: center;
+
+    @media #{$tab-max} {
+      width: 90%;
+    }
+  }
+
+  input[type=email] {
+    margin-bottom: 20px;
+  }
+
+  #response-newsletter {
+    font-size: rem(16px);
+    color: $white;
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,32 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+fos_ck_editor:
+    #base_path: "/js/ckeditor"
+    #js_path: '/js/ckeditor/ckeditor.js'
+    default_config: my_config
+    configs:
+        my_config:
+            contentsCss: "/assets/css/style.css"
+            removeButtons: 'SpecialChar,Iframe,About,Language,Smiley,Underline,Subscript,Superscript,Form,TextField,Textarea,Button,CreateDiv,Select,HiddenField,Radio,Checkbox,ImageButton,Anchor,Flash,Preview,Indent,Outdent'
+            # removePlugins: 'blockquote,save,flash,iframe,tabletools,pagebreak,templates,about,showblocks,newpage,print'
+            stylesSet:
+                # div level styles
+                - { name: "btn-rouge", element: "a", attributes: { 'class': "btn btn-bg-red btn-h50 btn-w15" }}
+                - { name: "btn-blue", element: "a", attributes: { 'class': "btn btn-bg-blue btn-h50 btn-w15" }}
+                - { name: "btn-blanc", element: "a", attributes: { 'class': "btn btn-bg-white btn-h50 btn-w15" }}
+                - { name: "btn-transparent", element: "a", attributes: { 'class': "btn btn-bg-transparent btn-h50 btn-w15" }}
+                - { name: "btn-transparent-blanc", element: "a", attributes: { 'class': "btn btn-bg-transparent-white btn-h50 btn-w15" }}
+                - { name: "btn-transparent-noire", element: "a", attributes: { 'class': "btn btn-transparent-black btn-h50 btn-w15" }}
+                - { name: "btn-transparent-rouge", element: "a", attributes: { 'class': "btn btn-transparent-red btn-h50 btn-w15" }}
+                - { name: "btn-degradé", element: "a", attributes: { 'class': "btn btn-orange-yellow btn-h50 btn-w15" }}
+                - { name: "btn-info", element: "a", attributes: { 'class': "btn btn-outline-info btn-h50 btn-w15" }}
+                - { name: "description", element: "p", attributes: { 'class': "description" }}
+                - { name: "ul", element: "ul", attributes: { 'class': "u-list" }}
+
+        config_front:
+            #toolbar: [ [ "Source", "-", "Save" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
+            toolbar: [ [ "Source", "-", "Bold", "Italic", "Strike", "-", "NumberedList", "BulletedList" ] ]

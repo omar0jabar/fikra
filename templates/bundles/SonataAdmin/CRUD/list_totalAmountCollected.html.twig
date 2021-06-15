@@ -1,0 +1,8 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% block field %}
+   {% set amountCollected = object.amountCollected('CONFIRMED') %}
+   {%- if amountCollected is not empty -%}
+      &nbsp;  {{ amountCollected|number_format(2, ',', ' ') }} MAD
+   {%- endif -%}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends '@VichUploader/Form/fields.html.twig' %}
+
+{% block vich_image_widget %}
+   {% spaceless %}
+         <div class="row">
+            <div class="col-md-12">
+               {% if image_uri %}
+                  <a href="{{ image_uri }}">
+                     <img class="w-100" src="{{ image_uri }}" alt="" id="img_avatar"/>
+                  </a>
+               {% endif %}
+               <div class="w-100 text-center my-3">
+                  {% if download_uri %}
+                     <a class="btn btn-bg-blue btn-h40 btn-w10" href="{{ download_uri }}">
+                        <i class="fas fa-download"></i>
+                        {{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
+                     </a>
+                  {% endif %}
+               </div>
+               {{ form_widget(form.file) }}
+            </div>
+         </div>
+   {% endspaceless %}
+{% endblock %}

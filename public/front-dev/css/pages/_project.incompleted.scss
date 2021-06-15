@@ -1,0 +1,50 @@
+
+.project-incompleted {
+  padding: 90px 0;
+  @media #{$tab-min} {
+    padding: 40px 0;
+  }
+
+  .intro {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .c-block-btn {
+    padding: 10px 0;
+    @media #{$tab-min} {
+      text-align: center;
+    }
+    .btn {
+      margin: 0;
+
+      &:not(:last-child) {
+        margin: 0 10px 0 0;
+      }
+
+      @media #{$tab-max} {
+        width: 45%;
+        display: inline-block;
+      }
+      @media #{$tab-min} {
+        width: 100%;
+        &:not(:last-child) {
+          margin: 0 0 10px 0;
+        }
+      }
+      @media #{$tab-min-2} {
+        width: 45%;
+        &:not(:last-child) {
+          margin: 0 3% 0 0;
+        }
+      }
+      @media #{$mobile} {
+        width: 100%;
+        &:not(:last-child) {
+          margin: 0 0 10px 0;
+        }
+      }
+    }
+  }
+}

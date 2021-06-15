@@ -1,0 +1,4 @@
+doctrine:
+  orm:
+    mappings:
+      CMSBundle: ~

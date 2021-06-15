@@ -1,0 +1,10 @@
+resetting:
+  request:
+    title: Reset password
+    email:
+      label: E-mail
+      placeholder: Your email ...
+    btn: Send
+  reset:
+    title: Reset password
+    btn: Update

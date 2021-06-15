@@ -1,0 +1,90 @@
+//html {
+//  scroll-behavior: smooth;
+//}
+
+body {
+  width: 100%;
+  background-color: $bg-white-default;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    @media #{$tab-max} {
+      width: 0;
+      display: none;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+    background: $bg-white-default;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray;
+    &:hover {
+      background-color: $papaGreen;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: $max-w;
+  padding: 0;
+
+  @media #{$desk-min} {
+    padding: 0 16px;
+  }
+
+  @media #{$tab-max} {
+    max-width: $page-content;
+    padding: 0 20px;
+  }
+
+  @media #{$tab-min} {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+.contenu-page {
+  margin: 0 auto;
+  width: 100%;
+  max-width: $page;
+
+  @media #{$tab-min} {
+    padding: 0 20px;
+  }
+}
+
+.contenu-page-min {
+  margin: 0 auto;
+  width: 100%;
+  max-width: $page-min;
+}
+
+#header,
+#wrapper,
+#footer {
+  float: left;
+  width: 100%;
+}
+
+#wrapper {
+  position: relative;
+
+}
+[class^="icon-"],
+[class*=" icon-"],
+[class^="icon-"] span {
+  font-family: 'icomoon';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+

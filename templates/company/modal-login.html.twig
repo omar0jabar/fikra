@@ -1,0 +1,43 @@
+{% trans_default_domain 'startuper' %}
+<form id="login" method="post" action="{{ path('startuper_login') }}">
+    {% include 'partials/_notice.html.twig' %}
+    <div class="form-group">
+        <div class="form-group">
+            <label for="inputEmail">{% trans %}form.email.label{% endtrans %}</label>
+            <input type="email" value="" name="email" id="inputEmail" class="form-control"
+                   placeholder="{% trans %}formLogin.email.placeholder{% endtrans %}" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">{% trans %}form.password.label{% endtrans %}</label>
+            <input type="password" name="password" id="inputPassword" class="form-control"
+                   placeholder="{% trans %}formLogin.password.placeholder{% endtrans %}" required>
+        </div>
+    </div>
+    <div class="custom-container">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck" name="_remember_me">
+            <label class="custom-control-label" for="customCheck">{% trans %}Remember me{% endtrans %}</label>
+        </div>
+        <div class="custom-control1">
+            <a href="{{ path('resetting_request') }}">{% trans %}Forgot your password{% endtrans %} ?</a>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </div>
+    </div>
+
+    <div class="row button-container ">
+        <div class="col-md-12 p-0">
+            {% if approvedCompany %}
+                {% set targetPath = path('company_show', {id: company.company.id, slug: company.slug}) %}
+            {% else %}
+                {% set targetPath = path('company_show', {id: company.id, slug: company.slug}) %}
+            {% endif %}
+            <input type="hidden" name="_target_path" value="{{ targetPath }}" />
+            <button class="btn btn-h50 btn-w50" type="submit">
+                {% trans %}Login{% endtrans %}
+            </button>
+            <a class="btn btn-h50 btn-w50" href="{{ path('startuper_registration') }}">
+                {% trans %}Register{% endtrans %}
+            </a>
+        </div>
+    </div>
+</form>

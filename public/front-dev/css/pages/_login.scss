@@ -1,0 +1,410 @@
+/* Login PAGE */
+#Login
+{
+	.LoginSingUp
+	{
+		height: 100vh;
+		display: flex;
+		flex-flow: column;
+		@media #{$tab-min} {
+			padding: 20px;
+		}
+		@media #{$tab-min-2} {
+			height: auto;
+		}
+		&:last-child {
+			@media #{$tab-min-2} {
+				.card {
+					margin: 150px auto;
+				}
+			}
+		}
+		header
+		{
+			background-color: transparent;
+			position: absolute;
+            padding-left: 21px;
+			margin-bottom: 90px;
+			@media #{$tab-max} {
+				padding-left: 0;
+			}
+			@media #{$tab-min} {
+				position: relative;
+				margin-bottom: 10px;
+			}
+			@media #{$tab-min-2} {
+				padding-left: 0;
+				left: 0;
+				margin: 0;
+			}
+
+			.navbar {
+				@media #{$tab-max} {
+					padding-left: 0;
+				}
+			}
+			.nav
+			{
+				padding: 22px 0 20px 107px; 
+			} 
+		}
+		.card
+		{
+			width: 100%;
+			max-width: 540px;
+			border: 0;
+			margin: auto;
+			background: transparent;
+			// margin-top: 300px;
+			@media #{$tab-min} {
+				// margin-top: 150px;
+				margin: auto;
+			}
+			@media #{$tab-min-2} {
+				margin: 50px auto;
+			}
+			@media #{$mobile-xs-2} {
+				margin: 20px auto;
+			}
+
+			.alert {
+				p {
+					margin: 0;
+				}
+			}
+
+			h3
+			{
+				color: $cloudBurst;
+				font-size: rem(54px);
+				@media #{$tab-min-2} {
+					font-size: rem(40px);
+				}
+			}
+			p
+			{
+				font-size: rem(24px);
+				color: $KashmirBlue;
+				font-weight: normal;
+				margin-bottom: 40px;
+				@media #{$tab-min-2} {
+					font-size: rem(16px);
+					margin-bottom: 20px;
+				}
+				@media #{$mobile-xs} {
+					margin-bottom: 10px;
+				}
+			}
+
+
+		}
+		&:nth-child(2)
+		{
+			background-image: url(#{$img}Login.png);
+			
+
+			.card
+			{
+				max-width: 540px;
+				display: block;
+				
+				a
+				{
+					color: $white;
+					background: transparent;
+					border: 2px solid $nepal;			
+					&:hover
+					{
+						background-color: $KashmirBlue;
+						color: $white;
+					}
+				}
+				h3
+				{
+					color: $white;
+				}
+				p
+				{
+					color: $HawkesBlue;
+				}
+			}
+
+		}
+		@media all and 
+		(device-width: 768px) and
+		(device-height: 1024px) and 
+		(orientation:portrait) 
+		{
+		 	// height: 50vh;
+		}
+
+	}
+
+}
+
+
+// LOGIN BACK-OFFICE
+.Login-boadmin {
+	position: relative;
+	height: 100vh;
+	padding: 15px;
+	.container {
+		position: relative;
+		height: 100%;
+		.card {
+			max-width: 500px;
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 0 6px rgba($black,.2);
+		}
+		.card-header {
+			text-align: center;
+			padding: 20px 15px;
+			h1 {
+				margin-bottom: 0;
+			}
+		}
+		.admin-forget-password {
+			margin-bottom: 21px;
+			a {
+				color: $cloudBurst;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+
+form#login {
+
+	label
+	{
+		font-size: 14px;
+		color: $KashmirBlue;
+		font-weight: 500;
+	}
+	> .form-group
+	{
+		box-shadow: 0px 2px 18px rgba(87,103,132,0.15);
+		border-radius: 5px;
+		@media #{$mobile-xs} {
+			margin-bottom: 20px;
+		}
+
+		.form-group
+		{
+			margin: 0;
+			padding: 25px 0 6px;
+			background: #fff;
+			position: relative;
+			@media #{$tab-min-2} {
+				padding-top: 15px;
+			}
+
+			label
+			{
+				position: absolute;
+				padding: 0 23px;
+				left: 0;
+				right: 0;
+				font-family: $font-base;
+				@media #{$tab-min-2} {
+					top: 7px;
+				}
+
+				&:after
+				{
+					font-family: 'icomoon' !important;
+					position: absolute;
+					right: 30px;
+					font-size: 19px;
+					@media #{$tab-min-2} {
+						top: 50%;
+					}
+				}
+			}
+			label[for="inputEmail"]
+			{
+				&:after
+				{
+					content: "\e921";
+				}
+			}
+			label[for="inputPassword"]
+			{
+				&:after
+				{
+					content: "\e920";
+				}
+			}
+			label.error
+			{
+				font-weight: normal;
+				font-size: rem(14px);
+				color: $btnRedHover;
+				bottom: -5px;
+				@media #{$tab-min-2} {
+					top: auto
+				}
+				&:after
+				{
+					content: none;
+				}
+			}
+			input
+			{
+				border: 0;
+				color: $KashmirBlue;
+				padding: 26px 23px 19px 23px;
+				height: initial;
+				font-size: rem(15px);
+				background: transparent;
+				@media #{$tab-min-2} {
+					padding-top: 15px;
+					padding-bottom: 15px;
+				}
+
+				@include placeholder
+				{
+					color: $KashmirBlue;
+					opacity: 0.54
+				}
+
+			}
+			&:nth-child(2)
+			{
+				border-top: 2px solid #eeeef8;
+			}
+
+		}
+	}
+	.custom-container
+	{
+		margin-bottom: 20px;
+
+		.custom-control
+		{
+			padding-left: 0.7rem;
+			display: inline-block;
+			@media #{$mobile-xs-2} {
+				width: 100%;
+				text-align: center;
+				padding: 0;
+			}
+
+			input[type=checkbox]
+			{
+
+				+ label
+				{
+					font-size: rem(15px);
+					font-weight: normal;
+					color: $KashmirBlue;
+					padding-left: 24px;
+					font-family: $font-base;
+
+					&:before
+					{
+						top: 1px;
+						width: 17px;
+						height: 17px;
+						border: 2px solid $cloudBurst;
+						border-radius: 4px;
+					}
+
+				}
+				&:checked + label
+				{
+
+					&:before
+					{
+						border: 0;
+						background: $cloudBurst;
+					}
+					&:after
+					{
+						top: 5.7px;
+						left: 4px;
+						width: 9px;
+						height: 9px;
+						color: $white;
+						background-color: $cloudBurst;
+					}
+
+				}
+
+			}
+		}
+		.custom-control1
+		{
+			display: inline-block;
+			float: right;
+
+			a
+			{
+				color: $KashmirBlue;
+				font-size: rem(15px);
+				text-decoration: underline;
+
+			}
+			@media #{$mobile-xs-2} {
+				width: 100%;
+				text-align: center;
+				float: none;
+				margin-top: 6px;
+
+			}
+
+		}
+	}
+	.button-container
+	{
+
+		button
+		{
+			background-color: $coralRed;
+			color: $white;
+			font-size: rem(18px);
+			margin-right: 25px;
+			width: 200px;
+			border: 2px solid $coralRed;
+
+			&:hover
+			{
+				background-color: $white;
+				color: $papaGreen;
+			}
+			@media screen and (max-width: 490px)
+			{
+				margin-right: 0;
+				margin-bottom: rem(15px);
+				width: 100%;
+			}
+
+		}
+		a
+		{
+			color: $KashmirBlue;
+			background: transparent;
+			border: 2px solid $nepal;
+			width: 200px;
+
+			&:hover
+			{
+				background-color: $KashmirBlue;
+				color: $white;
+			}
+			@media screen and (max-width: 490px)
+			{
+				width: 100%;
+			}
+		}
+
+	}
+
+}

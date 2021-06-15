@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block ogimage %}
+      <meta property="og:title" content="{% trans %}title_fond_og{% endtrans %}"/>
+      <meta property="og:description" content="{% trans %}description_fond_og{% endtrans %}"/>
+      <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/assets/img/programme-financements.jpg"}}"/>
+      <meta property="og:image:width" content="1600"/>
+      <meta property="og:image:height" content="550"/>
+{% endblock %}
+
+{% block ogimageTwitter %}
+  <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ "/assets/img/programme-financements.jpg"}}"/>
+  <meta property="twitter:image:width" content="1600"/>
+  <meta property="twitter:image:height" content="550"/>
+  <meta property="twitter:title" content="{% trans %}title_fond_og{% endtrans %}"/>
+  <meta property="twitter:description" content="{% trans %}description_fond_og{% endtrans %}"/>
+
+{% endblock %}
+
+{% trans_default_domain 'fond' %}
+
+{% block title %}{% trans %}Rechercher un programme de financement{% endtrans %}{% endblock %}
+
+{% block body %}
+	{% set locale = app.request.locale %}
+	{% if canSearch %}
+		{% include '/fond/search_index.html.twig' %}
+	{% else %}
+		{% include '/fond/search_listing.html.twig' %}
+    <div class="container result-listing">
+	   	<input type="hidden" id="input_fondType" value="{{fondType}}">
+	   	<input type="hidden" id="input_financement" value="{{financement}}">
+	   	<input type="hidden" id="input_secteurSelect" value="{{secteurSelect}}">
+	   	<input type="hidden" id="input_phase" value="{{phase}}">
+	   	<input type="hidden" id="input_montantMin" value="{{montantMin}}">
+	   	<input type="hidden" id="input_montantMax" value="{{montantMax}}">
+	   	<input type="hidden" id="iter" value="{{iter}}">
+	   	<input type="hidden" id="input_canSearch" value="{{canSearch}}">
+	   	<input type="hidden" id="input_count" value="{{count}}">
+	   	<input type="hidden" id="input_motCle" value="{{motCle}}">
+	   	<input type="hidden" id="input_gestionnaire" value="">
+	   	<input type="hidden" id="secteurJson" value="{{secteurJson}}">
+	   	<input type="hidden" id="financeJson" value="{{financeJson}}">
+	   	{% if count > 0 %}
+   		<div class="count-result">
+			<p>
+				<strong><b id="show">{{count}}</b> {% trans %}labelSearchResult{% endtrans %}</strong>
+			</p>
+		</div>
+   		{% else %}
+			<div class="no-result-found"><p>{% trans %}labelSearchResultEmpty{% endtrans %}</p></div>
+   		{% endif %}
+   		<div class="no-result-found" id="noResult" style="display:none"><p>{% trans %}labelSearchResultEmpty{% endtrans %}</p></div>
+    	<div class="row" id="results">
+    	{% include 'fond/items.html.twig' with {fonds: fonds} %}
+      	</div>
+    </div>
+    {% set style = '' %}
+    {% if showMore == 0 %}
+    {% set style = 'display:none' %}
+    {% endif %}
+	<div class="col-md-12 load-more" style="{{style}}">
+	   <div class="text-center">
+	      <button id="btn-load-more" type="button" class="btn btn-bg-red btn-h40 btn-w40" style="">Afficher plus de résultats
+	      </button>
+	      <img id="gif" src="/assets/img/loader-1.gif" alt="" class="gif">
+	   </div>
+	</div>
+
+
+
+
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+   <script type="text/javascript">
+      var locale = '{{ app.request.locale }}';
+      var linkMore = '{{ path('fond') }}';
+   </script>
+    <script src="{{ asset('js/fond_items.js') }}"></script>
+	<script src="{{ asset('js/fond_list.js') }}"></script>
+
+	
+{% endblock %}

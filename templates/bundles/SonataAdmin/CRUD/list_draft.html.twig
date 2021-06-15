@@ -1,0 +1,8 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+   {# {{ dump() }} you can dump all variables here #}
+   {% if object.isDraft == true %}
+      <span class="label label-warning">Oui</span>
+   {% endif %}
+{% endblock field %}

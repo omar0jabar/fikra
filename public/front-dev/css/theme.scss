@@ -1,0 +1,54 @@
+@import "~bootstrap/scss/bootstrap";
+@import "../../css/animate.min.css";
+@import "../../css/backtotop.css";
+
+@import "helper/font";
+@import "helper/mixin";
+@import "helper/variables";
+@import "helper/type";
+@import "helper/commun";
+@import "helper/form";
+@import "helper/icons";
+
+@import "layouts/footer";
+@import "layouts/header";
+
+@import "startuper/_startuper-profile.scss";
+
+@import "modules/tabs";
+@import "modules/cards-projet";
+@import "modules/cards-actualite";
+@import "modules/newsletter";
+@import "modules/popup";
+@import "modules/table";
+
+@import "blocks/home.carousel";
+@import "blocks/comment-ca-marche";
+@import "blocks/decouvrez-projets";
+@import "blocks/nos-garanties";
+@import "blocks/projet-recent";
+@import "blocks/actualites";
+@import "blocks/nos-partenaires";
+@import "blocks/testimonials";
+@import "blocks/b-contact";
+@import "blocks/b-video";
+@import "blocks/faq";
+
+@import "pages/page.cms";
+@import "pages/comment-ca-marche";
+@import "pages/documentation";
+@import "pages/services";
+@import "pages/login";
+@import "pages/create.new.project";
+@import "pages/projets";
+@import "pages/register";
+@import "pages/actus-listings";
+@import "pages/dashboard.project";
+@import "pages/contactez-nous";
+@import "pages/about-us";
+@import "pages/project.incompleted";
+@import "pages/project.delete";
+@import "pages/project.update";
+@import "pages/page.errors";
+@import "pages/projet.success";
+@import "pages/payment";

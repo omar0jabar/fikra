@@ -1,0 +1,41 @@
+#front list
+posts: Posts
+read_more: Learn more
+loading: Loading ...
+no_more_results: No more results
+
+# front show
+tags: Tags
+share: Share
+related_posts: Related posts
+
+Jan: January
+Feb: February
+Mar: March
+Apr: April
+May: May
+Jun: June
+Jul: July
+Aug: August
+Sep: September
+Oct: October
+Nov: November
+Dec: December
+
+All: All
+
+Results: Results
+No result found: No result found
+
+Category: Category
+Start date: Start date
+End date: End date
+From: From
+at: at
+to: to
+Location: Location
+
+Show event: Show event
+Event expired: Event expired
+
+Related events: Related events

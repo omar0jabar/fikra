@@ -1,0 +1,50 @@
+<div id="block_{{ id }}" class="marginBottom cms-col-12" >
+    <div class="form-group cms-col-12 block">
+        <div class="row handle">
+            <div class="col-md-8">
+                <h4><i class="fa fa-arrows"></i>
+                    Block  <span id="blockName_{{ id }}"></span>
+                    : <small>{{ form.title.vars.value }}</small>
+                </h4>
+            </div>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-default btn-sm showBlock" data-id="{{ id }}" type="button">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </button>
+                <button class="btn btn-default btn-sm hideBlock hide" data-id="{{ id }}" type="button">
+                    <span class="glyphicon glyphicon-eye-close"></span>
+                </button>
+                <button class="btn btn-danger btn-sm collection-remove" title="Delete block" type="button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+        <div class="hide" id="toggle_{{ id }}">
+            <hr>
+            {{ form_row(form.colLarge,{'attr': {'class': 'selectCol', 'data-id':id}}) }}
+            {{ form_row(form.title) }}
+            <div id="type_{{ id }}">{{ form_widget(form.type,{'attr': {'class': 'hide'}}) }}</div>
+            <div id="position_{{ id }}">{{ form_widget(form.position,{'attr': {'class': 'hide position'}}) }}</div>
+            <div id="row_{{ id }}">{{ form_widget(form.row,{'attr': {'class': 'hide row'}}) }}</div>
+            <div id="width_{{ id }}">{{ form_row(form.width) }}</div>
+            <div id="height_{{ id }}">{{ form_row(form.height) }}</div>
+            <div id="linkVideo_{{ id }}">
+                {{ form_row(form.linkVideo) }}
+                <div id="showVideo_{{ id }}" class="video hide" data-src="https://www.youtube.com/embed/">
+                    <iframe id="{{ id }}" width="420" height="315"
+                            src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                    </iframe>
+                </div>
+            </div>
+
+            <div id="uploadImage_{{ id }}">{{ form_row(form.uploadImage) }}</div>
+            <div id="alt_{{ id }}">{{ form_row(form.alt) }}</div>
+            <div id="linkImage_{{ id }}">{{ form_row(form.linkImage) }}</div>
+            <div id="legend_{{ id }}">{{ form_row(form.legend) }}</div>
+            <div id="textImage_{{ id }}">{{ form_row(form.textImage) }}</div>
+            <div id="content_{{ id }}">{{ form_row(form.content) }}</div>
+            {{ form_row(form.clearfix,{'attr': {'class': 'clearfixChange'}}) }}
+        </div>
+        {#<br>#}
+    </div>
+</div>

@@ -1,0 +1,198 @@
+{% trans_default_domain 'fond' %}
+{%  if defaultListingBanner %}
+	{% set img = '/upload/header/5cf4e4af5f4ce006032681.png' %}
+{% else %}
+	{% set img = vich_uploader_asset(headerListing, 'bannerFile') %}
+{% endif %}
+
+
+<div class="header-banner banner-listing-result">
+	<img src="{{img}}" class="img-responsive w-100" alt="">
+	<div class="container">
+		<div class="banner-content">
+			{{headerLinstingDescription|raw}}
+		</div>
+	</div>
+</div>
+<div class="block-tabs listing-result">
+	<form method="GET" accept="{{path('fond')}}">
+		<input type="hidden" id="search" value="search" name="search">
+		<div class="row select-filter">
+			<div class="col-md-6 filter-choose">
+				<div class="custom-select-field">
+					<select class="browser-default" id="secteur" name="secteur[]" multiple value='1'>
+						<option value="">{% trans %}labelAll{% endtrans %}</option>
+						{% for secteur in secteurs %}
+							{% set label = secteur.name %}
+							{% if locale == 'en' %}
+								{% set label = secteur.nameEn %}
+							{% endif %}f
+							{% set selected = 'selected' %}
+							<option value="{{secteur.id}}" {{selected}}>{{label}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="col-md-6 b-search">
+				<div class="search">
+					<input type="text" name="motCle" id="motCle" value="{{motCle}}">
+					<label for="search">{% trans %}label_mot{% endtrans %}...</label>
+					<button id='button_search' type="button"></button>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row filter">
+
+			<div class="col-lg-2 col-md-4 b-verified">
+				<label for="gestionnaire">{% trans %}labelSearchGestionnaire{% endtrans %}</label>
+				<div class="custom-select-field">
+					<select class="browser-default" id="gestionnaire" name="gestionnaire[]" multiple="multiple">
+						<option value="0">{% trans %}labelAll{% endtrans %}</option>
+						{% for gestionnaireItem in gestionnaires %}
+							{% set label = gestionnaireItem.name %}
+							{% if locale == 'en' %}
+								{% set label = gestionnaireItem.nameEn %}
+							{% endif %}
+							{% set selected = '' %}
+							{% if gestionnaireItem.id == gestionnaire %}
+								{% set selected ='selected' %}
+							{% endif %}
+							<option value="{{gestionnaireItem.id}}"  {{selected}}>{{label}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+
+			<div class="col-lg-2 col-md-4 b-trier">
+				<label for="fondType">{% trans %}labelSearchTypeFond{% endtrans %}</label>
+				<div class="custom-select-field">
+					<select class="browser-default" id="fondType" name="fondType">
+						<option value="">{% trans %}labelAll{% endtrans %}</option>
+						{% for type in fondsType %}
+							{% set label = type.name %}
+							{% if locale == 'en' %}
+								{% set label = type.nameEn %}
+							{% endif %}
+
+							{% set selected = '' %}
+							{% if type.id == fondType %}
+								{% set selected ='selected' %}
+							{% endif %}
+							<option value="{{type.id}}" {{selected}}>{{label}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div class="col-lg-2 col-md-6 b-finance">
+				<label for="financement">{% trans %}labelSearchFinancement{% endtrans %}</label>
+				<div class="custom-select-field">
+					<select class="browser-default" id="financement" name="financement[]" multiple="multiple">
+						<option value="">{% trans %}labelAll{% endtrans %}</option>
+						{% for financementItem in financements %}
+							{% set label = financementItem.name %}
+							{% if locale == 'en' %}
+								{% set label = financementItem.nameEn %}
+							{% endif %}
+
+							{% set selected = '' %}
+							{% if financementItem.id == financement %}
+								{% set selected ='selected' %}
+							{% endif %}
+							<option value="{{financementItem.id}}" {{selected}}>{{label}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-4 b-langue">
+				<label for="phase">{% trans %}labelSearchPhase{% endtrans %}</label>
+				<div class="custom-select-field">
+					<select class="browser-default" id="phase" name="phase" >
+						<option value="">{% trans %}labelAll{% endtrans %}</option>
+						{% for phaseItem in phases %}
+							{% set label = phaseItem.name %}
+							{% if locale == 'en' %}
+								{% set label = phaseItem.nameEn %}
+							{% endif %}
+							{% set selected = '' %}
+							{% if phaseItem.id == phase %}
+								{% set selected ='selected' %}
+							{% endif %}
+
+							<option value="{{phaseItem.id}}" {{selected}}>{{label}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2 b-chiffre">
+				<label>{% trans %}labelSearchMontant{% endtrans %}</label>
+				<div class="custom-select-field">
+					<select class="browser-default" id="montant" name="montant" >
+						<option value="">{% trans %}labelAll{% endtrans %}</option>
+						{% for montantItem in montants %}
+							{% set selected = '' %}
+							{% if montantItem.id == montant %}
+								{% set selected ='selected' %}
+							{% endif %}
+							<option value="{{montantItem.id}}" {{selected}}>
+								{% trans %}entre{% endtrans %}
+								{{montantItem.montantMin}}
+								{% trans %}et{% endtrans %}
+								{{montantItem.montantMax}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="col-md-12 reset text-center">
+				<a href="{{ path('fond') }}?search=search" class="btn btn-transparent-red btn-h50 btn-w25">{% trans %}Reset{% endtrans %}</a>
+			</div>
+
+		</div>
+		<div class="search-btn" style="display:none">
+			<button class="btn btn-bg-red" id='button_submit'>{% trans %}labelButton{% endtrans %}</button>
+		</div>
+	</form>
+</div>
+
+{% block javascripts %}
+	<script>
+		$(document).ready( function () {
+			var s2 = $('#secteur').select2({
+				placeholder: "{{ 'labelSearch'|trans|raw }}",
+				value: {id:1}
+			});
+
+			$('#financement').select2({
+				placeholder: "{{ 'labelAll'|trans|raw }}"
+			});
+
+			$('#gestionnaire').select2({
+				placeholder: "{{ 'labelAll'|trans|raw }}"
+			});
+
+
+			var secteurJson = $('#secteurJson').val();
+			$('#secteur').val(jQuery.parseJSON(secteurJson));
+			$('#secteur').trigger('change'); 
+
+			var financeJson = $('#financeJson').val();
+			$('#financement').val(jQuery.parseJSON(financeJson));
+			$('#financement').trigger('change'); 
+
+			$( "#gestionnaire" ).change(function() {
+				let value = $(this).val();
+				// if(jQuery.inArray("0", value) == 0) {
+				// 	$('#gestionnaire').select2("val", 0);
+				// 	$('#gestionnaire').trigger('change');
+				// } else {
+				// 	$('#gestionnaire').select2("val", value);
+				// 	$('#gestionnaire').trigger('change');
+				// }
+			});
+		})
+
+	</script>
+{% endblock %}

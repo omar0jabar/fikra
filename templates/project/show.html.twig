@@ -1,0 +1,982 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block meta %}
+    {% set url = app.request.pathInfo %}
+    {% set bool = true %}
+    {% if 'boadmin' in url %}
+        {% set bool = false %}
+    {% endif %}
+    {% if bool %}
+        <meta name="title" content="{{ metaTitle }}">
+        <meta name="description" content="{{ metaDescription }}">
+
+        <meta property="og:title" content="{{ metaTitle }}"/>
+        <meta property="og:description" content="{{ metaDescription }}"/>
+        
+        {% block ogimage %}
+            {% if width is defined and width %}
+                <meta property="og:image:width" content="{{ width }}"/>
+            {% endif %}
+            {% if height is defined and height %}
+                <meta property="og:image:height" content="{{ height }}"/>
+            {% endif %}
+        {% endblock %}
+
+        <meta name="twitter:title" content="{{ metaTitle }}"/>
+        <meta name="twitter:description" content="{{ metaDescription }}"/>
+    {% endif %}
+
+    
+
+    {% if project.imageCoverName is not empty %}
+        {% if approvedProject == false %}
+            {% set cover = vich_uploader_asset(project, 'imageFile') %}
+            <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}">
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+            <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+        {% elseif 'approvedProject' == true %}
+            {% set cover = '/upload/approved-projects/approved-gallery-photo/' ~ project.imageCoverName %}
+            <meta name="image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}">
+            <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+            <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() ~ cover }}"/>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+{% trans_default_domain 'project' %}
+
+{% block body %}
+
+    {% set locale = app.request.locale %}
+
+    {% if project.imageCoverName is not empty %}
+        {% if approvedProject == false %}
+            {% set cover = vich_uploader_asset(project, 'imageFile') %}
+        {% elseif 'approvedProject' == true %}
+            {% set cover = '/upload/approved-projects/approved-gallery-photo/' ~ project.imageCoverName %}
+        {% else %}
+            {% set cover = asset('assets/img/project_cover.png') %}
+        {% endif %}
+    {% else %}
+        {% set cover = asset('assets/img/project_cover.png') %}
+    {% endif %}
+    <div id="cover-project" class="banner-cover">
+        <div class="row banner-project">
+            <div class="col-lg-8 col-md-12 block-img">
+                <img src="{{ cover }}" class="img-responsive banner-img" alt="">
+
+                <div class="project-info">
+                    {% if app.user and app.user == project.author %}
+                        <div class="row change-cover">
+                            {% if approvedProject == true %}
+                                {% set id = project.project.id %}
+                                {% set slug = project.slug %}
+                            {% else %}
+                                {% set id = project.id %}
+                                {% set slug = project.slug %}
+                            {% endif %}
+                            <a id="btn-change-cover" class="btn btn-bg-white btn-h30 btn-w10"
+                               href="{{ path('startuper_project_update_cover', { id: id, slug: slug}) }}">
+                                <i class="icon-exchange-arrows mr-1"></i> {% trans %}Edit cover photo{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="row logo-change">
+                        {% if app.user and app.user == project.author %}
+                            {% if approvedProject == true %}
+                                {% set id = project.project.id %}
+                                {% set slug = project.slug %}
+                            {% else %}
+                                {% set id = project.id %}
+                                {% set slug = project.slug %}
+                            {% endif %}
+                            <a href="{{ path('startuper_project_update_logo', { id: id, slug: slug }) }}"
+                               id="btn-change-logo" class="btn btn-bg-white btn-h30 btn-w10"><i
+                                        class="icon-exchange-arrows mr-1"></i> {% trans %}Edit logo{% endtrans %}</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        {% if project.logoName is not empty %}
+                            {% if approvedProject == false %}
+                                {% set logo = vich_uploader_asset(project, 'logoFile') %}
+                            {% elseif 'approvedProject' == true %}
+                                {% set logo = '/upload/approved-projects/approved-gallery-photo/' ~ project.logoName %}
+                            {% else %}
+                                {% set logo = asset('assets/img/project_logo_180.png') %}
+                            {% endif %}
+                        {% else %}
+                            {% set logo = asset('assets/img/project_logo_180.png') %}
+                        {% endif %}
+
+                        <div class="col-lg-2 project-logo">
+                            <div id="show-logo-project">
+                                <div class="row">
+                                    <div class="col-12 p-0">
+                                        <img src="{{ logo }}" class="img-responsive" alt="{{ project.name }}"
+                                             title="Logo {{ project.name }}">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 project-text">
+                            <h1>{{ project.name }}
+                                {% if project.isVerified == true %}
+                                    <small class="text-success">
+                                        <i class="icon-Verifi"></i><span>{% trans %}Verified{% endtrans %}</span>
+                                    </small>
+                                {% endif %}
+                            </h1>
+
+                            <div class="b-details">
+                                <ul class="row">
+                                    <li class="detail-item">
+                                        <h5>
+                                            <i class="icon-calendar"></i>
+                                            <span>
+                                                {{ project.creatingDate|date('d/m/Y') }}
+                                            </span>
+                                        </h5>
+                                    </li>
+                                    {% if project.city is not empty %}
+                                        <li class="detail-item">
+                                            <h5>
+                                                <i class="icon-placeholder"></i>
+                                                <span>
+                                                    {{ project.city|default('vide') }}
+                                                </span>
+                                            </h5>
+                                        </li>
+                                    {% endif %}
+                                    {% if approvedProject == true %}
+                                        <li class="detail-item">
+                                            <h5>
+                                                <a href="{{ path('project_like', {id: project.id}) }}"
+                                                   class="js-like-project">
+                                                    {% if approvedProject == true %}
+                                                        <span id="js-likes"
+                                                              class="js-likes">{{ project.project.likes|length }}</span>
+                                                    {% else %}
+                                                        <span id="js-likes"
+                                                              class="js-likes">{{ project.likes|length }}</span>
+                                                    {% endif %}
+                                                    {% if app.user and project.Project.isLikedByUser(app.user) %}
+                                                        <i class="icon-favorite-heart-button red"></i>
+                                                        <span class="js-text">{% trans %}Unlike{% endtrans %}</span>
+                                                    {% else %}
+                                                        <i class="icon-favorite-heart-button"></i>
+                                                        <span class="js-text">{% trans %}Like{% endtrans %}</span>
+                                                    {% endif %}
+                                                </a>
+                                            </h5>
+                                        </li>
+                                    {% endif %}
+                                    <li class="detail-item">
+                                      <span class="share" title="{% trans %}Share{% endtrans %}">
+                                         <i class="icon-sharing-interface"></i>
+                                      </span>
+                                        <div class="block-addis">
+                                            <div class="addthis_inline_share_toolbox_sggx"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 block-card">
+                <div id="project" class="card section">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h3>{% trans %}Project{% endtrans %}</h3>
+                            <p>{{ project.description }}</p>
+                        </div>
+                        <hr>
+
+                        <div class="card-progress clearfix">
+                            <div class="progress-price">
+                                <h4>{% trans %}Amount{% endtrans %}</h4>
+                                <h3>
+                                    {% if project.hasNotAmount or project.amount == 0 %}
+                                        {% trans %}Has not amount{% endtrans %}
+                                    {% else %}
+                                        {{ project.amount|number_format(0, ',', ' ') }} MAD
+                                    {% endif %}
+                                </h3>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="phase">
+                            <h4>{% trans %}Sectors{% endtrans %}</h4>
+                            {% set three = null %}
+                            {% if project.sectors|length > 3 %}
+                                {% set three = ", ..." %}
+                            {% endif %}
+                            <h3>
+                                {{ project.sectors|slice(0, 3)|join(', ') ~ three }}
+                            </h3>
+                        </div>
+                        <hr>
+
+                        <div class="phase">
+                            <h4>{% trans %}Project phase{% endtrans %}</h4>
+                            <h3>
+                                {% set label = project.step.labelFr %}
+                                {% if locale == "en" %}
+                                    {% set label = project.step.labelEn %}
+                                {% endif %}
+                                {{ label }}
+                            </h3>
+                        </div>
+
+                        {% if project.earned.showInFront == 1 %}
+                            <div class="phase">
+                                <h4>{% trans %}Revenus{% endtrans %}</h4>
+                                <h3>
+                                    {% set label = project.earned.labelFr %}
+                                    {% if locale == "en" %}
+                                        {% set label = project.earned.labelEn %}
+                                    {% endif %}
+                                    {{ label }}
+                                </h3>
+                            </div>
+                            <hr>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if app.user %}
+        <div class="navigation-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 navigation-links">
+                        <div class="navigation-project-logo">
+                            <img src="{{ logo }}" class="img-responsive" alt="{{ project.name }}"
+                                 title="Logo {{ project.name }}">
+                        </div>
+                        <ul>
+                            {% if project.summary %}
+                                <li data-scroll="executive-summary">
+                                    <a href="#executive-summary">{% trans %}The project{% endtrans %}</a>
+                                </li>
+                            {% endif %}
+                            {% set countAvantages = project.avantages|length %}
+                            {% set countFinances = project.projectFinances|length %}
+                            {% if countAvantages > 0 or countFinances > 0 %}
+                                <li data-scroll="project-avantages-finances">
+                                    <a href="#project-avantages-finances">{% trans %}Avantages{% endtrans %}</a>
+                                </li>
+                            {% endif %}
+                            {% if project.galleryPhotos|length > 0 %}
+                                <li data-scroll="project-gallery">
+                                    <a href="#project-gallery">{% trans %}Our project in pictures{% endtrans %}</a>
+                                </li>
+                            {% endif %}
+                            <li data-scroll="team">
+                                <a href="#team">{% trans %}The team{% endtrans %}</a>
+                            </li>
+                            {% if questions|length > 0 %}
+                                <li data-scroll="faq">
+                                    <a href="#faq">{% trans %}Questions / Responses{% endtrans %}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-12 navigations-buttons">
+                        {% if app.user and app.user == project.author %}
+
+                            {% if app.request.get('_route') == "project_show" %}
+                                {% set project = project.project %}
+                            {% endif %}
+                            {% if project.stepCreating < 7 %}
+                                <a href="{{ path('startuper_project_complete', {id: project.id, slug: project.slug}) }}"
+                                   class="btn btn-primary  btn-h30 btn-w10">
+                                    {% trans %}Complete the project{% endtrans %}
+                                </a>
+                            {% endif %}
+                            {% if project.stepCreating >= 7 and project.isLocked == false %}
+                                <a href="{{ path('startuper_project_edit', { id: project.id, slug: project.slug }) }}"
+                                   class="btn btn-transparent-black  btn-h30 btn-w10">
+                                    <i class="icon-controls"></i>{% trans %}Update project{% endtrans %}</a>
+                            {% endif %}
+
+                            <a href="{{ path('startuper_project_confirm_delete', { id: project.id, slug: project.slug }) }}"
+                               class="btn btn-transparent-black  btn-h30 btn-w10">
+                                <i class="icon-garbage"></i>{% trans %}Delete project{% endtrans %}
+                            </a>
+                        {% else %}
+
+                            {% if app.user and app.user != project.author %}
+                                <a href="#" data-target="#modalContactLead" data-toggle="modal"
+                                   class="btn btn-bg-red btn-h40 btn-w15">
+                                    {% trans %}Contact the project leader{% endtrans %}
+                                </a>
+                            {% elseif not app.user %}
+                                <a href="#" data-target="#modalInformation" data-toggle="modal"
+                                   class="btn btn-bg-red btn-h40 btn-w15">
+                                    {% trans %}Contact the project leader{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="container-fp" class="b-project-content project">
+            <div class="container">
+                {% include 'partials/_notice.html.twig' %}
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 content-bar">
+                        {% if app.user and app.user == project.author %}
+                            {% set link = path('startuper_project_update_video', { id: project.id, slug: project.slug}) %}
+                            {% if project.video is not empty %}
+                                <a href="{{ link }} " class="edit-video btn btn-bg-red btn-h30 btn-w10">
+                                    {% trans %}Edit video{% endtrans %}
+                                </a>
+                            {% else %}
+                                <a href="{{ link }}" class="edit-video btn btn-bg-red btn-h30 btn-w10">
+                                    {% trans %}Add video{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if project.video is not empty %}
+                            <div class="b-video section">
+                                <iframe width="100%" height="100%"
+                                        src="//www.youtube.com/embed/{{ project.idVideo }}?rel=0"
+                                        frameborder="0" scrolling="no"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        {% endif %}
+
+                        {% if project.summary %}
+                            <div id="executive-summary" class="summary section">
+                                <h3 class="">{% trans %}Proposition of value{% endtrans %}</h3>
+                                <p>{{ project.summary|raw }}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if countAvantages > 0 or countFinances > 0 %}
+                            <div id="project-avantages-finances" class="project-avantages-finances section">
+                                <div class="row">
+                                    {% if countAvantages > 0 %}
+                                        <div id="project-avantages" class="col-md-12 project-avantages">
+                                            <h3>{% trans %}Avantages{% endtrans %}</h3>
+                                            <ul>
+                                                {% for avantage in project.avantages %}
+                                                    <li>{{ avantage.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                    {% if countFinances > 0 %}
+                                        <div id="project-finances" class="col-md-12 project-finances">
+                                            <h3>{% trans %}Use of raised funds{% endtrans %}</h3>
+                                            <ul>
+                                                {% for finance in project.projectFinances %}
+                                                    <li>{{ finance.detail }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if project.galleryPhotos|length > 0 %}
+                            <div id="project-gallery" class="project-gallery section">
+                                <h3 class="">{% trans %}Our project in pictures{% endtrans %}</h3>
+                                <div class="project-gallery-content__show">
+                                    {% for image in project.galleryPhotos %}
+                                        <div class="project-gallery-img">
+                                            {% if approvedProject == true %}
+                                                {% set src = '/upload/approved-projects/approved-gallery-photo/' ~ image.name %}
+                                            {% else %}
+                                                {% set src = vich_uploader_asset(image, 'imageFile') %}
+                                            {% endif %}
+                                            <div class="slider-img">
+                                                <img class="img-responsive" src="{{ src }}" alt="">
+                                            </div>
+                                            <div class="slider-content">
+                                                <h5>{{ image.alt }}</h5>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="project-gallery-content__select">
+                                    {% for image in project.galleryPhotos %}
+                                        <div class="project-gallery-img">
+                                            {% if approvedProject == true %}
+                                                {% set src = '/upload/approved-projects/approved-gallery-photo/' ~ image.name %}
+                                            {% else %}
+                                                {% set src = vich_uploader_asset(image, 'imageFile') %}
+                                            {% endif %}
+                                            <img class="img-responsive" src="{{ src }}" alt="{{ image.alt }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if project.teamMembers|length > 0 %}
+                            <div id="team" class="b-team section">
+                                <h3>{% trans %}The team{% endtrans %}</h3>
+                                <div class="row">
+                                    {% for member in project.teamMembers %}
+                                        <div class="col-md-3 collaborater">
+                                            <div class="card team-card">
+                                                {% if member.photo is not empty %}
+                                                    {% if approvedProject == true %}
+                                                        {% set src = '/upload/projects/member-photo/' ~ member.photo %}
+                                                    {% else %}
+                                                        {% set src = vich_uploader_asset(member, 'imageFile') %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% set src = "/upload/users/empty.jpg" %}
+                                                {% endif %}
+
+                                                <div class="card-img-top">
+                                                    <img class="img-responsive" src="{{ src }}"
+                                                         alt="{{ member.fullName }}">
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <div class="avatar-infos text-center">
+                                                        <h4>{{ member.fullName }}</h4>
+                                                        <h5>{{ member.position }}</h5>
+                                                        {% if member.porteur == true %}
+                                                            <button class="btn btn-bg-blue btn-h23 btn-w10">{% trans %}Lead{% endtrans %}</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-footer">
+                                                    <div class="b-medialinks text-center">
+                                                        {% if member.linkedin is not empty %}
+                                                            <a href="{{ member.linkedin }}" target="_blank" class="">
+                                                                <i class="icon-linkedin-logo1"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                        {% if member.twitter is not empty %}
+                                                            <a href="{{ member.twitter }}" target="_blank" class="">
+                                                                <i class="icon-twitter-logo-silhouette"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                        {% if member.facebook is not empty %}
+                                                            <a href="{{ member.facebook }}" target="_blank" class="">
+                                                                <i class="icon-facebook-logo-1"></i>
+                                                            </a>
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+
+                                                {% if member.biography %}
+                                                    <div class="biographie">
+                                                        <div>
+                                                            <h3>Mini-bio</h3>
+                                                            <p>{{ member.biography }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if project.express %}
+                            <div id="expression" class="expression section">
+                                <h3 class="">{% trans %}Expression{% endtrans %}</h3>
+                                <p>{{ project.express|raw }}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if questions|length > 0 %}
+                            <div id="faq" class="FAQ section">
+                                <h3 class="faq-title">{% trans %}Questions / Responses{% endtrans %}</h3>
+                                <div class="accordion" id="accordionExample">
+                                    {% for question in questions %}
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                        data-target="#collapse{{ loop.index }}"
+                                                        aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                                                        aria-controls="collapse{{ loop.index }}">
+                                                    <h4>{{ question.question }}</h4>
+                                                </button>
+                                            </div>
+                                            <div id="collapse{{ loop.index }}"
+                                                 class="collapse {% if loop.first %}show{% endif %}"
+                                                 aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        {{ question.response }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div><!-- /.col-md-8 -->
+
+                    <div class="col-lg-4 col-md-12 sidebar">
+
+                        <div class="card info-card">
+                            <div class="card-body">
+                                <h3 class="card-title">{% trans %}Technical sheet{% endtrans %}</h3>
+                                {% if project.services|length > 0 %}
+                                    <div class="secteur">
+                                        <h5>{% trans %}Products / Services{% endtrans %} : </h5>
+                                        <ul class="tags">
+                                            {% for service in project.services %}
+                                                <li>
+                                                    <button class="btn btn-bg-blue btn-h30 btn-w18">{{ service.name }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+
+                                {% if project.salesChannels|length > 0 %}
+                                    <div class="secteur">
+                                        <h5>{% trans %}Sales channels{% endtrans %} : </h5>
+                                        <ul class="tags">
+                                            {% for channel in project.salesChannels %}
+                                                {% set label = channel.labelFr %}
+                                                {% if locale == "en" %}
+                                                    {% set label = channel.labelEn %}
+                                                {% endif %}
+                                                <li>
+                                                    <button class="btn btn-bg-blue btn-h30 btn-w18">{{ label }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+
+                                {% if project.businessModels|length > 0 %}
+                                    <div class="secteur">
+                                        <h5>{% trans %}Business models{% endtrans %} : </h5>
+                                        <ul class="tags">
+                                            {% for businessModel in project.businessModels %}
+                                                {% set label = businessModel.labelFr %}
+                                                {% if locale == "en" %}
+                                                    {% set label = businessModel.labelEn %}
+                                                {% endif %}
+                                                <li>
+                                                    <button class="btn btn-bg-blue btn-h30 btn-w18">{{ label }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+
+                                {% if project.sectors|length > 0 %}
+                                    <div class="secteur">
+                                        <h5>{% trans %}Sectors{% endtrans %} : </h5>
+                                        <ul class="tags">
+                                            {% for sector in project.sectors %}
+                                                {% set label = sector.labelFr %}
+                                                {% if locale == "en" %}
+                                                    {% set label = sector.labelEn %}
+                                                {% endif %}
+                                                <li>
+                                                    <button class="btn btn-bg-blue btn-h30 btn-w18">{{ label }}</button>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="card docs-card">
+                            <div class="card-body">
+                                <h3 class="card-title">{% trans %}Documentation{% endtrans %}</h3>
+                                <p class="card-text">{% trans %}Download the documentation related to this project{% endtrans %}</p>
+                                {% if approvedProject and project.documents|length > 0 %}
+                                    <ul>
+                                        {% for document in project.documents %}
+                                            <li>
+                                                <img src="/images/{{ document.fileExtension }}.svg">
+                                                {{ document.documentType }}
+                                                {% if document.isPrivate == 0 %}
+                                                    <a href="{{ path('investor_download_document_public', {id: document.id}) }}">
+                                                        {{ 'Download'|trans }}
+                                                    </a>
+                                                {% endif %}
+                                                {% if document.isPrivate == 1 and app.user != project.author %}
+                                                    <a href="#" data-target="#modalAskDocumenation" data-toggle="modal">
+                                                        {{ 'Make a request'|trans }}
+                                                    </a>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <a href="#" data-target="#modalAskDocumenation" data-toggle="modal"
+                                       class="btn btn-bg-white btn-h40 btn-w20">
+                                        {% trans %}Make a request{% endtrans %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if app.user and app.user != project.author %}
+                            <div class="porteur-btn show-for-mobile">
+                                <a href="#" data-target="#modalContactLead" data-toggle="modal"
+                                   class="btn btn-bg-red btn-h40 btn-w15">
+                                    {% trans %}Contact the project leader{% endtrans %}
+                                </a>
+                            </div>
+                        {% elseif not app.user %}
+                            <div class="porteur-btn show-for-mobile">
+                                <a href="#" data-target="#modalInformation" data-toggle="modal"
+                                   class="btn btn-bg-red btn-h40 btn-w15" id="btn-for-mobile">
+                                    {% trans %}Contact the project leader{% endtrans %}
+                                </a>
+                            </div>
+                        {% endif %}
+
+                    </div><!-- /.col-md-4 -->
+                </div><!-- /.row -->
+
+                {% if projects|length > 0 %}
+                    <div class="projet-simillaires">
+                        <h3 class="">{% trans %}Similar projects{% endtrans %}</h3>
+                        <div class="row">
+                            {% for proj in projects %}
+                                {% include 'project/_card_project.html.twig' with { 'project': proj} %}
+                            {% endfor %}
+                        </div><!-- /.row -->
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalAskDocumenation" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            {% if app.user %}
+                                {% trans %}Ask documentation{% endtrans %}
+                            {% else %}
+                                {% trans %}Information{% endtrans %}
+                            {% endif %}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="icon-close"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="div-message" class="text-center">
+                            <span id="message"></span>
+                        </div>
+                        {% if app.user %}
+                            {% if project.documents|length > 0 %}
+                                <form id="form-ask-documentation" name="form-ask-documentation" method="post">
+                                    <p class="modal-description">
+                                        {% trans %}Select the document (s) that interests you and send us your request{% endtrans %}
+                                    </p>
+                                    <input type="hidden" id="url"
+                                           value="{{ path('make_request_documentation', { slug: project.slug}) }}">
+                                    <input type="hidden" id="token"
+                                           value="{{ csrf_token('make-request-documentation') }}">
+                                    <div class="form-group" id="div-types">
+                                        <label class="required" for="">Document</label>
+                                        {% for document in project.documents %}
+                                            {% set type = document.documentType %}
+                                            {% set label = type.labelFr %}
+                                            {% if locale == "en" %}
+                                                {% set label = type.labelEn %}
+                                            {% endif %}
+                                            {% if document.isPrivate == 1 %}
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           id="customCheck{{ type.id }}" name="document"
+                                                           value="{{ type.id }}">
+                                                    <label class="" for="customCheck{{ type.id }}">{{ label }}</label>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-request">Message</label>
+                                        <textarea name="message-request" id="message-request" class="form-control"
+                                                  cols="30" rows="10" placeholder="Message ..."></textarea>
+                                    </div>
+                                    <div class="form-group div-check" id="div-check">
+                                        <input type="checkbox" class="custom-control-input" id="accept" name="accept">
+                                        <label class="" for="accept">
+                                            {% trans %}By completing this form, I pledge to respect the{% endtrans %} <a
+                                                    href="#">{% trans %}PI engagement{% endtrans %}</a> {% trans %}of the platform{% endtrans %}
+                                        </label>
+                                    </div>
+
+                                    <div class="champ-requis">
+                                        <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                                        {% trans %}Send{% endtrans %}
+                                    </button>
+                                    <button type="button" class="btn btn-bg-blue btn-h40 btn-w15" data-dismiss="modal">
+                                        {% trans %}Cancel{% endtrans %}
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form id="form-send-message" name="form-send-message" method="post">
+                                    <p class="modal-description">
+                                        {% trans %}This project does not contain any documents, please contact the startuper{% endtrans %}
+                                    </p>
+                                    <input type="hidden" id="send-msg-url"
+                                           value="{{ path('send_message_project', { slug: project.slug}) }}">
+                                    <input type="hidden" id="msg-token" value="{{ csrf_token('send-message') }}">
+                                    <div class="form-group">
+                                        <label class="required"
+                                               for="msg-object">{{ 'form.object.label'|trans({}, 'message') }}</label>
+                                        <input type="text" id="msg-object" name="msg-object"
+                                               placeholder="{{ 'form.object.placeholder'|trans({}, 'message') }}"
+                                               class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required"
+                                               for="msg-content">{{ 'form.content.label'|trans({}, 'message') }}</label>
+                                        <textarea id="msg-content" name="msg-content"
+                                                  placeholder="{{ 'form.content.placeholder'|trans({}, 'message') }}"
+                                                  class="form-control" required></textarea>
+                                    </div>
+                                    <div class="champ-requis">
+                                        <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                                        {% trans %}Send{% endtrans %}
+                                    </button>
+                                    <button type="button" class="btn btn-bg-blue btn-h40 btn-w15" data-dismiss="modal">
+                                        {% trans %}Cancel{% endtrans %}
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                        {% else %}
+                            <p class="modal-description">{% trans %}To access the documentation, you must authenticate{% endtrans %}</p>
+                            <a href="{{ path('startuper_login') }}"
+                               class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Login{% endtrans %}</a>
+                            <a href="{{ path('startuper_registration') }}"
+                               class="btn btn-transparent-black btn-h50 btn-w15">{% trans %}Register{% endtrans %}</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="navigation-bar">
+        <div id="container-fp" class="b-project-content">
+            <div class="container">
+                {% include 'partials/_notice.html.twig' %}
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 content-bar">
+                        {% if app.user and app.user == project.author %}
+                            {% set link = path('startuper_project_update_video', { id: project.id, slug: project.slug}) %}
+                            {% if project.video is not empty %}
+                                <a href="{{ link }} " class="edit-video btn btn-bg-red btn-h30 btn-w10">
+                                    {% trans %}Edit video{% endtrans %}
+                                </a>
+                            {% else %}
+                                <a href="{{ link }}" class="edit-video btn btn-bg-red btn-h30 btn-w10">
+                                    {% trans %}Add video{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if project.video is not empty %}
+                            <div class="b-video section">
+                                <iframe width="100%" height="100%"
+                                        src="//www.youtube.com/embed/{{ project.idVideo }}?rel=0"
+                                        frameborder="0" scrolling="no"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        {% endif %}
+
+                        {% if project.summary %}
+                            <div id="executive-summary" class="summary section">
+                                <h3 class="">{% trans %}Proposition of value{% endtrans %}</h3>
+                                <p>
+                                    {{ project.summary|slice(0, 500)|raw }}....
+                                    <a href="#" data-target="#modalInformationRead" data-toggle="modal" class="">
+                                        {% trans %}readMore{% endtrans %}
+                                    </a>
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div><!-- /.col-md-8 -->
+                </div><!-- /.row -->
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="modal fade" id="modalInformationRead" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Login{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="modal-sub">
+                        {% trans %}messageLogin{% endtrans %}
+                    </h6>
+                    {% include 'project/modal-login.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalContactLead" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Contact the project leader{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="div-message2" class="text-center">
+                        <span id="message2"></span>
+                    </div>
+                    <form id="form-message2" name="form-message2" method="post">
+                        <input type="hidden" id="send-msg-url2"
+                               value="{{ path('send_message_project', { slug: project.slug}) }}">
+                        <input type="hidden" id="msg-token2" value="{{ csrf_token('send-message') }}">
+                        <div class="form-group">
+                            <label class="required"
+                                   for="msg-object2">{{ 'form.object.label'|trans({}, 'message') }}</label>
+                            <input type="text" id="msg-object2" name="msg-object2"
+                                   placeholder="{{ 'form.object.placeholder'|trans({}, 'message') }}"
+                                   class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required"
+                                   for="msg-content2">{{ 'form.content.label'|trans({}, 'message') }}</label>
+                            <textarea id="msg-content2" name="msg-content2"
+                                      placeholder="{{ 'form.content.placeholder'|trans({}, 'message') }}"
+                                      class="form-control" required></textarea>
+                        </div>
+                        <div class="champ-requis">
+                            <p class="required-field">{% trans %}Required Field{% endtrans %}</p>
+                        </div>
+                        <button type="submit" class="btn btn-bg-red btn-h40 btn-w15">
+                            {% trans %}Send{% endtrans %}
+                        </button>
+                        <button type="button" class="btn btn-bg-blue btn-h40 btn-w15" data-dismiss="modal">
+                            {% trans %}Cancel{% endtrans %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Information{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">{% trans %}Please authenticate to be able to contact the project leader{% endtrans %}</p>
+                    <a href="{{ path('startuper_login') }}"
+                       class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Login{% endtrans %}</a>
+                    <a href="{{ path('startuper_registration') }}"
+                       class="btn btn-transparent-black btn-h50 btn-w15">{% trans %}Register{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInformationLike" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {% trans %}Information{% endtrans %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">{% trans %}To make a project a favorite, you must authenticate{% endtrans %}</p>
+                    <a href="{{ path('startuper_login') }}"
+                       class="btn btn-bg-red btn-h50 btn-w15">{% trans %}Login{% endtrans %}</a>
+                    <a href="{{ path('startuper_registration') }}"
+                       class="btn btn-transparent-black btn-h50 btn-w15">{% trans %}Register{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- share buttons -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c93906a67926205"></script>
+    <script src="{{ asset('js/project-show.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/project-like.js') }}"></script>
+    {% if not app.user %}
+        <script >
+            var position = $(window).scrollTop();
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                if(scroll > position) {
+                    if ($(window).scrollTop() + $(window).height() > parseInt($('.b-footer').offset().top)) {
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                        $('#modalInformationRead').modal('show');
+                    }
+                }
+                position = scroll;
+            });
+        </script>
+    {% endif %}
+{% endblock %}

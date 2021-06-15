@@ -1,0 +1,297 @@
+.actusCardStyle {
+    padding: 0 12px;
+    margin-bottom: 24px;
+}
+.styleCardActus {
+    padding: 0 2px 0 17px;
+
+    @media #{$tab-max} {
+        padding: 0 10px;
+    }
+
+    @media #{$mobile} {
+        margin-bottom: 20px;
+    }
+}
+
+.card-actus {
+    background-color: $white;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 0;
+    box-shadow: 0 0 6px rgba($black, .2);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+    @media #{$mobile} {
+        &:hover {
+            transform: none;
+        }
+    }
+    
+    .passed-flag {
+        display: none;
+    }
+
+    .card-img-top {
+        height: 344px;
+        position: relative;
+        overflow: hidden;
+
+        @media #{$tab-max} {
+            height: 244px;
+        }
+
+        img {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .card-body {
+        padding: 10px 26px 0 20px;
+        @media #{$tab-max} {
+            padding: 10px;
+        }
+
+        .date {
+            @media #{$mobile} {
+                margin-bottom: 8px;
+            }
+        }
+
+        .card-title {
+            font-size: rem(28px);
+            font-weight: 500;
+            color: $black;
+            margin-bottom: 13px;
+            //margin-bottom: 3px;
+            //@media #{$tab-max} {
+            //    font-size: rem(20px);
+            //}
+        }
+
+        .card-text {
+            font-size: rem(18px);
+            font-weight: 300;
+            color: $black;
+            margin-bottom: 0px;
+            line-height: 24px;
+            //@media #{$tab-max} {
+            //    font-size: rem(16px);
+            //}
+        }
+
+        .category {
+            padding: 10px 0;
+            h5 {
+                font-size: rem(18px);
+                font-weight: 400;
+                color: $gray-scorpion-1;
+            }
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                .btn {
+                    font-size: rem(14px);
+                    font-weight: 400;
+                    margin-right: 6px;
+                    margin-bottom: 6px;
+                    cursor: auto;
+                }
+            }
+        }
+    }
+
+    .card-footer {
+        background-color: transparent;
+        padding: 32px 20px 15px;
+        border: 0;
+        @media #{$tab-max} {
+            padding: 10px;
+        }
+
+        .card-date, 
+        .card-like {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        .card-date span {
+            font-size: rem(18px);
+            font-weight: 300;
+            color: $gray-Scorpion;
+        }
+        .card-date-df span {
+            font-size: rem(18px);
+            font-weight: 300;
+            color: $gray-Scorpion;
+        }
+        .card-like {
+            padding-right: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            a {
+                color: $gray;
+                cursor: inherit;
+            }
+            span {
+                color: $gray;
+                span {
+                    font-size: rem(18px);
+                    font-weight: 300;
+                    color: $gray-Scorpion;
+                    
+                    i {
+                        font-size: rem(22px);
+                        color: $gray;
+                        margin-left: 11px;
+                        cursor: pointer;
+    
+                        &.red {
+                            color: $coralRed;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.passed {
+        opacity: .5;
+        .passed-flag {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            border-bottom-right-radius: 8px;
+            z-index: 10;
+            color: $white;
+            background-color: $cloudBurst;
+            padding: 3px 12px;
+            font-size: rem(14px);
+            display: block;
+        }
+    }
+}
+
+.styleCardActus-List {
+    padding: 0 0 0 17px;
+
+    @media #{$tab-max} {
+        padding: 0 10px;
+    }
+}
+
+.card-list {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba($black, .2);
+    transition: all .3s ease-in-out;
+    &:hover {
+        transform: translateY(-3px);
+    }
+
+    .card-img-left {
+        max-width: 190px;
+
+        @media #{$tab-min} {
+            max-width: 100%;
+        }
+    }
+
+    .card-img {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        @media #{$tab-min} {
+            height: 244px;
+        }
+        
+        img {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .card-body {
+        padding: 14px 8px 14px 20px;
+        min-height: 137px;
+        @media #{$desk-max} {
+            min-height: 150px;
+        }
+
+        @media #{$tab-max} {
+            height: auto;
+        }
+
+        .card-title {
+            font-size: rem(28px);
+            font-weight: 500;
+            color: $black;
+            margin-bottom: 5px;
+        }
+
+        .card-text {
+            font-size: rem(18px);
+            font-weight: 300;
+            color: $black;
+            margin-bottom: 0;
+            line-height: 23px;
+        }
+    }
+
+    .card-footer {
+        background-color: transparent;
+        padding: 0 20px 10px;
+        border: 0;
+
+        .card-date, 
+        .card-like {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        .card-date span {
+            font-size: rem(18px);
+            font-weight: 300;
+            color: $gray-Scorpion;
+        }
+        .card-like {
+            a {
+                color: $gray;
+                cursor: inherit;
+            }
+            span {
+                font-size: rem(18px);
+                font-weight: 500;
+                color: $gray-Scorpion;
+
+                i {
+                    font-size: rem(22px);
+                    color: $gray;
+                    margin-left: 11px;
+                    cursor: pointer;
+
+                    &.red {
+                        color: $coralRed;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<a href="{{ admin.generateObjectUrl('verify', object) }}" class="btn btn-sm btn-default">
+   {% if object.isVerified %}
+      <i class="fa fa-minus"></i> Unverified
+   {% else %}
+      <i class="fa fa-check"></i> Verified
+   {% endif %}
+</a>

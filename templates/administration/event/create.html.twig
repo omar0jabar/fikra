@@ -1,0 +1,54 @@
+{% extends 'bundles/SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_admin_content %}
+
+   {% block notice %}
+      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+   {% endblock notice %}
+
+   <div class="row">
+      {{ form_start(form) }}
+
+      <div class="col-md-12">
+         <div class="box box-primary">
+            <div class="box-header">
+               <h3>Evénement</h3>
+            </div>
+            <div class="box-body">
+
+               {{ form_row(form.date) }}
+               {{ form_row(form.isActive) }}
+               {{ form_row(form.uploadBannerDesktop) }}
+               {{ form_row(form.uploadBannerMobile) }}
+               {{ form_row(form.title) }}
+               {{ form_row(form.content) }}
+               {{ form_row(form.metaTitle) }}
+               {{ form_row(form.metaTags) }}
+               {{ form_row(form.metaDescription) }}
+               {{ form_row(form.slug) }}
+            </div>
+         </div>
+      </div>
+      
+      <div class="sonata-ba-form-actions well well-small form-actions mt-2">
+         <button class="btn btn-success" type="submit">
+            {% if action == 'create' %}
+               <i class="fa fa-save"></i> Ajouter
+            {% else %}
+               <i class="fa fa-save"></i> Enregistrer les modifications
+            {% endif %}
+         </button>
+      </div>
+
+      {{ form_end(form) }}
+
+   </div><!-- /.row -->
+
+   <script>
+      $("#event_metaTags").select2({
+         tags: [],
+         tokenSeparators: [',']
+      })
+   </script>
+
+{% endblock %}

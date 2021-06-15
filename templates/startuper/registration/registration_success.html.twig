@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'startuper' %}
+
+{% block title %}{% trans %}Registration{% endtrans%}{% endblock %}
+
+{% block body %}
+
+   <div class="registration-success">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+               <h1>{% trans %}Congratulations, your registration has been successfully completed{% endtrans %}</h1>
+               <p>
+                  {#Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et ipsa labore saepe. Assumenda
+                  <br>dolor et exercitationem explicabo nihil, quis tenetur. Aliquid amet assumenda at dolor iusto
+                  <br>molestias natus saepe. <a href="{{ path('startuper_login') }}">Connexion</a>#}
+                  {% trans %}You will receive a confirmation email in a few moments, confirm your registration to access your private area{% endtrans %}
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
